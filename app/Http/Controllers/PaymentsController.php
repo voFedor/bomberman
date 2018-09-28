@@ -12,10 +12,10 @@ class PaymentsController extends Controller
 {
     //
     /**
- * Show the payment page.
- *
- * @return \Illuminate\Http\Response
- */
+     * Show the payment page.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function getPayments()
     {
         return view('lobby.payment');
@@ -23,9 +23,10 @@ class PaymentsController extends Controller
 
 
     /**
-     * Show the send payment.
+     * Send payment.
      *
-     * @return \Illuminate\Http\Response
+     * @param request
+     * @return \Illuminate\Http\RedirectResponses
      */
     public function sendPayment(Request $request)
     {
@@ -44,14 +45,14 @@ class PaymentsController extends Controller
             true
         );
 
-        //$code = new UUID;
+
         do {
-            $token = rand(100000, 99999999);
-        } while (PaymentHistory::where('token', $token)->first() != null);
+            $code = new UUID;
+        } while (PaymentHistory::where('token', $code)->first() != null);
 
 
         $payment = new PaymentHistory();
-        $payment->token = $token;
+        $payment->token = $code;
         $payment->price = $request->price;
         $payment->user_id = Auth::user()->id;
         $payment->status = 0;
@@ -62,6 +63,7 @@ class PaymentsController extends Controller
         $payment_robkass
             ->setInvoiceId($token)
             ->setSum($payment->price)
+            ->addCustomParameters(['token' => $code])
             ->setDescription('Оплата');
 
         // redirect to payment url
@@ -79,12 +81,11 @@ class PaymentsController extends Controller
 
 
         if ($payment->validateResult($request->all())) {
-            $payments_history = PaymentHistory::where('token', $request->input('InvId'))->first();
+            $payments_history = PaymentHistory::where('token', $request->input('token'))->first();
             $paid = number_format($payment->getSum());
             if ($payments_history->price == $paid)
             {
                 $payments_history->status = 1;
-
             }
             $payments_history->update();
         }
@@ -93,7 +94,7 @@ class PaymentsController extends Controller
 
     public function successPayment(Request $request)
     {
-        $payment_history = PaymentHistory::where('token', $request->input('InvId'))->first();
+        $payment_history = PaymentHistory::where('token', $request->input('token'))->first();
         if ($payment_history == null) {
             abort(404);
         }
@@ -104,7 +105,7 @@ class PaymentsController extends Controller
 
     public function failPayment(Request $request)
     {
-        $payment_history = PaymentHistory::where('token', $request->input('InvId'))->first();
+        $payment_history = PaymentHistory::where('token', $request->input('token'))->first();
         if ($payment_history == null) {
             abort(404);
         }
