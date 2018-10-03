@@ -56,14 +56,10 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
-    function checkBet(url, info, price, credits, id) {
+    function checkBet(credits, id) {
 
         if(credits !== 0) {
 
-            if (credits < price) {
-                var payment = price - credits;
-                alert('Для этой игры пополните счет на '+ payment + "руб");
-            } else {
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -72,7 +68,7 @@
                 $.ajax({
                     url: '/get-bets',
                     type: "POST",
-                    data: { id: id, _token: '{{csrf_token()}}', url: url, info: info},
+                    data: { id: id, _token: '{{csrf_token()}}'},
                     success: function(data){
                         $('#bets-modal-content').html(data);
                         $('#bets-modal').modal('show');
@@ -82,14 +78,18 @@
                     }
                 });
 
-            }
+
         } else {
             alert('Вам необходимо авторизоваться для того чтобы начать играть');
         }
     }
 
 
-    function pickBet(id, url, info) {
+    function pickBet(id, url, bet) {
+        if ({{Auth::user()->credits}} < bet) {
+            alert('У вас не достаточно денег');
+            return;
+        }
         window.open(url, info+' BTC', 'scrollbars=no,fullscreen=no,left=0,top=0,height=800,width=800');
     }
     

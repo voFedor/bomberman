@@ -72,26 +72,6 @@ class GameSeed extends Seeder
             }
 
 
-            $bet2 = random_int(2, 15);
-            GameBet::create([
-                'game_id' => $game2->id,
-                'bet' => $bet2
-            ]);
-            $bet3 = random_int(2, 15);
-            GameBet::create([
-                'game_id' => $game3->id,
-                'bet' => $bet3
-             ]);
-            $bet4 = random_int(2, 15);
-            GameBet::create([
-                'game_id' => $game4->id,
-                'bet' => $bet4
-            ]);
-            $bet5 = random_int(2, 15);
-            GameBet::create([
-                'game_id' => $game5->id,
-                'bet' => $bet5
-            ]);
 
 
     }

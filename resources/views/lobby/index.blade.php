@@ -148,10 +148,10 @@
                     </ul>
                 </div>
                 <ul class="row client-slider" id="clint-slider">
-                    @foreach($bets as $bet)
+                    @foreach($games as $game)
                     <li>
-                        <a href="javascript:void(0)" onclick="return checkBet('{{ $bet->openUrl() }}', '{{ $bet->game->name }} {{ $bet->bet }}', {{$bet->bet}}, {{Auth::check() ? Auth::user()->credits : 0}}, {{ $bet->game->id }})">
-                            <img src="{{ env('THEME') }}/images/{{ $bet->game->getLogo() }}" alt="client logo 1">
+                        <a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : 0}}, {{ $game->id }})">
+                            <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                         </a>
                     </li>
                     @endforeach

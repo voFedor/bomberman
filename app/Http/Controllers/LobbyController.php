@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Requests\Lobby\OpenSessionRequest;
 use App\Http\Requests\Lobby\CloseSessionRequest;
 use App\Models\GameBet;
+use App\Models\Game;
 use App\Models\GameSession;
 use DB;
 use Illuminate\Support\Facades\Gate;
@@ -22,12 +23,10 @@ class LobbyController extends Controller
      */
     public function getIndex()
     {
-        $bets = GameBet::with(['game'])
-            ->get()
-            ->all();
+        $games = Game::all();
 
 
-        return view('lobby.index', compact('bets'));
+        return view('lobby.index', compact('games'));
     }
     /**
      * Show the application dashboard.
@@ -77,11 +76,9 @@ class LobbyController extends Controller
             ->all();
 
 
-        $bets = GameBet::with(['game'])
-            ->get()
-            ->all();
+        $games = Game::all();
 
-        return view('lobby.history', compact('sessions', 'bets'));
+        return view('lobby.history', compact('sessions', 'games'));
     }
 
     public function tournaments()
@@ -89,7 +86,11 @@ class LobbyController extends Controller
         $bets = GameBet::with(['game'])
             ->get()
             ->all();
-        return view('lobby.tournaments', compact('bets', 'payment_history'));
+
+        $games = Game::all();
+
+
+        return view('lobby.tournaments', compact('bets', 'payment_history', 'games'));
     }
 
     public function removeUserFromSession()
