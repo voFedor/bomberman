@@ -1,6 +1,7 @@
 <meta charset=utf-8>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title></title>
+<meta name="_token" content="{!! csrf_token() !!}" />
 <!-- Load Roboto font -->
 <!--<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>-->
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">

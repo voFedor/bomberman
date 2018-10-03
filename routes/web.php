@@ -7,6 +7,7 @@ Route::post('/feedback', 'ServiceController@feedback');
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');
+Route::get('/tournaments', 'LobbyController@tournaments');
 Route::post('/get-bets', 'PaymentsController@getBets');
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');

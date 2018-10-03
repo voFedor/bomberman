@@ -94,6 +94,6 @@
            href="{{ route('auth.logout') }}">Log
             Out</a>
     </div>
-    <li><a href="/history">История</a></li>
+    <li><a href="/tournaments">Турниры</a></li>
     <li><a href="/payments">Платежи</a></li>
 @endif

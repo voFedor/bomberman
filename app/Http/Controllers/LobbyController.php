@@ -37,7 +37,13 @@ class LobbyController extends Controller
         return view('lobby.games');
     }
 
-
+    public function tournaments()
+    {
+        $bets = GameBet::with(['game'])
+            ->get()
+            ->all();
+        return view('lobby.tournaments', compact('bets', 'payment_history'));
+    }
 
     public function removeUserFromSession()
     {

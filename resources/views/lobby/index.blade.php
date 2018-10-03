@@ -124,7 +124,7 @@
         <div class="triangle"></div>
         <div class="container centered">
             <p class="large-text">Зарегистрируйся в 1 клик! gjkt lkz ddjlf</p>
-            <a href="#" class="button">Зарегистрироваться</a>
+            <a href="#" class="button" data-toggle="modal" data-target="#callToAction">Зарегистрироваться</a>
         </div>
     </div>
     <!-- Client section start -->

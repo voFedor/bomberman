@@ -96,37 +96,32 @@
     
     function checkFeedbackForm() {
 
-            var email = $('#email').val();
-            var name = $('#name').val();
-            var comment = $('#comment').val();
-            
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: '/feedback',
-                type: "POST",
-                dataType: "JSON",
-                data: {email: email, name:name, comment:comment, _token: '{{csrf_token()}}'},
-                success: function (data) {
-                    if (data.error != null) {
-                        console.log(data);
-                        toastr.clear();
-                        toastr.error(data.error, 'Ошибка!', {timeOut: 3000})
-                    } else {
-                        console.log(data);
-                        toastr.clear();
-                        toastr.success(data.success, 'Отлично', {timeOut: 3000});
-                    }
-                },
-                error: function (xhr, str) {
-                    console.log(xhr.responseText);
-                    toastr.clear();
-                    toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
-                }
-            });
+        var email = $('#email').val();
+        var name = $('#name').val();
+        var comment = $('#comment').val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/feedback',
+            type: "POST",
+            dataType: "JSON",
+            data: {email: email, name:name, comment:comment, _token: '{{csrf_token()}}'},
+            success: function (data) {
+                console.log(JSON.parse(data));
+            },
+            error: function (xhr, str) {
+                console.log(xhr.responseText);
+                toastr.clear();
+                toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
+            }
+        });
 
     }
+
+
+
 </script>
