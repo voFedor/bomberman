@@ -124,7 +124,14 @@
         <div class="triangle"></div>
         <div class="container centered">
             <p class="large-text">Зарегистрируйся в 1 клик! gjkt lkz ddjlf</p>
-            <a href="#" class="button" data-toggle="modal" data-target="#callToAction">Зарегистрироваться</a>
+            <form action="/register" method="post" class="" id="callToAction-form">
+                {{ csrf_field() }}
+                <div class="form-group">
+                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Email">
+                </div>
+                <input type="hidden" name="login-with-ajax-call-to-action" value="register">
+                <button onclick="return callToAction()" type="button" class="button">Зарегистрироваться</button>
+            </form>
         </div>
     </div>
     <!-- Client section start -->

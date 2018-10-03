@@ -16,7 +16,7 @@ class SessionSeed extends Seeder
     public function run()
     {
         $game = Game::inRandomOrder()->first();
-        $limit = 30;
+        $limit = 1;
         for($i = 0; $i < $limit; $i++){
             $user = User::where('role_id', User::GAMER)
                 ->inRandomOrder()

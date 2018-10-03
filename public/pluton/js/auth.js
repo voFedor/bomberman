@@ -57,7 +57,8 @@ function callToAction() {
     var email = $('#callToActionEmail').val();
     if (email == null || email == "") {
         toastr.clear();
-        toastr.error('Укажите свой email', 'Ошибка!', {timeOut: 3000})
+        toastr.error('Укажите свой email', 'Ошибка!', {timeOut: 3000});
+        return;
     }
     $.ajaxSetup({
         headers: {
