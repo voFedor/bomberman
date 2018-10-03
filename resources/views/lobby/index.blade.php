@@ -121,14 +121,14 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container centered">
-            <p class="large-text">Зарегистрируйся в 1 клик! gjkt lkz ddjlf</p>
+            <p class="large-text">Зарегистрируйся в 1 клик!</p>
             <form action="/register" method="post" class="" id="callToAction-form">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Email">
+                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Введи email">
                 </div>
                 <input type="hidden" name="login-with-ajax-call-to-action" value="register">
-                <button onclick="return callToAction()" type="button" class="button">Зарегистрироваться</button>
+                <button onclick="return callToAction()" type="button" class="button">клик</button>
             </form>
         </div>
     </div>
@@ -163,10 +163,10 @@
         <div class="section secondary-section">
             <div class="container">
                 <div class="title">
-                    <h1>Contact Us</h1>
-                    <p>Duis mollis placerat quam, eget laoreet tellus tempor eu. Quisque dapibus in purus in dignissim.</p>
+                    <h1>Мы на связи</h1>
+                    <p>Не стесняйся, пиши все, что о нас думаешь </p>
                     <div class="span5 contact-form centered animated bounceIn" style="margin-top: 20px;margin-bottom: 20px;">
-                        <h3>Say Hello</h3>
+                        {{--<h3>Say Hello</h3>--}}
                         <div id="successSend" class="alert alert-success invisible">
                             <strong>Well done!</strong>Your message has been sent.</div>
                         <div id="errorSend" class="alert alert-error invisible">There was an error.</div>
@@ -200,46 +200,46 @@
                 </div>
             </div>
             <div class="container">
-                <div class="span9 center contact-info">
-                    <p>123 Fifth Avenue, 12th,Belgrade,SRB 11000</p>
-                    <p class="info-mail">ourstudio@somemail.com</p>
-                    <p>+11 234 567 890</p>
-                    <p>+11 286 543 850</p>
-                    <div class="title">
-                        <h3>We Are Social</h3>
-                    </div>
+                {{--<div class="span9 center contact-info">--}}
+                    {{--<p>123 Fifth Avenue, 12th,Belgrade,SRB 11000</p>--}}
+                    {{--<p class="info-mail">ourstudio@somemail.com</p>--}}
+                    {{--<p>+11 234 567 890</p>--}}
+                    {{--<p>+11 286 543 850</p>--}}
+                    {{--<div class="title">--}}
+                        {{--<h3>We Are Social</h3>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="row-fluid centered">
                     <ul class="social">
                         <li>
-                            <a href="">
+                            <a href="https://www.facebook.com/gamechainger/">
                                 <span class="icon-facebook-circled"></span>
                             </a>
                         </li>
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-twitter-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
                         <li>
-                            <a href="">
-                                <span class="icon-twitter-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
+                            <a href="https://www.linkedin.com/company/gamechainger/">
                                 <span class="icon-linkedin-circled"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-pinterest-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-dribbble-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-gplus-circled"></span>
-                            </a>
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-pinterest-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-dribbble-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-gplus-circled"></span>--}}
+                            {{--</a>--}}
                         </li>
                     </ul>
                 </div>

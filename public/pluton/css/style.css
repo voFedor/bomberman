@@ -758,14 +758,14 @@ p {
 }
 .contact-form {
     background:#fff;
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.02);
     z-index:110;
     position:relative;
     margin-top:-25px;
     padding:20px;
 }
 .contact-form h3 {
-    color:#838589;
+    color: #000000;
     padding-bottom:20px;
 }
 .message-btn {
