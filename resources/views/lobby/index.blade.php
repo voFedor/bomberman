@@ -138,7 +138,7 @@
             <div class="sub-section">
                 <div class="title clearfix">
                     <div class="pull-left">
-                        <h3>Наши игры</h3>
+                        <h3>Игры</h3>
                     </div>
                     <ul class="client-nav pull-right">
                         <li id="client-prev"></li>
@@ -168,31 +168,31 @@
                     <div class="span5 contact-form centered animated bounceIn" style="margin-top: 20px;margin-bottom: 20px;">
                         {{--<h3>Say Hello</h3>--}}
                         <div id="successSend" class="alert alert-success invisible">
-                            <strong>Well done!</strong>Your message has been sent.</div>
-                        <div id="errorSend" class="alert alert-error invisible">There was an error.</div>
+                            <strong>Well done!</strong>Сообщение отправлено</div>
+                        <div id="errorSend" class="alert alert-error invisible">Ошибка</div>
                         <form role="form" id="feedback_form" action="javascript:void(0);" method="POST">
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                             <div class="control-group">
                                 <div class="controls">
                                     <input required class="span1" style="width: 93%;" type="text" id="name" name="name" placeholder="* Your name...">
-                                    <div class="error left-align" id="err-name">Please enter name.</div>
+                                    <div class="error left-align" id="err-name">Введи имя</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
                                     <input required class="span1" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your name...">
-                                    <div class="error left-align" id="err-email">Please enter valid email adress.</div>
+                                    <div class="error left-align" id="err-email">Нужен настоящий email</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
                                     <textarea required class="span1" style="width: 93%;" name="comment" id="comment" placeholder="* Comments..."></textarea>
-                                    <div class="error left-align" id="err-comment">Please enter your comment.</div>
+                                    <div class="error left-align" id="err-comment">Сообщение</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button onclick="return checkFeedbackForm()" class="message-btn">Send message</button>
+                                    <button onclick="return checkFeedbackForm()" class="message-btn">Отправить</button>
                                 </div>
                             </div>
                         </form>
@@ -240,7 +240,7 @@
                             {{--<a href="">--}}
                                 {{--<span class="icon-gplus-circled"></span>--}}
                             {{--</a>--}}
-                        </li>
+                        {{--</li>--}}
                     </ul>
                 </div>
             </div>

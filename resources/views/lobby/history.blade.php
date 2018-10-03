@@ -8,7 +8,7 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container">
-            <p class="large-text">Elegance is not the abundance of simplicity. It is the absence of complexity.</p>
+            <p class="large-text">Страница где ты можешь посмотреть историю своих побед и запомнить обидчиков, чтобы взять реванш</p>
             <div class="row-fluid">
                 <div class="span12">
                     <table class="table table-dark">

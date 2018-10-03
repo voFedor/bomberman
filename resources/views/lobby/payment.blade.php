@@ -8,16 +8,29 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container">
-            <p class="large-text">Elegance is not the abundance of simplicity. It is the absence of complexity.</p>
+            <p class="large-text">Тут можно пополнить свой баланс, вывести деньги и увидеть историю пополнений и снятий </p>
             <div class="row-fluid">
                 <div class="span5">
+                    <h3>Пополнить баланс</h3>
+                    <h5>Принимаем яндекс.деньги, visa/mastercard</h5>
                     <form role="form" method="post" action="send-payment">
                         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                         <div class="form-group">
                             <label for="email">Сумма:</label>
                             <input type="text" class="form-control" name="price" id="price">
                         </div>
-                        <button type="submit" class="btn btn-default">Оплатить</button>
+                        <button type="submit" class="button">Оплатить</button>
+                    </form>
+                    <h3>Получить деньги</h3>
+                    <h5>Укажи свой яндекс.деньги или номер карты visa/mastercard</h5>
+                    <h5>Сумму, при выводе средств мы оставляем у себя комиссию 10%</h5>
+                    <form role="form" method="post" action="send-payment">
+                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        <div class="form-group">
+                            <label for="email">Сумма:</label>
+                            <input type="text" class="form-control" name="price" id="price">
+                        </div>
+                        <button type="submit" class="button">Оплатить</button>
                     </form>
                 </div>
                 <div class="span7">
