@@ -91,9 +91,12 @@
                 style="text-transform: none;"> mBTC</span><br>
         {{Auth::user()->email}} <br>
         <a id="wp-logout"
+           href="{{ route((Auth::check() ? Auth::user()->getSlugRole() : '') . '.home') }}">Dashboard</a>
+        <br>
+        <a id="wp-logout"
            href="{{ route('auth.logout') }}">Log
             Out</a>
     </div>
-    <li><a href="/tournaments">Турниры</a></li>
+    <li><a href="/history">История</a></li>
     <li><a href="/payments">Платежи</a></li>
 @endif

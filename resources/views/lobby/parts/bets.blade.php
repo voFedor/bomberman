@@ -5,6 +5,7 @@
     </button>
 </div>
 <div class="modal-body" style="color: black;">
+    @if(count($bets) != 0)
     <table class="table">
         <thead>
         <tr>
@@ -18,13 +19,15 @@
             <tr>
                 <th scope="row">{{$bet->bet}}</th>
                 <td>
-                    <button onclick="return pickBet('{{$bet->id}}', '{{$url}}', '{{$info}}')" type="button" class="btn btn-primary">Выбрать</button>
+                    <button onclick="return pickBet('{{$bet->id}}', '{{$bet->openUrl()}}', '{{$bet->bet}}')" type="button" class="btn btn-primary">Выбрать</button>
                 </td>
             </tr>
         @endforeach
         </tbody>
     </table>
-
+    @else
+        <h3>Ставок нет</h3>
+    @endif
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

@@ -8,6 +8,7 @@ use Idma\Robokassa\Payment;
 use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
+use App\Models\Game;
 use Auth;
 use Storage;
 
@@ -21,11 +22,9 @@ class PaymentsController extends Controller
      */
     public function getPayments()
     {
-        $bets = GameBet::with(['game'])
-            ->get()
-            ->all();
+        $games = Game::all();
         $payment_history = PaymentHistory::where('user_id', Auth::user()->id)->get();
-        return view('lobby.payment', compact('bets', 'payment_history'));
+        return view('lobby.payment', compact('games', 'payment_history'));
     }
 
 
@@ -36,7 +35,7 @@ class PaymentsController extends Controller
         if ($bets == null) {
             return response()->with(['error' => 'Для этой игры не определены ставки']);
         }
-        $view = view('lobby.parts.bets')->with(['bets' => $bets, 'url' => $request->url, 'info' => $request->info]);
+        $view = view('lobby.parts.bets')->with(['bets' => $bets]);
         return $view->render();
     }
 

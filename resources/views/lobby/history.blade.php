@@ -10,36 +10,39 @@
         <div class="container">
             <p class="large-text">Elegance is not the abundance of simplicity. It is the absence of complexity.</p>
             <div class="row-fluid">
-                <div class="span5">
-                    <form role="form" method="post" action="send-payment">
-                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                        <div class="form-group">
-                            <label for="email">Сумма:</label>
-                            <input type="text" class="form-control" name="price" id="price">
-                        </div>
-                        <button type="submit" class="btn btn-default">Оплатить</button>
-                    </form>
-                </div>
-                <div class="span7">
+                <div class="span12">
                     <table class="table table-dark">
                         <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Price</th>
-                            <th scope="col">Date</th>
+                            <th>@lang('quickadmin.sessions.fields.id')</th>
+                            <th>@lang('quickadmin.sessions.fields.game_name')</th>
+                            <th>@lang('quickadmin.sessions.fields.credits_before')</th>
+                            <th>@lang('quickadmin.sessions.fields.bet')</th>
+                            <th>@lang('quickadmin.sessions.fields.result')</th>
+                            <th>@lang('quickadmin.sessions.fields.credits_after')</th>
+                            <th>@lang('quickadmin.sessions.fields.started_at')</th>
+                            <th>@lang('quickadmin.sessions.fields.ended_at')</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php $i = 1;?>
-                        @foreach($payment_history as $payment)
+                        @if (count($sessions) > 0)
+                            @foreach ($sessions as $game)
+                                <tr data-entry-id="{{ $game->id }}">
+                                    <td field-key='id'>{{ $game->id }}</td>
+                                    <td field-key='game_name'>{{ $game->name }}</td>
+                                    <td field-key='credits_before'>{{ $game->credits_before }}</td>
+                                    <td field-key='bet'>{{ $game->bet }}</td>
+                                    <td field-key='result'>{{ (Auth::id() == $game->winner_id ? 'win' : (isset($game->ended_at) ? 'lose' : '')) }}</td>
+                                    <td field-key='credits_after'>{{ $game->credits_after }}</td>
+                                    <td field-key='started_at'>{{ $game->started_at }}</td>
+                                    <td field-key='ended_at'>{{ $game->ended_at }}</td>
+                                </tr>
+                            @endforeach
+                        @else
                             <tr>
-                                <th scope="row">{{$i}}</th>
-                                <td>{{$payment->price}}</td>
-                                <td>{{$payment->created_at}}</td>
+                                <td colspan="10">@lang('quickadmin.qa_no_entries_in_table')</td>
                             </tr>
-                            <?php $i++;?>
-                        @endforeach
-
+                        @endif
 
                         </tbody>
                     </table>

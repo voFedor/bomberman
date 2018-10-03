@@ -30,7 +30,7 @@ class ServiceController extends Controller
 
     public function callToAction(Request $request)
     {
-        $data = $request->all();
+        $data_val = $request->all();
 
         if ($data_val['email'] == null || $data_val['name'] == null || $data_val['comment'] == null){
             return response()->json(['error' => 'Заполните все поля']);

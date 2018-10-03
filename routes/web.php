@@ -1,9 +1,10 @@
 <?php
 Route::get('/', 'LobbyController@getIndex');
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
+Route::get('/history', 'LobbyController@gameHistory');
+
 
 Route::post('/feedback', 'ServiceController@feedback');
-
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');
