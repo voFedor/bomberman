@@ -9,6 +9,7 @@ use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
 use App\Models\Game;
+use Omnipay\Omnipay;
 use Auth;
 use Storage;
 

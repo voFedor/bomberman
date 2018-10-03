@@ -84,15 +84,18 @@
         }
     }
 
-
+@if(Auth::user() != null)
     function pickBet(id, url, bet) {
-        if ({{Auth::user()->credits}} < bet) {
-            alert('У вас не достаточно денег');
-            return;
-        }
-        window.open(url, info+' BTC', 'scrollbars=no,fullscreen=no,left=0,top=0,height=800,width=800');
+            if ({{Auth::user()->credits}} < bet)
+    {
+        alert('У вас не достаточно денег');
+        return;
     }
-    
+
+                window.open(url, info + ' BTC', 'scrollbars=no,fullscreen=no,left=0,top=0,height=800,width=800');
+            
+    }
+    @endif
     
     function checkFeedbackForm() {
 
