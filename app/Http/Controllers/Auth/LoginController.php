@@ -234,8 +234,11 @@ class LoginController extends Controller
 
         if ($user && Hash::check(Request::input(self::$fields['login']['password']), $user->password)) {
             Auth::loginUsingId($user->id);
+
             return [
                 'result' => true,
+                'email' => $user->email,
+                'credits' => $user->credits,
                 'action' => Request::input('login-with-ajax')
             ];
 
@@ -247,6 +250,7 @@ class LoginController extends Controller
             'action' => Request::input('login-with-ajax')
         ];
     }
+
 
     /**
      * Where to redirect users after login / registration.

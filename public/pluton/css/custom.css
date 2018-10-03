@@ -1,0 +1,19 @@
+.popover-title {
+    background-color: #ecc52f;
+    border-bottom: 1px solid #e3bb24;
+    color: black;
+}
+
+.popover {
+    background-color: #ae963b91;
+}
+
+.custom-modal-title {
+    background-color: #ecc52f;
+    border-bottom: 1px solid #e3bb24;
+    color: black;
+}
+
+.custom-modal-body {
+    background-color: #ae963b91;
+}

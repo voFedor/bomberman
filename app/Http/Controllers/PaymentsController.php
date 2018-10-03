@@ -6,7 +6,10 @@ use Illuminate\Http\Request;
 use App\Classes\UUID;
 use Idma\Robokassa\Payment;
 use App\Models\PaymentHistory;
+use App\Models\GameBet;
+use App\Models\User;
 use Auth;
+use Storage;
 
 class PaymentsController extends Controller
 {
@@ -18,7 +21,23 @@ class PaymentsController extends Controller
      */
     public function getPayments()
     {
-        return view('lobby.payment');
+        $bets = GameBet::with(['game'])
+            ->get()
+            ->all();
+        $payment_history = PaymentHistory::where('user_id', Auth::user()->id)->get();
+        return view('lobby.payment', compact('bets', 'payment_history'));
+    }
+
+
+    public function getBets(Request $request)
+    {
+        $bets = GameBet::where('game_id', $request->id)->get();
+
+        if ($bets == null) {
+            return response()->with(['error' => 'Для этой игры не определены ставки']);
+        }
+        $view = view('lobby.parts.bets')->with(['bets' => $bets, 'url' => $request->url, 'info' => $request->info]);
+        return $view->render();
     }
 
 
@@ -47,8 +66,8 @@ class PaymentsController extends Controller
 
 
         do {
-            $code = new UUID;
-        } while (PaymentHistory::where('token', $code)->first() != null);
+            $code = rand(10000, 9999990);
+        } while (PaymentHistory::where('token', $code)->where('status', 0)->first() != null);
 
 
         $payment = new PaymentHistory();
@@ -61,10 +80,9 @@ class PaymentsController extends Controller
 
 
         $payment_robkass
-            ->setInvoiceId($token)
+            ->setInvoiceId($code)
             ->setSum($payment->price)
-            ->addCustomParameters(['token' => $code])
-            ->setDescription('Оплата');
+            ->setDescription('Новая оплата');
 
         // redirect to payment url
         return redirect($payment_robkass->getPaymentUrl());
@@ -72,6 +90,7 @@ class PaymentsController extends Controller
 
     public function checkPayment(Request $request)
     {
+
         $payment = new Payment(
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
@@ -81,13 +100,16 @@ class PaymentsController extends Controller
 
 
         if ($payment->validateResult($request->all())) {
-            $payments_history = PaymentHistory::where('token', $request->input('token'))->first();
-            $paid = number_format($payment->getSum());
-            if ($payments_history->price == $paid)
+            $payments_history = PaymentHistory::where('token', $request->input('InvId'))->first();
+            if ($payments_history->price == $payment->getSum())
             {
                 $payments_history->status = 1;
+                $user = User::find($payments_history->user_id);
+                $user->credits = $user->credits + $payments_history->price;
+                $user->update();
+                $payments_history->update();
             }
-            $payments_history->update();
+
         }
     }
 

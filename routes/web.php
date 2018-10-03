@@ -2,15 +2,19 @@
 Route::get('/', 'LobbyController@getIndex');
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 
+Route::post('/feedback', 'ServiceController@feedback');
+
+
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');
+Route::post('/get-bets', 'PaymentsController@getBets');
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
-Route::post('/check-payment', ['as' => 'check-payment', 'uses' => 'PaymentsController@checkPayment']);
-Route::post('/success-payment', ['as' => 'success-payment', 'uses' => 'PaymentsController@successPayment']);
-Route::post('/fail-payment', ['as' => 'fail-payment', 'uses' => 'PaymentsController@failPayment']);
+Route::post('/check-payment', 'PaymentsController@checkPayment');
+Route::post('/success-payment', 'PaymentsController@successPayment');
+Route::post('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...
-Route::any('/wp-admin/admin-ajax.php', 'Auth\LoginController@anyForm')->name('login');
+Route::any('/register', 'Auth\LoginController@anyForm')->name('login');
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login')->name('auth.login');

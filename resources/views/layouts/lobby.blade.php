@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+<html lang="en">
 <head>
     @include('lobby.parts.head')
 </head>
-<body class="home-page bp-legacy home page-template-default page page-id-202 language-en group-blog wpb-js-composer js-comp-ver-5.4.5 vc_responsive js"
-      data-start="background-position: 50% 500px;" data-end="background-position: 50% 0px;">
+<body>
 
 <!-- Preloader -->
-@include('lobby.parts.preloader')
+{{--@include('lobby.parts.preloader')--}}
 <!-- /Preloader -->
 
 <!-- Navbar -->
@@ -16,7 +16,10 @@
 
 @yield('content')
 
-@include('lobby.parts.search')
+{{--@include('lobby.parts.search')--}}
+
+<!-- ScrollUp button start -->
+@include('lobby.parts.scrollup')
 
 @include('lobby.parts.javascript')
 

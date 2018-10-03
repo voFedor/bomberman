@@ -1,48 +1,25 @@
-<nav class="navbar-youplay navbar navbar-default navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="off-canvas" data-target="#navbar"
-                    aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">
-                <img src="http://mosgorinvest.ru/wp-content/uploads/2017/12/2spin_prel-1.png" alt="">
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="container">
+            <a href="#" class="brand">
+                <img src="{{ env('THEME') }}/images/logo.png" width="120" height="40" alt="Logo" />
+                <!-- This is website logo -->
             </a>
-        </div>
-
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul id="menu-main" class="nav navbar-nav">
-                <li id="menu-item-834" class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                            href="" role="button" aria-expanded="false">About Us</a></li>
-                <li id="menu-item-842" class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                            href="{{ route('games') }}" role="button" aria-expanded="false">Games</a></li>
-                <li id="menu-item-993" class="menu-item menu-item-type-post_type menu-item-object-page">
-                    <a href="" role="button" aria-expanded="false">Get a BONUS</a>
-                </li>
-
-                <li id="menu-item-1202" class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                            href="" role="button" aria-expanded="false">Support</a></li>
-                @if(Auth::check())
-                    <li id="menu-item-1202" class="menu-item menu-item-type-post_type menu-item-object-page"><a
-                                href="/payments" role="button" aria-expanded="false">Payment</a></li>
-                @endif
-
-            </ul>
-
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="search-toggle">
-                    <a href="javascript:void(0)" role="button" aria-expanded="false">
-                        <span class="fa fa-search"></span></a></li>
-            </ul>
-
-
-            @include('lobby.parts.auth')
-
-            <div class="nav navbar-nav navbar-right"></div>
+            <!-- Navigation button, visible on small resolution -->
+            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-menu"></i>
+            </button>
+            <!-- Main navigation -->
+            <div class="nav-collapse collapse pull-right">
+                <ul class="nav" id="top-navigation">
+                    <li class="active"><a href="#home">Home</a></li>
+                    <li><a href="#service">Who we are</a></li>
+                    <li><a href="#games">Games</a></li>
+                    <li><a href="#contact">Contacts</a></li>
+                    @include('lobby.parts.auth')
+                </ul>
+            </div>
+            <!-- End main navigation -->
         </div>
     </div>
-</nav>
+</div>

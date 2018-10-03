@@ -16,7 +16,7 @@ class CreateGameBets extends Migration
         Schema::create('game_bets', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('game_id');
-            $table->decimal('bet', 20, 10);
+            $table->decimal('bet');
             $table->timestamps();
 
             $table->unique(['game_id', 'bet']);
