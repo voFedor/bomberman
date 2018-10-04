@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Classes\UUID;
 use Idma\Robokassa\Payment;
 use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
 use App\Models\Game;
+use Carbon\Carbon;
 use Auth;
 use Storage;
 
@@ -23,8 +23,20 @@ class PaymentsController extends Controller
     public function getPayments()
     {
         $games = Game::all();
-        $payment_history = PaymentHistory::where('user_id', Auth::user()->id)->get();
-        return view('lobby.payment', compact('games', 'payment_history'));
+        $payment_history = PaymentHistory::where(['user_id' => Auth::user()->id, 'status' => 1])->get();
+
+        do {
+            $code = \Uuid::generate()->string;
+        } while (PaymentHistory::where(['token' => $code, 'user_id' => Auth::user()->id])->where('status', 0)->first() != null);
+
+        $payment = new PaymentHistory();
+        $payment->token = $code;
+        $payment->user_id = Auth::user()->id;
+        $payment->status = 0;
+        $payment->save();
+
+
+        return view('lobby.payment', compact('games', 'payment_history', 'payment'));
     }
 
 
@@ -87,6 +99,41 @@ class PaymentsController extends Controller
         return redirect($payment_robkass->getPaymentUrl());
     }
 
+
+    /**
+     * Send payment.
+     *
+     * @param request
+     * @return \Illuminate\Http\RedirectResponses
+     */
+    public function sendPaymentYandex(Request $request)
+    {
+
+        if ($request->price == "" || $request->price == null) {
+            return back()->with(['error' => 'Укажите сумму']);
+        }
+        if (!ctype_digit($request->price)) {
+            return back()->with(['error' => 'Поле сумма не может содержать символы']);
+        }
+
+
+        do {
+            $code = (string) Uuid::generate();
+        } while (PaymentHistory::where(['token' => $code, 'email' => Auth::user()->email])->where('status', 0)->first() != null);
+
+
+        $payment = new PaymentHistory();
+        $payment->token = $code;
+        $payment->price = $request->price;
+        $payment->user_id = Auth::user()->id;
+        $payment->status = 0;
+        $payment->save();
+
+
+        // redirect to payment url
+        return redirect('/');
+    }
+
     public function checkPayment(Request $request)
     {
 
@@ -111,6 +158,36 @@ class PaymentsController extends Controller
 
         }
     }
+
+
+
+    public function checkPaymentYandex(Request $request)
+    {
+        $secret_key = env('SECRET_KEY'); // секретное слово, которое мы получили в предыдущем шаге.
+
+        $payment = PaymentHistory::where(['token' => $_POST['label']])->first();
+        if ($payment == null) {
+            exit();
+        }
+
+        $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $secret_key. '&' . $_POST['label'] );
+
+        if ($sha1 != $_POST['sha1_hash'] ) {
+            exit();
+        }
+
+
+
+        $payment->operation_id = $_POST['operation_id'];
+        $payment->sender = $_POST['sender'];
+        $payment->date = now()->timestamp;;
+        $payment->status = 1;
+        $payment->amount = $payment->amount + $_POST['amount'];
+        $payment->update();
+
+        exit();
+    }
+
 
 
     public function successPayment(Request $request)

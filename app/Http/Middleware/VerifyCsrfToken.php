@@ -15,6 +15,7 @@ class VerifyCsrfToken extends Middleware
         //
         '/success-payment',
         '/fail-payment',
-        '/check-payment'
+        '/check-payment',
+        '/check-payment-yandex'
     ];
 }
