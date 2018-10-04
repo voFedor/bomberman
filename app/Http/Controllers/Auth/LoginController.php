@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Request;
 use Mail;
 use Validator;
+use Socialite;
 use Auth;
 use Hash;
 use App\Models\User;
@@ -38,6 +39,10 @@ class LoginController extends Controller
             'email' => 'user_login'
         ]
     ];
+
+
+
+
 
     /**
      * @return \Illuminate\Http\JsonResponse

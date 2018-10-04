@@ -4,6 +4,10 @@ Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 Route::get('/history', 'LobbyController@gameHistory');
 
 
+Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
+Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback');
+
+
 Route::post('/feedback', 'ServiceController@feedback');
 
 // Payments Routes...
@@ -12,7 +16,9 @@ Route::get('/tournaments', 'LobbyController@tournaments');
 Route::post('/get-bets', 'PaymentsController@getBets');
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');
-Route::post('/success-payment', 'PaymentsController@successPayment');
+Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');
+
+Route::get('/success-payment', 'PaymentsController@successPayment');
 Route::post('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...

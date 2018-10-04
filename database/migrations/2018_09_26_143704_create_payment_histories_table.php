@@ -15,10 +15,14 @@ class CreatePaymentHistoriesTable extends Migration
     {
         Schema::create('payment_histories', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('token');
+            $table->string('token');
             $table->integer('user_id');
-            $table->decimal('price');
-            $table->boolean('status');
+            $table->integer('operation_id')->nullable()->default(null);
+            $table->integer('sender')->nullable()->default(null);
+            $table->string('email')->nullable()->default(null);
+            $table->timestamp('date')->nullable()->default(null);
+            $table->decimal('amount')->nullable()->default(null);
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

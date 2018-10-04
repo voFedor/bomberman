@@ -84,18 +84,29 @@
         }
     }
 
+<<<<<<< HEAD
 @if(Auth::user() != null)
+=======
+    @if(Auth::user() != null)
+>>>>>>> yandex-mony
     function pickBet(id, url, bet) {
             if ({{Auth::user()->credits}} < bet)
     {
         alert('У вас не достаточно денег');
         return;
     }
+<<<<<<< HEAD
 
                 window.open(url, info + ' BTC', 'scrollbars=no,fullscreen=no,left=0,top=0,height=800,width=800');
             
     }
     @endif
+=======
+    @endif
+
+
+    
+>>>>>>> yandex-mony
     
     function checkFeedbackForm() {
 

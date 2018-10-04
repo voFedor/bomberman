@@ -11,6 +11,7 @@ use App\Models\GameSession;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Auth;
+use Socialite;
 use Session;
 
 class LobbyController extends Controller
