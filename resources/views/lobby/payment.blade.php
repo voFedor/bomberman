@@ -8,13 +8,33 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container">
-            <p class="large-text">Elegance is not the abundance of simplicity. It is the absence of complexity.</p>
+            <p class="large-text">Тут можно пополнить свой баланс, вывести деньги и увидеть историю пополнений и снятий </p>
             <div class="row-fluid">
                 <div class="span5">
 
                     <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81%D0%B0%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=http%3A%2F%2Fplayfor.tech%2Fsuccess-payment&quickpay=shop&account=41001915920393&label={{$payment->token}}" width="422" height="223" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 
-
+                    <h3>Пополнить баланс</h3>
+                    <h5>Принимаем яндекс.деньги, visa/mastercard</h5>
+                    <form role="form" method="post" action="send-payment">
+                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        <div class="form-group">
+                            <label for="email">Сумма:</label>
+                            <input type="text" class="form-control" name="price" id="price">
+                        </div>
+                        <button type="submit" class="button">Оплатить</button>
+                    </form>
+                    <h3>Получить деньги</h3>
+                    <h5>Укажи свой яндекс.деньги или номер карты visa/mastercard</h5>
+                    <h5>Сумму, при выводе средств мы оставляем у себя комиссию 10%</h5>
+                    <form role="form" method="post" action="send-payment">
+                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        <div class="form-group">
+                            <label for="email">Сумма:</label>
+                            <input type="text" class="form-control" name="price" id="price">
+                        </div>
+                        <button type="submit" class="button">Оплатить</button>
+                    </form>
                 </div>
                 <div class="span7">
                     <table class="table table-dark">

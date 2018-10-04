@@ -121,14 +121,14 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container centered">
-            <p class="large-text">Зарегистрируйся в 1 клик! gjkt lkz ddjlf</p>
+            <p class="large-text">Зарегистрируйся в 1 клик!</p>
             <form action="/register" method="post" class="" id="callToAction-form">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Email">
+                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Введи email">
                 </div>
                 <input type="hidden" name="login-with-ajax-call-to-action" value="register">
-                <button onclick="return callToAction()" type="button" class="button">Зарегистрироваться</button>
+                <button onclick="return callToAction()" type="button" class="button">клик</button>
             </form>
         </div>
     </div>
@@ -138,7 +138,7 @@
             <div class="sub-section">
                 <div class="title clearfix">
                     <div class="pull-left">
-                        <h3>Наши игры</h3>
+                        <h3>Игры</h3>
                     </div>
                     <ul class="client-nav pull-right">
                         <li id="client-prev"></li>
@@ -163,36 +163,36 @@
         <div class="section secondary-section">
             <div class="container">
                 <div class="title">
-                    <h1>Contact Us</h1>
-                    <p>Duis mollis placerat quam, eget laoreet tellus tempor eu. Quisque dapibus in purus in dignissim.</p>
+                    <h1>Мы на связи</h1>
+                    <p>Не стесняйся, пиши все, что о нас думаешь </p>
                     <div class="span5 contact-form centered animated bounceIn" style="margin-top: 20px;margin-bottom: 20px;">
-                        <h3>Say Hello</h3>
+                        {{--<h3>Say Hello</h3>--}}
                         <div id="successSend" class="alert alert-success invisible">
-                            <strong>Well done!</strong>Your message has been sent.</div>
-                        <div id="errorSend" class="alert alert-error invisible">There was an error.</div>
+                            <strong>Well done!</strong>Сообщение отправлено</div>
+                        <div id="errorSend" class="alert alert-error invisible">Ошибка</div>
                         <form role="form" id="feedback_form" action="javascript:void(0);" method="POST">
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                             <div class="control-group">
                                 <div class="controls">
                                     <input required class="span1" style="width: 93%;" type="text" id="name" name="name" placeholder="* Your name...">
-                                    <div class="error left-align" id="err-name">Please enter name.</div>
+                                    <div class="error left-align" id="err-name">Введи имя</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
                                     <input required class="span1" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your name...">
-                                    <div class="error left-align" id="err-email">Please enter valid email adress.</div>
+                                    <div class="error left-align" id="err-email">Нужен настоящий email</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
                                     <textarea required class="span1" style="width: 93%;" name="comment" id="comment" placeholder="* Comments..."></textarea>
-                                    <div class="error left-align" id="err-comment">Please enter your comment.</div>
+                                    <div class="error left-align" id="err-comment">Сообщение</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <button onclick="return checkFeedbackForm()" class="message-btn">Send message</button>
+                                    <button onclick="return checkFeedbackForm()" class="message-btn">Отправить</button>
                                 </div>
                             </div>
                         </form>
@@ -200,47 +200,47 @@
                 </div>
             </div>
             <div class="container">
-                <div class="span9 center contact-info">
-                    <p>123 Fifth Avenue, 12th,Belgrade,SRB 11000</p>
-                    <p class="info-mail">ourstudio@somemail.com</p>
-                    <p>+11 234 567 890</p>
-                    <p>+11 286 543 850</p>
-                    <div class="title">
-                        <h3>We Are Social</h3>
-                    </div>
+                {{--<div class="span9 center contact-info">--}}
+                    {{--<p>123 Fifth Avenue, 12th,Belgrade,SRB 11000</p>--}}
+                    {{--<p class="info-mail">ourstudio@somemail.com</p>--}}
+                    {{--<p>+11 234 567 890</p>--}}
+                    {{--<p>+11 286 543 850</p>--}}
+                    {{--<div class="title">--}}
+                        {{--<h3>We Are Social</h3>--}}
+                    {{--</div>--}}
                 </div>
                 <div class="row-fluid centered">
                     <ul class="social">
                         <li>
-                            <a href="">
+                            <a href="https://www.facebook.com/gamechainger/">
                                 <span class="icon-facebook-circled"></span>
                             </a>
                         </li>
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-twitter-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
                         <li>
-                            <a href="">
-                                <span class="icon-twitter-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
+                            <a href="https://www.linkedin.com/company/gamechainger/">
                                 <span class="icon-linkedin-circled"></span>
                             </a>
                         </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-pinterest-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-dribbble-circled"></span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="">
-                                <span class="icon-gplus-circled"></span>
-                            </a>
-                        </li>
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-pinterest-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-dribbble-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
+                        {{--<li>--}}
+                            {{--<a href="">--}}
+                                {{--<span class="icon-gplus-circled"></span>--}}
+                            {{--</a>--}}
+                        {{--</li>--}}
                     </ul>
                 </div>
             </div>
