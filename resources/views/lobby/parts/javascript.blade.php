@@ -147,7 +147,7 @@
 
 
     function newGameFeedback() {
-        var newGame = $('#newGameComment').val();
+        var newGame = $('#newGameCommentArea').val();
 
         if (newGame != null && newGame != "") {
             $.ajaxSetup({
@@ -158,7 +158,6 @@
             $.ajax({
                 url: '/new-game',
                 type: "POST",
-                dataType: "JSON",
                 data: {newGame: newGame, _token: '{{csrf_token()}}'},
                 success: function (data) {
                     toastr.clear();

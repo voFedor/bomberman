@@ -88,7 +88,7 @@ class GameSeed extends Seeder
 //                        'bet' => $bet
 //                    ]);
 //                }
-            
+
 
 
 

@@ -18,8 +18,8 @@ class ServiceController extends Controller
 
             \Mail::send('lobby.email.feedback', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
-                $message->from('mail@example.com', 'Example');
-                $message->subject($data_val['questionType']);
+                $message->from('info@playfor.tech', 'Gamechainger');
+                $message->subject('форма обратной свзи - '.$data_val['questionType']);
             });
 
 
@@ -30,14 +30,14 @@ class ServiceController extends Controller
     public function newGame(Request $request)
     {
         $data_val = $request->all();
-        try {
+        
             \Mail::send('lobby.email.newGame', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
-                $message->from('mail@example.com', 'Example');
+                $message->from('info@playfor.tech', 'Gamechainger');
+                $message->subject('Новое сообщение с сайта - предложение по играм');
             });
-            $message->subject('Новое сообщение с сайта - форма обратной свзи');
-        } catch (\Exception $exception) {
-        }
+
+
 
         return response()->json(['success' => "Сообщение отправлено"]);
     }
@@ -56,6 +56,7 @@ class ServiceController extends Controller
                 $message->from('mail@example.com', 'Example');
                 $message->subject('Новое сообщение с сайта');
             });
+
         } catch (\Exception $exception) {
         }
 

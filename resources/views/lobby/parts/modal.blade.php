@@ -38,7 +38,7 @@
             <div class="modal-body">
                 <form action="/new-game" method="post" id="newGame-form">
                     {{ csrf_field() }}
-                        <textarea style="width: 96%;" id="newGameCommentArea"></textarea>
+                        <textarea style="width: 96%;" id="newGameCommentArea" name="newGameCommentArea"></textarea>
 
                     <button onclick="return newGameFeedback()" type="button" class="btn btn-primary">Ответить</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
