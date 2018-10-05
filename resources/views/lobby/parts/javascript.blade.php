@@ -38,21 +38,21 @@
 
 
 <!-- Include javascript -->
-<script src="{{ env('THEME') }}/js/jquery.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/jquery.mixitup.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/bootstrap.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/modernizr.custom.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/jquery.bxslider.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/jquery.cslider.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/jquery.placeholder.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/jquery.inview.js"></script>
+<script src="/{{ env('THEME') }}/js/jquery.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.mixitup.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/bootstrap.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.cslider.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.inview.js"></script>
 <!-- css3-mediaqueries.js for IE8 or older -->
 <!--[if lt IE 9]>
 <script src="{{ env('THEME') }}/js/respond.min.js"></script>
 <![endif]-->
-<script type="text/javascript" src="{{ env('THEME') }}/js/app.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/popup-form.js"></script>
-<script type="text/javascript" src="{{ env('THEME') }}/js/auth.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/app.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/popup-form.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/auth.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
