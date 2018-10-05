@@ -402,7 +402,10 @@ p {
     padding-bottom: 1000px;
     background: url("../images/tourn.jpg")no-repeat center;
     border-top:6px solid #FFB612;
+    background-size: 100% 100%;
+    background-position: center center;
 }
+
 .tour-section .container {
     padding-top:20px;
     position:relative;

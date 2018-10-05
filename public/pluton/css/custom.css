@@ -30,3 +30,15 @@ select {
     border: 1px solid #1b2026;
     width: 100%;
 }
+
+
+.tournament-input {
+    background: white !important;
+    width: 300px !important;
+    margin-top: 20px !important;
+    height: 30px !important;
+}
+
+.tournament-button {
+    background-color: darkgoldenrod !important;
+}

@@ -33,14 +33,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title" style="color: black">Какую игру добавить?</h2>
+                <h2 class="modal-title" style="color: black;">Какую игру добавить?</h2>
             </div>
             <div class="modal-body">
-                <form action="/new-game" method="post" class="" id="newGame-form">
+                <form action="/new-game" method="post" id="newGame-form">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <textarea style="width: 96%;" name="newGameComment" id="newGameComment" cols="30" rows="10"></textarea>
-                    </div>
+                        <textarea style="width: 96%;" id="newGameCommentArea"></textarea>
+
                     <button onclick="return newGameFeedback()" type="button" class="btn btn-primary">Ответить</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
                 </form>

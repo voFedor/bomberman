@@ -7,18 +7,19 @@
     <!-- Start home section -->
     <div class="section tour-section">
         <div class="triangle"></div>
-        <div class="container">
+        <div class="container" style="text-align: -webkit-center;">
             <h2 class="align-content-center">До турнира по БОМБЕРМЕН осталось не так много времени </h2>
             <script src="http://megatimer.ru/s/c9d0b70bd70d4d488eb61415a9a9004b.js"></script>
             <h2 class="align-content-center">призовой фонд больше 5000рэ</h2>
             <h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>
-            <form action="/register" method="post" class="" id="callToAction-form">
+            <form action="/register" method="post" class="" id="callToAction-form" style="float: left;
+    text-align: -webkit-left;">
                 {{ csrf_field() }}
                 <div class="form-group">
-                    <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Введи email">
+                    <input name="callToActionEmail" type="email" required class="form-control tournament-input" id="callToActionEmail" placeholder="Введи email">
                 </div>
                 <input type="hidden" name="login-with-ajax-call-to-action" value="register">
-                <button onclick="return callToAction()" type="button" class="button">Зарегистрироваться</button>
+                <button onclick="return callToAction()" type="button" class="tournament-button button">Зарегистрироваться</button>
             </form>
         </div>
     </div>

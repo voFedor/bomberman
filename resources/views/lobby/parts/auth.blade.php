@@ -79,22 +79,20 @@
             <a id="wp-logout"
                href="{{ route('auth.logout') }}">Выйти</a>
         </div>
-        {{--<li id="history_menu" style="display: none"><a href="/history">История</a></li>--}}
-        {{--<li id="payments_menu" style="display: none"><a href="/payments">Платежи</a></li>--}}
     </div>
 
 @else
     <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupInfo()"><i class="fa fa-fw fa-user" ></i></a></li>
+    <li><a href="/history">История побед</a></li>
+    <li><a href="/payments">Платежи</a></li>
     <div class="hide auth" id="info">
         Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
                 style="text-transform: none;"> рэ</span><br>
         {{Auth::user()->email}} <br>
         {{--<a id="wp-logout"--}}
-           {{--href="{{ route((Auth::check() ? Auth::user()->getSlugRole() : '') . '.home') }}">Статистика побед</a>--}}
+        {{--href="{{ route((Auth::check() ? Auth::user()->getSlugRole() : '') . '.home') }}">Статистика побед</a>--}}
         {{--<br>--}}
         <a id="wp-logout"
            href="{{ route('auth.logout') }}">Выйти</a>
     </div>
-    <li><a href="/history">История побед</a></li>
-    <li><a href="/payments">Платежи</a></li>
 @endif
