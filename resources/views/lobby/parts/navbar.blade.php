@@ -14,7 +14,7 @@
                 <ul class="nav" id="top-navigation">
                     <li class="active"><a href="/">Коля, домой!</a></li>
                     {{--<li><a href="#service">Who we are</a></li>--}}
-                    <li><a href="#games">Игры</a></li>
+                    <li><a href="/#games">Игры</a></li>
                     {{--<li><a href="#contact">Contacts</a></li>--}}
                     <li><a href="/tournaments/">Турниры</a></li>
                     @include('lobby.parts.auth')
