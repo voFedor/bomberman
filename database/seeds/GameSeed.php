@@ -56,20 +56,39 @@ class GameSeed extends Seeder
                     'status' => false
                 ]);
 
-            $limitInner = rand(2, 6);
-            for($k = 0; $k < $limitInner; $k++){
-                $bet = rand(2, 15);
-                $gameBet = GameBet::where('game_id', $game1->id)
-                    ->where('bet', $bet)
-                    ->first();
 
-                if(!$gameBet){
-                    GameBet::create([
-                        'game_id' => $game1->id,
-                        'bet' => $bet
-                    ]);
-                }
-            }
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 10
+                ]);
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 25
+                ]);
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 50
+                ]);
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 100
+                ]);
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 200
+                ]);
+                GameBet::create([
+                    'game_id' => $game1->id,
+                    'bet' => 500
+                ]);
+
+//                if(!$gameBet){
+//                    GameBet::create([
+//                        'game_id' => $game1->id,
+//                        'bet' => $bet
+//                    ]);
+//                }
+            
 
 
 
