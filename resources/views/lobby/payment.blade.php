@@ -12,28 +12,35 @@
             <div class="row-fluid">
                 <div class="span5">
 
-                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81%D0%B0%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=http%3A%2F%2Fplayfor.tech%2Fsuccess-payment&quickpay=shop&account=41001915920393&label={{$payment->token}}" width="422" height="223" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
-
                     <h3>Пополнить баланс</h3>
                     <h5>Принимаем яндекс.деньги, visa/mastercard</h5>
-                    <form role="form" method="post" action="send-payment">
-                        <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
-                        <div class="form-group">
-                            <label for="email">Сумма:</label>
-                            <input type="text" class="form-control" name="price" id="price">
-                        </div>
-                        <button type="submit" class="button">Оплатить</button>
-                    </form>
+                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81%D0%B0%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=http%3A%2F%2Fplayfor.tech%2Fsuccess-payment&quickpay=shop&account=41001915920393&label={{$payment->token}}" width="422" height="223" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+
                     <h3>Получить деньги</h3>
                     <h5>Укажи свой яндекс.деньги или номер карты visa/mastercard</h5>
                     <h5>Сумму, при выводе средств мы оставляем у себя комиссию 10%</h5>
                     <form role="form" method="post" action="send-payment">
                         <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                        <div class="form-group" id="">
+                            <label for="sel1" style="color: black">Вывести:</label>
+                            <select onchange="return changeTransactionType()" name="transactionType" class="form-control" id="transactionType" style="width: 220px;">
+                                <option value="cardNumber">Кредитную карту</option>
+                                <option value="yandexWallet">Яндекс Деньги</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="cardNumber">
+                            <label for="email">Номер карты:</label>
+                            <input type="text" class="form-control" name="price" id="price">
+                        </div>
+                        <div class="form-group" id="yandexWallet" style="display: none">
+                            <label for="email">Номер кошелька:</label>
+                            <input type="text" class="form-control" name="price" id="price">
+                        </div>
                         <div class="form-group">
                             <label for="email">Сумма:</label>
                             <input type="text" class="form-control" name="price" id="price">
                         </div>
-                        <button type="submit" class="button">Оплатить</button>
+                        <button type="submit" class="button">Получить</button>
                     </form>
                 </div>
                 <div class="span7">
