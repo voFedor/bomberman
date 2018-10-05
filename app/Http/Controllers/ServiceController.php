@@ -15,14 +15,13 @@ class ServiceController extends Controller
             return response()->json(['error' => 'Заполните все поля']);
         }
 
-        try {
+
             \Mail::send('lobby.email.feedback', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
                 $message->from('mail@example.com', 'Example');
-                $message->subject('Новое сообщение с сайта - форма обратной свзи');
+                $message->subject($data_val['questionType']);
             });
-        } catch (\Exception $exception) {
-        }
+
 
         return response()->json(['success' => "Сообщение отправлено"]);
     }

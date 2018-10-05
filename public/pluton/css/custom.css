@@ -22,3 +22,11 @@
 .form-control::-webkit-input-placeholder {
     color: black;
 }
+
+
+select {
+    width: 220px;
+    background-color: #ffb612;
+    border: 1px solid #1b2026;
+    width: 100%;
+}

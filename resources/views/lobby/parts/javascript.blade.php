@@ -104,28 +104,46 @@
         var email = $('#email').val();
         var name = $('#name').val();
         var comment = $('#comment').val();
+        var questionType = $('#questionType').val();
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/feedback',
-            type: "POST",
-            dataType: "JSON",
-            data: {email: email, name:name, comment:comment, _token: '{{csrf_token()}}'},
-            success: function (data) {
-                console.log(JSON.parse(data));
-            },
-            error: function (xhr, str) {
-                console.log(xhr.responseText);
-                toastr.clear();
-                toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
-            }
-        });
+        
+        if (email != "" && name != "" && comment != "") {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/feedback',
+                type: "POST",
+                dataType: "JSON",
+                data: {email: email, name:name, comment:comment, questionType: questionType, _token: '{{csrf_token()}}'},
+                success: function () {
+                    toastr.clear();
+                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
+                    return;
 
+                },
+                error: function (xhr, str) {
+
+                    toastr.clear();
+                    toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
+                    return;
+                }
+            });
+
+        } else {
+
+            toastr.clear();
+            toastr.error('Заполните все поля', 'Ошибка!', {timeOut: 3000})
+            return;
+        }
     }
+
+
+
+
+
 
     function newGameFeedback() {
         var newGame = $('#newGameComment').val();

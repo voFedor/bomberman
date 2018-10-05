@@ -176,6 +176,19 @@
                         <div id="errorSend" class="alert alert-error invisible">Ошибка</div>
                         <form role="form" id="feedback_form" action="javascript:void(0);" method="POST">
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+
+                            <div class="control-group">
+                                <div class="controls">
+                                    <div class="form-group">
+                                        <label for="sel1" style="color: black">Тип отзыва:</label>
+                                        <select name="questionType" class="form-control" id="questionType">
+                                            <option value="Отзыв">Отзыв</option>
+                                            <option value="Предложение">Предложение</option>
+                                            <option value="Вопрос">Вопрос</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="control-group">
                                 <div class="controls">
                                     <input required class="span1 form-control" style="width: 93%;" type="text" id="name" name="name" placeholder="* Your name...">
@@ -184,7 +197,7 @@
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <input required class="span1 form-control" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your name...">
+                                    <input required class="span1 form-control" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your email...">
                                     <div class="error left-align" id="err-email">Нужен настоящий email</div>
                                 </div>
                             </div>
