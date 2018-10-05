@@ -39,14 +39,14 @@ class GameSeed extends Seeder
                     'need_users' => 2,
                     'status' => false
                 ]);
-            $game4 = Game::create(
-                [
-                    'name' => 'cs-go',
-                    'ru_name' => 'CS GO',
-                    'logo' => 'cs-go.png',
-                    'need_users' => 6,
-                    'status' => false
-                ]);
+//            $game4 = Game::create(
+//                [
+//                    'name' => 'cs-go',
+//                    'ru_name' => 'CS GO',
+//                    'logo' => 'cs-go.png',
+//                    'need_users' => 6,
+//                    'status' => false
+//                ]);
             $game5 = Game::create(
                 [
                     'name' => 'checkers',
