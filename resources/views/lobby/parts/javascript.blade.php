@@ -127,6 +127,42 @@
 
     }
 
+    function newGameFeedback() {
+        var newGame = $('#newGameComment').val();
 
+        if (newGame != null && newGame != "") {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/new-game',
+                type: "POST",
+                dataType: "JSON",
+                data: {newGame: newGame, _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    toastr.clear();
+                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
+                    $('#newGame').modal('hide');
+                    return;
+                },
+                error: function (xhr, str) {
+                    toastr.clear();
+                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
+                    $('#newGame').modal('hide');
+                    return;
+                }
+            });
+        } else {
+            toastr.clear();
+            toastr.error('Заполните отзыв', 'Ошибка!', {timeOut: 3000})
+            return;
+        }
+
+
+
+
+    }
 
 </script>
