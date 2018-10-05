@@ -17,3 +17,8 @@
 .custom-modal-body {
     background-color: #ae963b91;
 }
+
+
+.form-control::-webkit-input-placeholder {
+    color: black;
+}

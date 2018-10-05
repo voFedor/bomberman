@@ -178,19 +178,19 @@
                             <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
                             <div class="control-group">
                                 <div class="controls">
-                                    <input required class="span1" style="width: 93%;" type="text" id="name" name="name" placeholder="* Your name...">
+                                    <input required class="span1 form-control" style="width: 93%;" type="text" id="name" name="name" placeholder="* Your name...">
                                     <div class="error left-align" id="err-name">Введи имя</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <input required class="span1" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your name...">
+                                    <input required class="span1 form-control" style="width: 93%;" type="email" id="email" name="email" placeholder="* Your name...">
                                     <div class="error left-align" id="err-email">Нужен настоящий email</div>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="controls">
-                                    <textarea required class="span1" style="width: 93%;" name="comment" id="comment" placeholder="* Comments..."></textarea>
+                                    <textarea required class="span1 form-control" style="width: 93%;" name="comment" id="comment" placeholder="* Comments..."></textarea>
                                     <div class="error left-align" id="err-comment">Сообщение</div>
                                 </div>
                             </div>
