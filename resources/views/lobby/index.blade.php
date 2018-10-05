@@ -147,21 +147,22 @@
                 </div>
                 <ul class="row client-slider" id="clint-slider">
                     @foreach($games as $game)
-                    <li>
-                        <a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : 0}}, {{ $game->id }})">
-                            <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
-                        </a>
-                    </li>
-                    @endforeach
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#newGame">
-                                <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                            <a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : 0}}, {{ $game->id }})">
+                                <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
+                    @endforeach
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#newGame">
+                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
+
     <!-- Contact section start -->
     <div id="contact" class="contact">
         <div class="section secondary-section">

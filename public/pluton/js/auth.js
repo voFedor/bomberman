@@ -27,6 +27,11 @@ function login() {
 
 function register() {
     var data   = $('#reg-form').serialize();
+    if (!isValidEmailAddress($("#user_login-1").val())) {
+        toastr.clear();
+        toastr.error('Укажите реальный email', 'Ошибка!', {timeOut: 3000});
+        return;
+    }
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -55,9 +60,15 @@ function register() {
 
 function callToAction() {
     var email = $('#callToActionEmail').val();
+
     if (email == null || email == "") {
         toastr.clear();
         toastr.error('Укажите свой email', 'Ошибка!', {timeOut: 3000});
+        return;
+    }
+    if (!isValidEmailAddress(email)) {
+        toastr.clear();
+        toastr.error('Укажите реальный email', 'Ошибка!', {timeOut: 3000});
         return;
     }
     $.ajaxSetup({

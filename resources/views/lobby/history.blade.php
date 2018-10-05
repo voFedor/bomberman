@@ -56,7 +56,7 @@
             <div class="sub-section">
                 <div class="title clearfix">
                     <div class="pull-left">
-                        <h3>Наши игры</h3>
+                        <h3>Игры</h3>
                     </div>
                     <ul class="client-nav pull-right">
                         <li id="client-prev"></li>
@@ -71,7 +71,11 @@
                             </a>
                         </li>
                     @endforeach
-
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#newGame">
+                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>

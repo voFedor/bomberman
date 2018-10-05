@@ -53,6 +53,7 @@
 <script type="text/javascript" src="/{{ env('THEME') }}/js/app.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/popup-form.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/auth.js"></script>
+<script type="text/javascript" src="/{{ env('THEME') }}/js/custom.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
