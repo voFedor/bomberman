@@ -183,4 +183,93 @@
 
     }
 
+
+
+    function cashOut() {
+        var priceCashOut = $('#priceCashOut').val();
+        var cardNumber = $('#cardNumber').val();
+        var yandexWallet = $('#yandexWallet').val();
+        var transactionType = $('#transactionType').val();
+        var cashOutInfo;
+        var balance;
+        if (priceCashOut == "" || priceCashOut == null || priceCashOut < 2) {
+            toastr.clear();
+            toastr.error('Сумма не может быть меньше 2 рублей', 'Ошибка!', {timeOut: 3000})
+            return;
+        }
+        if (transactionType == 'yandexWallet') {
+            if(yandexWallet == "" || yandexWallet == null){
+                toastr.clear();
+                toastr.error('Укажите номер кошелька', 'Ошибка!', {timeOut: 3000})
+                return;
+            } else {
+                cashOutInfo = "Вывод на yandex кошелек. Номер: " + yandexWallet + ' Сумма: '+priceCashOut;
+            }
+        }
+
+        if (transactionType == 'cardNumber') {
+            if(cardNumber == "" || cardNumber == null){
+                toastr.clear();
+                toastr.error('Укажите номер карты', 'Ошибка!', {timeOut: 3000})
+                return;
+            } else {
+                cashOutInfo = "Вывод на карту. Номер: " + cardNumber+ ' Сумма: ' + priceCashOut;
+            }
+        }
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/check-balance',
+            type: "POST",
+            data: {
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+                balance = data['result'];
+            },
+            error: function (xhr, str) {
+            }
+        });
+        if (balance < priceCashOut) {
+
+            toastr.clear();
+            toastr.error('У вас нет такой суммы', 'Ошибка!', {timeOut: 3000})
+            return;
+        }
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/cash-out-request',
+                type: "POST",
+                data: {
+                    priceCashOut: priceCashOut,
+                    cardNumber: cardNumber,
+                    yandexWallet: yandexWallet,
+                    transactionType: transactionType,
+                    cashOutInfo: cashOutInfo,
+                    _token: '{{csrf_token()}}'},
+                success: function (data) {
+                    toastr.clear();
+                    toastr.success('Заявка отправлена', 'Отлично!', {timeOut: 3000});
+                    return;
+                },
+                error: function (xhr, str) {
+                    toastr.clear();
+                    toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+                    return;
+                }
+            });
+
+
+
+
+    }
+
 </script>

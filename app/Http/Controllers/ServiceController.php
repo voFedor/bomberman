@@ -26,11 +26,25 @@ class ServiceController extends Controller
         return response()->json(['success' => "Сообщение отправлено"]);
     }
 
+    public function cashOutRequest(Request $request)
+    {
+        $data_val = $request->all();
+        $data_val['email'] = \Auth::user()->email;
+        \Mail::send('lobby.email.cashOut', $data_val, function ($message) use ($data_val) {
+            $message->to(env('EMAIL'));
+            $message->from('info@playfor.tech', 'Gamechainger');
+            $message->subject('Новое сообщение с сайта - вывод средств');
+        });
+
+        return response()->json(['success' => "Сообщение отправлено"]);
+    }
+
+
 
     public function newGame(Request $request)
     {
         $data_val = $request->all();
-        
+
             \Mail::send('lobby.email.newGame', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
                 $message->from('info@playfor.tech', 'Gamechainger');

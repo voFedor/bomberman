@@ -43,11 +43,11 @@ function openLostPassForm() {
 function changeTransactionType(){
     var type = $( "#transactionType option:selected" ).val();
     if (type == "cardNumber") {
-        $( "#yandexWallet" ).fadeToggle();
-        $( "#cardNumber" ).toggle('show');
+        $( "#yandexWalletInput" ).fadeToggle();
+        $( "#cardNumberInput" ).toggle('show');
     } else {
-        $( "#yandexWallet" ).toggle('show');
-        $( "#cardNumber" ).fadeToggle();
+        $( "#yandexWalletInput" ).toggle('show');
+        $( "#cardNumberInput" ).fadeToggle();
     }
 }
 

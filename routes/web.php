@@ -16,6 +16,10 @@ Route::post('/new-game', 'ServiceController@newGame');
 Route::get('/payments', 'PaymentsController@getPayments');
 Route::get('/tournaments', 'LobbyController@tournaments');
 Route::post('/get-bets', 'PaymentsController@getBets');
+Route::post('/cash-out-request', 'ServiceController@cashOutRequest');
+Route::post('/check-balance', 'PaymentsController@checkBalance');
+
+
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');
 Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');

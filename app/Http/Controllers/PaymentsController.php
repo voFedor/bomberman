@@ -192,22 +192,20 @@ class PaymentsController extends Controller
 
     public function successPayment(Request $request)
     {
-        $payment_history = PaymentHistory::where('token', $request->input('token'))->first();
-        if ($payment_history == null) {
-            abort(404);
-        }
-
         return redirect('/payments')->with(['success' => 'Отлично! Оплата прошла успешно.']);
     }
 
 
     public function failPayment(Request $request)
     {
-        $payment_history = PaymentHistory::where('token', $request->input('token'))->first();
-        if ($payment_history == null) {
-            abort(404);
-        }
-
         return redirect('/payments')->with(['error' => 'Произошла ошибка! Оплата не прошла, попробуйте еще раз или обратитесь в службу поддержки']);
     }
+
+    public function checkBalance()
+    {
+        $balance = Auth::user()->credits;
+        return response()->json(['result' => $balance]);
+    }
+
+
 }
