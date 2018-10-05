@@ -37,8 +37,8 @@
                 <div class="da-slide">
                     <h2>Турнир близко</h2>
                     <h4>Скоро состоиться туренир по Bomberman<Br/>
-                    Призовой фонд больше 5000+ р.</h4>
-                    <a href="#" class="da-link button">Подробнее</a>
+                    Призовой фонд больше 5000 рэ</h4>
+                    <a href="/tournaments/" class="da-link button">Подробнее</a>
                     <div class="da-img">
                         <img src="{{ env('THEME') }}/images/Slider03.png" width="320" alt="image03">
                     </div>
@@ -61,7 +61,7 @@
             <div class="title">
                 <h1>Выигрывай и получай деньги за победу</h1>
                 <!-- Section's title goes here -->
-                <p>Здесь ты можешь создавать и участвовать в турнирах, а побеждая получать денежное вознаграждение.</p>
+                <p>Здесь ты можешь создавать и участвовать в турнирах. <br/> А побеждая получать денежное вознаграждение.</p>
                 <p>Все просто!</p>
                 <!--Simple description for section goes here. -->
             </div>
