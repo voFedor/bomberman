@@ -155,13 +155,13 @@
                 type: "POST",
                 dataType: "JSON",
                 data: {email: email, name:name, comment:comment, questionType: questionType, _token: '{{csrf_token()}}'},
-                success: function () {
-                    if (data['error'])  {
+                success: function (data) {
+                    if (data['result'] == 'error')  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
                         return;
                     }
-                    if (data['success']) {
+                    if (data['result'] == 'success') {
                         toastr.clear();
                         toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
                         return;
@@ -178,7 +178,7 @@
         } else {
 
             toastr.clear();
-            toastr.error('Что-то пошло не так, попробуйте выполнить операцию еще раз', 'Ошибка!', {timeOut: 3000})
+            toastr.error('Заполните все поля', 'Ошибка!', {timeOut: 3000})
             return;
         }
     }
