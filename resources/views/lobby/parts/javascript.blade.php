@@ -203,11 +203,11 @@
                 data: {newGame: newGame, _token: '{{csrf_token()}}'},
                 success: function (data) {
 
-                    if (data['error'])  {
+                    if (data['result'] == 'error')  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
                     }
-                    if (data['success']) {
+                    if (data['result'] == 'success') {
                         toastr.clear();
                         toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
                     }
