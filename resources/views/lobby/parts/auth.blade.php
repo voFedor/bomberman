@@ -54,19 +54,20 @@
             <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a> |
             <a href="javascript:void(0);" onclick="return openAuthForm()">Войти</a>
         </form>
-        <form class="lwa-remember block-content" action="/login/" method="post" id="forgot-form" style="display: none;">
+        <form action="javascript:void(0)" class="lwa-remember block-content" action="/register" method="post" id="forgot-form" style="display: none;">
             <span id="error_forget" style="color: red;font-size: 16px;"></span>
             <p style="padding: 2px;">
                 Логин/Email: </p>
             <div class="youplay-input">
-                <input type="text" name="log">
+                <input type="text" name="user_login_remember" id="user_login_remember">
             </div>
-            <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp_3-submit-1" tabindex="100">
+            <button onclick="return remember()" class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp_3-submit-1" tabindex="100">
                 Отправить пароль
             </button>
             <br>
             <input type="hidden" name="login-with-ajax" value="remember">
             <p></p>
+            {{ csrf_field() }}
             <a href="javascript:void(0);" onclick="return openAuthForm()">Вход</a> |
             <a href="javascript:void(0);" onclick="return openRegForm()">Регистрация</a>
         </form>

@@ -54,11 +54,13 @@ function changeTransactionType(){
 
 
 function showErrorLogin(error){
-    $("#error_login").append(error);
+    toastr.clear();
+    toastr.error(error, 'Ошибка!', {timeOut: 3000});
 }
 
 function showErrorReg(error){
-    $("#error_register").append(error);
+    $("#error_register").val();
+    $("#error_register").val(error);
 }
 
 

@@ -33,7 +33,7 @@ class LoginController extends Controller
             'password' => 'pwd'
         ],
         'remember' => [
-            'email' => 'user_login'
+            'email' => 'user_login_remember'
         ],
         'register' => [
             'email' => 'user_login'
@@ -51,15 +51,15 @@ class LoginController extends Controller
     {
         switch (Request::input('login-with-ajax')){
             case 'login':
-                return $this->prefix($this->login());
-            case 'register':
-                return $this->prefix($this->register());
+                return $this->login();
             case 'remember':
-                return $this->prefix($this->remember());
+                return $this->remember();
+            case 'register':
+                return $this->register();
             default:
-                return $this->prefix([
-                    'error' => 'Not found action',
-                    'result' => false,
+                return response()->json([
+                    'result' => 'error',
+                    'message' => 'Пользователь с таким email не найден',
                     'action' => Request::input('login-with-ajax')
                 ]);
         }
@@ -71,7 +71,7 @@ class LoginController extends Controller
      */
     public function prefix($json)
     {
-        return Request::input('callback') . '(' . json_encode($json) . ')';
+        return response(). '(' . json_encode($json) . ')';
     }
 
     /**
@@ -98,10 +98,9 @@ class LoginController extends Controller
                         $errorMessage .= ' ' . $error;
                     }
                 }
-
                 return [
-                    'error' => $errorMessage,
-                    'result' => false,
+                    'result' => 'error',
+                    'message' => $errorMessage,
                     'action' => Request::input('login-with-ajax')
                 ];
             }
@@ -128,13 +127,14 @@ class LoginController extends Controller
 
 
             return [
-                'result' => true,
+                'result' => 'success',
+                'message' => 'Пароль выслан вам на почту',
                 'action' => Request::input('login-with-ajax')
             ];
         }else{
             return [
-                'error' => '<strong>ERROR</strong>' . ' user not saved',
-                'result' => true,
+                'message' => '<strong>ERROR</strong>' . ' user not saved',
+                'result' => 'error',
                 'action' => Request::input('login-with-ajax')
             ];
         }
@@ -166,8 +166,8 @@ class LoginController extends Controller
                 }
 
                 return [
-                    'error' => $errorMessage,
-                    'result' => false,
+                    'result' => 'error',
+                    'message' => $errorMessage,
                     'action' => Request::input('login-with-ajax')
                 ];
             }
@@ -187,14 +187,15 @@ class LoginController extends Controller
 
 
             return [
-                'result' => true,
+                'result' => 'success',
+                'message' => 'Пароль отправлен вам на почту',
                 'action' => Request::input('login-with-ajax')
             ];
         }
 
         return [
-            'error' => '<strong>ERROR</strong>User not found',
-            'result' => false,
+            'message' => '<strong>ERROR</strong>User not found',
+            'result' => 'error',
             'action' => Request::input('login-with-ajax')
         ];
     }
@@ -225,8 +226,8 @@ class LoginController extends Controller
             }
 
             return [
-                'error' => $errorMessage,
-                'result' => false,
+                'result' => 'error',
+                'message' => $errorMessage,
                 'action' => Request::input('login-with-ajax')
             ];
         }
@@ -241,7 +242,7 @@ class LoginController extends Controller
             Auth::loginUsingId($user->id);
 
             return [
-                'result' => true,
+                'result' => 'success',
                 'email' => $user->email,
                 'credits' => $user->credits,
                 'action' => Request::input('login-with-ajax')
@@ -250,8 +251,8 @@ class LoginController extends Controller
         }
 
         return [
-            'error' => 'Not correct login or password',
-            'result' => false,
+            'message' => 'Not correct login or password',
+            'result' => 'error',
             'action' => Request::input('login-with-ajax')
         ];
     }

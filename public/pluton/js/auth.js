@@ -10,15 +10,14 @@ function login() {
         data: data,
         type: "POST",
         success: function(data){
-            if (data.result == true) {
+            if (data['result'] == 'success') {
                 location.reload();
             }
-            if (data.result == false){
-                showErrorLogin(data.error);
+            if (data['result'] == 'error'){
+                showErrorLogin(data['message']);
             }
     },
     error:  function(xhr, str){
-            console.log(xhr);
     }
 });
 }
@@ -41,17 +40,55 @@ function register() {
         url: '/register',
         data: data,
         type: "POST",
-        success: function(data){
-            if (data.result == true) {
-                showUserInfo(data.info);
+        success: function(data_resp){
+            if (data_resp['result'] == 'success') {
+                toastr.clear();
+                toastr.success(data_resp['message'], 'Отлично!', {timeOut: 3000});
+                return;
             }
-            if (data.result == false){
-                console.log(data.error);
-                showErrorReg(data.error);
+            if (data_resp['result'] == 'error'){
+                toastr.clear();
+                toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
+                showErrorReg(data_resp['message']);
             }
         },
         error:  function(xhr, str){
-            console.log(xhr);
+            showErrorReg('Что-то пошло не так');
+        }
+    });
+}
+
+
+function remember() {
+    var data   = $('#forgot-form').serialize();
+    if (!isValidEmailAddress($("#user_login_remember").val())) {
+        toastr.clear();
+        toastr.error('Укажите реальный email', 'Ошибка!', {timeOut: 3000});
+        return;
+    }
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+        }
+    });
+    $.ajax({
+        url: '/register',
+        data: data,
+        type: "POST",
+        success: function(data_resp){
+            if (data_resp['result'] == 'success') {
+                toastr.clear();
+                toastr.success(data_resp['message'], 'Отлично!', {timeOut: 3000});
+                return;
+            }
+            if (data_resp['result'] == 'error'){
+                toastr.clear();
+                toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
+                showErrorReg(data_resp['message']);
+            }
+        },
+        error:  function(xhr, str){
+            showErrorReg('Что-то пошло не так');
         }
     });
 }
@@ -81,19 +118,17 @@ function callToAction() {
         data: { user_login: email , 'login-with-ajax': 'register'},
         type: "POST",
         success: function(data){
-            toastr.clear();
-            toastr.success("Пароль отправлен на вашу почту", 'Отлично', {timeOut: 3000});
-            if (data.result == true) {
+            console.log(data);
+            if (data['result'] == 'success') {
                 toastr.clear();
                 toastr.success("Пароль отправлен на вашу почту", 'Отлично', {timeOut: 3000});
             }
-            if (data.result == false){
+            if (data['result'] == 'error'){
                 toastr.clear();
-                toastr.error(data.error, 'Ошибка', {timeOut: 3000});
+                toastr.error(data['message'], 'Ошибка', {timeOut: 3000});
             }
         },
         error:  function(xhr, str){
-            console.log(xhr);
         }
     });
 }

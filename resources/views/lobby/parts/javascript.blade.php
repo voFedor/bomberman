@@ -57,6 +57,40 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <script>
+
+    function checkBalance() {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/check-balance',
+            type: "POST",
+            data: {
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+                if (data['error'])  {
+                    toastr.clear();
+                    toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
+                    return;
+                }
+                if (data['success']) {
+                    toastr.clear();
+                    toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
+                    return;
+                }
+
+            },
+            error: function (xhr, str) {
+                return 0;
+            }
+        });
+    }
+
+
+
     function checkBet(credits, id) {
 
         if(credits !== 0) {
@@ -75,13 +109,14 @@
                         $('#bets-modal').modal('show');
                     },
                     error:  function(xhr, str){
-                        console.log(xhr);
                     }
                 });
 
 
         } else {
-            alert('Вам необходимо авторизоваться для того чтобы начать играть');
+            toastr.clear();
+            toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
+            return;
         }
     }
 
@@ -90,7 +125,8 @@
     function pickBet(id, url, bet) {
     if ({{Auth::user()->credits}} < bet)
     {
-        alert('У вас не достаточно денег');
+        toastr.clear();
+        toastr.error('У вас не достаточно денег', 'Ошибка!', {timeOut: 3000})
         return;
     }
 
@@ -120,10 +156,16 @@
                 dataType: "JSON",
                 data: {email: email, name:name, comment:comment, questionType: questionType, _token: '{{csrf_token()}}'},
                 success: function () {
-                    toastr.clear();
-                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
-                    return;
-
+                    if (data['error'])  {
+                        toastr.clear();
+                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
+                        return;
+                    }
+                    if (data['success']) {
+                        toastr.clear();
+                        toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
+                        return;
+                    }
                 },
                 error: function (xhr, str) {
 
@@ -136,7 +178,7 @@
         } else {
 
             toastr.clear();
-            toastr.error('Заполните все поля', 'Ошибка!', {timeOut: 3000})
+            toastr.error('Что-то пошло не так, попробуйте выполнить операцию еще раз', 'Ошибка!', {timeOut: 3000})
             return;
         }
     }
@@ -160,14 +202,22 @@
                 type: "POST",
                 data: {newGame: newGame, _token: '{{csrf_token()}}'},
                 success: function (data) {
-                    toastr.clear();
-                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
+
+                    if (data['error'])  {
+                        toastr.clear();
+                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
+                    }
+                    if (data['success']) {
+                        toastr.clear();
+                        toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
+                    }
+
                     $('#newGame').modal('hide');
                     return;
                 },
                 error: function (xhr, str) {
                     toastr.clear();
-                    toastr.success('Спасибо за ваш отзыв', 'Отлично!', {timeOut: 3000});
+                    toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
                     $('#newGame').modal('hide');
                     return;
                 }
@@ -191,7 +241,7 @@
         var yandexWallet = $('#yandexWallet').val();
         var transactionType = $('#transactionType').val();
         var cashOutInfo;
-        var balance;
+
         if (priceCashOut == "" || priceCashOut == null || priceCashOut < 2) {
             toastr.clear();
             toastr.error('Сумма не может быть меньше 2 рублей', 'Ошибка!', {timeOut: 3000})
@@ -217,24 +267,9 @@
             }
         }
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/check-balance',
-            type: "POST",
-            data: {
-                _token: '{{csrf_token()}}'},
-            success: function (data) {
-                balance = data['result'];
-            },
-            error: function (xhr, str) {
-            }
-        });
-        if (balance < priceCashOut) {
+        var balance = checkBalance();
 
+        if (balance < priceCashOut) {
             toastr.clear();
             toastr.error('У вас нет такой суммы', 'Ошибка!', {timeOut: 3000})
             return;
@@ -256,18 +291,24 @@
                     cashOutInfo: cashOutInfo,
                     _token: '{{csrf_token()}}'},
                 success: function (data) {
-                    toastr.clear();
-                    toastr.success('Заявка отправлена', 'Отлично!', {timeOut: 3000});
+                    if (data['error'])  {
+                        toastr.clear();
+                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
+                    }
+                    if (data['success']) {
+                        toastr.clear();
+                        toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
+                    }
+                    balance = 0;
                     return;
                 },
                 error: function (xhr, str) {
                     toastr.clear();
                     toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+                    var balance = 0;
                     return;
                 }
             });
-
-
 
 
     }

@@ -12,7 +12,7 @@ class ServiceController extends Controller
         $data_val = $request->all();
 
         if ($data_val['email'] == null || $data_val['name'] == null || $data_val['comment'] == null){
-            return response()->json(['error' => 'Заполните все поля']);
+            return response()->json(['message' => "Заполните все поля", 'result' => 'error']);
         }
 
 
@@ -23,7 +23,7 @@ class ServiceController extends Controller
             });
 
 
-        return response()->json(['success' => "Сообщение отправлено"]);
+        return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }
 
     public function cashOutRequest(Request $request)
@@ -36,7 +36,7 @@ class ServiceController extends Controller
             $message->subject('Новое сообщение с сайта - вывод средств');
         });
 
-        return response()->json(['success' => "Сообщение отправлено"]);
+        return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }
 
 
@@ -53,7 +53,7 @@ class ServiceController extends Controller
 
 
 
-        return response()->json(['success' => "Сообщение отправлено"]);
+        return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }
 
     public function callToAction(Request $request)
@@ -61,7 +61,8 @@ class ServiceController extends Controller
         $data_val = $request->all();
 
         if ($data_val['email'] == null || $data_val['name'] == null || $data_val['comment'] == null){
-            return response()->json(['error' => 'Заполните все поля']);
+
+            return response()->json(['message' => "Заполните все поля", 'result' => 'error']);
         }
 
         try {
@@ -73,8 +74,7 @@ class ServiceController extends Controller
 
         } catch (\Exception $exception) {
         }
-
-        return response()->json(['success' => "Сообщение отправлено"]);
+        return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }
 
 }
