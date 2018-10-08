@@ -54,6 +54,10 @@ function register() {
         },
         error:  function(xhr, str){
             showErrorReg('Что-то пошло не так');
+        },
+        beforeSend : function (){
+            toastr.clear();
+            toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
         }
     });
 }
@@ -89,6 +93,10 @@ function remember() {
         },
         error:  function(xhr, str){
             showErrorReg('Что-то пошло не так');
+        },
+        beforeSend : function (){
+            toastr.clear();
+            toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
         }
     });
 }
@@ -129,6 +137,10 @@ function callToAction() {
             }
         },
         error:  function(xhr, str){
+        },
+        beforeSend : function (){
+            toastr.clear();
+            toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
         }
     });
 }

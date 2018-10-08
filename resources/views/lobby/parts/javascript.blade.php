@@ -86,6 +86,10 @@
             },
             error: function (xhr, str) {
                 return 0;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
             }
         });
     }
@@ -110,6 +114,10 @@
                         $('#bets-modal').modal('show');
                     },
                     error:  function(xhr, str){
+                    },
+                    beforeSend : function (){
+                        toastr.clear();
+                        toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
                     }
                 });
 
@@ -173,6 +181,10 @@
                     toastr.clear();
                     toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
                     return;
+                },
+                beforeSend : function (){
+                    toastr.clear();
+                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
                 }
             });
 
@@ -221,6 +233,10 @@
                     toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
                     $('#newGame').modal('hide');
                     return;
+                },
+                beforeSend : function (){
+                    toastr.clear();
+                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
                 }
             });
         } else {
@@ -308,6 +324,10 @@
                     toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
                     var balance = 0;
                     return;
+                },
+                beforeSend : function (){
+                    toastr.clear();
+                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
                 }
             });
 
