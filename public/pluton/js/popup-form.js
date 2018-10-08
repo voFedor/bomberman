@@ -73,3 +73,10 @@ $('body').on('click', function(e) {
         }
     });
 });
+
+
+
+
+$( document ).ready(function() {
+    document.getElementById('auth-link').click();
+});
