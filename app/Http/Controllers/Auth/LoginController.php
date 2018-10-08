@@ -80,13 +80,13 @@ class LoginController extends Controller
     public function register()
     {
         $validator = Validator::make(Request::all(), [
-            self::$fields['remember']['email'] => 'required|email|max:255|unique:users,email',
+            self::$fields['register']['email'] => 'required|email|max:255|unique:users,email',
         ]);
 
         $validator->setCustomMessages([
-            self::$fields['remember']['email'] . '.required' => 'Email required',
-            self::$fields['remember']['email'] . '.email' => 'Email not correct',
-            self::$fields['remember']['email'] . '.unique' => 'Email not unique',
+            self::$fields['register']['email'] . '.required' => 'Email required',
+            self::$fields['register']['email'] . '.email' => 'Email not correct',
+            self::$fields['register']['email'] . '.unique' => 'Email not unique',
         ]);
 
         if ($validator->fails()) {
@@ -109,14 +109,14 @@ class LoginController extends Controller
 
         $password = str_random(5);
         $user = User::create([
-            'email' => Request::input(self::$fields['remember']['email']),
+            'email' => Request::input(self::$fields['register']['email']),
             'credits' => 1000,
             'password' => bcrypt($password),
             'role_id' => User::GAMER
         ]);
 
         if($user){
-            $email = Request::input(self::$fields['remember']['email']);
+            $email = Request::input(self::$fields['register']['email']);
 
             Mail::send('emails.register', [
                 'login' => $email,

@@ -7,6 +7,22 @@ use Illuminate\Http\Request;
 class ServiceController extends Controller
 {
     //
+
+
+    public function chat()
+    {
+        $encodedChatId = '42bgw';
+        $siteDomain = 'gamechainger.io';
+        $siteUserExternalId = \Auth::user()->id;
+        $siteUserFullName = \Auth::user()->name;
+        $secretKey = env("CHAT_KEY");
+
+        $signatureDataParts = $siteDomain.$siteUserExternalId.$siteUserFullName.$secretKey;
+        $hash = md5($signatureDataParts);
+        return view('lobby.chat', compact('hash'));
+    }
+
+
     public function feedback(Request $request)
     {
         $data_val = $request->all();

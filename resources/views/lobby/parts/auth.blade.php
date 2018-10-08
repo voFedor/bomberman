@@ -40,16 +40,17 @@
             <p style="padding: 2px;">
                 Логин/Email: </p>
             <div class="youplay-input">
-                <input type="text" name="user_login" id="user_login-1">
+                <input type="email" name="user_login" id="user_login-1">
             </div>
+            {{ csrf_field() }}
+
+            <input type="hidden" name="login-with-ajax" value="register">
             <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="wp-submit-1" tabindex="100"
                     type="button" onclick="return register()">
                 Зарегистрироваться
             </button>
             <br>
-            {{ csrf_field() }}
 
-            <input type="hidden" name="login-with-ajax" value="register">
             <p></p>
             <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a> |
             <a href="javascript:void(0);" onclick="return openAuthForm()">Войти</a>

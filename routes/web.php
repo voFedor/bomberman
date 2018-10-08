@@ -11,6 +11,8 @@ Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback
 Route::post('/feedback', 'ServiceController@feedback');
 Route::post('/new-game', 'ServiceController@newGame');
 
+Route::get('/chat', 'ServiceController@chat')->name('chat');
+
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 
 // Payments Routes...
