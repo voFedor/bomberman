@@ -167,55 +167,103 @@
     <div id="contact" class="contact">
         <div class="section secondary-section">
             <div class="container">
-                <div class="title">
-                    <h1>Мы на связи</h1>
-                    <p>Не стесняйся, пиши все, что о нас думаешь </p>
-                    <div class="span5 contact-form centered animated bounceIn" style="margin-top: 20px;margin-bottom: 20px;">
-                        {{--<h3>Say Hello</h3>--}}
-                        <div id="successSend" class="alert alert-success invisible">
-                            <strong>Well done!</strong>Сообщение отправлено</div>
-                        <div id="errorSend" class="alert alert-error invisible">Ошибка</div>
-                        <form role="form" id="feedback_form" action="javascript:void(0);" method="POST">
-                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+                <div class="row" style="display: flex;">
 
-                            <div class="control-group">
-                                <div class="controls">
-                                    <div class="form-group">
-                                        <label for="sel1" style="color: black">Тип отзыва:</label>
-                                        <select name="questionType" class="form-control" id="questionType">
-                                            <option value="Отзыв">Отзыв</option>
-                                            <option value="Предложение">Предложение</option>
-                                            <option value="Вопрос">Вопрос</option>
-                                        </select>
+
+
+                    <div class="col-md-12">
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="facebook-tab" data-toggle="tab" href="#facebook" role="tab" aria-controls="facebook" aria-selected="true">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="vk-tab" data-toggle="tab" href="#vk" role="tab" aria-controls="vk" aria-selected="false">Profile</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Contact</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="facebook" role="tabpanel" aria-labelledby="facebook-tab">
+                                <div id="fb-root"></div>
+                                <script>(function(d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) return;
+                                        js = d.createElement(s); js.id = id;
+                                        js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.1&appId=134229433336489&autoLogAppEvents=1';
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));</script>
+                                <div class="fb-comments" data-href="http://gamechainger.io/" data-width="500" data-numposts="15"></div>
+                            </div>
+                            <div class="tab-pane fade" id="vk" role="tabpanel" aria-labelledby="vk-tab">
+                                <script type="text/javascript" src="https://vk.com/js/api/openapi.js?159"></script>
+
+                                <script type="text/javascript">
+                                    VK.init({apiId: 6714839, onlyWidgets: true});
+                                </script>
+
+                                <!-- Put this div tag to the place, where the Comments block will be -->
+                                <div id="vk_comments"></div>
+                                <script type="text/javascript">
+                                    VK.Widgets.Comments("vk_comments", {limit: 15, attach: "*"});
+                                </script>
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="title">
+                                    <h1>Мы на связи</h1>
+                                    <p>Не стесняйся, пиши все, что о нас думаешь </p>
+                                    <div class="span5 contact-form centered animated bounceIn" style="margin-top: 20px;margin-bottom: 20px;">
+                                        {{--<h3>Say Hello</h3>--}}
+                                        <div id="successSend" class="alert alert-success invisible">
+                                            <strong>Well done!</strong>Сообщение отправлено</div>
+                                        <div id="errorSend" class="alert alert-error invisible">Ошибка</div>
+                                        <form role="form" id="feedback_form" action="javascript:void(0);" method="POST">
+                                            <input type="hidden" name="_token" value="{{{ csrf_token() }}}" />
+
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <div class="form-group">
+                                                        <label for="sel1" style="color: black">Тип отзыва:</label>
+                                                        <select name="questionType" class="form-control" id="questionType">
+                                                            <option value="Отзыв">Отзыв</option>
+                                                            <option value="Предложение">Предложение</option>
+                                                            <option value="Вопрос">Вопрос</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <input required class="span1 form-control" style="width: 93%;" type="text" id="name" name="name" placeholder="* Имя...">
+                                                    <div class="error left-align" id="err-name">Введи имя</div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <input required class="span1 form-control" style="width: 93%;" type="email" id="email" name="email" placeholder="* Email...">
+                                                    <div class="error left-align" id="err-email">Нужен настоящий email</div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <textarea required class="span1 form-control" style="width: 93%;" name="comment" id="comment" placeholder="* Сообщение"></textarea>
+                                                    <div class="error left-align" id="err-comment">Сообщение</div>
+                                                </div>
+                                            </div>
+                                            <div class="control-group">
+                                                <div class="controls">
+                                                    <button onclick="return checkFeedbackForm()" class="message-btn">Отправить</button>
+                                                </div>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <input required class="span1 form-control" style="width: 93%;" type="text" id="name" name="name" placeholder="* Имя...">
-                                    <div class="error left-align" id="err-name">Введи имя</div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <input required class="span1 form-control" style="width: 93%;" type="email" id="email" name="email" placeholder="* Email...">
-                                    <div class="error left-align" id="err-email">Нужен настоящий email</div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <textarea required class="span1 form-control" style="width: 93%;" name="comment" id="comment" placeholder="* Сообщение"></textarea>
-                                    <div class="error left-align" id="err-comment">Сообщение</div>
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <button onclick="return checkFeedbackForm()" class="message-btn">Отправить</button>
-                                </div>
-                            </div>
-                        </form>
+                        </div>
+
                     </div>
-                </div>
+                            </div>
             </div>
             <div class="container">
                 {{--<div class="span9 center contact-info">--}}

@@ -41,6 +41,7 @@
 <script src="/{{ env('THEME') }}/js/jquery.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.mixitup.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/bootstrap.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/modernizr.custom.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.bxslider.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.cslider.js"></script>
