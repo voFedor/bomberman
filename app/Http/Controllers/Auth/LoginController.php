@@ -110,7 +110,7 @@ class LoginController extends Controller
         $password = str_random(5);
         $user = User::create([
             'email' => Request::input(self::$fields['register']['email']),
-            'credits' => 1000,
+            'credits' => 0,
             'password' => bcrypt($password),
             'role_id' => User::GAMER
         ]);

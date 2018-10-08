@@ -16,7 +16,6 @@ use Session;
 
 class LobbyController extends Controller
 {
-
     /**
      * Show the application dashboard.
      *
@@ -27,7 +26,24 @@ class LobbyController extends Controller
         $games = Game::all();
 
 
-        return view('lobby.index', compact('games'));
+        $user = \Auth::user();
+        if ($user != null)
+        {
+            $encodedChatId = '42bgw';
+            $siteDomain = 'gamechainger.io';
+            $siteUserExternalId = $user->id;
+            $siteUserFullName = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
+            $secretKey = env("CHAT_KEY");
+
+            $signatureDataParts = $siteDomain.$siteUserExternalId.$siteUserFullName.$secretKey;
+            $hash = md5($signatureDataParts);
+            $name = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
+        } else {
+            $hash = null;
+            $name = null;
+        }
+
+        return view('lobby.index', compact('games', 'hash', 'name'));
     }
     /**
      * Show the application dashboard.

@@ -37,6 +37,9 @@ class TournamentsController extends Controller
                 $reg->user_id = $user->id;
                 $reg->save();
 
+                $user->credits = $user->credits - env('BANK');
+                $user->update();
+
                 \Mail::send('lobby.email.tournament', $data, function ($message) use ($data) {
                     $message->to(env('EMAIL'));
                     $message->from('info@playfor.tech', 'Gamechainger');
