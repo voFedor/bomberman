@@ -26,6 +26,10 @@ function tourReg() {
         error:  function(xhr, str){
             toastr.clear();
             toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+        },
+        beforeSend : function (){
+            toastr.clear();
+            toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
         }
     });
 }
