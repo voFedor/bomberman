@@ -135,12 +135,15 @@ function callToAction() {
                 toastr.clear();
                 toastr.error(data['message'], 'Ошибка', {timeOut: 3000});
             }
+            $('#callToActionEmail').val('');
         },
         error:  function(xhr, str){
+            $('#callToActionEmail').val('');
         },
         beforeSend : function (){
             toastr.clear();
             toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            $('#callToActionEmail').val('');
         }
     });
 }

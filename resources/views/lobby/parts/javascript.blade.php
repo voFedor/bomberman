@@ -165,6 +165,12 @@
                 dataType: "JSON",
                 data: {email: email, name:name, comment:comment, questionType: questionType, _token: '{{csrf_token()}}'},
                 success: function (data) {
+                    $('#email').val('');
+                    $('#name').val('');
+                    $('#comment').val('');
+                    $('#questionType').val('');
+
+
                     if (data['result'] == 'error')  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
@@ -175,8 +181,15 @@
                         toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
                         return;
                     }
+
+
                 },
                 error: function (xhr, str) {
+                    $('#email').val('');
+                    $('#name').val('');
+                    $('#comment').val('');
+                    $('#questionType').val('');
+
 
                     toastr.clear();
                     toastr.error('Произошла ошибка. Попробуйте обновить страницу и отправить сообщение еще раз', 'Ошибка!', {timeOut: 3000})
@@ -215,7 +228,7 @@
                 type: "POST",
                 data: {newGame: newGame, _token: '{{csrf_token()}}'},
                 success: function (data) {
-
+                    $('#newGameCommentArea').val("");
                     if (data['result'] == 'error')  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
@@ -229,6 +242,7 @@
                     return;
                 },
                 error: function (xhr, str) {
+                    $('#newGameCommentArea').val();
                     toastr.clear();
                     toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
                     $('#newGame').modal('hide');
@@ -308,6 +322,12 @@
                     cashOutInfo: cashOutInfo,
                     _token: '{{csrf_token()}}'},
                 success: function (data) {
+
+                    $('#priceCashOut').val('');
+                    $('#cardNumber').val('');
+                    $('#yandexWallet').val('');
+                    $('#transactionType').val('');
+
                     if (data['error'])  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
@@ -320,6 +340,11 @@
                     return;
                 },
                 error: function (xhr, str) {
+                    $('#priceCashOut').val('');
+                    $('#cardNumber').val('');
+                    $('#yandexWallet').val('');
+                    $('#transactionType').val('');
+
                     toastr.clear();
                     toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
                     var balance = 0;
