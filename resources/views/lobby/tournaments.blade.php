@@ -12,14 +12,14 @@
             <script src="http://megatimer.ru/s/c9d0b70bd70d4d488eb61415a9a9004b.js"></script>
             <h2 class="align-content-center">призовой фонд больше 5000рэ</h2>
             <h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>
-            <form action="/register" method="post" class="" id="callToAction-form" style="float: left;
+            <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;
     text-align: -webkit-left;">
-                {{ csrf_field() }}
-                <div class="form-group">
-                    <input name="callToActionEmail" type="email" required class="form-control tournament-input" id="callToActionEmail" placeholder="Введи email">
-                </div>
-                <input type="hidden" name="login-with-ajax-call-to-action" value="register">
-                <button onclick="return callToAction()" type="button" class="tournament-button button">Зарегистрироваться</button>
+                    {{ csrf_field() }}
+                    @if(Auth::user() == null)
+                    <button onclick="return alert('Вам необходимо авторизироваться на сайте.')" type="button" class="tournament-button button">Принять участие</button>
+                    @else
+                    <button onclick="return tourReg()" type="button" class="tournament-button button">Принять участие</button>
+                    @endif
             </form>
         </div>
     </div>

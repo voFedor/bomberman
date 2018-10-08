@@ -3,4 +3,29 @@ function isValidEmailAddress(emailAddress) {
     return pattern.test(emailAddress);
 }
 
+function tourReg() {
 
+    $.ajaxSetup({
+        headers:
+            { 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content') }
+    });
+    $.ajax({
+        url: '/tourReg',
+        type: "POST",
+        success: function(data){
+            if (data['result'] == 'success') {
+                toastr.clear();
+                toastr.success(data['message'], 'Отлично!', {timeOut: 3000});
+                return;
+            }
+            if (data['result'] == 'error'){
+                toastr.clear();
+                toastr.error(data['message'], 'Ошибка!', {timeOut: 3000});
+            }
+        },
+        error:  function(xhr, str){
+            toastr.clear();
+            toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+        }
+    });
+}
