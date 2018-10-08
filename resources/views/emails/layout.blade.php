@@ -98,14 +98,14 @@
 <!-- 100% background wrapper (grey background) -->
 <table border="0" width="100%" height="100%" cellpadding="0" cellspacing="0" bgcolor="#F0F0F0">
     <tr>
-        <td align="center" valign="top" bgcolor="#F0F0F0" style="background-color: #F0F0F0;">
+        <td align="center" valign="top" bgcolor="#FCBF35" style="background-color: #fcbf35;">
 
             <br>
 
             <!-- 600px container (white background) -->
             <table border="0" width="600" cellpadding="0" cellspacing="0" class="container" style="width:600px;max-width:600px">
                 <tr>
-                    <td class="container-padding header" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#DF4726;padding-left:24px;padding-right:24px">
+                    <td class="container-padding header" align="left" style="font-family:Helvetica, Arial, sans-serif;font-size:24px;font-weight:bold;padding-bottom:12px;color:#000000;padding-left:24px;padding-right:24px">
                         {{ env('APP_NAME', '') }}
                     </td>
                 </tr>

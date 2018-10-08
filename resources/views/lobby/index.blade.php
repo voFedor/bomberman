@@ -247,19 +247,20 @@
             </div>
         </div>
             <div class="container">
-                {{--<div class="span9 center contact-info">--}}
+                <div class="span9 center contact-info">
                     {{--<p>123 Fifth Avenue, 12th,Belgrade,SRB 11000</p>--}}
                     {{--<p class="info-mail">ourstudio@somemail.com</p>--}}
                     {{--<p>+11 234 567 890</p>--}}
                     {{--<p>+11 286 543 850</p>--}}
                     {{--<div class="title">--}}
-                        {{--<h3>We Are Social</h3>--}}
-                    {{--</div>--}}
+                        <h3>Мы еще не очень активны в соцсетях, но все равно добавься! <br/> Скоро там будет очень интересно</h3>
+                   </div>
                 </div>
                 <div class="row-fluid centered">
                     <ul class="social">
+
                         <li>
-                            <a href="https://www.facebook.com/gamechainger/">
+                            <a href="https://www.facebook.com/gamechainger/" target="_blank">
                                 <span class="icon-facebook-circled"></span>
                             </a>
                         </li>
@@ -269,7 +270,7 @@
                             {{--</a>--}}
                         {{--</li>--}}
                         <li>
-                            <a href="https://www.linkedin.com/company/gamechainger/">
+                            <a href= "https://www.linkedin.com/company/gamechainger/" target="_blank">
                                 <span class="icon-linkedin-circled"></span>
                             </a>
                         </li>
