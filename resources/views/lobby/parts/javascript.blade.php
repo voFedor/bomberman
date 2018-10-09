@@ -98,7 +98,10 @@
 
     function checkBet(credits, id) {
 
-        if(credits != null) {
+        if(credits != "auth-fail") {
+            
+
+
 
                 $.ajaxSetup({
                     headers: {
