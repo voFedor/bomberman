@@ -29,6 +29,8 @@ class PaymentsController extends Controller
             $code = \Uuid::generate()->string;
         } while (PaymentHistory::where(['token' => $code, 'user_id' => Auth::user()->id])->where('status', 0)->first() != null);
 
+
+
         $payment = new PaymentHistory();
         $payment->token = $code;
         $payment->user_id = Auth::user()->id;

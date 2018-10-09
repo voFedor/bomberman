@@ -84,9 +84,9 @@ class LoginController extends Controller
         ]);
 
         $validator->setCustomMessages([
-            self::$fields['register']['email'] . '.required' => 'Email required',
-            self::$fields['register']['email'] . '.email' => 'Email not correct',
-            self::$fields['register']['email'] . '.unique' => 'Email not unique',
+            self::$fields['register']['email'] . '.required' => 'Пожалуйста, укажите свой Email',
+            self::$fields['register']['email'] . '.email' => 'Пожалуйста, укажите реальный Email',
+            self::$fields['register']['email'] . '.unique' => 'Пользователь с таким Email уже зарегистрирован',
         ]);
 
         if ($validator->fails()) {

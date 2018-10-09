@@ -11,8 +11,9 @@ use App\Models\GameSession;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Auth;
-use Socialite;
 use Session;
+use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
+use RuntimeException;
 
 class LobbyController extends Controller
 {
@@ -24,7 +25,6 @@ class LobbyController extends Controller
     public function getIndex()
     {
         $games = Game::all();
-
 
         $user = \Auth::user();
         if ($user != null)

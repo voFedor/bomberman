@@ -198,6 +198,8 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         \App\Providers\LogProvider::class,
+
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class
     ],
 
     /*

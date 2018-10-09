@@ -98,7 +98,7 @@
 
     function checkBet(credits, id) {
 
-        if(credits !== 0) {
+        if(credits != null) {
 
                 $.ajaxSetup({
                     headers: {
@@ -328,11 +328,11 @@
                     $('#yandexWallet').val('');
                     $('#transactionType').val('');
 
-                    if (data['error'])  {
+                    if (data['result'] == 'error')  {
                         toastr.clear();
                         toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
                     }
-                    if (data['success']) {
+                    if (data['result'] == 'success') {
                         toastr.clear();
                         toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
                     }
