@@ -94,16 +94,11 @@
         });
     }
 
+    @if(Auth::user() != null)
 
+    function checkBet(id) {
 
-    function checkBet(credits, id) {
-
-        if(credits != "auth-fail") {
-            
-
-
-
-                $.ajaxSetup({
+        $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
@@ -125,12 +120,14 @@
                 });
 
 
-        } else {
-            toastr.clear();
-            toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
-            return;
         }
-    }
+   @else
+   function checkBet(id) {
+       toastr.clear();
+       toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
+       return;
+   }
+    @endif
 
 @if(Auth::user() != null)
 

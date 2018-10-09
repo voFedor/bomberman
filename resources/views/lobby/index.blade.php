@@ -148,7 +148,7 @@
                 <ul class="row client-slider" id="clint-slider">
                     @foreach($games as $game)
                         <li>
-                            <a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : "auth-fail"}}, {{ $game->id }})">
+                            <a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">
                                 <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
