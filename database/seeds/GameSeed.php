@@ -20,7 +20,7 @@ class GameSeed extends Seeder
                 'name' => 'bomber',
                 'ru_name' => 'Бомбермен',
                 'logo' => 'bomber.png',
-                'need_users' => 4,
+                'need_users' => 2,
                  'status' => true
                 ]);
             $game2 = Game::create(
@@ -56,7 +56,10 @@ class GameSeed extends Seeder
                     'status' => false
                 ]);
 
-
+                    GameBet::create([
+                        'game_id' => $game1->id,
+                        'bet' => 0
+                    ]);
                 GameBet::create([
                     'game_id' => $game1->id,
                     'bet' => 10

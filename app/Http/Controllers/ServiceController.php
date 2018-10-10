@@ -23,7 +23,7 @@ class ServiceController extends Controller
 
             \Mail::send('lobby.email.feedback', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
-                $message->from('info@playfor.tech', 'Gamechainger');
+                $message->from(env('EMAIL_SENDER'), 'Gamechainger');
                 $message->subject('форма обратной свзи - '.$data_val['questionType']);
             });
 
@@ -37,7 +37,7 @@ class ServiceController extends Controller
         $data_val['email'] = \Auth::user()->email;
         \Mail::send('lobby.email.cashOut', $data_val, function ($message) use ($data_val) {
             $message->to(env('EMAIL'));
-            $message->from('info@playfor.tech', 'Gamechainger');
+            $message->from(env('EMAIL_SENDER'), 'Gamechainger');
             $message->subject('Новое сообщение с сайта - вывод средств');
         });
 
@@ -52,7 +52,7 @@ class ServiceController extends Controller
 
             \Mail::send('lobby.email.newGame', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
-                $message->from('info@playfor.tech', 'Gamechainger');
+                $message->from(env('EMAIL_SENDER'), 'Gamechainger');
                 $message->subject('Новое сообщение с сайта - предложение по играм');
             });
 
@@ -73,7 +73,7 @@ class ServiceController extends Controller
         try {
             \Mail::send('lobby.email.feedback', $data_val, function ($message) use ($data_val) {
                 $message->to(env('EMAIL'));
-                $message->from('mail@example.com', 'Example');
+                $message->from(env('EMAIL_SENDER'), 'Gamechainger');
                 $message->subject('Новое сообщение с сайта');
             });
 

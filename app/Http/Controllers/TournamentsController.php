@@ -42,7 +42,7 @@ class TournamentsController extends Controller
 
                 \Mail::send('lobby.email.tournament', $data, function ($message) use ($data) {
                     $message->to(env('EMAIL'));
-                    $message->from('info@playfor.tech', 'Gamechainger');
+                    $message->from(env('EMAIL_SENDER'), 'Gamechainger');
                     $message->subject('Новое регистрация на турнир');
                 });
                 return response()->json([

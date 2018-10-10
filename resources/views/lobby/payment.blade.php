@@ -14,7 +14,7 @@
 
                     <h3>Пополнить баланс</h3>
                     <h5>Принимаем яндекс.деньги, visa/mastercard</h5>
-                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81%D0%B0%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=http%3A%2F%2Fgamechainger.io%2Fsuccess-payment&quickpay=shop&account=41001915920393&label={{$payment->token}}" width="422" height="223" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
+                    <iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BF%D0%BE%D0%BB%D0%BD%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%B1%D0%B0%D0%BB%D0%B0%D0%BD%D1%81%D0%B0%20%D0%B8%D0%B3%D1%80%D0%BE%D0%BA%D0%BE%D0%BC&targets-hint=&default-sum=1000&button-text=11&payment-type-choice=on&mobile-payment-type-choice=on&mail=on&hint=&successURL=http%3A%2F%2Fgamechainger.io%2Fsuccess-payment&quickpay=shop&account=41001915920393&label={{Auth::user()->id}}" width="422" height="223" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
 
                     <h3>Получить деньги</h3>
                     <h5>При выводе средств мы оставляем у себя комиссию 10%</h5>
@@ -57,7 +57,7 @@
                         @foreach($payment_history as $payment_h)
                             <tr>
                                 <th scope="row">{{$i}}</th>
-                                <td>{{$payment_h->amount}}</td>
+                                <td>{{$payment_h->withdraw_amount}}</td>
                                 <td>{{$payment_h->created_at}}</td>
                             </tr>
                             <?php $i++;?>
@@ -86,7 +86,7 @@
                 <ul class="row client-slider" id="clint-slider">
                     @foreach($games as $game)
                         <li>
-                            <a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : 0}}, {{ $game->id }})">
+                            <a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">
                                 <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>

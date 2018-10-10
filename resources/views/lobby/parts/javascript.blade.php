@@ -72,15 +72,15 @@
             data: {
                 _token: '{{csrf_token()}}'},
             success: function (data) {
-                if (data['error'])  {
+                if (data['result'] == 'error')  {
                     toastr.clear();
                     toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
-                    return;
+                    return false;
                 }
-                if (data['success']) {
+                if (data['result'] == 'success') {
                     toastr.clear();
                     toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
-                    return;
+                    return true;
                 }
 
             },
@@ -359,4 +359,16 @@
 
     }
 
+
+
+
+
+    $(document).ready(function() {
+        var yetVisited = localStorage['visited'];
+        if (!yetVisited) {
+            // open popup
+            localStorage['visited'] = "yes";
+            $('#betaVersionModal').modal('show');
+        }
+    });
 </script>

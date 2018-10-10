@@ -23,22 +23,22 @@ class PaymentsController extends Controller
     public function getPayments()
     {
         $games = Game::all();
-        $payment_history = PaymentHistory::where(['user_id' => Auth::user()->id, 'status' => 1])->get();
+        $payment_history = PaymentHistory::where(['user_id' => Auth::user()->id ])->get();
 
-        do {
-            $code = \Uuid::generate()->string;
-        } while (PaymentHistory::where(['token' => $code, 'user_id' => Auth::user()->id])->where('status', 0)->first() != null);
+//        do {
+//            $code = \Uuid::generate()->string;
+//        } while (PaymentHistory::where(['token' => $code, 'user_id' => Auth::user()->id])->where('status', 0)->first() != null);
+//
+//
+//
+////        $payment = new PaymentHistory();
+////        $payment->token = $code;
+////        $payment->user_id = Auth::user()->id;
+////        $payment->status = 0;
+////        $payment->save();
 
 
-
-        $payment = new PaymentHistory();
-        $payment->token = $code;
-        $payment->user_id = Auth::user()->id;
-        $payment->status = 0;
-        $payment->save();
-
-
-        return view('lobby.payment', compact('games', 'payment_history', 'payment'));
+        return view('lobby.payment', compact('games', 'payment_history'));
     }
 
 
@@ -153,7 +153,7 @@ class PaymentsController extends Controller
             {
                 $payments_history->status = 1;
                 $user = User::find($payments_history->user_id);
-                $user->credits = $user->credits + $payments_history->price;
+                $user->credits = $user->credits + $payments_history->amount;
                 $user->update();
                 $payments_history->update();
             }
@@ -167,10 +167,10 @@ class PaymentsController extends Controller
     {
         $secret_key = env('SECRET_KEY'); // секретное слово, которое мы получили в предыдущем шаге.
 
-        $payment = PaymentHistory::where(['token' => $_POST['label']])->first();
-        if ($payment == null) {
-            exit();
-        }
+//        $payment = PaymentHistory::where(['token' => $_POST['label']])->first();
+//        if ($payment == null) {
+//            exit();
+//        }
 
         $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $secret_key. '&' . $_POST['label'] );
 
@@ -178,14 +178,30 @@ class PaymentsController extends Controller
             exit();
         }
 
-
-
+        $payment = new PaymentHistory();
         $payment->operation_id = $_POST['operation_id'];
-        $payment->sender = $_POST['sender'];
-        $payment->date = now()->timestamp;;
-        $payment->status = 1;
-        $payment->amount = $payment->amount + $_POST['amount'];
-        $payment->update();
+//        $payment->token = $_POST['label'];
+        //$payment->sender = $_POST['sender'];
+        $payment->user_id = $_POST['label'];
+        //$payment->date = now()->timestamp;;
+        //$payment->status = 1;
+        $payment->amount = $_POST['amount'];
+        $payment->withdraw_amount = $_POST['withdraw_amount'];
+        $payment->save();
+
+
+        $user = User::find($payment->user_id);
+        $user->credits = $user->credits + $payment->withdraw_amount;
+        $user->update();
+
+        $data = array();
+        $data['email'] = $user->email;
+        $data['amount'] = $payment->withdraw_amount;
+        \Mail::send('lobby.email.paymentSuccess', $data, function ($message) use ($data) {
+            $message->to($data['email']);
+            $message->from(env('EMAIL_SENDER'), 'Gamechainger');
+            $message->subject('Баланс пополнен');
+        });
 
         exit();
     }
