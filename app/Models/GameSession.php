@@ -29,6 +29,12 @@ class GameSession extends Model
         'ended_at'
     ];
 
+
+    public function bet()
+    {
+        return $this->belongsTo('App\Models\GameBet');
+    }
+
     public function scopeNotPlayed()
     {
 

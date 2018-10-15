@@ -23,4 +23,15 @@ class GameSessionUser extends Model
         'credits_before',
         'credits_after'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
+
+
+    public function session()
+    {
+        return $this->belongsTo('App\Models\GameSession');
+    }
 }

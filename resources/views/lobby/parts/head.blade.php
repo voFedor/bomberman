@@ -24,7 +24,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/{{ env('THEME') }}/images/apple-touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="/{{ env('THEME') }}/images/ico/apple-touch-icon-57.png">
 <link rel="shortcut icon" href="/{{ env('THEME') }}/images/ico/favicon.ico">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
 
 @if(Auth::user() != null && Request::is('/'))
     <script id="chatBroEmbedCode">

@@ -21,6 +21,7 @@
                 <td>
                     <button onclick="return pickBet('{{$bet->id}}', '{{$bet->openUrl()}}', '{{$bet->bet}}')" type="button" class="btn btn-warning">Выбрать</button>
                 </td>
+
             </tr>
         @endforeach
         </tbody>

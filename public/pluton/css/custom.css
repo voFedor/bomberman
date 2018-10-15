@@ -1,8 +1,8 @@
 .popover-title {
-    background-color: #ecc52f;
-    border-bottom: 1px solid #e3bb24;
-    color: black;
-}
+                        background-color: #ecc52f;
+                        border-bottom: 1px solid #e3bb24;
+                        color: black;
+                    }
 
 .popover {
     background-color: #ae963b91;
@@ -56,3 +56,21 @@ select {
 .tab-content{padding:20px}
 
 .card {background: #FFF none repeat scroll 0% 0%; box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3); margin-bottom: 30px; }
+
+.table-tournament {
+    position: initial;
+    margin-top: 20px;
+    width: 30%;
+    float: right;
+    text-align: -webkit-right;
+}
+
+
+@media (max-width: 767px) {
+    .modal.fade {
+        top: 50px;
+    }
+}
+
+
+li {cursor: pointer}

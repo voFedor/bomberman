@@ -22,20 +22,25 @@
                             <th>@lang('quickadmin.sessions.fields.credits_after')</th>
                             <th>@lang('quickadmin.sessions.fields.started_at')</th>
                             <th>@lang('quickadmin.sessions.fields.ended_at')</th>
+                            <th>Опонент</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @if (count($sessions) > 0)
-                            @foreach ($sessions as $game)
-                                <tr data-entry-id="{{ $game->id }}">
-                                    <td field-key='id'>{{ $game->id }}</td>
-                                    <td field-key='game_name'>{{ $game->name }}</td>
-                                    <td field-key='credits_before'>{{ $game->credits_before }}</td>
-                                    <td field-key='bet'>{{ $game->bet }}</td>
-                                    <td field-key='result'>{{ (Auth::id() == $game->winner_id ? 'win' : (isset($game->ended_at) ? 'lose' : '')) }}</td>
-                                    <td field-key='credits_after'>{{ $game->credits_after }}</td>
-                                    <td field-key='started_at'>{{ $game->started_at }}</td>
-                                    <td field-key='ended_at'>{{ $game->ended_at }}</td>
+                        @if (count($users_sessions) > 0)
+                            @foreach ($users_sessions as $session)
+                                <tr data-entry-id="{{ $session->session_id }}">
+                                    <td field-key='id'>{{ $session->session->bet->game->id }}</td>
+                                    <td field-key='game_name'>{{ $session->session->bet->game->name }}</td>
+                                    <td field-key='credits_before'>{{ $session->credits_before }}</td>
+                                    <td field-key='bet'>{{ $session->session->bet->bet }}</td>
+                                    <td field-key='result'>{{ (Auth::id() == $session->session->winner_id ? 'win' : (isset($session->session->ended_at) ? 'lose' : '')) }}</td>
+                                    <td field-key='credits_after'>{{ $session->credits_after }}</td>
+                                    <td field-key='started_at'>{{ $session->session->started_at }}</td>
+                                    <td field-key='ended_at'>{{ $session->session->ended_at }}</td>
+                                    <?php
+                                        $user = $sessions->where('user_id', '!=', Auth::id())->where('session_id', $session->session_id)->first();
+                                    ?>
+                                    <td field-key='ended_at'>{{$user == null ? "" : $user->user()->first()->name }}</td>
                                 </tr>
                             @endforeach
                         @else

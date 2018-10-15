@@ -270,4 +270,5 @@ return [
 	'qa_team-management' => 'Команды',
 	'qa_team-management-singular' => 'Команда',
 	'quickadmin_title' => 'Admin',
+    'quickadmin.oponent' => 'Опонент',
 ];

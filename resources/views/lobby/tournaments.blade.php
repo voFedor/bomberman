@@ -9,11 +9,10 @@
         <div class="triangle"></div>
         <div class="container" style="text-align: -webkit-center;">
             <h2 class="align-content-center">До турнира по БОМБЕРМЕН осталось не так много времени </h2>
-            <script src="http://megatimer.ru/s/c9d0b70bd70d4d488eb61415a9a9004b.js"></script>
-            <h2 class="align-content-center">призовой фонд больше 5000рэ</h2>
+            <script src="https://gamechainger.io/timer/dcd07ca6a707711f788a1336417fb0dd.js"></script>
+            <h2 class="align-content-center">призовой фонд больше 15000рэ</h2>
             <h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>
-            <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;
-    text-align: -webkit-left;">
+            <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;text-align: -webkit-left;margin-top: 30px;">
                     {{ csrf_field() }}
                     @if(Auth::user() == null)
                     <button onclick="return alert('Вам необходимо авторизироваться на сайте.')" type="button" class="tournament-button button">Принять участие</button>
@@ -21,8 +20,36 @@
                     <button onclick="return tourReg()" type="button" class="tournament-button button">Принять участие</button>
                     @endif
             </form>
+
+            <table class="table table-tournament">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Имя</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <?php
+                    $i = 1;
+                    ?>
+                    @foreach($participants as $participant)
+                        <th scope="row">{{$i}}</th>
+                        <td>{{$participant->user->name}}</td>
+                        <?php $i++; ?>
+                    @endforeach
+                </tr>
+                </tbody>
+            </table>
+
+
         </div>
     </div>
+
+
+
+
+
     <!-- Client section start -->
     {{--<div id="games" class="section tour-section">--}}
         {{--<div class="container centered">--}}

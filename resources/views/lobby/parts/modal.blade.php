@@ -1,11 +1,23 @@
 <div class="modal fade" id="bets-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
+
         <div class="modal-content" id="bets-modal-content">
 
         </div>
     </div>
 </div>
 
+
+
+<div class="modal fade" id="startGame" tabindex="-1" role="dialog" aria-labelledby="startGame" aria-hidden="true">
+
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" id="bets-modal-content">
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

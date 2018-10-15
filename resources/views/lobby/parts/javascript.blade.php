@@ -55,9 +55,43 @@
 <script type="text/javascript" src="/{{ env('THEME') }}/js/popup-form.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/auth.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/custom.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>\
 
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.js"></script>
 <script>
+
+
+    (function($){
+        $.getQuery = function( query ) {
+            query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+            var expr = "[\\?&]"+query+"=([^&#]*)";
+            var regex = new RegExp( expr );
+            var results = regex.exec( window.location.href );
+            if( results !== null ) {
+                return results[1];
+                return decodeURIComponent(results[1].replace(/\+/g, " "));
+            } else {
+                return false;
+            }
+        };
+    })(jQuery);
+
+
+
+
+    function startGameInModal(url) {
+        $('#startGame').modal('show').find('.modal-body').load(url);
+    }
+    $('#startGame').on('show.bs.modal', function (e) {
+        var loadurl = $();
+
+    });
+
+
+
+
+
 
     function checkBalance() {
 
@@ -129,19 +163,79 @@
    }
     @endif
 
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+            function(m,key,value) {
+                vars[key] = value;
+            });
+        return vars;
+    }
+    
+    
+    function openGameWindow(json) {
+        console.log(json['url']);
+        $.fancybox.open({
+            padding : 0,
+            src: json['url'],
+            type: 'iframe',
+            scrolling : 'auto',
+            preload   : true,
+            wmode: 'transparent',
+            allowfullscreen   : true,
+            allowscriptaccess : 'always',
+            buttons : [],
+            clickOutside: "close",
+            afterClose: function( instance, slide ) {
+                var session_id = json['session_id'];
+                var user_id = json['user_id'];
+                afterCloseGameWindow(session_id, user_id);
+            }
+        });
+    }
+
+    function afterCloseGameWindow(session_id, user_id) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/api/v1/close?session_id='+session_id+'&user_id='+user_id,
+            type: "GET",
+            data: { session_id: session_id, user_id: user_id, _token: '{{csrf_token()}}'},
+            success: function(data){
+                console.log(data);
+
+            },
+            error:  function(xhr, str){
+            }
+        });
+    }
+
+
 @if(Auth::user() != null)
 
     function pickBet(id, url, bet) {
     if ({{Auth::user()->credits}} < bet)
     {
         toastr.clear();
-        toastr.error('У вас не достаточно денег', 'Ошибка!', {timeOut: 3000})
+        toastr.error('У вас не достаточно денег', 'Ошибка!', {timeOut: 3000});
         return;
     }
 
-    window.open(url, info + ' BTC', 'scrollbars=no,fullscreen=no,left=0,top=0,height=800,width=800');
-            
+    $.ajax({
+        url: url,
+        type: "GET",
+        success: function(json){
+            openGameWindow(json);
+        },
+        error:  function(xhr, str){
+        }
+    });
     }
+
     @endif
 
 
@@ -152,7 +246,7 @@
         var comment = $('#comment').val();
         var questionType = $('#questionType').val();
 
-        
+
         if (email != "" && name != "" && comment != "") {
             $.ajaxSetup({
                 headers: {
