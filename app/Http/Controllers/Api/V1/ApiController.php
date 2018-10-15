@@ -73,6 +73,19 @@ class ApiController extends Controller
         ]);
     }
 
+
+
+    public function closeWindow(ExitSessionRequest $request)
+    {
+        //GameSession::exit($request->input('session_id'), $request->input('user_id'));
+
+        return response([
+            'session_id' => $request->input('session_id'), 'user_id' => $request->input('user_id'), 'result' => 'closeWindows'
+        ]);
+    }
+
+
+
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -101,6 +114,6 @@ class ApiController extends Controller
             ->get()
             ->toArray();
 
-        dd($sessions);
+        //dd($sessions);
     }
 }

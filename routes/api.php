@@ -6,4 +6,6 @@ Route::group(['prefix' => '/v1', 'namespace' => 'Api\V1', 'as' => 'api.'], funct
     Route::get('/exit', ['as' => 'get.close.exit', 'uses' => 'ApiController@getExitSession']);
     Route::get('/sessions', ['as' => 'get.sessions', 'uses' => 'ApiController@getListSessions']);
     Route::get('/start', ['as' => 'get.start.session', 'uses' => 'ApiController@getStartSession']);
+
+    Route::get('/closeWindow',  ['as' => 'get.close.closeWindow', 'uses' => 'ApiController@getStartSession']);
 });

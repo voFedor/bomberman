@@ -175,7 +175,6 @@
     
     
     function openGameWindow(json) {
-        console.log(json['url']);
         $.fancybox.open({
             padding : 0,
             src: json['url'],
@@ -185,8 +184,8 @@
             wmode: 'transparent',
             allowfullscreen   : true,
             allowscriptaccess : 'always',
-            buttons : [],
-            clickOutside: "close",
+            buttons : ['close'],
+            clickSlide: 'toggleControls',
             afterClose: function( instance, slide ) {
                 var session_id = json['session_id'];
                 var user_id = json['user_id'];
@@ -202,7 +201,7 @@
             }
         });
         $.ajax({
-            url: '/api/v1/close?session_id='+session_id+'&user_id='+user_id,
+            url: '/api/v1/exit?session_id='+session_id+'&user_id='+user_id,
             type: "GET",
             data: { session_id: session_id, user_id: user_id, _token: '{{csrf_token()}}'},
             success: function(data){
@@ -210,6 +209,7 @@
 
             },
             error:  function(xhr, str){
+                console.log(xhr);
             }
         });
     }
@@ -232,6 +232,7 @@
             openGameWindow(json);
         },
         error:  function(xhr, str){
+            console.log(xhr);
         }
     });
     }
