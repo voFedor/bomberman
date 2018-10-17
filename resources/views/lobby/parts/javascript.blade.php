@@ -205,11 +205,16 @@
             type: "GET",
             data: { session_id: session_id, user_id: user_id, _token: '{{csrf_token()}}'},
             success: function(data){
-                console.log(data);
+                console.log(data['result']);
+                if(data['result']){
+                    if(data['user_id'] == user_id) {
+                        console.log('close user fancy box');
+                         $.fancybox.close();
+                    }
+                }
 
             },
             error:  function(xhr, str){
-                console.log(xhr);
             }
         });
     }

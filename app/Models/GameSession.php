@@ -240,6 +240,13 @@ class GameSession extends Model
                 ->where('session_id', $sessionId)
                 ->first();
 
+
+                $client = new \ElephantIO\Client(new \ElephantIO\Engine\SocketIO\Version2X("http://mvp:8000?user_id=$userId&session_id=$sessionId"));
+        
+                $client->initialize();
+                $client->emit('leave pending game', ['userId' => $userId, 'sessionId' => $sessionId]);
+                $client->close();
+
             if($sessionUser){
                 $sessionUser->delete();
 
