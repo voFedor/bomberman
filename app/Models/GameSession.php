@@ -241,7 +241,7 @@ class GameSession extends Model
                 ->first();
 
 
-                $client = new \ElephantIO\Client(new \ElephantIO\Engine\SocketIO\Version2X("http://mvp:8000?user_id=$userId&session_id=$sessionId"));
+                $client = new \ElephantIO\Client(new \ElephantIO\Engine\SocketIO\Version2X("http://gamechainger.io:8000?user_id=$userId&session_id=$sessionId"));
         
                 $client->initialize();
                 $client->emit('leave pending game', ['userId' => $userId, 'sessionId' => $sessionId]);
