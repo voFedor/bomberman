@@ -29,7 +29,7 @@
                         @if (count($users_sessions) > 0)
                             @foreach ($users_sessions as $session)
                                 <tr data-entry-id="{{ $session->session_id }}">
-                                    <td field-key='id'>{{ $session->session->bet->game->id }}</td>
+                                    <td field-key='id'>{{ $session->session->id }}</td>
                                     <td field-key='game_name'>{{ $session->session->bet->game->name }}</td>
                                     <td field-key='credits_before'>{{ $session->credits_before }}</td>
                                     <td field-key='bet'>{{ $session->session->bet->bet }}</td>
