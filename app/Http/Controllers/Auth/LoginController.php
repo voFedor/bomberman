@@ -188,6 +188,13 @@ class LoginController extends Controller
                 $message->to($email, 'Восстановление пароля')->subject('Восстановление пароля')->from(env('MAIL_SENDER'));
             });
 
+            Mail::send('emails.register', [
+                'login' => $email,
+                'password' => $password
+            ], function ($message) use ($email) {
+                $message->to($email, 'Успешная регистрация')->subject('Успешная регистрация')->from(env('MAIL_SENDER'));
+            });
+
 
             return [
                 'result' => 'success',

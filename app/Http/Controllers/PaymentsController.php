@@ -174,6 +174,17 @@ class PaymentsController extends Controller
 
         $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $secret_key. '&' . $_POST['label'] );
 
+
+
+        // var_export -- nice, one-liner
+        // $debug_export = var_export($sha1, true);
+
+        // \Storage::put('local.txt', $debug_export);
+
+        // // var_export -- nice, one-liner
+        // $debug_export2 = var_export($_POST['sha1_hash'], true);
+        // \Storage::put('sha1_hash.txt', $debug_export2);
+
         if ($sha1 != $_POST['sha1_hash'] ) {
             exit();
         }

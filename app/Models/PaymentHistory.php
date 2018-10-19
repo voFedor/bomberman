@@ -19,6 +19,6 @@ class PaymentHistory extends Model
     protected $table = 'payment_histories';
     public $timestamps = true;
 
-    protected $fillable = ['token', 'user_id', 'price', 'status'];
+    protected $fillable = ['operation_id', 'user_id', 'amount', 'withdraw_amount'];
     protected $hidden = [];
 }
