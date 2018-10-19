@@ -122,7 +122,7 @@
         <div class="triangle"></div>
         <div class="container centered">
             <p class="large-text">Зарегистрируйся в 1 клик!</p>
-            <form action="/register" method="post" class="" id="callToAction-form">
+            <form action="/register" method="post" class="" id="callToAction-form" onkeypress="return event.keyCode != 13;">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <input name="callToActionEmail" type="email" required class="form-control" id="callToActionEmail" placeholder="Введи email">
