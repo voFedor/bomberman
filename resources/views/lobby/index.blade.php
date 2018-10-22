@@ -36,7 +36,7 @@
                 <!-- Start third slide -->
                 <div class="da-slide">
                     <h2>Турнир близко</h2>
-                    <h4>Скоро состоиться туренир по Bomberman<Br/>
+                    <h4>Скоро состоится турнир по Bomberman<Br/>
                     Призовой фонд больше 5000 рэ</h4>
                     <a href="/tournaments/" class="da-link button">Подробнее</a>
                     <div class="da-img">

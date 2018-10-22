@@ -9,10 +9,12 @@
         <div class="triangle"></div>
         <div class="container" style="text-align: -webkit-center;">
             <h2 class="align-content-center">До турнира по БОМБЕРМЕН осталось не так много времени </h2>
-            <script src="https://gamechainger.io/timer/dcd07ca6a707711f788a1336417fb0dd.js"></script>
-            <h2 class="align-content-center">призовой фонд больше 15000рэ</h2>
+            {{--<script src="http://gamechainger.io/timer/dcd07ca6a707711f788a1336417fb0dd.js"></script>--}}
+            <script src="http://megatimer.ru/s/a55c16cee4ae62c546440b23aeee55ae.js"></script>
+            <h2 class="align-content-center">призовой фонд больше 5000рэ</h2>
             <h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>
             <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;text-align: -webkit-left;margin-top: 30px;">
+                <H3>Регистрация на турнир заканчивается 23 октября в 22:00<br/>Турнирная таблица будет опубликована 24 октября<br/>Турнир начнется 25 октября в 20:00.<br/>Стоимость участия 200рэ</H3>
                     {{ csrf_field() }}
                     @if(Auth::user() == null)
                     <button onclick="return alert('Вам необходимо авторизироваться на сайте.')" type="button" class="tournament-button button">Принять участие</button>

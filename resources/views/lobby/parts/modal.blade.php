@@ -44,21 +44,21 @@
 
 
 <!-- Modal -->
-<div id="betaVersionModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+{{--<div id="betaVersionModal" class="modal fade" role="dialog">--}}
+    {{--<div class="modal-dialog">--}}
 
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" style="color: black;">Бета версия</h4>
-            </div>
-            <div class="modal-body">
-                <p style="color: black;">Some text in the modal.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-            </div>
-        </div>
+        {{--<!-- Modal content-->--}}
+        {{--<div class="modal-content">--}}
+            {{--<div class="modal-header">--}}
+                {{--<h4 class="modal-title" style="color: black;">Бета версия</h4>--}}
+            {{--</div>--}}
+            {{--<div class="modal-body">--}}
+                {{--<p style="color: black;">Some text in the modal.</p>--}}
+            {{--</div>--}}
+            {{--<div class="modal-footer">--}}
+                {{--<button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>--}}
+            {{--</div>--}}
+        {{--</div>--}}
 
-    </div>
-</div>
+    {{--</div>--}}
+{{--</div>--}}
