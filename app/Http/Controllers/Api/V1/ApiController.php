@@ -28,6 +28,7 @@ class ApiController extends Controller
         $bet = GameBet::where('id', $request->input('bet_id'))->first();
         $id = GameSession::open($request->input('bet_id'), Auth::id());
         $url = env('GAME_HOST', '') . '/?session_id=' . $id . '&user_id=' . Auth::id() . '&bet=' . $bet->bet;
+        
         return response([
             'session_id' => $id, 'user_id' => Auth::id(),
             'bet' => $bet->bet,'result' => 'ok', 'url' => $url

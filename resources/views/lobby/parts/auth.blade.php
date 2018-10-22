@@ -87,6 +87,7 @@
     <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupInfo()"><i class="fa fa-fw fa-user" ></i></a></li>
     <li><a href="/history">История побед</a></li>
     <li><a href="/payments">Платежи</a></li>
+    <li><a href="/pvp/lobby">Дуэли</a></li>
     <div class="hide auth" id="info">
         Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
                 style="text-transform: none;"> рэ</span><br>

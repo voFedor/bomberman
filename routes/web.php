@@ -8,6 +8,8 @@ Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
 Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback');
 
 
+Route::get('/game-by-token/{token}', 'ServiceController@getByToken');
+Route::post('/game-url-by-token', 'ServiceController@getUrlByTokenInGame');
 Route::post('/feedback', 'ServiceController@feedback');
 Route::post('/new-game', 'ServiceController@newGame');
 
@@ -48,3 +50,11 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 //
 
+
+
+
+Route::prefix('pvp')->group(function () {
+	$this->get('/lobby/{game_id?}/{bet_id?}', 'PvpController@getLobby')->name('pvpLobby');
+
+    $this->get('/{token}', 'PvpController@getGame')->name('pvp');
+});

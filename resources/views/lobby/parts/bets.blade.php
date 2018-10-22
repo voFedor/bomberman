@@ -20,6 +20,7 @@
                 <th scope="row">{{$bet->bet}}</th>
                 <td>
                     <button onclick="return pickBet('{{$bet->id}}', '{{$bet->openUrl()}}', '{{$bet->bet}}')" type="button" class="btn btn-warning">Выбрать</button>
+                    <a href="/pvp/lobby/{{ $bet->game->id }}/{{ $bet->id }}" class="btn btn-info">Дуэль</a>
                 </td>
 
             </tr>

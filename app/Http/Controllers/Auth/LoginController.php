@@ -115,7 +115,8 @@ class LoginController extends Controller
             'name' => $username,
             'credits' => 0,
             'password' => bcrypt($password),
-            'role_id' => User::GAMER
+            'role_id' => User::GAMER,
+            'token' => str_random(20)
         ]);
 
         if($user){

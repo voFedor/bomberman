@@ -5,6 +5,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Hash;
+use Auth;
 
 /**
  * Class User
@@ -139,5 +140,26 @@ class User extends Authenticatable
             default:
                 return '';
         }
+    }
+
+
+
+    /**
+     * @return string
+     */
+    public static function createNewUserByToken($token)
+    {
+        if ($token == null) {
+            return;
+        }
+
+        $user = new User();
+        $user->token = $token;
+        $user->credits = 0;
+        $user->password = str_random(5);
+        $user->role_id = User::GAMER;
+        $user->save();
+
+        Auth::login($user);
     }
 }
