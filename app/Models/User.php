@@ -160,7 +160,7 @@ class User extends Authenticatable
         $user->role_id = User::GAMER;
         $user->save();
 
-        Auth::loginUsingId($user->id)
+        Auth::loginUsingId($user->id);
         //Auth::attempt(['' => $user->email, 'password' => $pass]);
 
         //Auth::login($user);
