@@ -156,10 +156,13 @@ class User extends Authenticatable
         $user = new User();
         $user->token = $token;
         $user->credits = 0;
-        $user->password = str_random(5);
+        $user->password = bcrypt(str_random(5));
         $user->role_id = User::GAMER;
         $user->save();
 
-        Auth::login($user);
+        Auth::loginUsingId($user->id)
+        //Auth::attempt(['' => $user->email, 'password' => $pass]);
+
+        //Auth::login($user);
     }
 }

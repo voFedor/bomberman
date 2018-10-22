@@ -109,8 +109,7 @@ class ServiceController extends Controller
         $duel = Duel::where(['token' => $token])->first();
         
         $url = $duel->bet->openUrl();
-
-        return response()->json(['url' => $url,'message' => "Игра загружается", 'result' => 'success']);
+        return response()->json(['url' => $url,'message' => "Игра загружается", 'result' => 'success'])->header('Content-Type', 'text/html');
     }
 
 }

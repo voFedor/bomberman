@@ -7,6 +7,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Duel;
 use App\Models\Game;
+use App\Models\GameBet;
 
 class PvpController extends Controller
 {
@@ -42,13 +43,23 @@ class PvpController extends Controller
     		$user = User::where('token', $token)->first();
     		if($user == null){
     			$user = User::createNewUserByToken($token);
+                
                 Auth::login($user);
     		} else {
     			Auth::login($user);
     		}
     	}
+        $games = Game::all();
+        $duel = Duel::where('token', $token)->first();
+        $duel->status = Duel::REGISTERED;
+        $duel->update();
 
-        return view('lobby.pvp-game')->with('url', $url);
+
+        $bet = GameBet::with(['game'])
+            ->where('id', $duel->bet_id)
+            ->first();
+
+        return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
     }
 
 
