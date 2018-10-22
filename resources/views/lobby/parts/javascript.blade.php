@@ -474,36 +474,7 @@
 
 
 
-    function newDuelGameOpen(token, url) {
-        $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-        $.ajax({
-        url: '/game-url-by-token/'+token,
-        type: "POST",
-        data: {token: token, _token: '{{csrf_token()}}'},
-        success: function(data){
-            if (data['result'] == 'error')  {
-                        toastr.clear();
-                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
-                        return;
-                    }
-
-                    if (data['result'] == 'success')  {
-                        toastr.clear();
-                        toastr.success(data['message'], 'Ожидайте!', {timeOut: 3000})
-
-                        window.location.href = data['url'];
-                    }
-        },
-        error:  function(xhr, str){
-            console.log(xhr);
-        }
-    });
-        
-    }
+    
 
 
 
@@ -513,47 +484,41 @@
     @if (request()->route("token") != null)
 
 
-    $.getScript( "ajax/test.js", function( data, textStatus, jqxhr ) {
-      console.log( data ); // Data returned
-      console.log( textStatus ); // Success
-      console.log( jqxhr.status ); // 200
-      console.log( "Load was performed." );
-    });
-
     
     
-    function newDuelGameOpen() {
-        console.log("json");
-        $.ajax({
-        url: '/game-url-by-token',
-        type: "POST",
-        data: {token: '{{ request()->route("token") }}'},
-        success: function(json){
-            $.fancybox.open({
-            padding : 0,
-            src: json['url'],
-            type: 'iframe',
-            scrolling : 'auto',
-            preload   : true,
-            wmode: 'transparent',
-            allowfullscreen   : true,
-            allowscriptaccess : 'always',
-            buttons : ['close'],
-            clickSlide: 'toggleControls',
-            afterClose: function( instance, slide ) {
-                var session_id = json['session_id'];
-                var user_id = json['user_id'];
-                afterCloseGameWindow(session_id, user_id);
-            }
-        });
-        },
-        error:  function(xhr, str){
-            console.log(xhr);
-        }
-    });
-    }
+    
+    // function newDuelGameOpen() {
+    //     $.ajax({
+    //     url: '/game-url-by-token',
+    //     type: "POST",
+    //     data: {token: '{{ request()->route("token") }}'},
+    //     success: function(json){
+    //         $.fancybox.open({
+    //         padding : 0,
+    //         src: json['url'],
+    //         type: 'iframe',
+    //         scrolling : 'auto',
+    //         preload   : true,
+    //         wmode: 'transparent',
+    //         allowfullscreen   : true,
+    //         allowscriptaccess : 'always',
+    //         buttons : ['close'],
+    //         clickSlide: 'toggleControls',
+    //         afterClose: function( instance, slide ) {
+    //             console.log(json);
+    //             var session_id = json['session_id'];
+    //             var user_id = json['user_id'];
+    //             afterCloseGameWindow(session_id, user_id);
+    //         }
+    //     });
+    //     },
+    //     error:  function(xhr, str){
+    //         console.log(xhr);
+    //     }
+    // });
+    // }
 
 
-    newDuelGameOpen();
+    // newDuelGameOpen();
     @endif
 </script>

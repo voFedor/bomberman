@@ -7,6 +7,7 @@
 /.vscode
 /.vagrant
 /games/bomberman/*
+/games/*
 /public/js/laroute.js
 /public/wp-content/*
 /public/wp-includes/*

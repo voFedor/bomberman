@@ -32,7 +32,9 @@
                                     <td>{{ $duel->game->name }}</td>
                                     <td>{{ $duel->bet->bet }}</td>
                                 <td>{{ env('APP_URL').'/pvp/'.$duel->token }}</td>
-                                <td>{{ $duel->status == App\Models\Duel::OPEN ? "Приглашение отправлено" : "Приглашение принято" }}</td>
+                                <td>
+                                    
+                                    {{ $duel->status == App\Models\Duel::OPEN ? "Приглашение отправлено" : "Приглашение принято" }}</td>
                                 <td><a href="{{ env('APP_URL').'/game-by-token/'.$duel->token }}" class="btn btn-info">Играть</a></td>
                                 </tr>
                             @endforeach

@@ -15,6 +15,7 @@ class Duel extends Model
         'user_id',
         'game_id',
         'token',
+        'bet_id',
         'status'
     ];
     
