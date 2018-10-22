@@ -164,5 +164,6 @@ class User extends Authenticatable
         //Auth::attempt(['' => $user->email, 'password' => $pass]);
 
         //Auth::login($user);
+        return $user;
     }
 }

@@ -22,7 +22,11 @@
 
 <!-- ScrollUp button start -->
 @include('lobby.parts.scrollup')
-
+<div id="mybutton">
+<button class="duel" onclick="return checkBet(1)">
+Назначить дуэль
+</button>
+</div>
 @include('lobby.parts.javascript')
 
 
