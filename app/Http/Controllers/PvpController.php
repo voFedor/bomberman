@@ -64,24 +64,32 @@ class PvpController extends Controller
 
 
 
-    public function getLobby($game_id = null, $bet_id = null)
+    public function getLobby()
+    {	
+        $games = Game::all();
+        $last_duel_token = Duel::where('user_id', Auth::user()->id)->orderByDesc('created_at')->first();
+        $duels = Duel::where('user_id', Auth::user()->id)->get();
+        return view('lobby.duels')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
+    }
+
+
+
+    public function getDuel(Request $request)
     {
-    	
-        if ($game_id != null && $bet_id != null) {
+        
             $token = str_random(20);
             $duel = new Duel();
             $duel->user_id = Auth::user()->id;
-            $duel->game_id = $game_id;
-            $duel->bet_id = $bet_id;
+            $duel->game_id = $request->game_id;
+            $duel->bet_id = 1;
             $duel->token = $token;
             $duel->status = Duel::OPEN;
             $duel->save();
-        } else {
-            $token = null;
-        }
-    	
-        $games = Game::all();
-        $duels = Duel::where('user_id', Auth::user()->id)->get();
-        return view('lobby.duels')->with(['duels' => $duels, 'token' => $token, 'games' => $games]);
+
+
+            session()->put('token', $token);
+        
+        
+        return redirect('/pvp/lobby/');
     }
 }

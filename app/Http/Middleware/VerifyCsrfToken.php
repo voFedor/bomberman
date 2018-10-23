@@ -17,6 +17,7 @@ class VerifyCsrfToken extends Middleware
         '/fail-payment',
         '/check-payment',
         '/check-payment-yandex',
-        '/game-url-by-token'
+        '/game-url-by-token',
+        '/pvp/get-duel'
     ];
 }

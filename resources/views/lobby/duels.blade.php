@@ -8,11 +8,15 @@
     <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container">
-            @if($token != null)
-            <h3>Ссылка на новую дуэль:</h3>
-            <p class="large-text">{{ env('APP_URL').'/pvp/'.$token }}</p>
+            @if($last_duel_token != null)
+            <h3  style="margin-left: 20px;">Твоя ссылка на последнюю дуэль</h3>
+            <p id="duel-url" class="large-text">{{ env('APP_URL').'/pvp/'.$last_duel_token->token }}</p>
+
+<!-- Trigger -->
+<button class="btn" onclick="copyToClipboard('#duel-url')" style="margin-left: 20px;">
+    Скопировать ссылку
+</button>
             @endif
-            
             <p class="large-text">Твои дуэли</p>
             <div class="row-fluid">
                 <div class="span12">
@@ -50,7 +54,8 @@
             </div>
         </div>
     </div>
-    <!-- Client section start -->
+    
+    <!--1 Client section start -->
     <div id="games" class="section third-section">
         <div class="container centered">
             <div class="sub-section">

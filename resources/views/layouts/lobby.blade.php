@@ -22,16 +22,21 @@
 
 <!-- ScrollUp button start -->
 @include('lobby.parts.scrollup')
+
+
+@if(Auth::check())
 <div id="mybutton">
-<button class="duel" onclick="return checkBet(1)">
+<button class="duel" onclick="return getDuel(1)">
 Назначить дуэль
 </button>
 </div>
+@endif
+
+
 @include('lobby.parts.javascript')
 
 
 @include('lobby.parts.modal')
-
 
 </body>
 </html>

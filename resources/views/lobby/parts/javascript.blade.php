@@ -59,7 +59,12 @@
 
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.js"></script>
+
+
+
+
 <script>
+
 
 
     (function($){
@@ -130,6 +135,30 @@
 
     @if(Auth::user() != null)
 
+    function getDuel(game_id) {
+    
+
+    $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/pvp/get-duel',
+                    type: "POST",
+                    data: { game_id: game_id},
+                    success: function(data){
+                    window.location = "{{ env('APP_URL') }}/pvp/lobby/";
+                    },
+                    error:  function(xhr, str){
+                    },
+                    beforeSend : function (){
+                        toastr.clear();
+                        toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+                    }
+                });
+    }
+
     function checkBet(id) {
 
         $.ajaxSetup({
@@ -157,6 +186,12 @@
         }
    @else
    function checkBet(id) {
+       toastr.clear();
+       toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
+       return;
+   }
+
+   function getDuel() {
        toastr.clear();
        toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
        return;
@@ -521,4 +556,15 @@
 
     // newDuelGameOpen();
     @endif
+
+
+
+    function copyToClipboard(element) {
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+}
+
 </script>
