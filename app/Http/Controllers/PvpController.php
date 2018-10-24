@@ -34,31 +34,28 @@ class PvpController extends Controller
 
     public function getGame($token = null, $url = null)
     {
-    	if ($token == null || $token == "") {
-    		return view('lobby.pvp-nogame');
-    	}
 
-    	$user = Auth::user();
-    	if ($user == null) {
-    		$user = User::where('token', $token)->first();
-    		if($user == null){
-    			$user = User::createNewUserByToken($token);
+    	if ($token == null || $token == "") {
+            return view('lobby.pvp-nogame');
+        }
+        $user = Auth::user();
+        if ($user == null) {
+            $user = User::where('token', $token)->first();
+            if($user == null){
+                $user = User::createNewUserByToken($token);
                 
                 Auth::login($user);
-    		} else {
-    			Auth::login($user);
-    		}
-    	}
+            } else {
+                Auth::login($user);
+            }
+        }
         $games = Game::all();
         $duel = Duel::where('token', $token)->first();
         $duel->status = Duel::REGISTERED;
         $duel->update();
-
-
         $bet = GameBet::with(['game'])
             ->where('id', $duel->bet_id)
             ->first();
-
         return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
     }
 

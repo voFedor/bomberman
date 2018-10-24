@@ -2,6 +2,7 @@
 Route::get('/', 'LobbyController@getIndex');
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 Route::get('/history', 'LobbyController@gameHistory');
+Route::get('/invitation', 'LobbyController@invitation');
 
 
 Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
@@ -12,10 +13,14 @@ Route::get('/game-by-token/{token}', 'ServiceController@getByToken');
 Route::post('/game-url-by-token', 'ServiceController@getUrlByTokenInGame');
 Route::post('/feedback', 'ServiceController@feedback');
 Route::post('/new-game', 'ServiceController@newGame');
+Route::post('/save-email', 'ServiceController@saveEmail');
+
 
 Route::get('/chat', 'ServiceController@chat')->name('chat');
 
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
+Route::post('/refresh-status', 'ServiceController@refreshStatus');
+
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');

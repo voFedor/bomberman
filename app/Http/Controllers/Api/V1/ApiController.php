@@ -9,7 +9,10 @@ use App\Http\Requests\Lobby\ExitSessionRequest;
 use App\Http\Requests\Lobby\CloseSessionRequest;
 use App\Http\Requests\Lobby\StartSessionRequest;
 use App\Models\GameBet;
+use App\Models\Game;
 use App\Models\GameSession;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 use Auth;
 use DB;
 use Session;
@@ -34,7 +37,6 @@ class ApiController extends Controller
             'bet' => $bet->bet,'result' => 'ok', 'url' => $url
         ]);
     }
-
     /**
      * @param StartSessionRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -42,12 +44,10 @@ class ApiController extends Controller
     public function getStartSession(StartSessionRequest $request)
     {
         GameSession::start($request->input('session_id'));
-
         return response()->json([
             'result' => 'success'
         ]);
     }
-
     /**
      * @param CloseSessionRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -55,12 +55,10 @@ class ApiController extends Controller
     public function getCloseSession(CloseSessionRequest $request)
     {
         GameSession::close($request->input('session_id'), $request->input('user_id'));
-
         return response()->json([
             'result' => 'success'
         ]);
     }
-
     /**
      * @param ExitSessionRequest $request
      * @return \Illuminate\Http\JsonResponse
@@ -69,24 +67,41 @@ class ApiController extends Controller
     {
         GameSession::exit($request->input('session_id'), $request->input('user_id'));
 
+
+        $user = Auth::user();
+        if ($user->email == null) {
+           do {
+                $user->name = "gamer-". rand(100, 1000);
+            } while (null != User::where('name', $user->name)->first());
+            $password = str_random(8);
+            $user->password = Hash::make($password);
+            $user->update();
+            $new_user = true;
+            $new_user_name = $user->name;
+        } else {
+            $new_user = false;
+            $password = null;
+            $new_user_name = null;
+        }
+        
+        $games = Game::all();
+        
+
         return response()->json([
-            'result' => 'success'
+            'result' => 'success',
+            'user' => $user,
+            'new_user' => $new_user,
+            'password' => $password,
+            'new_user_name' => $new_user_name
         ]);
     }
-
-
-
     public function closeWindow(ExitSessionRequest $request)
     {
         //GameSession::exit($request->input('session_id'), $request->input('user_id'));
-
         return response([
             'session_id' => $request->input('session_id'), 'user_id' => $request->input('user_id'), 'result' => 'closeWindows'
         ]);
     }
-
-
-
     /**
      * @return \Illuminate\Http\JsonResponse
      */
@@ -114,7 +129,6 @@ class ApiController extends Controller
             })
             ->get()
             ->toArray();
-
         //dd($sessions);
     }
 }

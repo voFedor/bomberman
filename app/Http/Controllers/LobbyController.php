@@ -7,6 +7,8 @@ use App\Http\Requests\Lobby\OpenSessionRequest;
 use App\Http\Requests\Lobby\CloseSessionRequest;
 use App\Models\GameBet;
 use App\Models\Game;
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 use App\Models\GameSession;
 use App\Models\GameSessionUser;
 use DB;
@@ -56,6 +58,30 @@ class LobbyController extends Controller
     {
         return view('lobby.games');
     }
+
+
+    public function invitation()
+    {
+        $user = Auth::user();
+        if ($user->email == null) {
+           do {
+                $user->name = "gamer-". rand(100, 1000);
+            } while (null != User::where('name', $user->name)->first());
+            $password = str_random(8);
+            $user->password = Hash::make($password);
+            $user->update();
+            $new_user = true;
+            $new_user_name = $user->name;
+        } else {
+            $new_user = false;
+        }
+        
+        $games = Game::all();
+        
+        return view('lobby.invitation', compact('user', 'games', 'new_user', 'password', 'new_user_name'));
+    }
+
+
 
     public function gameHistory()
     {

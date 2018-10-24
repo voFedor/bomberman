@@ -96,6 +96,50 @@
 
 
 
+    function saveEmail() {
+        var email = $("#exampleInputEmail1").val();
+        
+        if (email == null || email == ""){
+            toastr.clear();
+            toastr.error("Заполните поле email", 'Ошибка!', {timeOut: 3000})
+            return false;
+        }
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/save-email',
+            type: "POST",
+            data: {
+                email: email,
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+                if (data['result'] == 'error')  {
+                    toastr.clear();
+                    toastr.error("Что-то пошло не так", 'Ошибка!', {timeOut: 3000})
+                    
+                }
+                if (data['result'] == 'success') {
+                    toastr.clear();
+                    toastr.success("Ваша почта сохранена", 'Отлично!', {timeOut: 3000});
+                    $("#newUserEmail").val("");
+                    
+                }
+                window.location.href = env('APP_URL')+"/pvp/lobby";
+
+            },
+            error: function (xhr, str) {
+                return 0;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
+    }
+
 
 
     function checkBalance() {
@@ -240,7 +284,7 @@
             type: "GET",
             data: { session_id: session_id, user_id: user_id, _token: '{{csrf_token()}}'},
             success: function(data){
-                console.log(data['result']);
+
                 if(data['result']){
                     if(data['user_id'] == user_id) {
                         console.log('close user fancy box');
@@ -248,6 +292,11 @@
                     }
                 }
 
+                @if (Auth::check() && Auth::user()->email == null)
+                    $('#new_user_name').text(data['new_user_name']);
+                    $('#password').text(data['password']);
+                   $('#newUserForm').modal('show');
+                @endif
             },
             error:  function(xhr, str){
             }
@@ -278,6 +327,51 @@
     }
 
     @endif
+
+
+
+
+    function refreshStatus(duel_id) {
+    $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            $.ajax({
+                url: '/refresh-status',
+                type: "POST",
+                data: {
+                    duel_id: duel_id,
+                    _token: '{{csrf_token()}}'},
+                success: function (data) {
+
+                    if (data['result'] == 'error')  {
+                        toastr.clear();
+                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
+                    }
+                    if (data['result'] == 'success') {
+                        $("#status_"+duel_id).text();
+                        $("#status_"+duel_id).text(data['status']);
+
+                        toastr.clear();
+                        toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
+                    }
+                    
+                },
+                error: function (xhr, str) {
+
+                    toastr.clear();
+                    toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+                    var balance = 0;
+                    return;
+                },
+                beforeSend : function (){
+                    toastr.clear();
+                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+                }
+            });
+
+        }
 
 
     function checkFeedbackForm() {
@@ -566,5 +660,12 @@
   document.execCommand("copy");
   $temp.remove();
 }
+
+
+
+
+
+
+
 
 </script>

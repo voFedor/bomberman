@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Duel;
+use Auth;
 
 class ServiceController extends Controller
 {
@@ -82,6 +83,35 @@ class ServiceController extends Controller
         }
         return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }
+
+
+    
+
+    public function saveEmail(Request $request)
+    {
+        $user = Auth::user();
+        $user->email = $request->email;
+        $user->update();
+        return response()->json(['message' => "Статус обновлен", 'result' => 'success']);
+    }
+
+
+
+
+    public function refreshStatus(Request $request)
+    {
+    $duel_id = $request->duel_id;
+    $duel = Duel::find($duel_id);
+    if ($duel->status == 1) {
+        $status = "Приглашение отправлено";
+    } else if($duel->status == 2){
+        $status = "Приглашение принято";
+    }
+    
+    $duel->update();
+    return response()->json(['status' => $status, 'message' => "Статус обновлен", 'result' => 'success']);
+    }
+
 
 
 
