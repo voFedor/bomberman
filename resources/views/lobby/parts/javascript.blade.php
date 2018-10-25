@@ -268,19 +268,19 @@
             afterClose: function( instance, slide ) {
                 var session_id = json['session_id'];
                 var user_id = json['user_id'];
-                afterCloseGameWindow(session_id, user_id);
+                afterCloseGameWindow(session_id, user_id, json['duel_id']);
             }
         });
     }
 
-    function afterCloseGameWindow(session_id, user_id) {
+    function afterCloseGameWindow(session_id, user_id, duel_id) {
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
         $.ajax({
-            url: '/api/v1/exit?session_id='+session_id+'&user_id='+user_id,
+            url: '/api/v1/exit?session_id='+session_id+'&user_id='+user_id+'&duel_id='+duel_id,
             type: "GET",
             data: { session_id: session_id, user_id: user_id, _token: '{{csrf_token()}}'},
             success: function(data){
@@ -306,7 +306,7 @@
 
 @if(Auth::user() != null)
 
-    function pickBet(id, url, bet) {
+    function pickBet(id, url, bet, duel_id) {
     if ({{Auth::user()->credits}} < bet)
     {
         toastr.clear();
@@ -317,6 +317,7 @@
     $.ajax({
         url: url,
         type: "GET",
+        data: {duel_id: duel_id},
         success: function(json){
             openGameWindow(json);
         },

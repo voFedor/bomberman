@@ -76,7 +76,7 @@ class PvpController extends Controller
         
             $token = str_random(20);
             $duel = new Duel();
-            $duel->user_id = Auth::user()->id;
+            $duel->user_id = Auth::id();
             $duel->game_id = $request->game_id;
             $duel->bet_id = 1;
             $duel->token = $token;

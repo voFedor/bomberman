@@ -106,6 +106,8 @@ class ServiceController extends Controller
         $status = "Приглашение отправлено";
     } else if($duel->status == 2){
         $status = "Приглашение принято";
+    } else if($duel->status == 3){
+        $status = "Игра завершена";
     }
     
     $duel->update();

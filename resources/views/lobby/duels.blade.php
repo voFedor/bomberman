@@ -44,7 +44,11 @@
                                     <td>
                                         <button onclick="return refreshStatus({{ $duel->id }})" data-toggle="tooltip" title="Обновить статус" class="btn btn-info"><i class="fa fa-refresh"></i></button>
                                     </td>
-                                <td><a onclick="return pickBet('{{$duel->bet->id}}', '{{$duel->bet->openUrl()}}', '{{$duel->bet->bet}}')" href="javascript:void(0)" class="btn btn-info">Играть</a></td>
+                                <td>
+                                @if($duel->status != 3)
+                                    <a onclick="return pickBet('{{$duel->bet->id}}', '{{$duel->bet->openUrl()}}', '{{$duel->bet->bet}}', '{{$duel->id}}')" href="javascript:void(0)" class="btn btn-info">Играть</a>
+                                @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         @else

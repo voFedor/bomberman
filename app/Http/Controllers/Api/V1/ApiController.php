@@ -29,7 +29,7 @@ class ApiController extends Controller
     public function getOpenSession(OpenSessionRequest $request)
     {
         $bet = GameBet::where('id', $request->input('bet_id'))->first();
-        $id = GameSession::open($request->input('bet_id'), Auth::id());
+        $id = GameSession::open($request->input('bet_id'), Auth::id(), $request->duel_id);
         $url = env('GAME_HOST', '') . '/?session_id=' . $id . '&user_id=' . Auth::id() . '&bet=' . $bet->bet;
         
         return response([
@@ -67,6 +67,12 @@ class ApiController extends Controller
     {
         GameSession::exit($request->input('session_id'), $request->input('user_id'));
 
+        $duel = Duel::where($request->duel_id)->first();
+
+        if ($duel != null) {
+            $duel->status = 3;
+            $duel->update();
+        }
 
         $user = Auth::user();
         if ($user->email == null) {
