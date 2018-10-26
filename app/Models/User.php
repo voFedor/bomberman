@@ -36,7 +36,8 @@ class User extends Authenticatable
     
     CONST ADMIN = 1;
     CONST GAMER = 2;
-
+    CONST REGISTERED = true;
+    CONST NEWUSER = false;
 
     /**
      * Hash password

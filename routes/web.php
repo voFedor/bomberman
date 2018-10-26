@@ -42,6 +42,7 @@ Route::any('/register', 'Auth\LoginController@anyForm')->name('login');
 
 $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login')->name('auth.login');
+$this->post('ulogin', 'Auth\LoginController@ulogin')->name('auth.ulogin');
 $this->get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 // Change Password Routes...
