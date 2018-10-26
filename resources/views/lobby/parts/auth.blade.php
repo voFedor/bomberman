@@ -7,6 +7,13 @@
         <div class="centered-page" id="result">
         </div>
         <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
+
+            <div style="text-align: center;margin-top:15px">
+                <script src="//ulogin.ru/js/ulogin.js"></script>
+                <div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=google,yandex,linkedin,googleplus;redirect_uri=http%3A%2F%2Fgamechainger.io%2Fulogin;mobilebuttons=0;"></div>
+            </div>
+
+
             <span id="error_login" style="color: red;font-size: 16px;"></span>
             <p style="padding: 2px;">
                 Логин/Email: </p>
@@ -18,10 +25,10 @@
             <div class="youplay-input">
                 <input type="password" name="pwd">
             </div>
-            <div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">
+            {{-- <div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">
                 <input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">
                 <label for="rememberme-lwa-1">Запомнить меня</label>
-            </div>
+            </div> --}}
             <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp-submit-1"
                     tabindex="100" type="button" onclick="return login()">
                 Войти
@@ -50,7 +57,7 @@
                 Зарегистрироваться
             </button>
             <br>
-
+            
             <p></p>
             <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a> |
             <a href="javascript:void(0);" onclick="return openAuthForm()">Войти</a>
