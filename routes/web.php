@@ -64,3 +64,7 @@ Route::prefix('/pvp')->group(function () {
 	$this->post('/get-duel/{bet_id?}', 'PvpController@getDuel');
     $this->get('/{token}', 'PvpController@getGame')->name('pvp');
 });
+
+
+Route::post('/chat','ChatController@sendMessage');
+//Route::get('/chat','ChatController@chatPage');

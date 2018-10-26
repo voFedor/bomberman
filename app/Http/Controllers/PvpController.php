@@ -56,7 +56,13 @@ class PvpController extends Controller
         $bet = GameBet::with(['game'])
             ->where('id', $duel->bet_id)
             ->first();
-        return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
+
+        return view('lobby.pvp-game')->with([
+            'url' => $url, 
+            'games' => $games,
+            'bet' => $bet,
+            'user'=> $user
+        ]);
     }
 
 

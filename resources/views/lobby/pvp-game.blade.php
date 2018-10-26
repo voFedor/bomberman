@@ -3,7 +3,8 @@
 @section('content')
 
 
-
+<div>
+   
     <!-- Start home section -->
     <div class="section secondary-section">
         <div class="triangle"></div>
@@ -178,8 +179,13 @@
             </ul>
         </div>
     </div>
+
+    
+
+
     </div>
     </div>
     <!-- Contact section edn -->
+    </div>
 
 @endsection

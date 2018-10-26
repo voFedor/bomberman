@@ -20,6 +20,9 @@
         "vue": "^2.5.7"
     },
     "dependencies": {
-        "gulp": "^3.9.1"
+        "gulp": "^3.9.1",
+        "laravel-echo": "^1.4.0",
+        "pusher-js": "^4.3.1",
+        "vue-resource": "^1.5.1"
     }
 }

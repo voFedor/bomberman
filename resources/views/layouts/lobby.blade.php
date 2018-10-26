@@ -34,8 +34,7 @@
 
 
 @include('lobby.parts.javascript')
-
-
+{{-- <script src="{!! mix('js/app.js') !!}"></script> --}}
 @include('lobby.parts.modal')
 
 </body>

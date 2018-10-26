@@ -300,6 +300,7 @@ class LoginController extends Controller
 
     public function ulogin(Request $request)
     {
+        dd($request);
          // Get information about user.
         $data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
         $user = json_decode($data, TRUE);
