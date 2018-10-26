@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('nik')->nullable()->default(null);
             $table->string('avatar')->nullable()->default(null);
             $table->string('country')->nullable()->default(null);
-            $table->bollean('status')->nullable()->default(false);
+            $table->boolean('status')->nullable()->default(false);
             $table->string('ip')->nullable()->default(null);
             $table->string('name')->nullable()->default(null);
             $table->string('email')->nullable()->default(null);
