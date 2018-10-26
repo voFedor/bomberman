@@ -9,7 +9,7 @@
         <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
 
             <div style="text-align: center;margin-top:15px">
-                <script src="//ulogin.ru/js/ulogin.js"></script><div id="uLogin_500d4447" data-uloginid="500d4447"></div>
+                
             </div>
 
 
