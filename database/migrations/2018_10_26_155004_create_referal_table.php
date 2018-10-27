@@ -17,6 +17,7 @@ class CreateReferalTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable()->default(null);
             $table->integer('invited_id');
+            $table->string('token');
             $table->string('status')->default(false);
             $table->decimal('refill_amount');
             $table->decimal('percentage');
