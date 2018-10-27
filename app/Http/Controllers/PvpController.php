@@ -7,6 +7,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Duel;
 use App\Models\Game;
+use App\Models\Referal;
 use App\Models\GameBet;
 
 class PvpController extends Controller
@@ -57,8 +58,14 @@ class PvpController extends Controller
             ->where('id', $duel->bet_id)
             ->first();
 
+        $referal = Referal::where('token', $token)->first();
+        $referal->invited_id = $user->id;
+        $referal->status = Referal::VIEWED;
+        $referal->update();
+
+
         return view('lobby.pvp-game')->with([
-            'url' => $url, 
+            'url' => $url,
             'games' => $games,
             'bet' => $bet,
             'user'=> $user
@@ -88,6 +95,15 @@ class PvpController extends Controller
             $duel->token = $token;
             $duel->status = Duel::OPEN;
             $duel->save();
+
+
+            $referal = new Referal();
+            $referal->user_id = Auth::user()->id;
+            $referal->invited_id = null;
+            $referal->token = $token;
+            $referal->status = Referal::OPEN;
+            $referal->refill_amount = 0;
+            $referal->percentage = env('PERCENTAGE_STOCK');
 
 
             session()->put('token', $token);
