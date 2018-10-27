@@ -58,8 +58,7 @@ class PvpController extends Controller
             ->where('id', $duel->bet_id)
             ->first();
 
-        $referal = new Referal();
-        $referal->token = $token;
+        $referal = Referal::where('token', $token)->first();
         $referal->invited_id = $user->id;
         $referal->status = Referal::VIEWED;
         $referal->update();
