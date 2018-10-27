@@ -57,11 +57,10 @@ class PvpController extends Controller
         $bet = GameBet::with(['game'])
             ->where('id', $duel->bet_id)
             ->first();
-
-        $referal = Referal::where('token', $token)->first();
-        $referal->invited_id = $user->id;
-        $referal->status = Referal::VIEWED;
-        $referal->update();
+        $referal_user = Referal::where('duel_id', $duel->id)->first();
+        $referal_user->invited_id = Auth::user()->id;
+        $referal_user->status = Referal::VIEWED;
+        $referal_user->update();
 
 
         return view('lobby.pvp-game')->with([
@@ -96,15 +95,14 @@ class PvpController extends Controller
             $duel->status = Duel::OPEN;
             $duel->save();
 
-
             $referal = new Referal();
             $referal->user_id = Auth::user()->id;
             $referal->invited_id = null;
-            $referal->token = $token;
+            $referal->duel_id = $duel->id;
             $referal->status = Referal::OPEN;
             $referal->refill_amount = 0;
             $referal->percentage = env('PERCENTAGE_STOCK');
-
+            $referal->save();
 
             session()->put('token', $token);
         

@@ -60,7 +60,7 @@ $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.
 
 
 Route::prefix('/pvp')->group(function () {
-	$this->get('/lobby/{duel_id?}', 'PvpController@getLobby')->name('pvpLobby');
+	$this->get('/lobby', 'PvpController@getLobby')->name('pvpLobby');
 	$this->post('/get-duel/{bet_id?}', 'PvpController@getDuel');
     $this->get('/{token}', 'PvpController@getGame')->name('pvp');
 });

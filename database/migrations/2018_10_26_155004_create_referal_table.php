@@ -15,9 +15,9 @@ class CreateReferalTable extends Migration
     {
         Schema::create('referals', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->nullable()->default(null);
-            $table->integer('invited_id');
-            $table->string('token');
+            $table->integer('user_id');
+            $table->integer('invited_id')->nullable()->default(null);
+            $table->integer('duel_id');
             $table->string('status')->default(false);
             $table->decimal('refill_amount');
             $table->decimal('percentage');

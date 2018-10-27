@@ -204,18 +204,14 @@ class PaymentsController extends Controller
 
         // Пользователь которые получил приглашение и сейчас первый раз пополнил баланс
         $referal = Referal::where('invited_id', $payment->user_id)->first();
-        $referal->status = Referal::APLLY ;
-        $referal->refill_amount = $referal->refill_amount + $payment->withdraw_amount;
+        $referal->status = Referal::APLLY;
+        $referal->refill_amount = $payment->withdraw_amount;
         $referal->update();
 
         // Пользователь который пригласил предыдущего и сейчас получает процент на баланс
         $referal_usre = User::find($referal->user_id);
         $referal_usre->creadits = $referal_usre->creadits +  $payment->withdraw_amount * $referal->percentage / 100;
         $referal_usre->update();
-
-        $user = User::find($payment->user_id);
-        $user->credits = $user->credits + $payment->withdraw_amoun;
-        $user->update();
 
         $data = array();
         $data['email'] = $user->email;
