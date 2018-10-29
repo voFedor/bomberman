@@ -209,9 +209,9 @@ class PaymentsController extends Controller
         $referal->update();
 
         // Пользователь который пригласил предыдущего и сейчас получает процент на баланс
-        $referal_usre = User::find($referal->user_id);
-        $referal_usre->creadits = $referal_usre->creadits +  $payment->withdraw_amount * $referal->percentage / 100;
-        $referal_usre->update();
+        $referal_user = User::find($referal->user_id);
+        $referal_user->creadits = $referal_user->creadits +  $payment->withdraw_amount * $referal->percentage / 100;
+        $referal_user->update();
 
         $data = array();
         $data['email'] = $user->email;

@@ -78,7 +78,7 @@ class PvpController extends Controller
         $games = Game::all();
         $last_duel_token = Duel::where('user_id', Auth::user()->id)->orderByDesc('created_at')->first();
         $duels = Duel::where('user_id', Auth::user()->id)->get();
-        return view('lobby.duels')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
+        return view('lobby.duel-with-chat')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
     }
 
 

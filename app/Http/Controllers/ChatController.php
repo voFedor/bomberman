@@ -2,34 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
+use App\Events\PrivateChatEvent;
+use App\Http\Resources\ChatResource;
+use App\Http\Resources\UserResource;
+use App\Models\Session;
 use Illuminate\Http\Request;
-use App\Events\ChatMessage;
 use App\Models\User;
 use Auth;
 
 class ChatController extends Controller
 {
-    public function __construct()
+    //
+
+    public function getFriends()
     {
-        $this->middleware('auth');
+        $user = Auth::user();
+//        $users = User::whereHas('duels', function ($q) use ($user) {
+//            $q->where('user_id', $user->id);
+//        })->get();
+        $users = User::where('id', '!=', auth()->id())->get();
+        return UserResource::collection($users);
     }
 
-public function sendMessage(Request $request)
-{
-$message = [
-"id" => $request->userid,
-"sourceuserid" => Auth::user()->id,
-"name" => Auth::user()->name,
-"message" => $request->message
-];
-event(new ChatMessage($message));
-return "true";
-}
+    public function send(Session $session, Request $request)
+    {
+        $message = $session->messages()->create(['content' => $request->content]);
 
-public function chatPage()
-{
-$users = User::take(10)->get();
-       return view('chat',['users'=> $users]);
-}
+        $chat = $message->createForSend($session->id);
+        $message->createForReceive($session->id, $request->to_user);
+
+        broadcast(new PrivateChatEvent($message->content, $chat));
+
+        return response($message, 200);
+    }
+
+    public function chats(Session $session)
+    {
+        return ChatResource::collection($session->chats->where('user_id', auth()->id()));
+    }
 }

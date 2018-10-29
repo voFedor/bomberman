@@ -55,9 +55,10 @@ $this->post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail'
 $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 //
-
-
-
+Route::post('/getFriends','ChatController@getFriends');
+Route::post('/session/create', 'SessionController@create');
+Route::post('/session/{session}/chats', 'ChatController@chats');
+Route::post('/send/{session}', 'ChatController@send');
 
 Route::prefix('/pvp')->group(function () {
 	$this->get('/lobby', 'PvpController@getLobby')->name('pvpLobby');
@@ -66,5 +67,5 @@ Route::prefix('/pvp')->group(function () {
 });
 
 
-Route::post('/chat','ChatController@sendMessage');
+
 //Route::get('/chat','ChatController@chatPage');

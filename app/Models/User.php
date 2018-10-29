@@ -64,6 +64,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
+    public function duels()
+    {
+        return $this->hasMany(Duel::class, 'id');
+    }
 
     /**
      * @param string $token

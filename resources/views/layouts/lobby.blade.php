@@ -6,10 +6,8 @@
     
 </head>
 <body>
+ <div id="app">
 
-<!-- Preloader -->
-{{--@include('lobby.parts.preloader')--}}
-<!-- /Preloader -->
 
 <!-- Navbar -->
 @include('lobby.parts.navbar')
@@ -17,6 +15,8 @@
 
 
 @yield('content')
+
+
 
 {{--@include('lobby.parts.search')--}}
 
@@ -31,10 +31,9 @@
 </button>
 </div>
 @endif
-
+ </div>
 
 @include('lobby.parts.javascript')
-{{-- <script src="{!! mix('js/app.js') !!}"></script> --}}
 @include('lobby.parts.modal')
 
 </body>

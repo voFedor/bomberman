@@ -2,6 +2,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title></title>
 <meta name="_token" content="{!! csrf_token() !!}" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Load Roboto font -->
 <!--<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>-->
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
@@ -11,6 +12,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="/{{ env('THEME') }}/css/style.css" />
 <link rel="stylesheet" type="text/css" href="/{{ env('THEME') }}/css/pluton.css" />
+<link rel="stylesheet" type="text/css" href="/{{ env('THEME') }}/css/chat.css" />
 <link rel="stylesheet" type="text/css" href="/{{ env('THEME') }}/css/custom.css" />
 <!--[if IE 7]>
 <link rel="stylesheet" type="text/css" href="/{{ env('THEME') }}/css/pluton-ie7.css" />
@@ -25,6 +27,10 @@
 <link rel="apple-touch-icon-precomposed" href="/{{ env('THEME') }}/images/ico/apple-touch-icon-57.png">
 <link rel="shortcut icon" href="/{{ env('THEME') }}/images/ico/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
+
+<link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+
+
 
 @if(Auth::user() != null && Request::is('/'))
     <script id="chatBroEmbedCode">
@@ -75,9 +81,10 @@
 <!-- /Yandex.Metrika counter -->
 <link rel="canonical" href="/">
 <link rel="shortlink" href="/">
-
+<link rel='stylesheet prefetch' href='http://cdn.materialdesignicons.com/1.1.70/css/materialdesignicons.min.css'>
+<link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:300'>
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
-
+{{--<link rel="stylesheet" href="{!! mix('css/app.css') !!}">--}}
 <style>
         .duel {
   background-color : #31B0D5;
@@ -88,8 +95,15 @@
 }
 
 #mybutton {
-  position: fixed;
-  bottom: -4px;
-  left: 10px;
-}
+       position: fixed;
+       bottom: -4px;
+       left: 10px;
+   }
+
+        #chat {
+            position: fixed;
+            bottom: 28px;
+            right: 38%;
+        }
     </style>
+

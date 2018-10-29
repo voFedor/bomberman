@@ -57,9 +57,9 @@
 <script type="text/javascript" src="/{{ env('THEME') }}/js/custom.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>\
 
-
+{{--<script src="/{{ env('THEME') }}/js/chat.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.js"></script>
-
+<script src="{!! mix('js/app.js') !!}"></script>
 
 
 
@@ -98,7 +98,7 @@
 
     function saveEmail() {
         var email = $("#exampleInputEmail1").val();
-        
+
         if (email == null || email == ""){
             toastr.clear();
             toastr.error("Заполните поле email", 'Ошибка!', {timeOut: 3000})
@@ -119,13 +119,13 @@
                 if (data['result'] == 'error')  {
                     toastr.clear();
                     toastr.error("Что-то пошло не так", 'Ошибка!', {timeOut: 3000})
-                    
+
                 }
                 if (data['result'] == 'success') {
                     toastr.clear();
                     toastr.success("Ваша почта сохранена", 'Отлично!', {timeOut: 3000});
                     $("#newUserEmail").val("");
-                    
+
                 }
                 window.location.href = env('APP_URL')+"/pvp/lobby";
 
@@ -180,66 +180,66 @@
     @if(Auth::user() != null)
 
     function getDuel(game_id) {
-    
 
-    $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '/pvp/get-duel',
-                    type: "POST",
-                    data: { game_id: game_id},
-                    success: function(data){
-                    window.location = "{{ env('APP_URL') }}/pvp/lobby/";
-                    },
-                    error:  function(xhr, str){
-                    },
-                    beforeSend : function (){
-                        toastr.clear();
-                        toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
-                    }
-                });
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/pvp/get-duel',
+            type: "POST",
+            data: { game_id: game_id},
+            success: function(data){
+                window.location = "{{ env('APP_URL') }}/pvp/lobby/";
+            },
+            error:  function(xhr, str){
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
     }
 
     function checkBet(id) {
 
         $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
-                $.ajax({
-                    url: '/get-bets',
-                    type: "POST",
-                    data: { id: id, _token: '{{csrf_token()}}'},
-                    success: function(data){
-                        $('#bets-modal-content').html(data);
-                        $('#bets-modal').modal('show');
-                    },
-                    error:  function(xhr, str){
-                    },
-                    beforeSend : function (){
-                        toastr.clear();
-                        toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
-                    }
-                });
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/get-bets',
+            type: "POST",
+            data: { id: id, _token: '{{csrf_token()}}'},
+            success: function(data){
+                $('#bets-modal-content').html(data);
+                $('#bets-modal').modal('show');
+            },
+            error:  function(xhr, str){
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
 
 
-        }
-   @else
-   function checkBet(id) {
-       toastr.clear();
-       toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
-       return;
-   }
+    }
+    @else
+    function checkBet(id) {
+        toastr.clear();
+        toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
+        return;
+    }
 
-   function getDuel() {
-       toastr.clear();
-       toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
-       return;
-   }
+    function getDuel() {
+        toastr.clear();
+        toastr.error('Вам необходимо авторизоваться для того чтобы начать играть', 'Ошибка!', {timeOut: 3000})
+        return;
+    }
     @endif
 
 
@@ -251,8 +251,8 @@
             });
         return vars;
     }
-    
-    
+
+
     function openGameWindow(json) {
         $.fancybox.open({
             padding : 0,
@@ -288,14 +288,14 @@
                 if(data['result']){
                     if(data['user_id'] == user_id) {
                         console.log('close user fancy box');
-                         $.fancybox.close();
+                        $.fancybox.close();
                     }
                 }
 
                 @if (Auth::check() && Auth::user()->email == null)
-                    $('#new_user_name').text(data['new_user_name']);
-                    $('#password').text(data['password']);
-                   $('#newUserForm').modal('show');
+                $('#new_user_name').text(data['new_user_name']);
+                $('#password').text(data['password']);
+                $('#newUserForm').modal('show');
                 @endif
             },
             error:  function(xhr, str){
@@ -304,27 +304,27 @@
     }
 
 
-@if(Auth::user() != null)
+    @if(Auth::user() != null)
 
     function pickBet(id, url, bet, duel_id) {
-    if ({{Auth::user()->credits}} < bet)
-    {
-        toastr.clear();
-        toastr.error('У вас не достаточно денег', 'Ошибка!', {timeOut: 3000});
-        return;
-    }
-
-    $.ajax({
-        url: url,
-        type: "GET",
-        data: {duel_id: duel_id},
-        success: function(json){
-            openGameWindow(json);
-        },
-        error:  function(xhr, str){
-            console.log(xhr);
+        if ({{Auth::user()->credits}} < bet)
+        {
+            toastr.clear();
+            toastr.error('У вас не достаточно денег', 'Ошибка!', {timeOut: 3000});
+            return;
         }
-    });
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            data: {duel_id: duel_id},
+            success: function(json){
+                openGameWindow(json);
+            },
+            error:  function(xhr, str){
+                console.log(xhr);
+            }
+        });
     }
 
     @endif
@@ -333,46 +333,46 @@
 
 
     function refreshStatus(duel_id) {
-    $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/refresh-status',
+            type: "POST",
+            data: {
+                duel_id: duel_id,
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+
+                if (data['result'] == 'error')  {
+                    toastr.clear();
+                    toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
                 }
-            });
-            $.ajax({
-                url: '/refresh-status',
-                type: "POST",
-                data: {
-                    duel_id: duel_id,
-                    _token: '{{csrf_token()}}'},
-                success: function (data) {
-
-                    if (data['result'] == 'error')  {
-                        toastr.clear();
-                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
-                    }
-                    if (data['result'] == 'success') {
-                        $("#status_"+duel_id).text();
-                        $("#status_"+duel_id).text(data['status']);
-
-                        toastr.clear();
-                        toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
-                    }
-                    
-                },
-                error: function (xhr, str) {
+                if (data['result'] == 'success') {
+                    $("#status_"+duel_id).text();
+                    $("#status_"+duel_id).text(data['status']);
 
                     toastr.clear();
-                    toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
-                    var balance = 0;
-                    return;
-                },
-                beforeSend : function (){
-                    toastr.clear();
-                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+                    toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
                 }
-            });
 
-        }
+            },
+            error: function (xhr, str) {
+
+                toastr.clear();
+                toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+                var balance = 0;
+                return;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
+
+    }
 
 
     function checkFeedbackForm() {
@@ -536,55 +536,55 @@
             return;
         }
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            $.ajax({
-                url: '/cash-out-request',
-                type: "POST",
-                data: {
-                    priceCashOut: priceCashOut,
-                    cardNumber: cardNumber,
-                    yandexWallet: yandexWallet,
-                    transactionType: transactionType,
-                    cashOutInfo: cashOutInfo,
-                    _token: '{{csrf_token()}}'},
-                success: function (data) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/cash-out-request',
+            type: "POST",
+            data: {
+                priceCashOut: priceCashOut,
+                cardNumber: cardNumber,
+                yandexWallet: yandexWallet,
+                transactionType: transactionType,
+                cashOutInfo: cashOutInfo,
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
 
-                    $('#priceCashOut').val('');
-                    $('#cardNumber').val('');
-                    $('#yandexWallet').val('');
-                    $('#transactionType').val('');
+                $('#priceCashOut').val('');
+                $('#cardNumber').val('');
+                $('#yandexWallet').val('');
+                $('#transactionType').val('');
 
-                    if (data['result'] == 'error')  {
-                        toastr.clear();
-                        toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
-                    }
-                    if (data['result'] == 'success') {
-                        toastr.clear();
-                        toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
-                    }
-                    balance = 0;
-                    return;
-                },
-                error: function (xhr, str) {
-                    $('#priceCashOut').val('');
-                    $('#cardNumber').val('');
-                    $('#yandexWallet').val('');
-                    $('#transactionType').val('');
-
+                if (data['result'] == 'error')  {
                     toastr.clear();
-                    toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
-                    var balance = 0;
-                    return;
-                },
-                beforeSend : function (){
-                    toastr.clear();
-                    toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+                    toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
                 }
-            });
+                if (data['result'] == 'success') {
+                    toastr.clear();
+                    toastr.success("Спасибо за ваш отзыв", 'Отлично!', {timeOut: 3000})
+                }
+                balance = 0;
+                return;
+            },
+            error: function (xhr, str) {
+                $('#priceCashOut').val('');
+                $('#cardNumber').val('');
+                $('#yandexWallet').val('');
+                $('#transactionType').val('');
+
+                toastr.clear();
+                toastr.error('Что-то пошло не так', 'Ошибка!', {timeOut: 3000});
+                var balance = 0;
+                return;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
 
 
     }
@@ -604,7 +604,7 @@
 
 
 
-    
+
 
 
 
@@ -614,9 +614,9 @@
     @if (request()->route("token") != null)
 
 
-    
-    
-    
+
+
+
     // function newDuelGameOpen() {
     //     $.ajax({
     //     url: '/game-url-by-token',
@@ -655,12 +655,12 @@
 
 
     function copyToClipboard(element) {
-  var $temp = $("<input>");
-  $("body").append($temp);
-  $temp.val($(element).text()).select();
-  document.execCommand("copy");
-  $temp.remove();
-}
+        var $temp = $("<input>");
+        $("body").append($temp);
+        $temp.val($(element).text()).select();
+        document.execCommand("copy");
+        $temp.remove();
+    }
 
 
 

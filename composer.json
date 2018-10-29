@@ -15,7 +15,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.5",
         "lord/laroute": "2.*",
-        "pusher/pusher-php-server": "^3.2",
+        "pusher/pusher-php-server": "~3.0",
         "webpatser/laravel-uuid": "2.*",
         "wisembly/elephant.io": "^3.3",
         "yandex-money/yandex-money-sdk-php": "3.0.*"

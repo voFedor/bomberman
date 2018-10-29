@@ -8,9 +8,9 @@
         </div>
         <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
 
-            <div style="text-align: center;margin-top:15px">
-                
-            </div>
+            {{--<div style="text-align: center;margin-top:15px">--}}
+                {{--<script src="//ulogin.ru/js/ulogin.js"></script><div id="uLogin_3bc72319" data-uloginid="3bc72319"></div>--}}
+            {{--</div>--}}
 
 
             <span id="error_login" style="color: red;font-size: 16px;"></span>

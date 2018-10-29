@@ -2,10 +2,8 @@
 
 @section('content')
 
-
-
     <!-- Start home section -->
-    <div id="home">
+    <div>
         <!-- Start cSlider -->
         <div id="da-slider" class="da-slider">
             <div class="triangle"></div>
