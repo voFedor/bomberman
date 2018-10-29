@@ -36,7 +36,8 @@ class User extends Authenticatable
     
     CONST ADMIN = 1;
     CONST GAMER = 2;
-
+    CONST REGISTERED = true;
+    CONST NEWUSER = false;
 
     /**
      * Hash password
@@ -63,6 +64,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id');
     }
 
+    public function duels()
+    {
+        return $this->hasMany(Duel::class, 'id');
+    }
 
     /**
      * @param string $token

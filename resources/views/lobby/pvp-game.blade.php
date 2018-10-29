@@ -3,6 +3,7 @@
 @section('content')
 
 
+<div>
 
     <!-- Start home section -->
     <div class="section secondary-section">
@@ -11,10 +12,15 @@
             
             <p class="large-text">Тебе бросили вызов</p>
             <div class="row-fluid">
-                <div class="span12">
+                <div class="span4">
 
-                	<button onclick="return pickBet('{{$bet->id}}', '{{$bet->openUrl()}}', '{{$bet->bet}}')" type="button" class="btn btn-warning">Принять вызов</button>
-                    
+                    <button onclick="return pickBet('{{$bet->id}}', '{{$bet->openUrl()}}', '{{$bet->bet}}')" type="button" class="btn btn-warning">Принять вызов</button>
+
+                </div>
+
+
+                <div class="span8">
+                    <chat></chat>
                 </div>
             </div>
         </div>
@@ -178,8 +184,13 @@
             </ul>
         </div>
     </div>
+
+    
+
+
     </div>
     </div>
     <!-- Contact section edn -->
+    </div>
 
 @endsection

@@ -8,6 +8,7 @@ use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
 use App\Models\Game;
+use App\Models\Referal;
 use Carbon\Carbon;
 use Auth;
 use Storage;
@@ -201,9 +202,16 @@ class PaymentsController extends Controller
         $payment->save();
 
 
-        $user = User::find($payment->user_id);
-        $user->credits = $user->credits + $payment->withdraw_amount;
-        $user->update();
+        // Пользователь которые получил приглашение и сейчас первый раз пополнил баланс
+        $referal = Referal::where('invited_id', $payment->user_id)->first();
+        $referal->status = Referal::APLLY;
+        $referal->refill_amount = $payment->withdraw_amount;
+        $referal->update();
+
+        // Пользователь который пригласил предыдущего и сейчас получает процент на баланс
+        $referal_user = User::find($referal->user_id);
+        $referal_user->creadits = $referal_user->creadits +  $payment->withdraw_amount * $referal->percentage / 100;
+        $referal_user->update();
 
         $data = array();
         $data['email'] = $user->email;

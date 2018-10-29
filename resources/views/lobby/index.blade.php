@@ -2,10 +2,8 @@
 
 @section('content')
 
-
-
     <!-- Start home section -->
-    <div id="home">
+    <div>
         <!-- Start cSlider -->
         <div id="da-slider" class="da-slider">
             <div class="triangle"></div>
@@ -58,7 +56,7 @@
     <div class="section primary-section" id="service">
         <div class="container">
             <!-- Start title section -->
-            <div class="title">
+                
                 <h1>Выигрывай и получай деньги за победу</h1>
                 <!-- Section's title goes here -->
                 <p>Здесь ты можешь создавать и участвовать в турнирах. <br/> А побеждая получать денежное вознаграждение.</p>
@@ -122,6 +120,7 @@
         <div class="triangle"></div>
         <div class="container centered">
             <p class="large-text">Зарегистрируйся в 1 клик!</p>
+
             <form action="/register" method="post" class="" id="callToAction-form" onkeypress="return event.keyCode != 13;">
                 {{ csrf_field() }}
                 <div class="form-group">

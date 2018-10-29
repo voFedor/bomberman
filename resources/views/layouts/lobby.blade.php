@@ -6,10 +6,8 @@
     
 </head>
 <body>
+ <div id="app">
 
-<!-- Preloader -->
-{{--@include('lobby.parts.preloader')--}}
-<!-- /Preloader -->
 
 <!-- Navbar -->
 @include('lobby.parts.navbar')
@@ -18,20 +16,25 @@
 
 @yield('content')
 
+
+
 {{--@include('lobby.parts.search')--}}
 
 <!-- ScrollUp button start -->
 @include('lobby.parts.scrollup')
+
+
+@if(Auth::check())
 <div id="mybutton">
-<button class="duel" onclick="return checkBet(1)">
+<button class="duel" onclick="return getDuel(1)">
 Назначить дуэль
 </button>
 </div>
+@endif
+ </div>
+
 @include('lobby.parts.javascript')
-
-
 @include('lobby.parts.modal')
-
 
 </body>
 </html>

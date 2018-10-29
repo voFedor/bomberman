@@ -7,6 +7,7 @@ use Auth;
 use App\Models\User;
 use App\Models\Duel;
 use App\Models\Game;
+use App\Models\Referal;
 use App\Models\GameBet;
 
 class PvpController extends Controller
@@ -34,54 +35,78 @@ class PvpController extends Controller
 
     public function getGame($token = null, $url = null)
     {
-    	if ($token == null || $token == "") {
-    		return view('lobby.pvp-nogame');
-    	}
 
-    	$user = Auth::user();
-    	if ($user == null) {
-    		$user = User::where('token', $token)->first();
-    		if($user == null){
-    			$user = User::createNewUserByToken($token);
+    	if ($token == null || $token == "") {
+            return view('lobby.pvp-nogame');
+        }
+        $user = Auth::user();
+        if ($user == null) {
+            $user = User::where('token', $token)->first();
+            if($user == null){
+                $user = User::createNewUserByToken($token);
                 
                 Auth::login($user);
-    		} else {
-    			Auth::login($user);
-    		}
-    	}
+            } else {
+                Auth::login($user);
+            }
+        }
         $games = Game::all();
         $duel = Duel::where('token', $token)->first();
         $duel->status = Duel::REGISTERED;
         $duel->update();
-
-
         $bet = GameBet::with(['game'])
             ->where('id', $duel->bet_id)
             ->first();
+        $referal_user = Referal::where('duel_id', $duel->id)->first();
+        $referal_user->invited_id = Auth::user()->id;
+        $referal_user->status = Referal::VIEWED;
+        $referal_user->update();
 
-        return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
+
+        return view('lobby.pvp-game')->with([
+            'url' => $url,
+            'games' => $games,
+            'bet' => $bet,
+            'user'=> $user
+        ]);
     }
 
 
 
-    public function getLobby($game_id = null, $bet_id = null)
+    public function getLobby()
+    {	
+        $games = Game::all();
+        $last_duel_token = Duel::where('user_id', Auth::user()->id)->orderByDesc('created_at')->first();
+        $duels = Duel::where('user_id', Auth::user()->id)->get();
+        return view('lobby.duel-with-chat')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
+    }
+
+
+
+    public function getDuel(Request $request)
     {
-    	
-        if ($game_id != null && $bet_id != null) {
+        
             $token = str_random(20);
             $duel = new Duel();
-            $duel->user_id = Auth::user()->id;
-            $duel->game_id = $game_id;
-            $duel->bet_id = $bet_id;
+            $duel->user_id = Auth::id();
+            $duel->game_id = $request->game_id;
+            $duel->bet_id = 1;
             $duel->token = $token;
             $duel->status = Duel::OPEN;
             $duel->save();
-        } else {
-            $token = null;
-        }
-    	
-        $games = Game::all();
-        $duels = Duel::where('user_id', Auth::user()->id)->get();
-        return view('lobby.duels')->with(['duels' => $duels, 'token' => $token, 'games' => $games]);
+
+            $referal = new Referal();
+            $referal->user_id = Auth::user()->id;
+            $referal->invited_id = null;
+            $referal->duel_id = $duel->id;
+            $referal->status = Referal::OPEN;
+            $referal->refill_amount = 0;
+            $referal->percentage = env('PERCENTAGE_STOCK');
+            $referal->save();
+
+            session()->put('token', $token);
+        
+        
+        return redirect('/pvp/lobby/');
     }
 }
