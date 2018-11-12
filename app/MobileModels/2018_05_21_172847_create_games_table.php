@@ -13,7 +13,7 @@ class CreateGamesTable extends Migration
      */
     public function up()
     {
-        Schema::create('games', function (Blueprint $table) {
+        Schema::connection('mysql')->create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 20)->nullable();
             $table->string('ru_name', 20)->nullable();
@@ -31,6 +31,6 @@ class CreateGamesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('games');
+        Schema::connection('mysql')->dropIfExists('games');
     }
 }

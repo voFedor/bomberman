@@ -49,11 +49,12 @@ function register() {
             if (data_resp['result'] == 'error'){
                 toastr.clear();
                 toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
-                showErrorReg(data_resp['message']);
+                //showErrorReg(data_resp['message']);
             }
         },
         error:  function(xhr, str){
-            showErrorReg('Что-то пошло не так');
+            toastr.clear();
+            toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
         },
         beforeSend : function (){
             toastr.clear();

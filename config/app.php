@@ -198,6 +198,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         \App\Providers\LogProvider::class,
+        Jenssegers\Agent\AgentServiceProvider::class,
 
     ],
 
@@ -254,7 +255,7 @@ return [
         'Image'        => Intervention\Image\Facades\Image::class,
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
-        
+        'Agent' => Jenssegers\Agent\Facades\Agent::class,
     ],
 
     

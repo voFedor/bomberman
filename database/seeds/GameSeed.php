@@ -15,75 +15,236 @@ class GameSeed extends Seeder
     public function run()
     {
 //        for($i = 0; $i < $limit; $i++){
-            $game1 = Game::create(
-                [
-                'name' => 'bomber',
-                'ru_name' => 'Бомбермен',
-                'logo' => 'bomber.png',
+        $game1 = Game::create(
+            [
+                'name' => 'Golf',
+                'ru_name' => 'Гольф',
+                'logo' => 'Golf.jpg',
                 'need_users' => 2,
-                 'status' => true
-                ]);
-            $game2 = Game::create(
+                'description' => 'Пришло время вытащить клюшки для гольфа и ударить по мячам. Цельтесь в лунки для гольфа или головы ваших противников в   многопользовательском безумии в реальном времени!',
+                'slug' => 'golf',
+                'status' => true
+            ]);
+        $game2 = Game::create(
+            [
+                'name' => 'Soccer',
+                'ru_name' => 'аэрофутбол',
+                'logo' => 'Soccer.jpg',
+                'need_users' => 2,
+                'description' => 'Идет последняя минута игры, мяч у соперника… но ты перехватываешь его! Отличный шанс решить исход матча… ты целишься... удар… ГООООООЛ! Аэрофутбол отличается простым и увлекательным игровым процессом и замечательной физикой! Проникнись духом большого спорта: бросай вызов соперникам со всего мира, устраивая футбольные поединки!
+',
+                'slug' => 'soccer',
+                'status' => false
+            ]);
+        $game3 = Game::create(
+            [
+                'name' => 'The Gun',
+                'ru_name' => 'Пушка',
+                'logo' => 'TheGun.jpg',
+                'need_users' => 2,
+                'description' => 'Эта игра про оружие отличается реалистичной физической моделью с отдачей, перезарядкой, разлетом пуль и ограниченным боекомплектом! Вызывай соперников на и докажи им что ты самый меткий, быстрый и сообразительный!',
+                'slug' => 'the-gun',
+                'status' => false
+            ]);
+        $game4 = Game::create(
                 [
-                    'name' => 'sea-battle',
-                    'ru_name' => 'Морской бой',
-                    'logo' => 'sea-battle.png',
+                    'name' => 'cs-go',
+                    'ru_name' => 'CS GO',
+                    'logo' => 'cs-go.jpg',
                     'need_users' => 2,
+                    'description' => 'Эта игра про оружие отличается реалистичной физической моделью с отдачей, перезарядкой, разлетом пуль и ограниченным боекомплектом! Вызывай соперников на и докажи им что ты самый меткий, быстрый и сообразительный!',
+                    'slug' => 'cs-go',
                     'status' => false
                 ]);
-            $game3 = Game::create(
-                [
-                    'name' => 'billiards',
-                    'ru_name' => 'Бильярд',
-                    'logo' => 'billiards.png',
-                    'need_users' => 2,
-                    'status' => false
-                ]);
-//            $game4 = Game::create(
-//                [
-//                    'name' => 'cs-go',
-//                    'ru_name' => 'CS GO',
-//                    'logo' => 'cs-go.png',
-//                    'need_users' => 6,
-//                    'status' => false
-//                ]);
-            $game5 = Game::create(
-                [
-                    'name' => 'checkers',
-                    'ru_name' => 'Шашки',
-                    'logo' => 'checkers.png',
-                    'need_users' => 2,
-                    'status' => false
-                ]);
+        $game5 = Game::create(
+            [
+                'name' => 'Flip Master',
+                'ru_name' => 'Мастер переворотов',
+                'logo' => 'flipmaster.jpg',
+                'need_users' => 2,
+                'description' => 'Мастер переворотов c пользовательским физическим движком и анимированной физикой тряпичной куклы, является самым динамичным и интересным опытом с батутом когда-либо созданных! Бросьте вызов законам физики и докажите, что вы достойны и стань хозяином бабута!',
+                'slug' => 'flip-master',
+                'status' => false
+            ]);
+        $game6 = Game::create(
+            [
+                'name' => 'Table Tennis',
+                'ru_name' => 'Настольный теннис',
+                'logo' => 'tabletennis.jpg',
+                'need_users' => 2,
+                'description' => 'По силам ли Вам одержать победу над чемпионами в этой невероятной реалистичной теннисной игре? Вызывай противников и покажи невероятные техники владения теннисной ракеткой, и пусть весь мир подождет!',
+                'slug' => 'table-tennis',
+                'status' => false
+            ]);
+        $game7 = Game::create(
+            [
+                'name' => 'Hockey',
+                'ru_name' => 'Хоккей',
+                'logo' => 'hockey.jpg',
+                'need_users' => 2,
+                'description' => 'Забейте как можно большее количество голов в поединке с соперниками. Разыгрывай шайбу, применяйте силовые приемы, ускоряйся и делай невероятные финты, чтобы пробить вратаря соперника! Под твоим натиском должен сломаться любой.',
+                'slug' => 'hockey',
+                'status' => false
+            ]);
+        $game8 = Game::create(
+            [
+                'name' => 'Sudoku',
+                'ru_name' => 'Судоку',
+                'logo' => 'sudoku.jpg',
+                'need_users' => 2,
+                'description' => 'Поиграйте в эту фантастическую игру-головоломку, покоряющую мир новой головоломкой каждый день! Докажи что твой мозг быстрее обрабатывает информация и закрой все поле первым! Думай и побеждай!',
+                'slug' => 'sudoku',
+                'status' => false
+            ]);
+        $game9 = Game::create(
+            [
+                'name' => 'Motocross',
+                'ru_name' => 'Мотокросс',
+                'logo' => 'motocross.jpg',
+                'need_users' => 2,
+                'description' => 'Осторожно, Мотокросс пробудит в тебе жажду скорости! Здесь тебе предстоит гонять на мотоцикле по разным трассам и видам местности и выполнять головоломные трюки, оставляя соперников позади. ',
+                'slug' => 'motocross',
+                'status' => false
+            ]);
+        $game10 = Game::create(
+            [
+                'name' => 'Checkers',
+                'ru_name' => 'Шашки',
+                'logo' => 'check.jpg',
+                'need_users' => 2,
+                'description' => 'настольная игра для двух игроков, заключающаяся в передвижении определённым образом фишек-шашек по клеткам шашечной доски. Возьми все шашки соперника или лиши их возможности хода. Быстрое и увлекательное занятие, чтобы решить кто из вас лучше!',
+                'slug' => 'checkers',
+                'status' => false
+            ]);
+        $game11 = Game::create(
+            [
+                'name' => 'Tanks',
+                'ru_name' => 'Танки',
+                'logo' => 'tankattack3d.jpg',
+                'need_users' => 2,
+                'description' => 'В этой позиционной войне ты начинаешь битву на передовой линии. Твоя бронированная машина готова возглавить танковую атаку: разрушай бункеры, машины и бомбардировщики, ломай вражеские радары. В этой игре нужно будет, находясь в самом пылу боя, помочь своей армии выиграть войну.',
+                'slug' => 'tanks',
+                'status' => false
+            ]);
+        $game12 = Game::create(
+            [
+                'name' => 'Kranker',
+                'ru_name' => 'Кранкер',
+                'logo' => 'Kranker.jpg',
+                'need_users' => 2,
+                'description' => 'Кранкер - многопользовательский шутер от первого лица в пиксельной Вселенной. Заходи и выживи!',
+                'slug' => 'kranker',
+                'status' => false
+            ]);
+        $game13 = Game::create(
+            [
+                'name' => '8Pool',
+                'ru_name' => 'Пул',
+                'logo' => '8Pool.jpg',
+                'need_users' => 2,
+                'description' => 'Забей восемь шаров в поединке с живыми игроками. Чтобы выиграть, ЗАГОНИ В ЛУЗУ 8-ой ШАР ПОСЛЕДНИМ, после всех других шаров.',
+                'slug' => '8pool',
+                'status' => true
+            ]);
+        $game14 = Game::create(
+            [
+                'name' => 'Bowling King',
+                'ru_name' => 'Король Боулинга',
+                'logo' => 'Bowlingking.jpg',
+                'need_users' => 2,
+                'description' => 'Побеждай игроков со всего мира и стань королем боулинга! Сделай больше всех страйков и набирай максимальное количество очков среди своих друзьями',
+                'slug' => 'bowlingking',
+                'status' => true
+            ]);
+        $game15 = Game::create(
+            [
+                'name' => 'GoBattle',
+                'ru_name' => 'ГоБатл',
+                'logo' => 'Gobattle.jpg',
+                'need_users' => 2,
+                'description' => 'Сражайся чтобы быть королем! В этой массивной многопользовательской игре, основанной на 2D аркадных игр, вы должны бороться против других рыцарей, чтобы быть королем.',
+                'slug' => 'gobattle',
+                'status' => true
+            ]);
+        $game16 = Game::create(
+            [
+                'name' => 'Football Strike',
+                'ru_name' => 'Футбольный Удар',
+                'logo' => 'Footballstrike.jpg',
+                'need_users' => 2,
+                'description' => 'Вы никогда не играли в такой футбол до этого. Вызови своих друзей в мультиплеере, что бы определить кто лучше из вас при пробитие пенальти или выбивании целей на время.',
+                'slug' => 'footballstrike',
+                'status' => true
+            ]);
+        $game17 = Game::create(
+            [
+                'name' => 'Sleigh Shot',
+                'ru_name' => 'Санный Выстрел',
+                'logo' => 'Sleighshot.jpg',
+                'need_users' => 2,
+                'description' => 'Лето здесь, Санты нигде не видно, но новые претенденты теперь принимают вызов кто Выстрелит Санями дальше всех! ',
+                'slug' => 'sleighshot',
+                'status' => true
+            ]);
+        $game18 = Game::create(
+            [
+                'name' => 'Powerline',
+                'ru_name' => 'Электрическая Змейка',
+                'logo' => 'Powerline.jpg',
+                'need_users' => 2,
+                'description' => 'Современный подход к классической игре змейка. Ешьте, чтобы расти, приближайтесь к другим вражеским линиям, генерируйте электричество и повышайте свою линию, чтобы получить преимущество над другими игроками, но не позволяйте своей голове касаться других линий электропередач.',
+                'slug' => 'powerline',
+                'status' => true
+            ]);
+        $game19 = Game::create(
+            [
+                'name' => 'Darts of Fury',
+                'ru_name' => 'Дартс Ярости',
+                'logo' => 'Dartsoffury.jpg',
+                'need_users' => 2,
+                'description' => 'Давайте играть в дартс! Соревнуйтесь с реальными противниками в этой потрясающей многопользовательской игре в дартс. "Дартс ярости" футуристическая, современная игра сделана для дартс новичков и поклонников.',
+                'slug' => 'dartsoffury',
+                'status' => true
+            ]);
+        $game20 = Game::create(
+            [
+                'name' => 'CarJack',
+                'ru_name' => 'Карджек',
+                'logo' => 'Carjack.jpg',
+                'need_users' => 2,
+                'description' => 'Кэрджек - это интенсивная онлайн-гоночная игра, в которой вы мчитесь по шоссе на смешных скоростях против других игроков. Вы ускоряетесь от полицейских на шоссе, полном движения, как это час пик, убедитесь, что не врезаться в противном случае полиция быстро догнать вас в кратчайшие сроки.',
+                'slug' => 'carjack',
+                'status' => true
+            ]);
 
-                    GameBet::create([
-                        'game_id' => $game1->id,
-                        'bet' => 0
-                    ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 10
-                ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 25
-                ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 50
-                ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 100
-                ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 200
-                ]);
-                GameBet::create([
-                    'game_id' => $game1->id,
-                    'bet' => 500
-                ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 0
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 10
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 25
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 50
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 100
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 200
+        ]);
+        GameBet::create([
+            'game_id' => $game1->id,
+            'bet' => 500
+        ]);
 
 //                if(!$gameBet){
 //                    GameBet::create([

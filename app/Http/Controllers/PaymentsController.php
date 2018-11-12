@@ -11,6 +11,7 @@ use App\Models\Game;
 use Carbon\Carbon;
 use Auth;
 use Storage;
+use Jenssegers\Agent\Agent;
 
 class PaymentsController extends Controller
 {
@@ -37,8 +38,13 @@ class PaymentsController extends Controller
 ////        $payment->status = 0;
 ////        $payment->save();
 
-
-        return view('lobby.payment', compact('games', 'payment_history'));
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()) {
+            $games = Game::all();
+            return view('mobile.payment.content', compact('games'));
+        } else {
+            return view('lobby.payment', compact('games', 'payment_history'));
+        }
     }
 
 

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Duel;
 use App\Models\Game;
 use App\Models\GameBet;
+use Jenssegers\Agent\Agent;
 
 class PvpController extends Controller
 {
@@ -29,7 +30,11 @@ class PvpController extends Controller
             }
         }
 
-        return view('lobby.pvp-game');
+        if ($agent->isMobile() || $agent->isTablet()){
+            return redirect('/');
+        } else {
+            return view('lobby.pvp-game');
+        }
     }
 
     public function getGame($token = null, $url = null)
@@ -64,9 +69,14 @@ class PvpController extends Controller
     public function getLobby()
     {	
         $games = Game::all();
-        $last_duel_token = Duel::where('user_id', Auth::user()->id)->orderByDesc('created_at')->first();
-        $duels = Duel::where('user_id', Auth::user()->id)->get();
-        return view('lobby.duels')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
+        $last_duel_token = Duel::where('user_id', Auth::id())->orderByDesc('created_at')->first();
+        $duels = Duel::where('user_id', Auth::id())->get();
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()){
+            return redirect('/');
+        } else {
+            return view('lobby.duels')->with(['duels' => $duels, 'games' => $games, 'last_duel_token' => $last_duel_token]);
+        }
     }
 
 

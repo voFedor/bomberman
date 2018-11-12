@@ -1,7 +1,10 @@
 <?php
 Route::get('/', 'LobbyController@getIndex');
+Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
+
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 Route::get('/history', 'LobbyController@gameHistory');
+Route::get('/game/{slug}', 'LobbyController@getGame');
 Route::get('/invitation', 'LobbyController@invitation');
 
 
@@ -44,6 +47,7 @@ $this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->post('login', 'Auth\LoginController@login')->name('auth.login');
 $this->get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
+
 // Change Password Routes...
 $this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
 $this->patch('change_password', 'Auth\ChangePasswordController@changePassword')->name('auth.change_password');
@@ -63,3 +67,19 @@ Route::prefix('/pvp')->group(function () {
 	$this->post('/get-duel/{bet_id?}', 'PvpController@getDuel');
     $this->get('/{token}', 'PvpController@getGame')->name('pvp');
 });
+
+
+
+Route::post('/check-balance-mob', 'Mobile\HomeController@checkBalance');
+Route::post('/generateGameUrl', 'Mobile\HomeController@generateGameUrl');
+Route::post('/inviteFriend', 'Mobile\HomeController@inviteFriend');
+Route::post('logout', ['as' => 'logout', 'uses' => 'Auth\LoginController@logout']);
+
+
+Route::get('mlogin', ['as' => 'mlogin', 'uses' => 'Mobile\LoginController@showLoginForm']);
+Route::post('mlogin', 'Mobile\LoginController@login');
+
+
+Route::get('mregister', 'Mobile\RegisterController@showRegistrationForm');
+Route::post('mregister', 'Mobile\RegisterController@register');
+Route::post('/makeDeposit', 'Mobile\PaymentsController@getPayments');

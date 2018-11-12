@@ -18,6 +18,8 @@ use Session;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use RuntimeException;
 use App\Models\Tournament;
+use Jenssegers\Agent\Agent;
+use App\MobileModels\UserAction;
 
 class LobbyController extends Controller
 {
@@ -47,7 +49,15 @@ class LobbyController extends Controller
             $name = null;
         }
 
-        return view('lobby.index', compact('games', 'hash', 'name'));
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet())
+        {
+            return view('mobile.home.content', compact('games', 'hash', 'name'));
+        } else {
+            return view('lobby.index', compact('games', 'hash', 'name'));
+        }
+
+
     }
     /**
      * Show the application dashboard.
@@ -56,7 +66,42 @@ class LobbyController extends Controller
      */
     public function getGames()
     {
+
         return view('lobby.games');
+    }
+
+
+    public function statistic()
+    {
+        return view('lobby.statistic')->with(['actions' => \App\Models\UserAction::all(), 'users' => \App\Models\User::all()]);
+    }
+
+
+    public function getGame($slug)
+    {
+        $game = Game::where('slug', $slug)->first();
+        $user = Auth::user();
+        if ($user) {
+            $action = UserAction::where(['user_id' => $user->id, 'game_id' => $game->id, 'action' => UserAction::VIEW])->first();
+            if ($action == null) {
+                $action = new UserAction();
+                $action->user_id = $user->id;
+                $action->game_id = $game->id;
+                $action->action = UserAction::VIEW;
+                $action->amount = 1;
+                $action->save();
+            } else {
+                $action->amount = $action->amount + 1;
+                $action->update();
+            }
+        }
+        $games = Game::all();
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()) {
+            return view('mobile.games.content', compact('game', 'games'));
+        } else {
+            return redirect('/');
+        }
     }
 
 
@@ -77,8 +122,13 @@ class LobbyController extends Controller
         }
         
         $games = Game::all();
-        
-        return view('lobby.invitation', compact('user', 'games', 'new_user', 'password', 'new_user_name'));
+        $games = Game::all();
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()){
+            return redirect('/');
+        } else {
+            return view('lobby.invitation', compact('user', 'games', 'new_user', 'password', 'new_user_name'));
+        }
     }
 
 
@@ -95,8 +145,14 @@ class LobbyController extends Controller
         $sessions = GameSessionUser::get();
 
         $games = Game::all();
-
-        return view('lobby.history', compact('sessions', 'games', 'users_sessions'));
+        $games = Game::all();
+        $games = Game::all();
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()){
+            return redirect('/');
+        } else {
+            return view('lobby.history', compact('sessions', 'games', 'users_sessions'));
+        }
     }
 
     public function tournaments()
@@ -107,8 +163,14 @@ class LobbyController extends Controller
 
         $games = Game::all();
         $participants = Tournament::get();
-
-        return view('lobby.tournaments', compact('bets', 'participants', 'games'));
+        $games = Game::all();
+        $games = Game::all();
+        $agent = new Agent();
+        if ($agent->isMobile() || $agent->isTablet()){
+            return redirect('/');
+        } else {
+            return view('lobby.tournaments', compact('bets', 'participants', 'games'));
+        }
     }
 
     public function removeUserFromSession()
