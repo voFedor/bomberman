@@ -6,6 +6,10 @@
     <div class="hide auth" id="auth">
         <div class="centered-page" id="result">
         </div>
+        <div style="text-align: center;margin-top:15px">
+            <script src="//ulogin.ru/js/ulogin.js"></script>
+            <div id="uLogin" data-ulogin="display=panel;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=google,yandex,linkedin,googleplus;redirect_uri=http%3A%2F%2Fgamechainger.io%2Fulogin;mobilebuttons=0;"></div>
+        </div>
         <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
             <span id="error_login" style="color: red;font-size: 16px;"></span>
             <p style="padding: 2px;">

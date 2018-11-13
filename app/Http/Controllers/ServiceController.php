@@ -48,6 +48,12 @@ class ServiceController extends Controller
 
 
 
+    public function ulogin()
+    {
+        return dd('/qweqweqwe');
+    }
+
+
     public function newGame(Request $request)
     {
         $data_val = $request->all();

@@ -24,6 +24,7 @@ Route::get('/chat', 'ServiceController@chat')->name('chat');
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
 
+Route::post('/ulogin', 'Auth\LoginController@ulogin');
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');

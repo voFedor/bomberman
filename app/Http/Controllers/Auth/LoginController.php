@@ -4,16 +4,63 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-use Request;
+use Illuminate\Http\Request;
 use Mail;
 use Validator;
 use Socialite;
 use Auth;
 use Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
+
+
+
+    public function ulogin(Request $request)
+    {
+        // Get information about user.
+        $data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
+        $user = json_decode($data, TRUE);
+        $network = $user['network'];
+        // Find user in DB.
+        $userData = User::where('email', $user['email'])->first();
+        // Check exist user.
+        if (isset($userData->id)) {
+            // Check user status.
+            if ($userData->status) {
+                // Make login user.
+                Auth::loginUsingId($userData->id, TRUE);
+            }
+            // Wrong status.
+            else {
+                \Session::flash('flash_message_error', trans('interface.AccountNotActive'));
+            }
+            return redirect('/');
+        }
+        // Make registration new user.
+        else {
+            // Create new user in DB.
+
+            $newUser = User::create([
+                'name' => $user['first_name'] . ' ' . $user['last_name'],
+                'photo' => isset($user['photo'])  ? $user['photo'] : null,
+                'country' => isset($user['country'])  ? $user['country'] : null,
+                'email' => $user['email'],
+                'password' => Hash::make(str_random(8)),
+                'role' => User::GAMER,
+                'status' => User::REGISTERED,
+                'ip' => $request->ip(),
+                'credits' => 0,
+                'token' => str_random(20)
+            ]);
+            // Make login user.
+            Auth::loginUsingId($newUser->id, TRUE);
+            \Session::flash('flash_message', trans('interface.ActivatedSuccess'));
+            return redirect('/');
+        }
+    }
     /*
     |--------------------------------------------------------------------------
     | Login Controller
