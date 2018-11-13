@@ -17,7 +17,7 @@
         <div class="modal-content modal-content-custom" id="loginFormContent">
             <div class="modal-header text-center">
                 <script src="//ulogin.ru/js/ulogin.js"></script>
-                <div id="uLogin" data-ulogin="display=small;theme=classic;fields=first_name,last_name;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=http%3A%2F%2Fdisput.fun%2Fulogin;mobilebuttons=0;"></div>
+                <div id="uLogin" data-ulogin="display=small;theme=classic;fields=first_name,last_name,email;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=other;redirect_uri=http%3A%2F%2Fgamechainger.io%2Fulogin;mobilebuttons=0;"></div>
                 <h4 class="modal-title w-100 font-weight-bold">Вход</h4>
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></h6>
             </div>
