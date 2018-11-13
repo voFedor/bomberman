@@ -34,8 +34,12 @@ class PaymentsController extends MobileController
                 $action->sum = $request->sum;
                 $action->save();
             } else {
-                $action->sum = $action->sum + $request->sum;
-                $action->update();
+                $action = new UserAction();
+                $action->user_id = $user->id;
+                $action->game_id = null;
+                $action->action =  UserAction::PAYMENT;
+                $action->sum = $request->sum;
+                $action->save();
             }
         }
        abort(403);
