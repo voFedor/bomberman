@@ -1,6 +1,6 @@
 
 function preview(token){
-    $.getJSON("//ulogin.ru/token.php?host=http://disput.fun&token=" + token + "&callback=?",
+    $.getJSON("//ulogin.ru/token.php?host=http://gamechainger.io&token=" + token + "&callback=?",
         function(data){
 
             data=$.parseJSON(data.toString());
