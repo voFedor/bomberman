@@ -12,8 +12,10 @@
 
 <div class="modal fade" style="width: 91%;" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
      aria-hidden="true">
-    <div class="modal-dialog-custom" role="document">
-        <div class="modal-content-custom" id="loginFormContent">
+
+    <div class="modal-dialog modal-dialog-custom" role="document">
+        <div id="uLogin500d4447" data-ulogin="display=panel;fields=first_name,last_name,email,nickname,photo;optional=country;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=google,yandex,linkedin;redirect_uri=http://{{env('APP_URL')}}/ulogin;callback=preview"></div>
+        <div class="modal-content modal-content-custom" id="loginFormContent">
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Вход</h4>
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></h6>
@@ -37,7 +39,7 @@
             </div>
             </form>
         </div>
-        <div class="modal-content-custom" id="regForm" style="display: none">
+        <div class="modal-content modal-content-custom" id="regForm" style="display: none">
             <div class="modal-header text-center">
                 <h4 class="modal-title w-100 font-weight-bold">Регистрация</h4>
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutLoginForm()" href="javascript:void(0)">Вход</a></h6>
@@ -56,6 +58,7 @@
                     <button class="btn btn-default" data-dismiss="modal" aria-label="Close">cancel</button>
                 </div>
             </form>
+
         </div>
     </div>
 </div>

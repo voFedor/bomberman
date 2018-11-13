@@ -22,10 +22,6 @@
 
 <script type="text/javascript" >
 
-
-
-
-
     @if(Auth::user())
 
     function modalAuth() {
@@ -190,6 +186,5 @@
     }
 
     @endif
-
 
 </script>
