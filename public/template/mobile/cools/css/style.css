@@ -88,6 +88,11 @@ a {
 	text-decoration: none;
 	color: #171717;
 }
+z {
+	text-decoration: none;
+	color: #ffffff;
+	font-size: 20px;
+}
 
 p {
 	margin: 5px 0;
@@ -321,7 +326,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 }
 
 .side-nav-panel-right i {
-	font-size: 36px;
+	font-size: 20px;
 	padding: 5px;
 	color: #ffffff;
 	border-radius: 50%;
@@ -681,7 +686,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .slider .indicators {
 	position: relative;
 	bottom: 50px;
-	z-index: 95;
+	z-index: 5;
 }
 
 .slider .indicators .indicator-item {
@@ -747,6 +752,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 ---------------------------------*/
 .features .content {
 	text-align: center;
+	height: 160px;
 	background: #fff;
 	padding: 15px 12px;
 	border-radius: 2px;

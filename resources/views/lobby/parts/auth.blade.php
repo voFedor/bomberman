@@ -1,6 +1,6 @@
 
 @if(!Auth::check())
-    <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupForm()"><i class="fa fa-fw fa-user" ></i></a></li>
+    <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupForm()"><i class="fa fa-fw fa-user" ></i> Профиль</a></li>
 
     <input type="hidden" value="0" id="authCheck">
     <div class="hide auth" id="auth">

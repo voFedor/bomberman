@@ -14,7 +14,10 @@
                 {{ csrf_field() }}
             </form>
         @else
-            <h5>Вход через социальные сети</h5>
+            <li style="text-align: -webkit-center;margin-top: 15px;">
+            <h5>Вы не авторизированы</h5>
+            <a>войти через социальные сети</a>
+            </li>
         <li style="text-align: -webkit-center;margin-top: 15px;">
             <div id="uLogin500d4447" data-ulogin="display=panel;fields=first_name,last_name,email,nickname,photo;optional=country;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=google,yandex,linkedin;redirect_uri=http://{{env('APP_URL')}}/ulogin;callback=preview"></div>
         </li>
