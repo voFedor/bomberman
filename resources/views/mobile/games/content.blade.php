@@ -17,7 +17,6 @@
                         @if(Auth::user())
                             <div class="post" style="text-align: center">
                                 <ul id="generate_ui">
-
                                     <button id="generate_btn" onclick='return generate_code("{{$game->slug}}")' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
                                 </ul>
                                 <div id="social_btn" style="display: none">

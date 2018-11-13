@@ -681,7 +681,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 .slider .indicators {
 	position: relative;
 	bottom: 50px;
-	z-index: 95;
+	z-index: 5;
 }
 
 .slider .indicators .indicator-item {
@@ -747,6 +747,7 @@ textarea.materialize-textarea:focus:not([readonly]) {
 ---------------------------------*/
 .features .content {
 	text-align: center;
+	height: 160px;
 	background: #fff;
 	padding: 15px 12px;
 	border-radius: 2px;

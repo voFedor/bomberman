@@ -6,6 +6,6 @@
     </div>
     <!-- end site brand	 -->
     <div class="side-nav-panel-right">
-        <a href="#" data-activates="slide-out-right" class="side-nav-left"><i class="fa fa-user-secret"></i></a>
+        <a href="#" data-activates="slide-out-right" class="side-nav-left">Логин<i class="fa fa-user-secret"></i></a>
     </div>
 </div>

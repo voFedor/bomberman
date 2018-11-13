@@ -9,7 +9,7 @@
             <li>
                 <img src="template/mobile/{{env('MOBILE_THEME')}}/img/slide1.jpg" alt="">
                 <div class="caption slider-content">
-                    <h2>Надоело спорить?</h2>
+                    <h2>Победа шуршит в кармане</h2>
                     {{--<h4>можно разными методами</h4>--}}
                     {{--<button class="button-default">Read More</button>--}}
                 </div>
@@ -17,7 +17,7 @@
             <li>
                 <img src="template/mobile/{{env('MOBILE_THEME')}}/img/slide2.jpg" alt="">
                 <div class="caption slider-content">
-                    <h2>Как доказать, что ты лучший?</h2>
+                    <h2>Докажи, что ты лучший</h2>
                     {{--<h4>Lorem ipsum dolor sit amet.</h4>--}}
                     {{--<button class="button-default">Read More</button>--}}
                 </div>
@@ -58,20 +58,28 @@
             <div class="row">
                 <div class="col s6">
                     <div class="content">
-                        <img src="template/mobile/{{env('MOBILE_THEME')}}/img/duel.png" alt="">
-                        <h5>Вызови на дуэль</h5>
-                        <p>Вышли ссылку на игру и выясни, кто прав</p>
+                        <img src="template/mobile/{{env('MOBILE_THEME')}}/img/victor.png" alt="">
+                        <h5>Побеждай</h5>
+                        <p>И получай деньги за каждую победу</p>
                     </div>
                 </div>
                 <div class="col s6">
                     <div class="content">
                         <img src="template/mobile/{{env('MOBILE_THEME')}}/img/tourn.png" alt="">
-                        <h5>Участвуй в турнирах</h5>
+                        <h5>Зови друзей</h5>
                         <p>Докажи, что ты лучший</p>
                     </div>
                 </div>
             </div>
+
             <div class="row">
+                <div class="col s6">
+                    <div class="content">
+                        <img src="template/mobile/{{env('MOBILE_THEME')}}/img/game.png" alt="">
+                        <h5>Честная игра</h5>
+                        <p>Здесь нет читов и случайностей. Только ты и твой скилл</p>
+                    </div>
+                </div>
                 <div class="col s6">
                     <div class="content">
                         <img src="template/mobile/{{env('MOBILE_THEME')}}/img/bet.png" alt="">
@@ -80,13 +88,7 @@
                     </div>
                 </div>
 
-                <div class="col s6">
-                    <div class="content">
-                        <img src="template/mobile/{{env('MOBILE_THEME')}}/img/victor.png" alt="">
-                        <h5>Побеждай дважды</h5>
-                        <p>Доминируй и получай денежный выигрыш</p>
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>
