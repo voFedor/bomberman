@@ -19,9 +19,10 @@
                                 <ul id="generate_ui">
                                     <button id="generate_btn" onclick='return generate_code("{{$game->slug}}")' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
                                 </ul>
-                                <div id="social_btn" style="display: none">
+                                <div id="social_btn" style="">
                                     <script src="https://yastatic.net/share2/share.js" async="async"></script>
-                                    <div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>
+                                    {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
+                                    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,viber,whatsapp,skype,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="http://gamechainger.io?from=vk_fb" data-image="http://mob.gamechainger.io/template/mobile/cools/img/games/8Pool.jpg">  </div>
                                 </div>
                             </div>
                             @else
