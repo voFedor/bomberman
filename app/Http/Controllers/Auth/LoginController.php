@@ -10,6 +10,7 @@ use Validator;
 use Socialite;
 use Auth;
 use Hash;
+use Storage;
 use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
@@ -20,34 +21,57 @@ class LoginController extends Controller
 
     public function ulogin(Request $request)
     {
-        // Get information about user.
-        $data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['token'] . '&host=' . $_SERVER['HTTP_HOST']);
-        $user = json_decode($data, TRUE);
-        $network = $user['network'];
+        //dd($request->all());
+		var_dump($request->email);
+        $data = $request->all();
+        //file_put_contents('asdasdasdasd', '<?php $arr = ' . var_export($request, true) . ';');
+        //Storage::put('file.txt', '<?php $arr = ' . var_export($request, true) . ';');
+        //$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
+        $user = json_decode($request, TRUE);
+		
+		
+		 //Storage::put('file.txt', '<?php $arr = ' . var_export($data, true) . ';');
+        //Storage::put('file2.txt', '<?php $arr = ' . var_export($user, true) . ';');
+		
+		
+		//$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
+        //$user = json_decode($data, TRUE);
+
+        //$network = $data['network'];
+
         // Find user in DB.
         $userData = User::where('email', $user['email'])->first();
+
         // Check exist user.
         if (isset($userData->id)) {
+
             // Check user status.
-            if ($userData->status) {
+            if ($userData) {
+
                 // Make login user.
                 Auth::loginUsingId($userData->id, TRUE);
             }
             // Wrong status.
             else {
-                \Session::flash('flash_message_error', trans('interface.AccountNotActive'));
+                Session::flash('flash_message_error', trans('interface.AccountNotActive'));
             }
-            return redirect('/');
+
+            return response()->json(['message' => "Спасибо за регистрацию", 'result' => 'success']);
         }
         // Make registration new user.
         else {
+            $parts = explode("@", $request->email);
+            $email = $parts[0];
             // Create new user in DB.
-
             $newUser = User::create([
-                'name' => $user['first_name'] . ' ' . $user['last_name'],
-                'photo' => isset($user['photo'])  ? $user['photo'] : null,
-                'country' => isset($user['country'])  ? $user['country'] : null,
-                'email' => $user['email'],
+                'last_name' => $request->last_name,
+                'first_name' => $request->first_name,
+                'nickname' => $request->nickname,
+                'network' => $request->network,
+                'profile' => $request->profile,
+                'name' => $email,
+                'photo' => $request->photo,
+                'email' => $request->email,
                 'password' => Hash::make(str_random(8)),
                 'role' => User::GAMER,
                 'status' => User::REGISTERED,
@@ -55,10 +79,13 @@ class LoginController extends Controller
                 'credits' => 0,
                 'token' => str_random(20)
             ]);
+
             // Make login user.
             Auth::loginUsingId($newUser->id, TRUE);
-            \Session::flash('flash_message', trans('interface.ActivatedSuccess'));
-            return redirect('/');
+
+            Session::flash('flash_message', trans('interface.ActivatedSuccess'));
+
+            return response()->json(['message' => "Спасибо за регистрацию", 'result' => 'success']);
         }
     }
     /*
