@@ -142,33 +142,30 @@
     @else
 
      function openModalAuth() {
-        $('#loginForm').modal();
+        $('#get_side_bar').click();
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
 
     }
     function checkBalance() {
-        $('#loginForm').modal('show');
+
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000})
         return;
     }
 
     function checkBet(id) {
-        $('#loginForm').modal('show');
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000})
         return;
     }
     function invaiteFriend() {
-        $('#loginForm').modal('show');
-
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000})
         return;
     }
     function getInvitation() {
-        $('#loginForm').modal('show');
+
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000})
         return;
@@ -187,4 +184,49 @@
 
     @endif
 
+</script>
+<script>
+    function preview(token){
+        $.getJSON("//ulogin.ru/token.php?host=" + encodeURIComponent(location.toString()) + "&token=" + token + "&callback=?", function(data){
+            data = $.parseJSON(data.toString());
+            if(!data.error){
+                alert("Привет, "+data.first_name+" "+data.last_name+"!");
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $.ajax({
+                    url: '/ulogin',
+                    type: "POST",
+                    data: {
+                        data: data,
+                        id: id,
+                        _token: '{{csrf_token()}}'},
+                    success: function (data) {
+                        console.log(data);
+                        if (data['result'] != "success")  {
+                            toastr.clear();
+                            toastr.error("", 'Пополните счет!', {timeOut: 3000})
+                            return false;
+                        } else {
+                            toastr.clear();
+                            toastr.success("Приятной игры", '', {timeOut: 3000})
+                            return false;
+                        }
+                    },
+                    error: function (xhr, str) {
+                        return 0;
+                    },
+                    beforeSend : function (){
+                        toastr.clear();
+                        toastr.info('Запрос обрабатывается', '', {timeOut: 3000});
+                    }
+                });
+            }
+
+
+        });
+    }
 </script>

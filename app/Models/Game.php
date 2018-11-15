@@ -32,7 +32,7 @@ class Game extends Model
      */
     public function getLogo()
     {
-        return '/games/' . $this->logo;
+        return 'games/' . $this->logo;
     }
 
     /**

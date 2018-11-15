@@ -22,12 +22,12 @@ class LoginController extends Controller
     public function ulogin(Request $request)
     {
         //dd($request->all());
-		var_dump($request->email);
-        $data = $request->all();
+		//print_r($request->email);
+
         //file_put_contents('asdasdasdasd', '<?php $arr = ' . var_export($request, true) . ';');
         //Storage::put('file.txt', '<?php $arr = ' . var_export($request, true) . ';');
         //$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
-        $user = json_decode($request, TRUE);
+        //$user = json_decode($request, TRUE);
 		
 		
 		 //Storage::put('file.txt', '<?php $arr = ' . var_export($data, true) . ';');
@@ -40,7 +40,11 @@ class LoginController extends Controller
         //$network = $data['network'];
 
         // Find user in DB.
-        $userData = User::where('email', $user['email'])->first();
+        $data = $request->all();
+
+
+        $token = isset($data['email']) && $data['email'] != null ? $data['email'] : "";
+        $userData = User::where('token', $token)->first();
 
         // Check exist user.
         if (isset($userData->id)) {
@@ -60,25 +64,33 @@ class LoginController extends Controller
         }
         // Make registration new user.
         else {
-            $parts = explode("@", $request->email);
+            //  $parts = explode("@", $request->email);
             $email = $parts[0];
             // Create new user in DB.
-            $newUser = User::create([
-                'last_name' => $request->last_name,
-                'first_name' => $request->first_name,
-                'nickname' => $request->nickname,
-                'network' => $request->network,
-                'profile' => $request->profile,
-                'name' => $email,
-                'photo' => $request->photo,
-                'email' => $request->email,
-                'password' => Hash::make(str_random(8)),
-                'role' => User::GAMER,
-                'status' => User::REGISTERED,
-                'ip' => $request->ip(),
-                'credits' => 0,
-                'token' => str_random(20)
-            ]);
+            $newUserFill = new User();
+            $newUserFill->fill($data);
+            $newUserFill->name = $email;
+            $newUserFill->password = Hash::make(str_random(8));
+            $newUserFill->role = $data->role;
+
+            $newUserFill->save();
+
+//            $newUser = User::create([
+//                'last_name' => $request->last_name,
+//                'first_name' => $request->first_name,
+//                'nickname' => $request->nickname,
+//                'network' => $request->network,
+//                'profile' => $request->profile,
+//                'name' => $email,
+//                'photo' => $request->photo,
+//                'email' => $request->email,
+//                'password' => Hash::make(str_random(8)),
+//                'role' => User::GAMER,
+//                'status' => User::REGISTERED,
+//                'ip' => $request->ip(),
+//                'credits' => 0,
+//                'token' => str_random(20)
+//            ]);
 
             // Make login user.
             Auth::loginUsingId($newUser->id, TRUE);
