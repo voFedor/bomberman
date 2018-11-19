@@ -10,7 +10,7 @@
 
 
 
-<div class="modal fade" style="width: 91%;" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+<div class="modal fade" style="width: 91%;" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="loginForm"
      aria-hidden="true">
     {{--<div id="uLogin500d4447" data-ulogin="display=panel;fields=first_name,last_name,email,nickname,photo;optional=country;providers=vkontakte,odnoklassniki,mailru,facebook;hidden=google,yandex,linkedin;redirect_uri=http://{{env('APP_URL')}}/ulogin;callback=preview"></div>--}}
     <div class="modal-dialog modal-dialog-custom" role="document">

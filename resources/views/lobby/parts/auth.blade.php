@@ -6,10 +6,8 @@
     <div class="hide auth" id="auth">
         <div class="centered-page" id="result">
         </div>
-        <div style="text-align: center;margin-top:15px">
-            <a class="btn btn-social-icon btn-twitter" href="/socialAuth/vkontakte">
-                vkontakte
-            </a>
+        <div style="text-align: center;">
+           <div id="uLogin_500d4447" data-uloginid="500d4447"></div>
         </div>
         <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
             <span id="error_login" style="color: red;font-size: 16px;"></span>

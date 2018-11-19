@@ -21,6 +21,11 @@
 
 
 <script type="text/javascript" >
+    
+    
+    function openAuthModal() {
+        $('#loginForm').modal('show');
+    }
 
     @if(Auth::user())
 

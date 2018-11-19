@@ -7,7 +7,11 @@
     </div>
     <!-- end site brand	 -->
     <div class="side-nav-panel-right">
-        <z href="#" data-activates="slide-out-right" class="side-nav-left"><i class="fa fa-user"></i>профиль</z>
+        @if(Auth::user())
+            <z href="#" data-activates="slide-out-right" class="side-nav-left"><i class="fa fa-user"></i>профиль</z>
+        @else
+            <z onclick="return openAuthModal()" href="#" class="side-nav-left"><i class="fa fa-user"></i>Вход</z>
+        @endif
        <p></p>
     </div>
 </div>

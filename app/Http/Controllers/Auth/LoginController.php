@@ -12,6 +12,7 @@ use Auth;
 use Hash;
 use Storage;
 use App\Models\User;
+use App\Models\Role;
 use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
@@ -42,15 +43,14 @@ class LoginController extends Controller
         $data = $request->all();
 
 
-        $token = isset($data['email']) && $data['email'] != null ? $data['email'] : "";
-        $userData = User::where('token', $token)->first();
+        $email = isset($data['email']) && $data['email'] != null ? $data['email'] : null;
+        $userData = User::where('token', $email)->first();
 
         // Check exist user.
         if (isset($userData->id)) {
 
             // Check user status.
             if ($userData) {
-
                 // Make login user.
                 Auth::loginUsingId($userData->id, TRUE);
             }
@@ -70,7 +70,7 @@ class LoginController extends Controller
             $newUserFill->fill($data);
             $newUserFill->name = $email;
             $newUserFill->password = Hash::make(str_random(8));
-            $newUserFill->role = $data->role;
+            $newUserFill->role = Role::GAMER;
 
             $newUserFill->save();
 

@@ -40,7 +40,6 @@ class LobbyController extends Controller
      */
     public function getGames()
     {
-
         return view('lobby.games');
     }
 
