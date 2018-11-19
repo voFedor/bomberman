@@ -373,5 +373,10 @@ class LoginController extends Controller
         Auth::logout();
         return redirect()->to('/');
     }
-    
+
+
+    public function networkAuth($network)
+    {
+        return Socialite::with('vkontakte')->redirect();
+    }
 }
