@@ -33,32 +33,23 @@ class LobbyController extends Controller
 
         $games = Game::all();
 
-        $user = \Auth::user();
-        if ($user != null)
-        {
-            $encodedChatId = '42bgw';
-            $siteDomain = 'gamechainger.io';
-            $siteUserExternalId = $user->id;
-            $siteUserFullName = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
-            $secretKey = env("CHAT_KEY");
-
-            $signatureDataParts = $siteDomain.$siteUserExternalId.$siteUserFullName.$secretKey;
-            $hash = md5($signatureDataParts);
-            $name = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
-        } else {
-            $hash = null;
-            $name = null;
-        }
-
-        $agent = new Agent();
-        if ($agent->isMobile() || $agent->isTablet())
-        {
-            return view('mobile.home.content', compact('games', 'hash', 'name'));
-        } else {
-            return view('lobby.index', compact('games', 'hash', 'name'));
-        }
-
-
+//        $user = \Auth::user();
+//        if ($user != null)
+//        {
+//            $encodedChatId = '42bgw';
+//            $siteDomain = 'gamechainger.io';
+//            $siteUserExternalId = $user->id;
+//            $siteUserFullName = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
+//            $secretKey = env("CHAT_KEY");
+//
+//            $signatureDataParts = $siteDomain.$siteUserExternalId.$siteUserFullName.$secretKey;
+//            $hash = md5($signatureDataParts);
+//            $name = substr(Auth::user()->email, 0, strrpos(Auth::user()->email, '@'));
+//        } else {
+//            $hash = null;
+//            $name = null;
+//        }
+        return view('lobby.index', compact('games'));
     }
     /**
      * Show the application dashboard.
