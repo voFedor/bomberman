@@ -23,10 +23,10 @@
             <div class="youplay-input">
                 <input type="password" name="pwd">
             </div>
-            <div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">
-                <input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">
-                <label for="rememberme-lwa-1">Запомнить меня</label>
-            </div>
+            {{--<div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">--}}
+                {{--<input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">--}}
+                {{--<label for="rememberme-lwa-1">Запомнить меня</label>--}}
+            {{--</div>--}}
             <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp-submit-1"
                     tabindex="100" type="button" onclick="return login()">
                 Войти

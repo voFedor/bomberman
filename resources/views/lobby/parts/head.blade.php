@@ -27,22 +27,6 @@
 <link rel="shortcut icon" href="/{{ env('THEME') }}/images/ico/favicon.ico">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
 
-@if(Auth::user() != null && Request::is('/'))
-    <script id="chatBroEmbedCode">
-        /* Chatbro Widget Embed Code Start */
-        function ChatbroLoader(chats,async){async=!1!==async;var params={embedChatsParameters:chats instanceof Array?chats:[chats],lang:navigator.language||navigator.userLanguage,needLoadCode:'undefined'==typeof Chatbro,embedParamsVersion:localStorage.embedParamsVersion,chatbroScriptVersion:localStorage.chatbroScriptVersion},xhr=new XMLHttpRequest;xhr.withCredentials=!0,xhr.onload=function(){eval(xhr.responseText)},xhr.onerror=function(){console.error('Chatbro loading error')},xhr.open('GET','//www.chatbro.com/embed.js?'+btoa(unescape(encodeURIComponent(JSON.stringify(params)))),async),xhr.send()}
-        /* Chatbro Widget Embed Code End */
-        ChatbroLoader({
-
-            encodedChatId: '42bgw',
-            siteDomain: 'gamechainger.io',
-            siteUserExternalId: "{{Auth::user()->id}}",
-            siteUserFullName: "{{$name}}",
-            signature: "{{$hash}}"
-        });
-    </script>
-
-@endif
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >

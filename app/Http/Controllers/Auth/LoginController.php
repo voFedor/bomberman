@@ -132,20 +132,20 @@ class LoginController extends Controller
     /**
      * @return \Illuminate\Http\JsonResponse
      */
-    public function anyForm()
+    public function anyForm(Request $request)
     {
-        switch (Request::input('login-with-ajax')){
+        switch ($request->input('login-with-ajax')){
             case 'login':
-                return $this->login();
+                return $this->login($request);
             case 'remember':
-                return $this->remember();
+                return $this->remember($request);
             case 'register':
-                return $this->register();
+                return $this->register($request);
             default:
                 return response()->json([
                     'result' => 'error',
                     'message' => 'Пользователь с таким email не найден',
-                    'action' => Request::input('login-with-ajax')
+                    'action' => $request->input('login-with-ajax')
                 ]);
         }
     }
@@ -162,9 +162,9 @@ class LoginController extends Controller
     /**
      * @return array
      */
-    public function register()
+    public function register(Request $request)
     {
-        $validator = Validator::make(Request::all(), [
+        $validator = Validator::make($request->all(), [
             self::$fields['register']['email'] => 'required|email|max:255|unique:users,email',
         ]);
 
@@ -186,17 +186,17 @@ class LoginController extends Controller
                 return [
                     'result' => 'error',
                     'message' => $errorMessage,
-                    'action' => Request::input('login-with-ajax')
+                    'action' => $request->input('login-with-ajax')
                 ];
             }
         }
 
-        $partOfEmail = explode("@", Request::input(self::$fields['register']['email']));
+        $partOfEmail = explode("@", $request->input(self::$fields['register']['email']));
         $username = $partOfEmail[0];
 
         $password = str_random(5);
         $user = User::create([
-            'email' => Request::input(self::$fields['register']['email']),
+            'email' => $request->input(self::$fields['register']['email']),
             'name' => $username,
             'credits' => 0,
             'password' => bcrypt($password),
@@ -205,7 +205,7 @@ class LoginController extends Controller
         ]);
 
         if($user){
-            $email = Request::input(self::$fields['register']['email']);
+            $email = $request->input(self::$fields['register']['email']);
 
             Mail::send('emails.register', [
                 'login' => $email,
@@ -218,13 +218,13 @@ class LoginController extends Controller
             return [
                 'result' => 'success',
                 'message' => 'Пароль выслан вам на почту',
-                'action' => Request::input('login-with-ajax')
+                'action' => $request->input('login-with-ajax')
             ];
         }else{
             return [
                 'message' => '<strong>ERROR</strong>' . ' user not saved',
                 'result' => 'error',
-                'action' => Request::input('login-with-ajax')
+                'action' => $request->input('login-with-ajax')
             ];
         }
 
@@ -233,9 +233,9 @@ class LoginController extends Controller
     /**
      * @return array
      */
-    public function remember()
+    public function remember(Request $request)
     {
-        $validator = Validator::make(Request::all(), [
+        $validator = Validator::make($request->all(), [
             self::$fields['remember']['email'] => 'required|email|max:255',
         ]);
 
@@ -257,51 +257,44 @@ class LoginController extends Controller
                 return [
                     'result' => 'error',
                     'message' => $errorMessage,
-                    'action' => Request::input('login-with-ajax')
+                    'action' => $request->input('login-with-ajax')
                 ];
             }
         }
 
-        $user = User::where('email', Request::input(self::$fields['remember']['email']))->get()->first();
+        $user = User::where('email', $request->input(self::$fields['remember']['email']))->get()->first();
         if ($user) {
             $password = str_random(10);
             $user->update([
                 'password' => bcrypt($password)
             ]);
 
-            $email = Request::input(self::$fields['remember']['email']);
+            $email = $request->input(self::$fields['remember']['email']);
             Mail::send('emails.forgot', ['password' => $password], function ($message) use ($email) {
                 $message->to($email, 'Восстановление пароля')->subject('Восстановление пароля')->from(env('MAIL_SENDER'));
-            });
-
-            Mail::send('emails.register', [
-                'login' => $email,
-                'password' => $password
-            ], function ($message) use ($email) {
-                $message->to($email, 'Успешная регистрация')->subject('Успешная регистрация')->from(env('MAIL_SENDER'));
             });
 
 
             return [
                 'result' => 'success',
                 'message' => 'Пароль отправлен вам на почту',
-                'action' => Request::input('login-with-ajax')
+                'action' => $request->input('login-with-ajax')
             ];
         }
 
         return [
             'message' => '<strong>ERROR</strong>User not found',
             'result' => 'error',
-            'action' => Request::input('login-with-ajax')
+            'action' => $request->input('login-with-ajax')
         ];
     }
 
     /**
      * @return array
      */
-    public function login()
+    public function login(Request $request)
     {
-        $validator = Validator::make(Request::all(), [
+        $validator = Validator::make($request->all(), [
             self::$fields['login']['email'] => 'required|email|max:255',
             self::$fields['login']['password'] => 'required',
         ]);
@@ -324,7 +317,7 @@ class LoginController extends Controller
             return [
                 'result' => 'error',
                 'message' => $errorMessage,
-                'action' => Request::input('login-with-ajax')
+                'action' => $request->input('login-with-ajax')
             ];
         }
 
@@ -332,16 +325,16 @@ class LoginController extends Controller
         /**
          * @var User $user
          */
-        $user = User::where('email', Request::input(self::$fields['login']['email']))->get()->first();
+        $user = User::where('email', $request->input(self::$fields['login']['email']))->get()->first();
 
-        if ($user && Hash::check(Request::input(self::$fields['login']['password']), $user->password)) {
+        if ($user && Hash::check($request->input(self::$fields['login']['password']), $user->password)) {
             Auth::loginUsingId($user->id);
 
             return [
                 'result' => 'success',
                 'email' => $user->email,
                 'credits' => $user->credits,
-                'action' => Request::input('login-with-ajax')
+                'action' => $request->input('login-with-ajax')
             ];
 
         }
@@ -349,7 +342,7 @@ class LoginController extends Controller
         return [
             'message' => 'Not correct login or password',
             'result' => 'error',
-            'action' => Request::input('login-with-ajax')
+            'action' => $request->input('login-with-ajax')
         ];
     }
 
