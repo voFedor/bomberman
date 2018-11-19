@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     @include('lobby.parts.head')
-    
+
 </head>
 <body>
 

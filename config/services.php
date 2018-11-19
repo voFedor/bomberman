@@ -35,6 +35,15 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    
+    'facebook' => [
+        'client_id' => env('FACEBOOK_CLIENT_ID'),         // Your GitHub Client ID
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'), // Your GitHub Client Secret
+        'redirect' => env('APP_URL').'/'.env('SOCIAL_REDIRECT_URI'),
+    ],
+    'vkontakte' => [
+        'client_id' => env('VKONTAKTE_KEY'),
+        'client_secret' => env('VKONTAKTE_SECRET'),
+        'redirect' => env('SOCIAL_REDIRECT_URI')
+    ],
 
 ];

@@ -21,17 +21,16 @@ class LoginController extends Controller
 
     public function ulogin(Request $request)
     {
-        //dd($request->all());
+        $data = $request->all();
 		//print_r($request->email);
 
         //file_put_contents('asdasdasdasd', '<?php $arr = ' . var_export($request, true) . ';');
-        //Storage::put('file.txt', '<?php $arr = ' . var_export($request, true) . ';');
+        Storage::put('file1.txt', '<?php $arr = ' . var_export($request, true) . ';');
         //$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
         //$user = json_decode($request, TRUE);
 		
 		
-		 //Storage::put('file.txt', '<?php $arr = ' . var_export($data, true) . ';');
-        //Storage::put('file2.txt', '<?php $arr = ' . var_export($user, true) . ';');
+		 Storage::put('file.txt', '<?php $arr = ' . var_export($data, true) . ';');
 		
 		
 		//$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);

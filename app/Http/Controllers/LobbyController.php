@@ -30,6 +30,7 @@ class LobbyController extends Controller
      */
     public function getIndex()
     {
+
         $games = Game::all();
 
         $user = \Auth::user();

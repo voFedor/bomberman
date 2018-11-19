@@ -25,6 +25,8 @@ Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
 
 Route::post('/ulogin', 'Auth\LoginController@ulogin');
+Route::get('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
+Route::post('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');

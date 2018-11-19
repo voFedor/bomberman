@@ -200,6 +200,7 @@ return [
         \App\Providers\LogProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
+        \SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
     /*
