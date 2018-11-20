@@ -1,4 +1,5 @@
 function openPopupForm() {
+
             $('#auth-link').popover({
                 placement: 'bottom',
                 title: 'Вход на сайт',
@@ -9,15 +10,15 @@ function openPopupForm() {
 
 
 function openPopupInfo() {
-    $("#mySidenav").css("display","block");
-    openNav();
-    $('#auth-link').popover({
-        placement: 'bottom',
-        title: 'Информация',
-        html: true,
-        content: $('#info').html()
-    });
 
+    //
+    // $('#auth-link').popover({
+    //     placement: 'bottom',
+    //     title: 'Информация',
+    //     html: true,
+    //     content: $('#info').html()
+    // });
+    openNav();
 }
 
 function openNav(){
@@ -88,6 +89,6 @@ function showErrorReg(error){
 
 
 
-$(document).ready(function() {
-    document.getElementById('auth-link').click();
-});
+// $(document).ready(function() {
+//     document.getElementById('auth-link').click();
+// });

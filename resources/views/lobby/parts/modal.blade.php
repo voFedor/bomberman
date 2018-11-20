@@ -113,7 +113,7 @@
         position: fixed;
         z-index: 1;
         top: 0;
-        left: 0;
+        right: 0;
         background-color: #111;
         overflow-x: hidden;
         transition: 0.5s;
@@ -136,9 +136,9 @@
     .sidenav .closebtn {
         position: absolute;
         top: 0;
-        right: 25px;
+        left: 25px;
         font-size: 36px;
-        margin-left: 50px;
+        margin-right: 50px;
     }
 
     @media screen and (max-height: 450px) {
