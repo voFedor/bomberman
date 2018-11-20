@@ -9,16 +9,25 @@ function openPopupForm() {
 
 
 function openPopupInfo() {
-
+    $("#mySidenav").css("display","block");
+    openNav();
     $('#auth-link').popover({
         placement: 'bottom',
         title: 'Информация',
         html: true,
         content: $('#info').html()
     });
+
 }
 
+function openNav(){
 
+    document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+}
 
 function openRegForm() {
     $('#auth-form').hide();
