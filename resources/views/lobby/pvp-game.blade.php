@@ -178,8 +178,6 @@
             </ul>
         </div>
     </div>
-    </div>
-    </div>
     <!-- Contact section edn -->
 
 @endsection

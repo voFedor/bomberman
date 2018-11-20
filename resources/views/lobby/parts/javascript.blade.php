@@ -71,6 +71,52 @@
 
 
 
+    function checkBalance(id) {
+        if ("{{Auth::user()}}" == "")
+        {
+            openPopupForm();
+            toastr.clear();
+            toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
+            return;
+        }
+
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/check-balance',
+            type: "POST",
+            data: {
+                id: id,
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+                if (data['result'] < 100)  {
+                    toastr.clear();
+                    toastr.error("", 'Пополните счет!', {timeOut: 3000})
+                    return false;
+                } else {
+                    toastr.clear();
+                    toastr.success("Приятной игры", '', {timeOut: 3000})
+                    return false;
+                }
+            },
+            error: function (xhr, str) {
+                return 0;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', '', {timeOut: 3000});
+            }
+        });
+    }
+
+
+
+
     (function($){
         $.getQuery = function( query ) {
             query = query.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
@@ -146,42 +192,44 @@
 
 
 
-    function checkBalance() {
+    {{--function checkBalance() {--}}
 
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $.ajax({
-            url: '/check-balance',
-            type: "POST",
-            data: {
-                _token: '{{csrf_token()}}'},
-            success: function (data) {
-                if (data['result'] == 'error')  {
-                    toastr.clear();
-                    toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})
-                    return false;
-                }
-                if (data['result'] == 'success') {
-                    toastr.clear();
-                    toastr.success(data['message'], 'Отлично!', {timeOut: 3000})
-                    return true;
-                }
+        {{--$.ajaxSetup({--}}
+            {{--headers: {--}}
+                {{--'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
+            {{--}--}}
+        {{--});--}}
+        {{--$.ajax({--}}
+            {{--url: '/check-balance',--}}
+            {{--type: "POST",--}}
+            {{--data: {--}}
+                {{--_token: '{{csrf_token()}}'},--}}
+            {{--success: function (data) {--}}
+                {{--if (data['result'] == 'error')  {--}}
+                    {{--toastr.clear();--}}
+                    {{--toastr.error(data['message'], 'Ошибка!', {timeOut: 3000})--}}
+                    {{--return false;--}}
+                {{--}--}}
+                {{--if (data['result'] == 'success') {--}}
+                    {{--toastr.clear();--}}
+                    {{--toastr.success(data['message'], 'Отлично!', {timeOut: 3000})--}}
+                    {{--return true;--}}
+                {{--}--}}
 
-            },
-            error: function (xhr, str) {
-                return 0;
-            },
-            beforeSend : function (){
-                toastr.clear();
-                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
-            }
-        });
-    }
+            {{--},--}}
+            {{--error: function (xhr, str) {--}}
+                {{--return 0;--}}
+            {{--},--}}
+            {{--beforeSend : function (){--}}
+                {{--toastr.clear();--}}
+                {{--toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});--}}
+            {{--}--}}
+        {{--});--}}
+    {{--}--}}
 
     @if(Auth::user() != null)
+
+
 
     function getDuel(game_id) {
     
@@ -310,6 +358,13 @@
 
 @if(Auth::user() != null)
 
+function openModalAuth() {
+    openPopupForm();
+    toastr.clear();
+    toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
+}
+
+
     function pickBet(id, url, bet) {
     if ({{Auth::user()->credits}} < bet)
     {
@@ -332,6 +387,12 @@
 
     @endif
 
+
+    function openModalAuth() {
+        openPopupForm();
+        toastr.clear();
+        toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
+    }
 
 
 

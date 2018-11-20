@@ -19,7 +19,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use RuntimeException;
 use App\Models\Tournament;
 use Jenssegers\Agent\Agent;
-use App\MobileModels\UserAction;
+use App\Models\UserAction;
 
 class LobbyController extends Controller
 {
@@ -55,7 +55,7 @@ class LobbyController extends Controller
         $game = Game::where('slug', $slug)->first();
         $user = Auth::user();
         if ($user) {
-            $action = UserAction::where(['user_id' => $user->id, 'game_id' => $game->id, 'action' => UserAction::VIEW])->first();
+            $action = UserAction::where(['user_id' => $user->id, 'game_id' => $game->id, 'action' => UserAction::VIEW ])->first();
             if ($action == null) {
                 $action = new UserAction();
                 $action->user_id = $user->id;
@@ -69,12 +69,7 @@ class LobbyController extends Controller
             }
         }
         $games = Game::all();
-        $agent = new Agent();
-        if ($agent->isMobile() || $agent->isTablet()) {
-            return view('mobile.games.content', compact('game', 'games'));
-        } else {
-            return redirect('/');
-        }
+        return view('lobby.game', compact('game', 'games'));
     }
 
 

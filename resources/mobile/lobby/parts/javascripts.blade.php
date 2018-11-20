@@ -150,7 +150,6 @@
         $('#get_side_bar').click();
         toastr.clear();
         toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
-
     }
     function checkBalance() {
 
