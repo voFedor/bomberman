@@ -122,6 +122,9 @@
         <div class="triangle"></div>
         <div class="container centered">
             <p class="large-text">Зарегистрируйся в 1 клик!</p>
+            <a class="btn btn-block btn-social btn-vk" style="padding: 0 1.1rem;" href="/login/vk">
+                <span class="fa fa-vk"></span>
+            </a>
             <form action="/register" method="post" class="" id="callToAction-form" onkeypress="return event.keyCode != 13;">
                 {{ csrf_field() }}
                 <div class="form-group">

@@ -22,82 +22,29 @@ class LoginController extends Controller
 
     public function ulogin(Request $request)
     {
-        $data = $request->all();
-		//print_r($request->email);
+        $userVk = Socialite::driver('vkontakte')->user();
+        //Storage::put('file.txt', '<?php $arr = ' . var_export($user, true) . ';');
+        $email = $userVk->accessTokenResponseBody['email'];
 
-        //file_put_contents('asdasdasdasd', '<?php $arr = ' . var_export($request, true) . ';');
-        Storage::put('file1.txt', '<?php $arr = ' . var_export($request, true) . ';');
-        //$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
-        //$user = json_decode($request, TRUE);
-		
-		
-		 Storage::put('file.txt', '<?php $arr = ' . var_export($data, true) . ';');
-		
-		
-		//$data = file_get_contents('http://ulogin.ru/token.php?token=' . $_POST['_token'] . '&host=' . $_SERVER['HTTP_HOST']);
-        //$user = json_decode($data, TRUE);
-
-        //$network = $data['network'];
-
-        // Find user in DB.
-        $data = $request->all();
-
-
-        $email = isset($data['email']) && $data['email'] != null ? $data['email'] : null;
-        $userData = User::where('token', $email)->first();
-
-        // Check exist user.
-        if (isset($userData->id)) {
-
-            // Check user status.
-            if ($userData) {
-                // Make login user.
-                Auth::loginUsingId($userData->id, TRUE);
-            }
-            // Wrong status.
-            else {
-                Session::flash('flash_message_error', trans('interface.AccountNotActive'));
-            }
-
-            return response()->json(['message' => "Спасибо за регистрацию", 'result' => 'success']);
+        $existUser = User::where('email', $email)->first();
+        if ($existUser != null)
+        {
+            Auth::loginUsingId($existUser->id, TRUE);
+        } else {
+            $newUser = new User();
+            $newUser->uid = $userVk->user['id'];
+            $newUser->first_name = $userVk->user['first_name'];
+            $newUser->last_name = $userVk->user['last_name'];
+            $newUser->photo = $userVk->user['photo'];
+            $newUser->network = "vk";
+            $newUser->email = $email;
+            $newUser->password = Hash::make(str_random(8));
+            $newUser->role = 2;
+            $newUser->save();
         }
-        // Make registration new user.
-        else {
-            //  $parts = explode("@", $request->email);
-            $email = $parts[0];
-            // Create new user in DB.
-            $newUserFill = new User();
-            $newUserFill->fill($data);
-            $newUserFill->name = $email;
-            $newUserFill->password = Hash::make(str_random(8));
-            $newUserFill->role = Role::GAMER;
 
-            $newUserFill->save();
+        return redirect('/');
 
-//            $newUser = User::create([
-//                'last_name' => $request->last_name,
-//                'first_name' => $request->first_name,
-//                'nickname' => $request->nickname,
-//                'network' => $request->network,
-//                'profile' => $request->profile,
-//                'name' => $email,
-//                'photo' => $request->photo,
-//                'email' => $request->email,
-//                'password' => Hash::make(str_random(8)),
-//                'role' => User::GAMER,
-//                'status' => User::REGISTERED,
-//                'ip' => $request->ip(),
-//                'credits' => 0,
-//                'token' => str_random(20)
-//            ]);
-
-            // Make login user.
-            Auth::loginUsingId($newUser->id, TRUE);
-
-            Session::flash('flash_message', trans('interface.ActivatedSuccess'));
-
-            return response()->json(['message' => "Спасибо за регистрацию", 'result' => 'success']);
-        }
     }
     /*
     |--------------------------------------------------------------------------
