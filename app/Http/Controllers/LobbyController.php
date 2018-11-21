@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\GameSession;
 use App\Models\GameSessionUser;
+use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Auth;
@@ -99,6 +100,27 @@ class LobbyController extends Controller
         }
     }
 
+
+    public function profileSave(Request $request)
+    {
+        if ($request->email == null || $request->email == "")
+        {
+            return back()->with('error', 'Поле email не может быть пустым');
+        }
+
+        $user = User::find($request->id);
+        $user->fill($request->all());
+        $user->update();
+        return back()->with('success', 'Данные сохранены');
+    }
+
+
+
+    public function profile()
+    {
+        $games = Game::all();
+        return view('lobby.profile', compact('games'));
+    }
 
 
     public function gameHistory()

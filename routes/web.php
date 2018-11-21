@@ -7,6 +7,8 @@ Route::get('/history', 'LobbyController@gameHistory');
 Route::get('/game/{slug}', 'LobbyController@getGame');
 Route::get('/invitation', 'LobbyController@invitation');
 
+Route::get('/profile', 'LobbyController@profile');
+Route::post('/profile/save', 'LobbyController@profileSave');
 
 Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
 Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback');

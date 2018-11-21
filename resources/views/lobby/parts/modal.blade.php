@@ -148,10 +148,15 @@
 </style>
 
 
-<div id="mySidenav" class="sidenav" style="width: 0;">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Clients</a>
-    <a href="#">Contact</a>
+<div id="mySidenav" class="sidenav" style="width: 0;z-index: 999;">
+    <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;
+    @if(Auth::user())
+        <a href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
+                    style="text-transform: none;"> рэ</span></a>
+    <a href="/history">История побед</a>
+    <a href="/payments">Баланс</a>
+    <a href="/profile">Профиль</a>
+    <a id="wp-logout"
+       href="{{ route('auth.logout') }}">Выйти
+        @endif
 </div>

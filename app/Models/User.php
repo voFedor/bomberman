@@ -28,7 +28,10 @@ class User extends Authenticatable
         'credits',
         'password',
         'remember_token',
-        'role_id'
+        'role_id',
+        'first_name',
+        'last_name',
+        'country'
     ];
 
     protected $hidden = ['password', 'remember_token'];
