@@ -37,11 +37,11 @@ class ServiceController extends Controller
     {
         $data_val = $request->all();
         $data_val['email'] = \Auth::user()->email;
-        \Mail::send('lobby.email.cashOut', $data_val, function ($message) use ($data_val) {
-            $message->to(env('EMAIL'));
-            $message->from(env('EMAIL_SENDER'), 'Gamechainger');
-            $message->subject('Новое сообщение с сайта - вывод средств');
-        });
+//        \Mail::send('lobby.email.cashOut', $data_val, function ($message) use ($data_val) {
+//            $message->to(env('EMAIL'));
+//            $message->from(env('EMAIL_SENDER'), 'Gamechainger');
+//            $message->subject('Новое сообщение с сайта - вывод средств');
+//        });
 
         return response()->json(['message' => "Сообщение отправлено", 'result' => 'success']);
     }

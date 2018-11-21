@@ -25,26 +25,7 @@ class PaymentsController extends Controller
     {
         $games = Game::all();
         $payment_history = PaymentHistory::where(['user_id' => Auth::user()->id ])->get();
-
-//        do {
-//            $code = \Uuid::generate()->string;
-//        } while (PaymentHistory::where(['token' => $code, 'user_id' => Auth::user()->id])->where('status', 0)->first() != null);
-//
-//
-//
-////        $payment = new PaymentHistory();
-////        $payment->token = $code;
-////        $payment->user_id = Auth::user()->id;
-////        $payment->status = 0;
-////        $payment->save();
-
-        $agent = new Agent();
-        if ($agent->isMobile() || $agent->isTablet()) {
-            $games = Game::all();
-            return view('mobile.payment.content', compact('games'));
-        } else {
-            return view('lobby.payment', compact('games', 'payment_history'));
-        }
+        return view('lobby.payment', compact('games', 'payment_history'));
     }
 
 

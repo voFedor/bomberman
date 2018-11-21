@@ -103,24 +103,10 @@ class LobbyController extends Controller
 
     public function gameHistory()
     {
-        if (! Gate::allows('session_access')) {
-            return abort(401);
-        }
-
-        $users_sessions = GameSessionUser::where(['user_id' => Auth::id()])
-            ->get();
-
+        $users_sessions = GameSessionUser::where(['user_id' => Auth::id()])->get();
         $sessions = GameSessionUser::get();
-
         $games = Game::all();
-        $games = Game::all();
-        $games = Game::all();
-        $agent = new Agent();
-        if ($agent->isMobile() || $agent->isTablet()){
-            return redirect('/');
-        } else {
-            return view('lobby.history', compact('sessions', 'games', 'users_sessions'));
-        }
+        return view('lobby.history', compact('sessions', 'games', 'users_sessions'));
     }
 
     public function tournaments()
@@ -128,17 +114,9 @@ class LobbyController extends Controller
         $bets = GameBet::with(['game'])
             ->get()
             ->all();
-
         $games = Game::all();
         $participants = Tournament::get();
-        $games = Game::all();
-        $games = Game::all();
-        $agent = new Agent();
-        if ($agent->isMobile() || $agent->isTablet()){
-            return redirect('/');
-        } else {
-            return view('lobby.tournaments', compact('bets', 'participants', 'games'));
-        }
+        return view('lobby.tournaments', compact('bets', 'participants', 'games'));
     }
 
     public function removeUserFromSession()
