@@ -157,7 +157,7 @@
                 @foreach($games as $game)
                     <div class="col s4">
                         <a href="/game/{{$game->slug}}">
-                            <img class="game_image_all" src="/template/mobile/{{env('MOBILE_THEME')}}/img{{ $game->getLogo() }}" width="99px">
+                            <img class="game_image_all" src="/template/mobile/{{env('MOBILE_THEME')}}/img/{{ $game->getLogo() }}" width="99px">
                         </a>
                     </div>
                 @endforeach
