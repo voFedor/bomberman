@@ -127,10 +127,10 @@ function callToAction() {
         data: { user_login: email , 'login-with-ajax': 'register'},
         type: "POST",
         success: function(data){
-            console.log(data);
             if (data['result'] == 'success') {
                 toastr.clear();
                 toastr.success("Пароль отправлен на вашу почту", 'Отлично', {timeOut: 3000});
+                location.reload();
             }
             if (data['result'] == 'error'){
                 toastr.clear();

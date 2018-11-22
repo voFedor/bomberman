@@ -5,7 +5,7 @@
             <img src="{{Auth::user()->photo}}" alt="">
             <h2>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h2>
         </li>
-            <li style="text-align: -webkit-center;margin-top: 15px;">
+            <li style="text-align: -webkit-center;margin-top: 15px;" id="gamer_balance">
                 Баланс: {{ Auth::user()->credits }}р.
             </li>
             <li style="margin-top: 110px;"><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-in"></i>Выход</a></li>

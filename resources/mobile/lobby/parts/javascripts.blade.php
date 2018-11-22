@@ -123,8 +123,18 @@
                 id: null,
                 _token: '{{csrf_token()}}'},
             success: function (data) {
+                if (data['result'] < 100) {
+                    toastr.clear();
+                    toastr.error('У вас нет такой суммы', '', {timeOut: 3000})
+                    return false;
+                } else {
+                    toastr.clear();
+                    toastr.success('Приятной игры', '', {timeOut: 3000})
+                    return balance;
+                }
 
-                    return data['result'];
+
+
             },
             error: function (xhr, str) {
                 return 0;
@@ -216,9 +226,9 @@
         }
 
 
-        var balance = checkBalance();
+        var balance = $("#gamer_balance").text();
         console.log(balance);
-        console.log(priceCashOut);
+
         if (balance < priceCashOut) {
             toastr.clear();
             toastr.error('У вас нет такой суммы', 'Ошибка!', {timeOut: 3000})

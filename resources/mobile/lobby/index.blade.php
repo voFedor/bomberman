@@ -100,7 +100,7 @@
             <h5>Регистрируйся и в бой 👊 </h5>
             <p>Зарегистрируйся, выбери игру и отправь приглашение другу. Или недругу 😉</p>
 
-            <a href="#" data-activates="slide-out-right" class="side-nav-left"><button class="btn-light">Регистрация</button></a>
+            <a onclick="return openAuthModal()" class="side-nav-left"><button class="btn-light">Регистрация</button></a>
 
         </div>
     </div>
