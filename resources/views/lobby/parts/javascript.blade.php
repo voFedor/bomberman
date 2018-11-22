@@ -592,8 +592,8 @@ function openModalAuth() {
             }
         }
 
-        var balance = checkBalance();
 
+        var balance = $("#gamer_balance").text();
         if (balance < priceCashOut) {
             toastr.clear();
             toastr.error('У вас нет такой суммы', 'Ошибка!', {timeOut: 3000})
