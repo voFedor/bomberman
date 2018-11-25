@@ -3,7 +3,7 @@
 <title>Играй и зарабатывай на каждой победе</title>
 <meta name="description" content="Большой выбор игр, соревнйся с друзьями, участвуй в турнирах, побеждай" />
 <meta property="og:image" content="gamechainger.io/template/mobile/cools/img/meta.jpg">
-<meta name="_token" content="{!! csrf_token() !!}" />
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <!-- Load Roboto font -->
 <!--<link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>-->
 <link href="https://fonts.googleapis.com/css?family=Play" rel="stylesheet">
