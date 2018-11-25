@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Events\MessageSent;
 
 
-class ChatsController extends Controller
+class ChatController extends Controller
 {
     //
     public function __construct()

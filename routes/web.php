@@ -4,6 +4,7 @@ Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
 
 Route::get('/lobby', 'LobbyController@getLobby');
 Route::post('/getUsers', 'LobbyController@getUsers');
+Route::post('/session/create', 'Admin\SessionsController@create');
 
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 Route::get('/history', 'LobbyController@gameHistory');
@@ -68,9 +69,9 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 //
 
-Route::get('/chat', 'ChatsController@index');
-Route::get('messages', 'ChatsController@fetchMessages');
-Route::post('messages', 'ChatsController@sendMessage');
+Route::get('/chat', 'ChatController@index');
+Route::get('messages', 'ChatController@fetchMessages');
+Route::post('messages', 'ChatController@sendMessage');
 
 
 Route::prefix('/pvp')->group(function () {

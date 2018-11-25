@@ -45,7 +45,7 @@ class LobbyController extends Controller
 
     public function getUsers()
     {
-        return UserResource::collection(User::all());
+        return UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
         //return User::all();
     }
 

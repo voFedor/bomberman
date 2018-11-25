@@ -14,7 +14,9 @@ Broadcast::channel('chat', function ($user) {
     return Auth::user();
 });
 
-
+Broadcast::channel('Chat', function ($user){
+    return $user;
+});
 //Broadcast::channel('Lobby', function ($user) {
 //    return $user;
 //});

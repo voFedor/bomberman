@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Session;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -25,6 +26,8 @@ class UserResource extends JsonResource
 
     private function session_details($id)
     {
-        return $id;
+        $session = Session::whereIn('user1_id', [auth()->id(), $id])->whereIn('user2_id', [auth()->id(), $id])
+            ->first();
+        return new SessionResource($session);
     }
 }
