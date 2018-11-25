@@ -43,6 +43,14 @@ class User extends Authenticatable
     CONST REGISTERED = true;
     CONST NEWUSER = false;
 
+
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+
+
     /**
      * Hash password
      * @param $input

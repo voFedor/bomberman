@@ -17,6 +17,7 @@
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.5",
         "lord/laroute": "2.*",
+        "pusher/pusher-php-server": "^3.2",
         "socialiteproviders/vkontakte": "^4.0",
         "webpatser/laravel-uuid": "2.*",
         "wisembly/elephant.io": "^3.3",

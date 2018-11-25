@@ -17,7 +17,9 @@
 
 
 @yield('content')
-
+<div>
+    @include('lobby.parts.chat')
+</div>
 {{--@include('lobby.parts.search')--}}
 
 <!-- ScrollUp button start -->

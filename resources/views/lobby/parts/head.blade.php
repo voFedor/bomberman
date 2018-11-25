@@ -63,7 +63,9 @@
 <link rel="shortlink" href="/">
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+<link rel='stylesheet prefetch' href='http://cdn.materialdesignicons.com/1.1.70/css/materialdesignicons.min.css'>
 
+<link rel="stylesheet" href="/hangout/css/style.css">
 <style>
         .duel {
   background-color : #31B0D5;

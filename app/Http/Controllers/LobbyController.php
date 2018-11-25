@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Http\Requests\Lobby\OpenSessionRequest;
 use App\Http\Requests\Lobby\CloseSessionRequest;
+use App\Http\Resources\UserResource;
 use App\Models\GameBet;
 use App\Models\Game;
 use Illuminate\Support\Facades\Hash;
@@ -32,8 +33,24 @@ class LobbyController extends Controller
     public function getIndex()
     {
         $games = Game::all();
+        //return UserResource::collection(User::all());
         return view('lobby.index', compact('games'));
     }
+
+    public function getLobby()
+    {
+        return view('lobby.lobby');
+    }
+
+
+    public function getUsers()
+    {
+        return UserResource::collection(User::all());
+        //return User::all();
+    }
+
+
+
     /**
      * Show the application dashboard.
      *
