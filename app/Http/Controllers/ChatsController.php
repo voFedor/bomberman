@@ -7,6 +7,7 @@ use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Events\MessageSent;
 
+
 class ChatsController extends Controller
 {
     //
@@ -22,7 +23,7 @@ class ChatsController extends Controller
      */
     public function index()
     {
-        return view('chat');
+        return view('lobby.chat');
     }
 
     /**

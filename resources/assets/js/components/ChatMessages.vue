@@ -1,9 +1,16 @@
 <template>
-    <ul class="chat" style="margin: 0 0 10px 5px;">
-        <li v-for="message in messages">
-            <img src="http://s8.postimg.org/76bg2es2t/index.png">
-            <span>{{ message.user.name }}</span>
-            <div class="message"> {{ message.message }}</div>
+    <ul class="chat">
+        <li class="left clearfix" v-for="message in messages">
+            <div class="chat-body clearfix">
+                <div class="header">
+                    <strong class="primary-font">
+                        {{ message.user.name }}
+                    </strong>
+                </div>
+                <p>
+                    {{ message.message }}
+                </p>
+            </div>
         </li>
     </ul>
 </template>

@@ -14001,12 +14001,11 @@ window.Vue = __webpack_require__(39);
  */
 
 //Vue.component('chat-component', require('./components/LobbyComponent.vue'));
-
 Vue.component('chat-messages', __webpack_require__(42));
 Vue.component('chat-form', __webpack_require__(45));
 
 var app = new Vue({
-    el: '#hangout',
+    el: '#app',
 
     data: {
         messages: []
@@ -57150,6 +57149,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['messages']
@@ -57165,17 +57171,25 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "ul",
-    { staticClass: "chat", staticStyle: { margin: "0 0 10px 5px" } },
+    { staticClass: "chat" },
     _vm._l(_vm.messages, function(message) {
-      return _c("li", [
-        _c("img", {
-          attrs: { src: "http://s8.postimg.org/76bg2es2t/index.png" }
-        }),
-        _vm._v(" "),
-        _c("span", [_vm._v(_vm._s(message.user.name))]),
-        _vm._v(" "),
-        _c("div", { staticClass: "message" }, [
-          _vm._v(" " + _vm._s(message.message))
+      return _c("li", { staticClass: "left clearfix" }, [
+        _c("div", { staticClass: "chat-body clearfix" }, [
+          _c("div", { staticClass: "header" }, [
+            _c("strong", { staticClass: "primary-font" }, [
+              _vm._v(
+                "\n                    " +
+                  _vm._s(message.user.name) +
+                  "\n                "
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("p", [
+            _vm._v(
+              "\n                " + _vm._s(message.message) + "\n            "
+            )
+          ])
         ])
       ])
     })
@@ -57248,6 +57262,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['user'],
@@ -57279,7 +57301,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "meta-bar chat" }, [
+  return _c("div", { staticClass: "input-group" }, [
     _c("input", {
       directives: [
         {
@@ -57289,8 +57311,13 @@ var render = function() {
           expression: "newMessage"
         }
       ],
-      staticClass: "nostyle chat-input",
-      attrs: { name: "message", type: "text", placeholder: "Message..." },
+      staticClass: "form-control input-sm",
+      attrs: {
+        id: "btn-input",
+        type: "text",
+        name: "message",
+        placeholder: "Type your message here..."
+      },
       domProps: { value: _vm.newMessage },
       on: {
         keyup: function($event) {
@@ -57311,11 +57338,17 @@ var render = function() {
       }
     }),
     _vm._v(" "),
-    _c("i", {
-      staticClass: "mdi mdi-send",
-      attrs: { id: "btn-chat" },
-      on: { click: _vm.sendMessage }
-    })
+    _c("span", { staticClass: "input-group-btn" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-primary btn-sm",
+          attrs: { id: "btn-chat" },
+          on: { click: _vm.sendMessage }
+        },
+        [_vm._v("\n            Send\n        ")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []

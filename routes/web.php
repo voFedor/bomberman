@@ -24,7 +24,7 @@ Route::post('/new-game', 'ServiceController@newGame');
 Route::post('/save-email', 'ServiceController@saveEmail');
 
 
-Route::get('/chat', 'ServiceController@chat')->name('chat');
+//Route::get('/chat', 'ServiceController@chat')->name('chat');
 
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
@@ -68,7 +68,7 @@ $this->get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 $this->post('password/reset', 'Auth\ResetPasswordController@reset')->name('auth.password.reset');
 //
 
-//Route::get('/', 'ChatsController@index');
+Route::get('/chat', 'ChatsController@index');
 Route::get('messages', 'ChatsController@fetchMessages');
 Route::post('messages', 'ChatsController@sendMessage');
 
