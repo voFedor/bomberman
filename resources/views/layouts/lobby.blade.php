@@ -17,6 +17,7 @@
 
 
 @yield('content')
+
 <div>
     @include('lobby.parts.chat')
 </div>
