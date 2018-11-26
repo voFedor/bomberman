@@ -26,27 +26,38 @@
         <i class="fa fa-file-o"></i> &nbsp;&nbsp;&nbsp;
         <i class="fa fa-file-image-o"></i>
 
-        <button>Send</button>
+        <button v-model="message">Send</button>
     </div></form>
     </div> <!-- end chat-message -->
 </template>
 
 <script>
     export default {
-        props: ['user'],
+        props: ['friend'],
         data(){
             return {
-                chats:[]
+                chats:[],
+                message: null
+            }
+        },
+        methods: {
+            send() {
+                if (this.message) {
+                    this.chats.push(this.message);
+                    axios.post(`/send/${this.session.id}`, {
+                        content : this.message
+                    });
+                    this.message = null;
+                }
+            },
+            close(){
+                this.$emit('closr');
             }
         },
         mounted() {
             console.log('Component mounted.')
         },
-        methods: {
-            send() {
-                console.log('QWE')
-            }
-        },
+
         created(){
             this.chats.push({
                 message:"Hey"

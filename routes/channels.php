@@ -10,9 +10,9 @@
 | used to check if an authenticated user can listen to the channel.
 |
 */
-//Broadcast::channel('chat', function ($user) {
-//    return Auth::user();
-//});
+Broadcast::channel('chat', function ($user) {
+    return Auth::user();
+});
 
 Broadcast::channel('Chat', function ($user){
     return $user;

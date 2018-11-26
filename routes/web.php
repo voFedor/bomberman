@@ -4,7 +4,8 @@ Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
 
 Route::get('/lobby', 'LobbyController@getLobby');
 Route::post('/getUsers', 'LobbyController@getUsers');
-Route::post('/session/create', 'Admin\SessionsController@create');
+Route::post('/session/create', 'SessionsController@create');
+Route::post('/send/{session}', 'ChatController@send');
 
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);
 Route::get('/history', 'LobbyController@gameHistory');

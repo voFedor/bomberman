@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Session;
 use Illuminate\Http\Request;
 use App\Models\Message;
 use Auth;
@@ -25,6 +26,13 @@ class ChatController extends Controller
     public function index()
     {
         return view('lobby.chat');
+    }
+
+
+    public function send(Session $session, Request $request)
+    {
+        $message = $session->messages()->create(['content' => $request->content]);
+        return $message;
     }
 
     /**
