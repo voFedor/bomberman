@@ -20,20 +20,17 @@
 
                 </div>
 
-
-
-        <modal-component></modal-component>
     </div> <!-- end container -->
 
 </template>
 
 <script>
 
-    import modalComponent from './ModalComponent.vue';
+    import moment from '../../../../public/some.js';
 
     export default {
         components: {
-            modalComponent
+            moment
         },
         props: ['game_id', 'bet_id'],
         data(){
@@ -57,7 +54,7 @@
                     game_id: this.game_id,
                     friend_id: friend.id,
                     bet_id: this.bet_id
-                }).then(res => res.data.data)
+                }).then(res => openGameWindowScript(res.data.data))
             },
             openGamePopU: function
             close(friend){

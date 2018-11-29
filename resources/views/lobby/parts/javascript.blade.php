@@ -304,7 +304,23 @@
             });
         return vars;
     }
-    
+    function openGameWindowScript(data) {
+        console.log(data);
+        $.fancybox.open({
+            padding : 0,
+            src: data,
+            type: 'iframe',
+            scrolling : 'auto',
+            preload   : true,
+            wmode: 'transparent',
+            allowfullscreen   : true,
+            allowscriptaccess : 'always',
+            buttons : ['close'],
+            clickSlide: 'toggleControls',
+            afterClose: function( instance, slide ) {
+            }
+        });
+    }
     
     function openGameWindow(json) {
         $.fancybox.open({
