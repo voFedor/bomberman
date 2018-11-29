@@ -21,6 +21,7 @@ use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use RuntimeException;
 use App\Models\Tournament;
 use Jenssegers\Agent\Agent;
+use Carbon\Carbon;
 use App\Models\UserAction;
 
 class LobbyController extends Controller
@@ -37,16 +38,86 @@ class LobbyController extends Controller
         return view('lobby.index', compact('games'));
     }
 
+    public function getGamePlay(Request $request)
+    {
+        $uuid = str_random(8);
+        if (GameSession::where('uuid', $uuid)->first() != null) {
+            while (GameSession::where('uuid', $uuid)->first() != null) {
+                $uuid = str_random(8);
+            }
+        }
+
+        $gameSession = new GameSession();
+        $gameSession->bet_id = $request->bet_id;
+        $gameSession->game_id = $request->game_id;
+        $gameSession->started_at = Carbon::now();
+        $gameSession->uuid = $uuid;
+        $gameSession->save();
+
+        $gameSessionUser = new GameSessionUser();
+        $gameSessionUser->user_id = $request->friend_id;
+        $gameSessionUser->session_id = $gameSession->id;
+        $gameSessionUser->credits_before = User::find($request->friend_id)->credits;
+        $gameSessionUser->save();
+
+        $gameSessionUser = new GameSessionUser();
+        $gameSessionUser->user_id = Auth::user()->id;
+        $gameSessionUser->session_id = $gameSession->id;
+        $gameSessionUser->credits_before = Auth::user()->credits;
+        $gameSessionUser->save();
+
+         return response()->json(['data' => env('GAME_HOST')."/?$uuid/".Auth::user()->id]);
+    }
+
+
+    public function saveScore(Request $request)
+    {
+        $gameSession = GameSession::where('uuid', $request->uuid)->first();
+        $gameSessionUserCheck = GameSessionUser::where(['session_id' => $gameSession->id, 'score' => $request->score])->first();
+        $gameSessionUser = GameSessionUser::where(['session_id' => $gameSession->id, 'user_id' => $request->user_id])->first();
+
+        if ($gameSessionUserCheck != null)
+        {
+            if ($gameSessionUserCheck->score > $request->score)
+            {
+                $gameSession->winner_id = $gameSessionUserCheck->user_id;
+                $gameSessionUserCheck->credits_after = $gameSessionUserCheck->credits_after + $gameSession->bet->bet;
+                $winner = User::find($gameSessionUserCheck->user_id);
+                $winner->credits = $winner->credits + $gameSession->bet->bet;
+                $winner->update();
+                $looser = User::find($gameSessionUser->user_id);
+                $looser->credits = $looser->credits - $gameSession->bet->bet;
+                $looser->update();
+            } else {
+                $gameSession->winner_id = $gameSessionUser->user_id;
+                $gameSessionUser->credits_after = $gameSessionUser->credits_after + $gameSession->bet->bet;
+                $winner = User::find($gameSessionUser->user_id);
+                $winner->credits = $winner->credits + $gameSession->bet->bet;
+                $winner->update();
+                $looser = User::find($gameSessionUserCheck->user_id);
+                $looser->credits = $looser->credits - $gameSession->bet->bet;
+                $looser->update();
+            }
+            $gameSession->ended_at = Carbon::now();
+            $gameSession->update();
+        }
+
+        $gameSessionUser->score = $request->score;
+        $gameSessionUser->update;
+
+        return response()->json(['data' => env('APP_URL')]);
+    }
+
+
     public function getLobby()
     {
         return view('lobby.lobby');
     }
 
 
-    public function getUsers()
+    public function getUsers(Request $request)
     {
-        return UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
-        //return User::all();
+        return  UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
     }
 
 

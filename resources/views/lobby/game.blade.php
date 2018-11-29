@@ -49,7 +49,8 @@
                             <div class="share-post">
                                 <ul>
                                     {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
-                                    <button onclick="return checkBalance('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
+                                    <button onclick="return checkBalance('{{$game->id}}', 0)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 0р</button>
+                                    <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
                                 </ul>
                             </div>
                         </div>

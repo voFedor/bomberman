@@ -50,6 +50,8 @@
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.cslider.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.placeholder.js"></script>
 <script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.inview.js"></script>
+
+
 <!-- css3-mediaqueries.js for IE8 or older -->
 <!--[if lt IE 9]>
 <script src="{{ env('THEME') }}/js/respond.min.js"></script>
@@ -72,7 +74,7 @@
 
 
 
-    function checkBalance(id) {
+    function checkBalance(id, bet) {
         if ("{{Auth::user()}}" == "")
         {
             openPopupForm();
@@ -100,9 +102,7 @@
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})
                     return false;
                 } else {
-                    toastr.clear();
-                    toastr.success("Приятной игры", '', {timeOut: 3000})
-                    return false;
+                    window.location.href = "/users-list/"+id+'/'+bet;
                 }
             },
             error: function (xhr, str) {
@@ -325,6 +325,27 @@
             }
         });
     }
+
+
+
+    function openScoreGameWindow(url) {
+        $.fancybox.open({
+            padding : 0,
+            src: url,
+            type: 'iframe',
+            scrolling : 'auto',
+            preload   : true,
+            wmode: 'transparent',
+            allowfullscreen   : true,
+            allowscriptaccess : 'always',
+            buttons : ['close'],
+            clickSlide: 'toggleControls',
+            afterClose: function( instance, slide ) {
+                afterCloseGameWindow(session_id, user_id);
+            }
+        });
+    }
+
 
     function afterCloseGameWindow(session_id, user_id) {
         $.ajaxSetup({
