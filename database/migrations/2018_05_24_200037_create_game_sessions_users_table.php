@@ -18,7 +18,6 @@ class CreateGameSessionsUsersTable extends Migration
             $table->integer('session_id');
             $table->integer('user_id');
             $table->integer('score')->nullable();
-            $table->integer('score');
             $table->integer('credits_before')->nullable();
             $table->integer('credits_after')->nullable();
             $table->unique(['session_id', 'user_id']);
