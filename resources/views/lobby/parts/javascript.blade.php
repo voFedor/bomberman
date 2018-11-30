@@ -304,7 +304,7 @@
             });
         return vars;
     }
-    function openGameWindowScript(data) {
+    function openMathGameWindow(data) {
         console.log(data);
         $.fancybox.open({
             padding : 0,

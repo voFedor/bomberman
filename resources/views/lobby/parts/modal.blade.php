@@ -123,7 +123,7 @@
     .sidenav a {
         padding: 8px 8px 8px 32px;
         text-decoration: none;
-        font-size: 25px;
+        font-size: 15px;
         color: #818181;
         display: block;
         transition: 0.3s;
@@ -139,17 +139,22 @@
         left: 25px;
         font-size: 36px;
         margin-right: 50px;
+        padding: 16px 8px 10px 10px !important;
     }
 
     @media screen and (max-height: 450px) {
         .sidenav {padding-top: 15px;}
         .sidenav a {font-size: 18px;}
     }
+
+    p{
+        font-size: 25px;
+    }
 </style>
 
 
 <div id="mySidenav" class="sidenav" style="width: 0;z-index: 999;">
-    <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;
+    <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @if(Auth::user())
         <a href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
                     style="text-transform: none;"> рэ</span></a>
@@ -158,5 +163,89 @@
     <a href="/profile">Профиль</a>
     <a id="wp-logout"
        href="{{ route('auth.logout') }}">Выйти
+        @else
+            <div style="margin-left: 25px;">
+            <div style="text-align: center;">
+                <div id="uLogin_500d4447" data-uloginid="500d4447"></div>
+            </div>
+            <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
+                <span id="error_login" style="color: red;font-size: 16px;"></span>
+                <p style="padding: 2px;">
+                    Логин/Email: </p>
+                <div class="youplay-input">
+                    <input type="text" name="log" style="width: auto;">
+                </div>
+                <p style="padding: 2px;">
+                    Пароль: </p>
+                <div class="youplay-input">
+                    <input type="password" name="pwd" style="width: auto;">
+                </div>
+                {{--<div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">--}}
+                {{--<input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">--}}
+                {{--<label for="rememberme-lwa-1">Запомнить меня</label>--}}
+                {{--</div>--}}
+                <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp-submit-1"
+                        tabindex="100" type="button" onclick="return login()">
+                    Войти
+                </button>
+                <div style="line-height: 3px;">
+                    <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a>
+                    <a href="javascript:void(0);" onclick="return openRegForm()">Зарегистрироваться</a>
+                </div>
+                <br>
+
+                {{ csrf_field() }}
+                <input type="hidden" name="lwa_profile_link" value="1">
+                <input type="hidden" name="login-with-ajax" value="login">
+                <p></p>
+
+            </form>
+            </div>
+            <div style="margin-left: 25px;">
+            <form class="lwa-register lwa-register-default block-content" action="/register" method="post" id="reg-form" style="display: none;">
+                <span id="error_register" style="color: red;font-size: 16px;"></span>
+                <p style="padding: 2px;">
+                    Логин/Email: </p>
+                <div class="youplay-input">
+                    <input type="email" name="user_login" id="user_login-1" style="width: auto;background-color: rgb(250, 255, 189) !important;">
+                </div>
+                {{ csrf_field() }}
+
+                <input type="hidden" name="login-with-ajax" value="register">
+                <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="wp-submit-1" tabindex="100"
+                        type="button" onclick="return register()">
+                    Зарегистрироваться
+                </button>
+                <br>
+                <div style="line-height: 3px;margin-top: 15px;">
+                    <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a>
+                    <a href="javascript:void(0);" onclick="return openAuthForm()">Войти</a>
+                </div>
+
+            </form>
+            </div>
+            <div style="margin-left: 25px;">
+            <form action="javascript:void(0)" class="lwa-remember block-content" action="/register" method="post" id="forgot-form" style="display: none;">
+                <span id="error_forget" style="color: red;font-size: 16px;"></span>
+                <p style="padding: 2px;">
+                    Логин/Email: </p>
+                <div class="youplay-input">
+                    <input type="text" name="user_login_remember" id="user_login_remember" style="background-color: rgb(250, 255, 189) !important;width: auto;">
+                </div>
+                <button onclick="return remember()" class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp_3-submit-1" tabindex="100">
+                    Отправить пароль
+                </button>
+                <br>
+                <input type="hidden" name="login-with-ajax" value="remember">
+                <p></p>
+                {{ csrf_field() }}
+                <div style="line-height: 3px;">
+                    <a href="javascript:void(0);" onclick="return openRegForm()" title="Password Lost and Found">Регистрация</a>
+                    <a href="javascript:void(0);" onclick="return openAuthForm()">Войти</a>
+                </div>
+            </form>
+            </div>
         @endif
 </div>
+
+

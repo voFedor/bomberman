@@ -54,7 +54,7 @@
                     game_id: this.game_id,
                     friend_id: friend.id,
                     bet_id: this.bet_id
-                }).then(res => openGameWindowScript(res.data.data))
+                }).then(res => openMathGameWindow(res.data.data))
             },
             openGamePopU: function
             close(friend){

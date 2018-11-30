@@ -43970,7 +43970,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 friend_id: friend.id,
                 bet_id: this.bet_id
             }).then(function (res) {
-                return openGameWindowScript(res.data.data);
+                return openMathGameWindow(res.data.data);
             });
         },
         openGamePopU: function close(friend) {
