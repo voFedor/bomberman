@@ -77,7 +77,7 @@
     function checkBalance(id, bet) {
         if ("{{Auth::user()}}" == "")
         {
-            openPopupForm();
+            $('#loginForm').modal('show');
             toastr.clear();
             toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
             return;
@@ -97,7 +97,8 @@
                 id: id,
                 _token: '{{csrf_token()}}'},
             success: function (data) {
-                if (data['result'] < 100)  {
+                if (bet != 0 && data['result'] < 100)  {
+                    $('#paymentBtn').modal('show');
                     toastr.clear();
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})
                     return false;
@@ -115,7 +116,15 @@
         });
     }
 
+    function checkoutRegForm() {
+        $("#loginFormContent").css("display", "none");
+        $("#regForm").css("display", "block");
+    }
 
+    function checkoutLoginForm() {
+        $("#loginFormContent").css("display", "block");
+        $("#regForm").css("display", "none");
+    }
 
 
     (function($){
@@ -190,6 +199,9 @@
             }
         });
     }
+
+
+
 
 
 
