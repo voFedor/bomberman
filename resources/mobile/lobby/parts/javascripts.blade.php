@@ -123,7 +123,8 @@
                 id: null,
                 _token: '{{csrf_token()}}'},
             success: function (data) {
-                if (data['result'] < 100) {
+                if (data['result'] < 10000) {
+                    $('#paymentBtn').modal('show');
                     toastr.clear();
                     toastr.error('У вас нет такой суммы', '', {timeOut: 3000})
                     return false;
@@ -152,9 +153,7 @@
     }
     function checkBalance() {
 
-        toastr.clear();
-        toastr.error('Выполните вход на сайт', '', {timeOut: 3000})
-        return;
+        openAuthModal();
     }
 
     function checkBet(id) {

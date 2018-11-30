@@ -7,6 +7,15 @@
     </div>
 </div>
 
+<div class="modal fade" id="paymentBtn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" style="height: 89px;">
+    <div class="modal-dialog" role="document">
+
+        <div class="modal-content" style="text-align: center;">
+            <a href="/payments" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Пополнить счет</a>
+        </div>
+    </div>
+</div>
+
 
 
 
