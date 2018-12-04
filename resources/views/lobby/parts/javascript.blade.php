@@ -74,6 +74,9 @@
 
 
 
+
+
+
     function checkBalance(id, bet) {
         if ("{{Auth::user()}}" == "")
         {
@@ -241,7 +244,47 @@
     {{--}--}}
 
     @if(Auth::user() != null)
+    function checkBalanceFromChallenge(id, bet, uuid) {
+        if ("{{Auth::user()}}" == "")
+        {
+            $('#loginForm').modal('show');
+            toastr.clear();
+            toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
+            return;
+        }
 
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/check-balance',
+            type: "POST",
+            data: {
+                id: id,
+                _token: '{{csrf_token()}}'},
+            success: function (data) {
+                if (bet != 0 && data['result'] < 100)  {
+                    $('#paymentBtn').modal('show');
+                    toastr.clear();
+                    toastr.error("", 'Пополните счет!', {timeOut: 3000})
+                    return false;
+                } else {
+                    openMathGameWindow("{{env('GAME_HOST')}}"+"/?"+uuid+"/"+'{{Auth::user()->id}}')
+                }
+            },
+            error: function (xhr, str) {
+                return 0;
+            },
+            beforeSend : function (){
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', '', {timeOut: 3000});
+            }
+        });
+    }
 
 
     function getDuel(game_id) {

@@ -1,12 +1,13 @@
 <?php
 Route::get('/', 'LobbyController@getIndex');
+Route::get('/challenge', 'LobbyController@getChallenge');
 Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
 
 Route::get('/lobby', 'LobbyController@getLobby');
 Route::get('/getUsers', 'LobbyController@getUsers');
 Route::post('/getGamePlay', 'LobbyController@getGamePlay');
 Route::get('/play', 'LobbyController@play');
-Route::post('/save-game-result', 'LobbyController@saveScore');
+Route::get('/save-game-result', 'LobbyController@saveScore');
 Route::post('/session/create', 'SessionsController@create');
 Route::post('/send/{session}', 'ChatController@send');
 

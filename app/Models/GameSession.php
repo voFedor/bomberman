@@ -24,6 +24,7 @@ class GameSession extends Model
     protected $fillable = [
         'winner_id',
         'bet_id',
+        'game_id',
         'win',
         'started_at',
         'ended_at'
@@ -33,6 +34,16 @@ class GameSession extends Model
     public function bet()
     {
         return $this->belongsTo('App\Models\GameBet');
+    }
+
+    public function game()
+    {
+        return $this->belongsTo('App\Models\Game');
+    }
+
+    public function game_sessions_users()
+    {
+        return $this->hasMany('App\Models\GameSessionUser', 'session_id','id');
     }
 
     public function scopeNotPlayed()

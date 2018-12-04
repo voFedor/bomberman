@@ -159,6 +159,7 @@
         <a href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
                     style="text-transform: none;"> рэ</span></a>
     <a href="/history">История побед</a>
+    <a href="/challenge">Вызовы</a>
     <a href="/payments">Баланс</a>
     <a href="/profile">Профиль</a>
     <a id="wp-logout"
