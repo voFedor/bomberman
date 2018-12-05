@@ -100,9 +100,10 @@
             type: "POST",
             data: {
                 id: id,
+                bet: bet,
                 _token: '{{csrf_token()}}'},
             success: function (data) {
-                if (bet != 0 && data['result'] < 100)  {
+                if (data['result'] < data['bet'])  {
                     $('#paymentBtn').modal('show');
                     toastr.clear();
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})

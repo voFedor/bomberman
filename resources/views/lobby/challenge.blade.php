@@ -26,16 +26,17 @@
                         <tbody>
                         @if (count($sessions) > 0)
                             @foreach ($sessions as $session)
+
                                 <tr>
                                     <td>{{$session->game->name}}</td>
                                     <td>{{$session->bet->bet}}</td>
-                                    <td>{{$session->game_sessions_users->where('user_id', '!=', Auth::user()->id)->first()->user->name}}</td>
-                                    <td>{{$session->game_sessions_users->where('user_id', '!=', Auth::user()->id)->first()->score}}</td>
-                                    <td>{{$session->game_sessions_users->where('user_id', Auth::user()->id)->first()->score}}</td>
+                                    <td>{{$session->users_sessions->where('user_id', '!=', Auth::user()->id)->first()->user->name}}</td>
+                                    <td>{{$session->users_sessions->where('user_id', '!=', Auth::user()->id)->first()->score}}</td>
+                                    <td>{{$session->users_sessions->where('user_id', Auth::user()->id)->first()->score}}</td>
                                     <td>{{ Carbon\Carbon::parse($session->started_at)->diffForHumans()}}</td>
                                     <td>
 
-                                        @if($session->game_sessions_users->where('user_id', Auth::user()->id)->first()->score == null)
+                                        @if($session->users_sessions->where('user_id', Auth::user()->id)->first()->score == null)
                                             <button onclick="return checkBalanceFromChallenge('{{$session->game->id}}', '{{$session->bet->id}})', '{{$session->uuid}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть</button>
                                         @endif
                                     </td>

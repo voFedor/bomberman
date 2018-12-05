@@ -69,6 +69,7 @@
                 this.$modal.hide('hello-world');
             },
             play: function (friend) {
+
                 axios.post('/getGamePlay', {
                     game_id: $("#game_id_for_vue").val(),
                     friend_id: friend.id,

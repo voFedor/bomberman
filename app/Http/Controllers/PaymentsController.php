@@ -217,10 +217,11 @@ class PaymentsController extends Controller
         return redirect('/payments')->with(['error' => 'Произошла ошибка! Оплата не прошла, попробуйте еще раз или обратитесь в службу поддержки']);
     }
 
-    public function checkBalance()
+    public function checkBalance(Request $request)
     {
         $balance = Auth::user()->credits;
-        return response()->json(['result' => $balance]);
+        $bet_sum = GameBet::find($request->bet)->bet;
+        return response()->json(['result' => $balance, 'bet' => $bet_sum]);
     }
 
 

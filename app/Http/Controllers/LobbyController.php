@@ -44,10 +44,9 @@ class LobbyController extends Controller
         $games = Game::all();
         $challenge = GameSessionUser::where('user_id', Auth::user()->id)->where('credits_after', null)->get();
         $user_id = Auth::user()->id;
-        $sessions = GameSession::whereHas('game_sessions_users', function ($query) use ($user_id){
+        $sessions = GameSession::with('users_sessions')->whereHas('users_sessions', function ($query) use ($user_id){
             $query->where('user_id', $user_id);
         })->get();
-
         return view('lobby.challenge', compact('games', 'challenge', 'sessions'));
     }
 

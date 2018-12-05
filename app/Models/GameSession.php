@@ -33,17 +33,17 @@ class GameSession extends Model
 
     public function bet()
     {
-        return $this->belongsTo('App\Models\GameBet');
+        return $this->belongsTo(\App\Models\GameBet::class);
     }
 
     public function game()
     {
-        return $this->belongsTo('App\Models\Game');
+        return $this->belongsTo(\App\Models\Game::class);
     }
 
-    public function game_sessions_users()
+    public function users_sessions()
     {
-        return $this->hasMany('App\Models\GameSessionUser', 'session_id','id');
+        return $this->hasMany(\App\Models\GameSessionUser::class, 'session_id', 'id');
     }
 
     public function scopeNotPlayed()
