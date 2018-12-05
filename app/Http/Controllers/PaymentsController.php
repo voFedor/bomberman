@@ -219,7 +219,6 @@ class PaymentsController extends Controller
 
     public function checkBalance(Request $request)
     {
-        
         $balance = Auth::user()->credits;
         $bet_sum = GameBet::find($request->bet)->bet;
         return response()->json(['result' => $balance, 'bet' => $bet_sum]);
