@@ -1,24 +1,43 @@
 <template>
     <div class="container clearfix" style="margin: 0 auto;background: #444753;border-radius: 5px;">
-                <div class="people-list" id="people-list">
-                    <div class="search">
-                        <input type="text" placeholder="search" />
-                        <i class="fa fa-search"></i>
-                    </div>
-                    <ul class="list" style="overflow-y: hidden;overflow: auto;">
-                        <li class="clearfix" v-for="friend in friends" :key=friend.id>
-                            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-                            <div class="about">
-                                <div class="name">{{friend.name}}</div>
-                                <div class="status">
-                                    <i class="fa fa-circle online" v-if="friend.online"></i>
-                                    <button  @click.prevent="play(friend)">Пригласить</button>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
 
+        <!-- Modal -->
+        <div class="modal fade" id="users_list" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="people-list" id="people-list">
+                            <div class="search">
+                                <input type="text" placeholder="search" />
+                                <i class="fa fa-search"></i>
+                            </div>
+                            <ul class="list" style="overflow-y: hidden;overflow: auto;">
+                                <li class="clearfix" v-for="friend in friends" :key=friend.id>
+                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
+                                    <div class="about">
+                                        <div class="name">{{friend.name}}</div>
+                                        <div class="status">
+                                            <i class="fa fa-circle online" v-if="friend.online"></i>
+                                            <button  @click.prevent="play(friend)">Пригласить</button>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
+            </div>
+        </div>
+
+
 
     </div> <!-- end container -->
 
@@ -51,9 +70,9 @@
             },
             play: function (friend) {
                 axios.post('/getGamePlay', {
-                    game_id: this.game_id,
+                    game_id: $("#game_id_for_vue").val(),
                     friend_id: friend.id,
-                    bet_id: this.bet_id
+                    bet_id: $("#bet_id_for_vue").val()
                 }).then(res => openMathGameWindow(res.data.data))
             },
             openGamePopU: function
@@ -113,3 +132,8 @@
         openGameWindow();
     })
 </script>
+<style>
+    i {
+        color: green;
+    }
+</style>

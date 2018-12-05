@@ -69,7 +69,9 @@
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
-
+{{--<div id="app">--}}
+    {{--<chat-component :bet_id="{{$bet_id}}" :game_id="{{$game_id}}"></chat-component>--}}
+{{--</div>--}}
 <script>
 
 
@@ -106,7 +108,32 @@
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})
                     return false;
                 } else {
-                    window.location.href = "/users-list/"+id+'/'+bet;
+                    $("#game_id_for_vue").val(id);
+                    $("#bet_id_for_vue").val(bet);
+
+
+                    $("#users_list").modal('show');
+
+                    // $.ajax({
+                    //     url: "/users-list/"+id+'/'+bet,
+                    //     type: "get", //send it through get method
+                    //     data: {
+                    //         id: id,
+                    //         bet: bet
+                    //     },
+                    //     success: function(response) {
+                    //      console.log(response);
+                    //     },
+                    //     error: function(xhr) {
+                    //         console.log(xhr);
+                    //     }
+                    // });
+                    //
+                    //
+                    //
+                    //
+                    // $("#users_list").modal('show');
+                    // window.location.href = "/users-list/"+id+'/'+bet;
                 }
             },
             error: function (xhr, str) {

@@ -200,9 +200,9 @@
                 <h1>Have You Seen our Works?</h1>
                 <p>Duis mollis placerat quam, eget laoreet tellus tempor eu. Quisque dapibus in purus in dignissim.</p>
             </div>
-            <div id="app">
-                <chat-component :bet_id="{{$bet_id}}" :game_id="{{$game_id}}"></chat-component>
-            </div>
+            {{--<div id="app">--}}
+                {{--<chat-component :bet_id="{{$bet_id}}" :game_id="{{$game_id}}"></chat-component>--}}
+            {{--</div>--}}
             <!-- Start details for portfolio project 1 -->
 
 

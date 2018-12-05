@@ -18,6 +18,11 @@
 
 @yield('content')
 
+<div id="app">
+    <chat-component :bet_id="'+bet+'" :game_id="'+bet+'"></chat-component>
+</div>
+
+
 <div>
     @include('lobby.parts.chat')
 </div>
@@ -33,6 +38,9 @@
 Назначить дуэль
 </button>
 </div>
+
+<input type="hidden" id="game_id_for_vue" name="game_id_for_vue">
+<input type="hidden" id="bet_id_for_vue" name="bet_id_for_vue">
 @endif
 
 
