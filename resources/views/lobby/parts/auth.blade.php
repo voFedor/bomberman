@@ -5,6 +5,8 @@
 
 @else
     <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupInfo()">Профиль</a></li>
+    <h4>Name: {{Auth::user()->name}}
+         Credits: {{ Auth::user()->credits }}</h4>
     <div class="hide auth" id="info">
         Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
                 style="text-transform: none;"> рэ</span><br>

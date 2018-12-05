@@ -114,7 +114,7 @@
         z-index: 1;
         top: 0;
         right: 0;
-        background-color: #111;
+        background-color: rgba(0, 0, 0, 0.77);
         overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
@@ -124,13 +124,13 @@
         padding: 8px 8px 8px 32px;
         text-decoration: none;
         font-size: 15px;
-        color: #818181;
+        color: #ffffff;
         display: block;
         transition: 0.3s;
     }
 
     .sidenav a:hover {
-        color: #f1f1f1;
+        color: #fcbf35;
     }
 
     .sidenav .closebtn {
@@ -156,8 +156,9 @@
 <div id="mySidenav" class="sidenav" style="width: 0;z-index: 9999;">
     <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @if(Auth::user())
-        <a href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
-                    style="text-transform: none;"> рэ</span></a>
+            <p>{{Auth::user()->name}}</p>
+        <p href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
+                    style="text-transform: none;"> рэ</span></p>
     <a href="/history">История побед</a>
     <a href="/challenge">Вызовы</a>
     <a href="/payments">Баланс</a>
