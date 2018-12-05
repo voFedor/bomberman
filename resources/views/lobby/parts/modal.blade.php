@@ -153,7 +153,7 @@
 </style>
 
 
-<div id="mySidenav" class="sidenav" style="width: 0;z-index: 999;">
+<div id="mySidenav" class="sidenav" style="width: 0;z-index: 9999;">
     <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @if(Auth::user())
         <a href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
@@ -167,19 +167,30 @@
         @else
             <div style="margin-left: 25px;">
             <div style="text-align: center;">
-                <div id="uLogin_500d4447" data-uloginid="500d4447"></div>
             </div>
+               <p> войти с помощью </p>
+
+                   <p class="btn  btn-social-icon btn-vk" style="width: 20px" href="/login/vk">
+                       <span class="fa fa-vk"></span>
+                   </p>
+                   <p class="btn btn-social-icon btn-facebook" style="width: 20px" href="/login/vk">
+                       <span class="fa fa-facebook"></span>
+                   </p>
+                   <p class="btn  btn-social-icon btn-google"  style="width: 20px" href="/login/vk">
+                       <span class="fa fa-google"></span>
+                   </p>
+                <p> или введи </p>
             <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
                 <span id="error_login" style="color: red;font-size: 16px;"></span>
                 <p style="padding: 2px;">
                     Логин/Email: </p>
                 <div class="youplay-input">
-                    <input type="text" name="log" style="width: auto;">
+                    <input type="text" name="log" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93);">
                 </div>
                 <p style="padding: 2px;">
                     Пароль: </p>
                 <div class="youplay-input">
-                    <input type="password" name="pwd" style="width: auto;">
+                    <input type="password" name="pwd" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93);">
                 </div>
                 {{--<div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">--}}
                 {{--<input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">--}}
@@ -189,7 +200,7 @@
                         tabindex="100" type="button" onclick="return login()">
                     Войти
                 </button>
-                <div style="line-height: 3px;">
+                <div style="line-height: 13px;">
                     <a href="javascript:void(0);" onclick="return openLostPassForm()" title="Password Lost and Found">Забыл?</a>
                     <a href="javascript:void(0);" onclick="return openRegForm()">Зарегистрироваться</a>
                 </div>

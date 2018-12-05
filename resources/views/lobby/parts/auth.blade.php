@@ -1,6 +1,6 @@
 
 @if(!Auth::check())
-    <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupInfo()"><i class="fa fa-fw fa-user" ></i> Профиль</a></li>
+    <li><a href="javascript:void(0);" id="auth-link" onclick="return openPopupInfo()">Профиль</a></li>
 
 
 @else
