@@ -110,7 +110,7 @@ class LobbyController extends Controller
             {
                 $gameSession->winner_id = $gameSessionUserCheck->user_id;
                 $gameSessionUserCheck->credits_after = $gameSessionUserCheck->credits_after + $gameSession->bet->bet;
-
+                $gameSessionUser->score = (int)$request->score;
                 $winner = User::find($gameSessionUserCheck->user_id);
                 $winner->credits = $winner->credits + $gameSession->bet->bet;
                 $winner->update();
