@@ -5,10 +5,7 @@
     <div class="section secondary-section " id="portfolio">
         <div class="triangle"></div>
         <div class="container">
-            <div class=" title">
-                <h1>Have You Seen our Works?</h1>
-                <p>Duis mollis placerat quam, eget laoreet tellus tempor eu. Quisque dapibus in purus in dignissim.</p>
-            </div>
+
 
             <!-- Start details for portfolio project 1 -->
             <div id="single-project">
@@ -20,24 +17,19 @@
                         <div class="project-description">
                             <div class="project-title clearfix">
                                 <h3>{{$game->name}}</h3>
-                                <span class="show_hide close">
-                                        <i class="icon-cancel"></i>
-                                    </span>
+
                             </div>
                             <div class="project-info">
                                 <div>Игроков онлайн: 0</div>
                                 <div>Пригласить:</div>
 
                                 @if(Auth::user())
-                                    <div class="post" style="text-align: center">
-                                        <ul id="generate_ui">
-                                            <button id="generate_btn" onclick='return generate_code("{{$game->slug}}")' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
-                                        </ul>
-                                        <div id="social_btn" style="">
-                                            <script src="https://yastatic.net/share2/share.js" async="async"></script>
-                                            {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
-                                            <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,viber,whatsapp,skype,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="http://gamechainger.io?from=vk_fb" data-image="http://mob.gamechainger.io/template/mobile/cools/img/games/8Pool.jpg">  </div>
-                                        </div>
+
+                                    <div id="social_btn" style="">
+                                        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
+                                        <script src="https://yastatic.net/share2/share.js" async="async"></script>
+                                        {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus  ,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
+                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="http://gamechainger.io?from=vk_fb" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
                                     </div>
                                 @else
                                     <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
