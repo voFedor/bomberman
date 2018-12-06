@@ -14,6 +14,7 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 
 <link rel="stylesheet" href="/template/mobile/{{env('MOBILE_THEME')}}/css/custom.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
 
 <style>
     .modal-open .modal {

@@ -12,8 +12,11 @@
                     <div class="modal-body">
                         <div class="people-list" id="people-list">
                             <div class="search">
-                                <input type="text" placeholder="search" />
-                                <i class="fa fa-search"></i>
+                                <div class="filter" style="color: black">
+                                    <label><input type="radio" v-model="selectedCategory" value="All" /> Все</label>
+                                    <label><input type="radio" v-model="selectedCategory" value="Online" /> Онлайн</label>
+                                    <label><input type="radio" v-model="selectedCategory" value="Offline" /> Офлайн</label>
+                                </div>
                             </div>
                             <ul class="list" style="overflow-y: hidden;overflow: auto;">
                                 <li class="clearfix" v-for="friend in friends" :key=friend.id>
@@ -54,10 +57,26 @@
         props: ['game_id', 'bet_id'],
         data(){
             return {
-                friends:[]
+                friends:[],
+                selectedCategory: "All"
             }
         },
+        computed: {
+            filteredPeople: function() {
+                var category = this.selectedCategory;
 
+                if(category === "All") {
+                    return this.friends;
+                } else {
+                    return this.friends.filter(function(friend) {
+                        if (category == "Online")
+                        return friend.session.online === true;
+                        else
+                            return friend.session.online === false;
+                    });
+                }
+            }
+        },
         mounted() {
             console.log('Component mounted.')
         },
@@ -69,7 +88,7 @@
                 this.$modal.hide('hello-world');
             },
             play: function (friend) {
-
+                $('#users_list').modal('toggle');
                 axios.post('/getGamePlay', {
                     game_id: $("#game_id_for_vue").val(),
                     friend_id: friend.id,

@@ -68,7 +68,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.js"></script>
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
-
+<script src="/template/mobile/{{env('MOBILE_THEME')}}/js/jquery.magnific-popup.min.js"></script>
 {{--<div id="app">--}}
     {{--<chat-component :bet_id="{{$bet_id}}" :game_id="{{$game_id}}"></chat-component>--}}
 {{--</div>--}}

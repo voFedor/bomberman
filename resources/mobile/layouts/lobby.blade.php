@@ -34,6 +34,16 @@
 <!-- end footer -->
 
 
+
+@if(Auth::check())
+
+    <input type="hidden" id="game_id_for_vue" name="game_id_for_vue">
+    <input type="hidden" id="bet_id_for_vue" name="bet_id_for_vue">
+@endif
+
+<div id="app">
+    <chat-component :bet_id="'+bet+'" :game_id="'+bet+'"></chat-component>
+</div>
 @include('lobby.parts.modal')
 
 <!-- scripts -->

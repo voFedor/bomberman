@@ -967,7 +967,7 @@ module.exports = Cancel;
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(10);
-module.exports = __webpack_require__(46);
+module.exports = __webpack_require__(51);
 
 
 /***/ }),
@@ -43755,13 +43755,13 @@ return VueChatScroll;
 var disposed = false
 function injectStyle (ssrContext) {
   if (disposed) return
-  __webpack_require__(51)
+  __webpack_require__(42)
 }
-var normalizeComponent = __webpack_require__(42)
+var normalizeComponent = __webpack_require__(47)
 /* script */
-var __vue_script__ = __webpack_require__(43)
+var __vue_script__ = __webpack_require__(48)
 /* template */
-var __vue_template__ = __webpack_require__(45)
+var __vue_template__ = __webpack_require__(50)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -43801,430 +43801,46 @@ module.exports = Component.exports
 
 /***/ }),
 /* 42 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-/* globals __VUE_SSR_CONTEXT__ */
+// style-loader: Adds some css to the DOM by adding a <style> tag
 
-// IMPORTANT: Do NOT use ES2015 features in this file.
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-module.exports = function normalizeComponent (
-  rawScriptExports,
-  compiledTemplate,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier /* server only */
-) {
-  var esModule
-  var scriptExports = rawScriptExports = rawScriptExports || {}
-
-  // ES6 modules interop
-  var type = typeof rawScriptExports.default
-  if (type === 'object' || type === 'function') {
-    esModule = rawScriptExports
-    scriptExports = rawScriptExports.default
-  }
-
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (compiledTemplate) {
-    options.render = compiledTemplate.render
-    options.staticRenderFns = compiledTemplate.staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = injectStyles
-  }
-
-  if (hook) {
-    var functional = options.functional
-    var existing = functional
-      ? options.render
-      : options.beforeCreate
-
-    if (!functional) {
-      // inject component registration as beforeCreate hook
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    } else {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return existing(h, context)
-      }
-    }
-  }
-
-  return {
-    esModule: esModule,
-    exports: scriptExports,
-    options: options
-  }
+// load the styles
+var content = __webpack_require__(43);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(45)("45364606", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
 }
-
 
 /***/ }),
 /* 43 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__public_some_js__ = __webpack_require__(44);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__public_some_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__public_some_js__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+exports = module.exports = __webpack_require__(44)(false);
+// imports
 
 
+// module
+exports.push([module.i, "\ni {\n    color: green;\n}\n", ""]);
 
+// exports
 
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        moment: __WEBPACK_IMPORTED_MODULE_0__public_some_js___default.a
-    },
-    props: ['game_id', 'bet_id'],
-    data: function data() {
-        return {
-            friends: []
-        };
-    },
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-    methods: {
-        show: function show() {
-            this.$modal.show('hello-world');
-        },
-        hide: function hide() {
-            this.$modal.hide('hello-world');
-        },
-
-        play: function play(friend) {
-            axios.post('/getGamePlay', {
-                game_id: $("#game_id_for_vue").val(),
-                friend_id: friend.id,
-                bet_id: $("#bet_id_for_vue").val()
-            }).then(function (res) {
-                return openMathGameWindow(res.data.data);
-            });
-        },
-        openGamePopU: function close(friend) {
-            friend.session.open = false;
-        },
-        getUsers: function getUsers() {
-            var _this = this;
-
-            axios.post('/getUsers/').then(function (res) {
-                return _this.friends = res.data.data;
-            });
-        },
-        openChat: function openChat(friend) {
-            if (friend.session) {
-                this.friends.forEach(function (friend) {
-                    friend.session.open = false;
-                });
-                friend.session.open = true;
-            } else {
-                this.createSession(friend);
-            }
-        },
-        createSession: function createSession(friend) {
-            axios.post('/session/create', { friend_id: friend.id }).then(function (res) {
-                friend.session = res.data.data, friend.session.open = true;
-            });
-        }
-    },
-    created: function created() {
-        var _this2 = this;
-
-        this.getUsers();
-        Echo.channel('Chat').listen('SessionEvent', function (e) {
-            var friend = _this2.friends.find(function (friend) {
-                return friend.id == e.session_by;
-            });
-            friend.session = e.session;
-        });
-        Echo.join('Chat').here(function (users) {
-            _this2.friends.forEach(function (friend) {
-                users.forEach(function (user) {
-                    if (user.id == friend.id) {
-                        friend.online = true;
-                    }
-                });
-            });
-        }).joining(function (user) {
-            _this2.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = true : "";
-            });
-        }).leaving(function (user) {
-            _this2.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = false : '';
-            });
-        });
-    }
-});
-
-$(function () {
-    openGameWindow();
-});
 
 /***/ }),
 /* 44 */
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-/* 45 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      staticClass: "container clearfix",
-      staticStyle: {
-        margin: "0 auto",
-        background: "#444753",
-        "border-radius": "5px"
-      }
-    },
-    [
-      _c(
-        "div",
-        {
-          staticClass: "modal fade",
-          attrs: { id: "users_list", role: "dialog" }
-        },
-        [
-          _c("div", { staticClass: "modal-dialog modal-sm" }, [
-            _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c(
-                  "div",
-                  { staticClass: "people-list", attrs: { id: "people-list" } },
-                  [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c(
-                      "ul",
-                      {
-                        staticClass: "list",
-                        staticStyle: {
-                          "overflow-y": "hidden",
-                          overflow: "auto"
-                        }
-                      },
-                      _vm._l(_vm.friends, function(friend) {
-                        return _c(
-                          "li",
-                          { key: friend.id, staticClass: "clearfix" },
-                          [
-                            _c("img", {
-                              attrs: {
-                                src:
-                                  "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg",
-                                alt: "avatar"
-                              }
-                            }),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "about" }, [
-                              _c("div", { staticClass: "name" }, [
-                                _vm._v(_vm._s(friend.name))
-                              ]),
-                              _vm._v(" "),
-                              _c("div", { staticClass: "status" }, [
-                                friend.online
-                                  ? _c("i", {
-                                      staticClass: "fa fa-circle online"
-                                    })
-                                  : _vm._e(),
-                                _vm._v(" "),
-                                _c(
-                                  "button",
-                                  {
-                                    on: {
-                                      click: function($event) {
-                                        $event.preventDefault()
-                                        _vm.play(friend)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Пригласить")]
-                                )
-                              ])
-                            ])
-                          ]
-                        )
-                      })
-                    )
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ])
-          ])
-        ]
-      )
-    ]
-  )
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("×")]
-      ),
-      _vm._v(" "),
-      _c("h4", { staticClass: "modal-title" }, [_vm._v("Modal Header")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "search" }, [
-      _c("input", { attrs: { type: "text", placeholder: "search" } }),
-      _vm._v(" "),
-      _c("i", { staticClass: "fa fa-search" })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-default",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Close")]
-      )
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c0ce17c4", module.exports)
-  }
-}
-
-/***/ }),
-/* 46 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 47 */,
-/* 48 */
 /***/ (function(module, exports) {
 
 /*
@@ -44306,49 +43922,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 49 */,
-/* 50 */,
-/* 51 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// style-loader: Adds some css to the DOM by adding a <style> tag
-
-// load the styles
-var content = __webpack_require__(52);
-if(typeof content === 'string') content = [[module.i, content, '']];
-if(content.locals) module.exports = content.locals;
-// add the styles to the DOM
-var update = __webpack_require__(53)("45364606", content, false, {});
-// Hot Module Replacement
-if(false) {
- // When the styles change, update the <style> tags
- if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue");
-     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
-     update(newContent);
-   });
- }
- // When the module is disposed, remove the <style> tags
- module.hot.dispose(function() { update(); });
-}
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(48)(false);
-// imports
-
-
-// module
-exports.push([module.i, "\ni {\n    color: green;\n}\n", ""]);
-
-// exports
-
-
-/***/ }),
-/* 53 */
+/* 45 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -44367,7 +43941,7 @@ if (typeof DEBUG !== 'undefined' && DEBUG) {
   ) }
 }
 
-var listToStyles = __webpack_require__(54)
+var listToStyles = __webpack_require__(46)
 
 /*
 type StyleObject = {
@@ -44576,7 +44150,7 @@ function applyToTag (styleElement, obj) {
 
 
 /***/ }),
-/* 54 */
+/* 46 */
 /***/ (function(module, exports) {
 
 /**
@@ -44607,6 +44181,516 @@ module.exports = function listToStyles (parentId, list) {
   return styles
 }
 
+
+/***/ }),
+/* 47 */
+/***/ (function(module, exports) {
+
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file.
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+module.exports = function normalizeComponent (
+  rawScriptExports,
+  compiledTemplate,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier /* server only */
+) {
+  var esModule
+  var scriptExports = rawScriptExports = rawScriptExports || {}
+
+  // ES6 modules interop
+  var type = typeof rawScriptExports.default
+  if (type === 'object' || type === 'function') {
+    esModule = rawScriptExports
+    scriptExports = rawScriptExports.default
+  }
+
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (compiledTemplate) {
+    options.render = compiledTemplate.render
+    options.staticRenderFns = compiledTemplate.staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = injectStyles
+  }
+
+  if (hook) {
+    var functional = options.functional
+    var existing = functional
+      ? options.render
+      : options.beforeCreate
+
+    if (!functional) {
+      // inject component registration as beforeCreate hook
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    } else {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return existing(h, context)
+      }
+    }
+  }
+
+  return {
+    esModule: esModule,
+    exports: scriptExports,
+    options: options
+  }
+}
+
+
+/***/ }),
+/* 48 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__public_some_js__ = __webpack_require__(49);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__public_some_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__public_some_js__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: {
+        moment: __WEBPACK_IMPORTED_MODULE_0__public_some_js___default.a
+    },
+    props: ['game_id', 'bet_id'],
+    data: function data() {
+        return {
+            friends: [],
+            selectedCategory: "All"
+        };
+    },
+
+    computed: {
+        filteredPeople: function filteredPeople() {
+            var category = this.selectedCategory;
+
+            if (category === "All") {
+                return this.friends;
+            } else {
+                return this.friends.filter(function (friend) {
+                    if (category == "Online") return friend.session.online === true;else return friend.session.online === false;
+                });
+            }
+        }
+    },
+    mounted: function mounted() {
+        console.log('Component mounted.');
+    },
+
+    methods: {
+        show: function show() {
+            this.$modal.show('hello-world');
+        },
+        hide: function hide() {
+            this.$modal.hide('hello-world');
+        },
+
+        play: function play(friend) {
+            $('#users_list').modal('toggle');
+            axios.post('/getGamePlay', {
+                game_id: $("#game_id_for_vue").val(),
+                friend_id: friend.id,
+                bet_id: $("#bet_id_for_vue").val()
+            }).then(function (res) {
+                return openMathGameWindow(res.data.data);
+            });
+        },
+        openGamePopU: function close(friend) {
+            friend.session.open = false;
+        },
+        getUsers: function getUsers() {
+            var _this = this;
+
+            axios.post('/getUsers/').then(function (res) {
+                return _this.friends = res.data.data;
+            });
+        },
+        openChat: function openChat(friend) {
+            if (friend.session) {
+                this.friends.forEach(function (friend) {
+                    friend.session.open = false;
+                });
+                friend.session.open = true;
+            } else {
+                this.createSession(friend);
+            }
+        },
+        createSession: function createSession(friend) {
+            axios.post('/session/create', { friend_id: friend.id }).then(function (res) {
+                friend.session = res.data.data, friend.session.open = true;
+            });
+        }
+    },
+    created: function created() {
+        var _this2 = this;
+
+        this.getUsers();
+        Echo.channel('Chat').listen('SessionEvent', function (e) {
+            var friend = _this2.friends.find(function (friend) {
+                return friend.id == e.session_by;
+            });
+            friend.session = e.session;
+        });
+        Echo.join('Chat').here(function (users) {
+            _this2.friends.forEach(function (friend) {
+                users.forEach(function (user) {
+                    if (user.id == friend.id) {
+                        friend.online = true;
+                    }
+                });
+            });
+        }).joining(function (user) {
+            _this2.friends.forEach(function (friend) {
+                return user.id == friend.id ? friend.online = true : "";
+            });
+        }).leaving(function (user) {
+            _this2.friends.forEach(function (friend) {
+                return user.id == friend.id ? friend.online = false : '';
+            });
+        });
+    }
+});
+
+$(function () {
+    openGameWindow();
+});
+
+/***/ }),
+/* 49 */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+/* 50 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "container clearfix",
+      staticStyle: {
+        margin: "0 auto",
+        background: "#444753",
+        "border-radius": "5px"
+      }
+    },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "modal fade",
+          attrs: { id: "users_list", role: "dialog" }
+        },
+        [
+          _c("div", { staticClass: "modal-dialog modal-sm" }, [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c(
+                  "div",
+                  { staticClass: "people-list", attrs: { id: "people-list" } },
+                  [
+                    _c("div", { staticClass: "search" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "filter",
+                          staticStyle: { color: "black" }
+                        },
+                        [
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedCategory,
+                                  expression: "selectedCategory"
+                                }
+                              ],
+                              attrs: { type: "radio", value: "All" },
+                              domProps: {
+                                checked: _vm._q(_vm.selectedCategory, "All")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.selectedCategory = "All"
+                                }
+                              }
+                            }),
+                            _vm._v(" Все")
+                          ]),
+                          _vm._v(" "),
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedCategory,
+                                  expression: "selectedCategory"
+                                }
+                              ],
+                              attrs: { type: "radio", value: "Online" },
+                              domProps: {
+                                checked: _vm._q(_vm.selectedCategory, "Online")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.selectedCategory = "Online"
+                                }
+                              }
+                            }),
+                            _vm._v(" Онлайн")
+                          ]),
+                          _vm._v(" "),
+                          _c("label", [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.selectedCategory,
+                                  expression: "selectedCategory"
+                                }
+                              ],
+                              attrs: { type: "radio", value: "Offline" },
+                              domProps: {
+                                checked: _vm._q(_vm.selectedCategory, "Offline")
+                              },
+                              on: {
+                                change: function($event) {
+                                  _vm.selectedCategory = "Offline"
+                                }
+                              }
+                            }),
+                            _vm._v(" Офлайн")
+                          ])
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      {
+                        staticClass: "list",
+                        staticStyle: {
+                          "overflow-y": "hidden",
+                          overflow: "auto"
+                        }
+                      },
+                      _vm._l(_vm.friends, function(friend) {
+                        return _c(
+                          "li",
+                          { key: friend.id, staticClass: "clearfix" },
+                          [
+                            _c("img", {
+                              attrs: {
+                                src:
+                                  "https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg",
+                                alt: "avatar"
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "about" }, [
+                              _c("div", { staticClass: "name" }, [
+                                _vm._v(_vm._s(friend.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "status" }, [
+                                friend.online
+                                  ? _c("i", {
+                                      staticClass: "fa fa-circle online"
+                                    })
+                                  : _vm._e(),
+                                _vm._v(" "),
+                                _c(
+                                  "button",
+                                  {
+                                    on: {
+                                      click: function($event) {
+                                        $event.preventDefault()
+                                        _vm.play(friend)
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Пригласить")]
+                                )
+                              ])
+                            ])
+                          ]
+                        )
+                      })
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(1)
+            ])
+          ])
+        ]
+      )
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("×")]
+      ),
+      _vm._v(" "),
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Modal Header")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-default",
+          attrs: { type: "button", "data-dismiss": "modal" }
+        },
+        [_vm._v("Close")]
+      )
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-c0ce17c4", module.exports)
+  }
+}
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

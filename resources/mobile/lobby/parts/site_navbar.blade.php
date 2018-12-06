@@ -15,6 +15,7 @@
             <li><a href="/history"><i class="fa fa-user-plus"></i>История побед</a></li>
             <li><a href="/payments"><i class="fa fa-user-plus"></i>Баланс</a></li>
             <li><a href="/profile"><i class="fa fa-user-plus"></i>Профиль</a></li>
+            <li><a href="/challenge"><i class="fa fa-user-plus"></i>Вызовы</a></li>
         @else
             <li style="text-align: -webkit-center;margin-top: 15px;">
             {{--<h5>Вы не авторизированы</h5>--}}
