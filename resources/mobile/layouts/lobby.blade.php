@@ -6,7 +6,17 @@
 
 </head>
 <body>
-
+<style>
+    .fancybox-overlay {
+        position: relative;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        display: none;
+        /*    z-index: 9999;*/
+        background: url('fancybox_overlay.png');
+    }
+</style>
 <!-- loader -->
 @include('lobby.parts.loader')
 <!-- end loader -->

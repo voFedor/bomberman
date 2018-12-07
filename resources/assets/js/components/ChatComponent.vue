@@ -25,7 +25,10 @@
                                         <div class="name">{{friend.name}}</div>
                                         <div class="status">
                                             <i class="fa fa-circle online" v-if="friend.online"></i>
-                                            <button  @click.prevent="play(friend)">Пригласить</button>
+                                            <button  @click.prevent="play(friend)">Играть</button>
+                                            Пригласите друзей:
+                                            Отправьте им ссылку для регистрации:
+                                            <span>http://ohh/invitation/{{current_user}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -58,7 +61,8 @@
         data(){
             return {
                 friends:[],
-                selectedCategory: "All"
+                selectedCategory: "All",
+                current_user: ""
             }
         },
         computed: {
@@ -102,6 +106,9 @@
             getUsers(){
                 axios.post('/getUsers/').then(res => (this.friends = res.data.data));
             },
+            getCurrentUsers(){
+                axios.post('/getCurrentUsers/').then(res => (this.current_user = res.data.data));
+            },
             openChat(friend){
                 if (friend.session){
                     this.friends.forEach(friend => {
@@ -122,6 +129,7 @@
         },
         created(){
             this.getUsers();
+            this.getCurrentUsers();
             Echo.channel(`Chat`).listen('SessionEvent', e => {
                let friend = this.friends.find(friend => friend.id == e.session_by);
                friend.session = e.session;
@@ -155,5 +163,8 @@
 <style>
     i {
         color: green;
+    }
+    .status{
+        color: black;
     }
 </style>

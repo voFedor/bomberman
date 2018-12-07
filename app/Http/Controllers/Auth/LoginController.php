@@ -11,6 +11,7 @@ use Socialite;
 use Auth;
 use Hash;
 use Storage;
+use Session;
 use App\Models\User;
 use App\Models\Role;
 use Illuminate\Support\Facades\Redirect;
@@ -40,6 +41,7 @@ class LoginController extends Controller
             $newUser->email = $email;
             $newUser->password = Hash::make(str_random(8));
             $newUser->role = 2;
+            $newUser->uuid = str_random(30);
             $newUser->save();
         }
 
@@ -141,15 +143,38 @@ class LoginController extends Controller
         $partOfEmail = explode("@", $request->input(self::$fields['register']['email']));
         $username = $partOfEmail[0];
 
+        //$invitation_user_id = null;
+        $uuid_invitation_user = Session::get('uuid');
+        if ($uuid_invitation_user != null)
+        {
+            $invitation_user = User::where('uuid', $uuid_invitation_user)->first();
+
+            if($invitation_user != null)
+            {
+                $invitation_user_id = $invitation_user->id;
+            }
+        }
         $password = str_random(5);
-        $user = User::create([
-            'email' => $request->input(self::$fields['register']['email']),
-            'name' => $username,
-            'credits' => 0,
-            'password' => bcrypt($password),
-            'role_id' => User::GAMER,
-            'token' => str_random(20)
-        ]);
+        $user = new User();
+        $user->email = $request->input(self::$fields['register']['email']);
+        $user->name = $username;
+        $user->credits = 0;
+        $user->password = bcrypt($password);
+        $user->role_id = User::GAMER;
+        $user->token = str_random(20);
+        $user->uuid = str_random(30);
+        $user->invited_user_id = $invitation_user_id;
+        $user->save();
+//        $user = User::create([
+//            'email' => $request->input(self::$fields['register']['email']),
+//            'name' => $username,
+//            'credits' => 0,
+//            'password' => bcrypt($password),
+//            'role_id' => User::GAMER,
+//            'token' => str_random(20),
+//            'uuid' => str_random(30),
+//            'invited_user_id' => $invitation_user_id
+//        ]);
 
         if($user){
             $email = $request->input(self::$fields['register']['email']);

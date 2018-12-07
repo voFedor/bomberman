@@ -132,4 +132,17 @@
                 border-top-left-radius: 0.3rem;
                 border-top-right-radius: 0.3rem;
             }
+
+
+
+
+            .fancybox-overlay {
+                position: relative;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+                display: none;
+                /*    z-index: 9999;*/
+                background: url('fancybox_overlay.png');
+            }
 </style>

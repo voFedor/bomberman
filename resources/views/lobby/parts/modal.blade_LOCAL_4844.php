@@ -162,7 +162,6 @@
     <a href="/history">История побед</a>
     <a href="/challenge">Вызовы</a>
     <a href="/payments">Баланс</a>
-    <a href="/invitations">Ивайты</a>
     <a href="/profile">Профиль</a>
     <a id="wp-logout"
        href="{{ route('auth.logout') }}">Выйти
@@ -199,7 +198,7 @@
                 {{--<label for="rememberme-lwa-1">Запомнить меня</label>--}}
                 {{--</div>--}}
                 <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="lwa_wp-submit-1"
-                        tabindex="100" type="button" onclick="return login('auth-form')">
+                        tabindex="100" type="button" onclick="return login()">
                     Войти
                 </button>
                 <div style="line-height: 13px;">
@@ -227,7 +226,7 @@
 
                 <input type="hidden" name="login-with-ajax" value="register">
                 <button class="btn btn-sm ml-0 mr-0" name="wp-submit" id="wp-submit-1" tabindex="100"
-                        type="button" onclick="return register('reg-form')">
+                        type="button" onclick="return register()">
                     Зарегистрироваться
                 </button>
                 <br>
@@ -273,7 +272,6 @@
 
 
 
-
 <div id="loginForm" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="color: black;">
     <div class="modal-dialog modal-dialog-custom" role="document">
         <div class="modal-content modal-content-custom" id="loginFormContent">
@@ -290,7 +288,6 @@
                 <a class="btn btn-social btn-vk" style="padding: 0 1.1rem;" href="/login/vk">
                     <span class="fa fa-vk"></span>
                 </a>
-            <form action="javascript:void(0)" method="post" id="auth-form-popup" style="text-align: -webkit-center;">
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5" style="padding: 10px;">
                         <input  name="log" type="email" id="loginForm-email" class="form-control validate">
@@ -304,7 +301,7 @@
 
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button style="float: left;" class="btn btn-default" onclick="return login('auth-form-popup')">Войти</button>
+                    <button style="float: left;" class="btn btn-default" onclick="return login()">Войти</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-label="Close">cancel</button>
                 </div>
             </form>
@@ -314,17 +311,17 @@
                 <h4 class="modal-title w-100 font-weight-bold">Регистрация</h4>
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutLoginForm()" href="javascript:void(0)">Вход</a></h6>
             </div>
-            <form action="javascript:void(0)" action="/register" method="post" id="regForm-popup"   style="text-align: -webkit-center;">
+            <form action="javascript:void(0)" action="/register" method="post" id="reg-form"   style="text-align: -webkit-center;">
                 <div class="modal-body mx-3">
                     <div class="md-form mb-5" style="padding: 10px;">
                         <span id="error_forget" style="color: red;font-size: 16px;"></span>
-                        <input type="email"  name="user_login" id="user_login-1-mySmallModalLabel" class="form-control validate">
+                        <input type="email"  name="user_login" id="user_login-1" class="form-control validate">
                         <label data-error="wrong" for="regForm-email">Ваш email</label>
                     </div>
                     <input type="hidden" name="login-with-ajax" value="register">
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button style="float: left;" class="btn btn-default"  onclick="return register('regForm-popup')">Потвердить</button>
+                    <button style="float: left;" class="btn btn-default"  onclick="return register()">Потвердить</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-label="Close">cancel</button>
                 </div>
             </form>

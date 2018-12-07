@@ -1,5 +1,5 @@
-function login() {
-    var data   = $('#auth-form').serialize();
+function login(form_id) {
+    var data   = $('#'+form_id).serialize();
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -23,46 +23,49 @@ function login() {
 }
 
 
+function register(form_id) {
+    var data = $('#'+form_id).serialize();
+    if (isValidEmailAddress($("#register").val()) ||
+        isValidEmailAddress($("#user_login-1").val()) ||
+        isValidEmailAddress($("#user_login-1-mySmallModalLabel").val())) {
 
-function register() {
-    var data   = $('#reg-form').serialize();
-    if (!isValidEmailAddress($("#user_login-1").val())) {
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $.ajax({
+            url: '/register',
+            data: data,
+            type: "POST",
+            success: function (data_resp) {
+                if (data_resp['result'] == 'success') {
+                    toastr.clear();
+                    toastr.success(data_resp['message'], 'Отлично!', {timeOut: 3000});
+                    return;
+                }
+                if (data_resp['result'] == 'error') {
+                    toastr.clear();
+                    toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
+                    //showErrorReg(data_resp['message']);
+                }
+            },
+            error: function (xhr, str) {
+                toastr.clear();
+                toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
+            },
+            beforeSend: function () {
+                toastr.clear();
+                toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
+            }
+        });
+
+    } else {
         toastr.clear();
         toastr.error('Укажите реальный email', 'Ошибка!', {timeOut: 3000});
         return;
     }
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-    $.ajax({
-        url: '/register',
-        data: data,
-        type: "POST",
-        success: function(data_resp){
-            if (data_resp['result'] == 'success') {
-                toastr.clear();
-                toastr.success(data_resp['message'], 'Отлично!', {timeOut: 3000});
-                return;
-            }
-            if (data_resp['result'] == 'error'){
-                toastr.clear();
-                toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
-                //showErrorReg(data_resp['message']);
-            }
-        },
-        error:  function(xhr, str){
-            toastr.clear();
-            toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
-        },
-        beforeSend : function (){
-            toastr.clear();
-            toastr.info('Запрос обрабатывается', 'Внимание!', {timeOut: 3000});
-        }
-    });
 }
-
 
 function remember() {
     var data   = $('#forgot-form').serialize();
