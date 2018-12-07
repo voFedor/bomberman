@@ -10,12 +10,11 @@
         <div class="container">
 
 
-            <p class="large-text">Тут можно пополнить свой баланс, вывести деньги и увидеть историю пополнений и снятий </p>
+            <p class="large-text">Тут можно изменить свои данныее </p>
             <div class="row-fluid">
                 <div class="span5">
 
-                    <h3>Получить деньги</h3>
-                    <h5>При выводе средств мы оставляем у себя комиссию 10%</h5>
+                    <h5>Дополни или измени информацию о себе</h5>
                     <div class="col-md-12">
                         @if ($errors->any())
                             <div class="alert alert-danger">
