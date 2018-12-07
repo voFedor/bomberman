@@ -17,9 +17,8 @@
 
 
 @yield('content')
-
 <div id="app">
-    <chat-component :bet_id="'+bet+'" :game_id="'+bet+'"></chat-component>
+    <chat-component></chat-component>
 </div>
 
 

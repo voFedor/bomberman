@@ -38,6 +38,12 @@ class LobbyController extends Controller
         return view('lobby.index', compact('games'));
     }
 
+    public function getNewUser($uuid)
+    {
+        \Session::put('uuid', $uuid);
+        return redirect('/');
+    }
+
 
     public function getChallenge()
     {
@@ -160,6 +166,11 @@ class LobbyController extends Controller
     public function getUsers(Request $request)
     {
         return  UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
+    }
+
+    public function getCurrentUsers(Request $request)
+    {
+        return  Auth::user()->uuid;
     }
 
 

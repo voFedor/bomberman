@@ -20,6 +20,7 @@ class UserSeed extends Seeder
                 'password' => bcrypt('admin'),
                 'role_id' => User::ADMIN,
                 'remember_token' => '',
+                'uuid' => "asdasdas"
             ],
         ];
 
@@ -36,6 +37,7 @@ class UserSeed extends Seeder
                 'role_id' => User::GAMER,
                 'credits' => 100,
                 'remember_token' => '',
+                'uuid' => str_random(10)
             ]);
         }
 

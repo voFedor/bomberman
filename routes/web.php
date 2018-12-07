@@ -2,9 +2,11 @@
 Route::get('/', 'LobbyController@getIndex');
 Route::get('/challenge', 'LobbyController@getChallenge');
 Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
+Route::get('/invitation/{uuid}', 'LobbyController@getNewUser');
 
 Route::get('/lobby', 'LobbyController@getLobby');
 Route::get('/getUsers', 'LobbyController@getUsers');
+Route::get('/getCurrentUsers', 'LobbyController@getCurrentUsers');
 Route::post('/getGamePlay', 'LobbyController@getGamePlay');
 Route::get('/play', 'LobbyController@play');
 Route::get('/save-game-result', 'LobbyController@saveScore');

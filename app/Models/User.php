@@ -31,7 +31,8 @@ class User extends Authenticatable
         'role_id',
         'first_name',
         'last_name',
-        'country'
+        'country',
+        'uuid'
     ];
 
     protected $hidden = ['password', 'remember_token'];
@@ -49,7 +50,10 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
-
+    public function payments()
+    {
+        return $this->hasMany(PaymentHistory::class);
+    }
 
     /**
      * Hash password

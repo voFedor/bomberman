@@ -32,6 +32,8 @@ class CreateUsersTable extends Migration
             $table->string('ip')->nullable()->default(null);
             $table->decimal('credits', 7, 2)->default(0);
             $table->string('token')->nullable()->default(null);
+            $table->string('uuid');
+            $table->integer('invited_user_id');
             $table->rememberToken();
             $table->timestamps();
         });

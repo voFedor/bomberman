@@ -2,57 +2,46 @@
 
 @section('content')
 
-    <div class="section secondary-section " id="portfolio">
+
+
+    <!-- Start home section -->
+    <div class="section secondary-section">
         <div class="triangle"></div>
         <div class="container">
+            <p class="large-text">Страница где ты можешь посмотреть историю своих побед и запомнить обидчиков, чтобы взять реванш</p>
+            <div class="row-fluid">
+                <div class="span12">
+                    <table class="table table-dark">
+                        <thead>
+                        <tr>
+                            <th>Пользователь</th>
+                            <th>Дата регистрации</th>
+                            <th>общая сумма пополнений</th>
+                            <th>Действия</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @if (count($user->invitations) > 0)
+                            @foreach ($user->invitations as $invitation)
 
+                                <tr>
+                                    <td>{{$invitation->name}}</td>
+                                    <td>{{Carbon\Carbon::parse($invitation->created_at)->diffForHumans()}}</td>
+                                    <td>{{$invitation->payments->sum('amount')}}</td>
+                                    <td>
 
-            <!-- Start details for portfolio project 1 -->
-            <div id="single-project">
-                <div id="slidingDiv" class=" row-fluid single-project">
-                    <div class="span6">
-                        <img src="/{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="project 1" />
-                    </div>
-                    <div class="span6">
-                        <div class="project-description">
-                            <div class="project-title clearfix">
-                                <h3>{{$game->name}}</h3>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        @endif
 
-                            </div>
-                            <div class="project-info">
-                                <div>Игроков онлайн: 0</div>
-                                <div>Пригласить:</div>
-
-                                @if(Auth::user())
-
-                                    <div id="social_btn" style="">
-                                        <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
-                                        <script src="https://yastatic.net/share2/share.js" async="async"></script>
-                                        {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus  ,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
-                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url=" http://disput.fun/invitation/{{Auth::user()->uuid}}/?from=vk_fb" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
-                                    </div>
-                                @else
-                                    <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
-                                @endif
-                            </div>
-                            <p>
-                                {{$game->description}}
-                            </p>
-                            <div class="share-post">
-                                <ul>
-                                    {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
-                                    <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 0р</button>
-                                    <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-
             </div>
         </div>
     </div>
-    <!-- Contact section start -->
+    <!-- Client section start -->
     <div id="games" class="section third-section">
         <div class="container centered">
             <div class="sub-section">
@@ -70,21 +59,19 @@
                         <li>
                             {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
                             <a href="/game/{{$game->slug}}">
-                                <img src="/{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
+                                <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="/{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
                         </a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-    <!-- Client section start -->
-
     <!-- Contact section start -->
     <div id="contact" class="contact">
         <div class="section secondary-section">
@@ -213,6 +200,8 @@
                 {{--</li>--}}
             </ul>
         </div>
+    </div>
+    </div>
     </div>
     <!-- Contact section edn -->
 
