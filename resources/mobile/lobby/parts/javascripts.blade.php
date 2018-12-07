@@ -157,7 +157,7 @@
             scrolling : 'auto',
             preload   : true,
             wmode: 'transparent',
-            allowfullscreen   : true,
+            allowfullscreen   : false,
             allowscriptaccess : 'always',
             buttons : ['close'],
             clickSlide: 'toggleControls',
