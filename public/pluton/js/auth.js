@@ -10,6 +10,9 @@ function login(form_id) {
         data: data,
         type: "POST",
         success: function(data){
+            if (data['result'] == 'url') {
+                window.location.href = data['url'];
+            }
             if (data['result'] == 'success') {
                 location.reload();
             }

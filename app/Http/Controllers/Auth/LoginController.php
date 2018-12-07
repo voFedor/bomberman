@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Game;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Mail;
@@ -143,7 +144,7 @@ class LoginController extends Controller
         $partOfEmail = explode("@", $request->input(self::$fields['register']['email']));
         $username = $partOfEmail[0];
 
-        //$invitation_user_id = null;
+        $invitation_user_id = null;
         $uuid_invitation_user = Session::get('uuid');
         if ($uuid_invitation_user != null)
         {
@@ -301,6 +302,19 @@ class LoginController extends Controller
 
         if ($user && Hash::check($request->input(self::$fields['login']['password']), $user->password)) {
             Auth::loginUsingId($user->id);
+
+            $game_id = $request->game_id;
+            if($game_id != null)
+            {
+                $game = Game::find($game_id);
+                return [
+                    'result' => 'url',
+                    'email' => $user->email,
+                    'credits' => $user->credits,
+                    'url' => env("APP_URL").'/game/'.$game->slug,
+                    'action' => $request->input('login-with-ajax')
+                ];
+            }
 
             return [
                 'result' => 'success',

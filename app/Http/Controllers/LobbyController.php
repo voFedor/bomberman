@@ -38,10 +38,15 @@ class LobbyController extends Controller
         return view('lobby.index', compact('games'));
     }
 
-    public function getNewUser($uuid)
+    public function getNewUser()
     {
+        $temp = Route::getCurrentRoute()->parameters();
+
+        $uuid = Input::get('ref');
         \Session::put('uuid', $uuid);
-        return redirect('/');
+        $game_id = Input::get('game');
+        $game = Game::find($game_id);
+        return redirect("/game/".$game->slug);
     }
 
 
@@ -182,6 +187,7 @@ class LobbyController extends Controller
      */
     public function getGames()
     {
+
         return view('lobby.games');
     }
 
@@ -192,7 +198,7 @@ class LobbyController extends Controller
     }
 
 
-    public function getGame($slug)
+    public function getGame($slug, Request $request)
     {
         $game = Game::where('slug', $slug)->first();
         $user = Auth::user();
@@ -211,6 +217,20 @@ class LobbyController extends Controller
             }
         }
         $games = Game::all();
+
+        $uuid = $request->ref;
+        if ($uuid != null)
+        {
+            \Session::put('uuid', $uuid);
+
+            $game = Game::find($request->game);
+            \Session::put('game_id', $game->id);
+
+            return view('lobby.game', compact('game', 'games'));
+        }
+
+
+
         return view('lobby.game', compact('game', 'games'));
     }
 
