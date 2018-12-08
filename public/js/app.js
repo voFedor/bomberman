@@ -44369,16 +44369,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     computed: {
         filteredPeople: function filteredPeople() {
-            var category = this.selectedCategory;
+            var vm = this;
+            var category = vm.selectedCategory;
 
             if (category === "All") {
-                return this.friends;
+                return vm.friends;
             } else {
-                return this.friends.filter(function (friend) {
-                    if (category == "Online") return friend.session.online === true;else return friend.session.online === false;
+                return vm.friends.filter(function (friend) {
+
+                    if (vm.selectedCategory == "Online") {
+                        return friend.session !== null;
+                    }
+                    if (vm.selectedCategory == "Offline") {
+                        return friend.session === null;
+                    }
                 });
             }
         }
+
     },
     mounted: function mounted() {
         console.log('Component mounted.');
@@ -44600,7 +44608,7 @@ var render = function() {
                           overflow: "auto"
                         }
                       },
-                      _vm._l(_vm.friends, function(friend) {
+                      _vm._l(_vm.filteredPeople, function(friend) {
                         return _c(
                           "li",
                           { key: friend.id, staticClass: "clearfix" },

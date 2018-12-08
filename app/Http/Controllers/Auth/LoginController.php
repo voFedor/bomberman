@@ -36,13 +36,14 @@ class LoginController extends Controller
             $newUser = new User();
             $newUser->uid = $userVk->user['id'];
             $newUser->first_name = $userVk->user['first_name'];
+            $newUser->name = $userVk->user['first_name'];
             $newUser->last_name = $userVk->user['last_name'];
             $newUser->photo = $userVk->user['photo'];
             $newUser->network = "vk";
             $newUser->email = $email;
             $newUser->password = Hash::make(str_random(8));
             $newUser->role = 2;
-            $newUser->uuid = str_random(30);
+            $newUser->uuid = str_random(5);
             $newUser->save();
         }
 
@@ -159,11 +160,12 @@ class LoginController extends Controller
         $user = new User();
         $user->email = $request->input(self::$fields['register']['email']);
         $user->name = $username;
+        $user->first_name = $username;
         $user->credits = 0;
         $user->password = bcrypt($password);
         $user->role_id = User::GAMER;
         $user->token = str_random(20);
-        $user->uuid = str_random(30);
+        $user->uuid = str_random(5);
         $user->invited_user_id = $invitation_user_id;
         $user->save();
 //        $user = User::create([

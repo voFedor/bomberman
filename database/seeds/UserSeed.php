@@ -37,7 +37,7 @@ class UserSeed extends Seeder
                 'role_id' => User::GAMER,
                 'credits' => 100,
                 'remember_token' => '',
-                'uuid' => str_random(10)
+                'uuid' => str_random(5)
             ]);
         }
 

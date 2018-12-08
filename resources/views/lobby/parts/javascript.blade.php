@@ -82,7 +82,7 @@
     function checkBalance(id, bet) {
         if ("{{Auth::user()}}" == "")
         {
-            $('#loginForm').modal('show');
+            $('#checkBalanceForm').modal('show');
             toastr.clear();
             toastr.error('Выполните вход на сайт', '', {timeOut: 3000});
             return;
@@ -103,11 +103,12 @@
                 bet: bet,
                 _token: '{{csrf_token()}}'},
             success: function (data) {
-                if (data['result'] < data['bet'])  {
+                    if (Math.round(data['result']) < Math.round(data['bet'])) {
+
                     $('#paymentBtn').modal('show');
                     toastr.clear();
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})
-                    return false;
+
                 } else {
                     $("#game_id_for_vue").val(id);
                     $("#bet_id_for_vue").val(bet);

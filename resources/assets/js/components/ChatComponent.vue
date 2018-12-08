@@ -19,7 +19,7 @@
                                 </div>
                             </div>
                             <ul class="list" style="overflow-y: hidden;overflow: auto;">
-                                <li class="clearfix" v-for="friend in friends" :key=friend.id>
+                                <li class="clearfix" v-for="friend in filteredPeople" :key=friend.id>
                                     <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
                                     <div class="about">
                                         <div class="name">{{friend.name}}</div>
@@ -67,19 +67,24 @@
         },
         computed: {
             filteredPeople: function() {
-                var category = this.selectedCategory;
+                var vm = this;
+                var category = vm.selectedCategory;
 
                 if(category === "All") {
-                    return this.friends;
+                    return vm.friends;
                 } else {
-                    return this.friends.filter(function(friend) {
-                        if (category == "Online")
-                        return friend.session.online === true;
-                        else
-                            return friend.session.online === false;
+                    return vm.friends.filter(function(friend) {
+                       
+                        if (vm.selectedCategory == "Online"){
+                            return friend.session !== null;
+                        }
+                        if (vm.selectedCategory == "Offline"){
+                            return friend.session === null;
+                        }
                     });
                 }
-            }
+            },
+
         },
         mounted() {
             console.log('Component mounted.')
