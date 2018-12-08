@@ -74,7 +74,7 @@
                     return vm.friends;
                 } else {
                     return vm.friends.filter(function(friend) {
-                       
+
                         if (vm.selectedCategory == "Online"){
                             return friend.session !== null;
                         }

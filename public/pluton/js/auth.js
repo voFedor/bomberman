@@ -17,7 +17,8 @@ function login(form_id) {
                 location.reload();
             }
             if (data['result'] == 'error'){
-                showErrorLogin(data['message']);
+                toastr.clear();
+                toastr.error(data['message'], 'Ошибка!', {timeOut: 3000});
             }
     },
     error:  function(xhr, str){

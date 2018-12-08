@@ -49,9 +49,12 @@
 
             </div>
             <div class="modal-footer d-flex justify-content-center">
-                <button style="float: left;" class="btn btn-default" onclick="return login()">Войти</button>
+                <button style="float: left;" class="btn btn-default" onclick="return login('auth-form')">Войти</button>
                 <button class="btn btn-default" data-dismiss="modal" aria-label="Close">cancel</button>
             </div>
+                {{ csrf_field() }}
+                <input type="hidden" name="lwa_profile_link" value="1">
+                <input type="hidden" name="login-with-ajax" value="login">
             </form>
         </div>
         <div class="modal-content modal-content-custom" id="regForm" style="display: none">
