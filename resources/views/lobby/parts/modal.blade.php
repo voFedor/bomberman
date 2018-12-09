@@ -264,6 +264,7 @@
 <div id="paymentBtn" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content" style="text-align: center;">
+                <h4 class="modal-title w-100 font-weight-bold">На твоем счету не достаточно средств, чтобы сделать ставку<br/>Пожалуйста пополни счет </h4>
                 <a href="/payments" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Пополнить счет</a>
             </div>
         </div>

@@ -978,18 +978,15 @@ module.exports = __webpack_require__(51);
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_js_modal__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_js_modal___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_js_modal__);
-
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-
 __webpack_require__(11);
 
 window.Vue = __webpack_require__(36);
 Vue.use(__webpack_require__(39));
-
 
 Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_js_modal___default.a);
 /**
@@ -997,22 +994,19 @@ Vue.use(__WEBPACK_IMPORTED_MODULE_0_vue_js_modal___default.a);
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
 //Vue.component('chat-component', require('./components/LobbyComponent.vue'));
-Vue.component('chat-component', __webpack_require__(41));
+
+Vue.component('chat-component', __webpack_require__(41)); // register modal component
 // register modal component
 
-
-// register modal component
 Vue.component('modal', {
-    template: '#modal'
+  template: '#modal'
 });
-
 var app = new Vue({
-    el: '#app',
-    data: {
-        showModal: false
-    }
+  el: '#app',
+  data: {
+    showModal: false
+  }
 });
 
 /***/ }),
@@ -1023,16 +1017,13 @@ var app = new Vue({
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo__ = __webpack_require__(34);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_laravel_echo__);
-
 window._ = __webpack_require__(12);
 window.Popper = __webpack_require__(14).default;
-
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
  * for JavaScript based Bootstrap features such as modals and tabs. This
  * code may be modified to fit the specific needs of your application.
  */
-
 // try {
 //     window.$ = window.jQuery = require('jquery');
 //
@@ -1046,9 +1037,7 @@ window.Popper = __webpack_require__(14).default;
  */
 
 window.axios = __webpack_require__(15);
-
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -1062,7 +1051,6 @@ if (token) {
 } else {
   console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
-
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
@@ -1072,7 +1060,6 @@ if (token) {
 
 
 window.Pusher = __webpack_require__(35);
-
 window.Echo = new __WEBPACK_IMPORTED_MODULE_0_laravel_echo___default.a({
   broadcaster: 'pusher',
   key: "2cc8326ee42413bb0886",
@@ -43778,7 +43765,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\ChatComponent.vue"
+Component.options.__file = "resources/assets/js/components/ChatComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -43787,9 +43774,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-c0ce17c4", Component.options)
+    hotAPI.createRecord("data-v-ed7b4d44", Component.options)
   } else {
-    hotAPI.reload("data-v-c0ce17c4", Component.options)
+    hotAPI.reload("data-v-ed7b4d44", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -43810,13 +43797,13 @@ var content = __webpack_require__(43);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(45)("45364606", content, false, {});
+var update = __webpack_require__(45)("3d46431e", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue", function() {
-     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-c0ce17c4\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue");
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ed7b4d44\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-ed7b4d44\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./ChatComponent.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -44351,131 +44338,126 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-
-
-
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: {
-        moment: __WEBPACK_IMPORTED_MODULE_0__public_some_js___default.a
-    },
-    props: ['game_id', 'bet_id'],
-    data: function data() {
-        return {
-            friends: [],
-            selectedCategory: "All",
-            current_user: ""
-        };
-    },
+  components: {
+    moment: __WEBPACK_IMPORTED_MODULE_0__public_some_js___default.a
+  },
+  props: ['game_id', 'bet_id'],
+  data: function data() {
+    return {
+      friends: [],
+      selectedCategory: "All",
+      current_user: ""
+    };
+  },
+  computed: {
+    filteredPeople: function filteredPeople() {
+      var vm = this;
+      var category = vm.selectedCategory;
 
-    computed: {
-        filteredPeople: function filteredPeople() {
-            var vm = this;
-            var category = vm.selectedCategory;
+      if (category === "All") {
+        return vm.friends;
+      } else {
+        return vm.friends.filter(function (friend) {
+          if (vm.selectedCategory == "Online") {
+            return friend.session !== null;
+          }
 
-            if (category === "All") {
-                return vm.friends;
-            } else {
-                return vm.friends.filter(function (friend) {
-
-                    if (vm.selectedCategory == "Online") {
-                        return friend.session !== null;
-                    }
-                    if (vm.selectedCategory == "Offline") {
-                        return friend.session === null;
-                    }
-                });
-            }
-        }
-
-    },
-    mounted: function mounted() {
-        console.log('Component mounted.');
-    },
-
-    methods: {
-        show: function show() {
-            this.$modal.show('hello-world');
-        },
-        hide: function hide() {
-            this.$modal.hide('hello-world');
-        },
-
-        play: function play(friend) {
-            $('#users_list').modal('toggle');
-            axios.post('/getGamePlay', {
-                game_id: $("#game_id_for_vue").val(),
-                friend_id: friend.id,
-                bet_id: $("#bet_id_for_vue").val()
-            }).then(function (res) {
-                return openMathGameWindow(res.data.data);
-            });
-        },
-        openGamePopU: function close(friend) {
-            friend.session.open = false;
-        },
-        getUsers: function getUsers() {
-            var _this = this;
-
-            axios.post('/getUsers/').then(function (res) {
-                return _this.friends = res.data.data;
-            });
-        },
-        getCurrentUsers: function getCurrentUsers() {
-            var _this2 = this;
-
-            axios.post('/getCurrentUsers/').then(function (res) {
-                return _this2.current_user = res.data.data;
-            });
-        },
-        openChat: function openChat(friend) {
-            if (friend.session) {
-                this.friends.forEach(function (friend) {
-                    friend.session.open = false;
-                });
-                friend.session.open = true;
-            } else {
-                this.createSession(friend);
-            }
-        },
-        createSession: function createSession(friend) {
-            axios.post('/session/create', { friend_id: friend.id }).then(function (res) {
-                friend.session = res.data.data, friend.session.open = true;
-            });
-        }
-    },
-    created: function created() {
-        var _this3 = this;
-
-        this.getUsers();
-        this.getCurrentUsers();
-        Echo.channel('Chat').listen('SessionEvent', function (e) {
-            var friend = _this3.friends.find(function (friend) {
-                return friend.id == e.session_by;
-            });
-            friend.session = e.session;
+          if (vm.selectedCategory == "Offline") {
+            return friend.session === null;
+          }
         });
-        Echo.join('Chat').here(function (users) {
-            _this3.friends.forEach(function (friend) {
-                users.forEach(function (user) {
-                    if (user.id == friend.id) {
-                        friend.online = true;
-                    }
-                });
-            });
-        }).joining(function (user) {
-            _this3.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = true : "";
-            });
-        }).leaving(function (user) {
-            _this3.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = false : '';
-            });
-        });
+      }
     }
-});
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  },
+  methods: {
+    show: function show() {
+      this.$modal.show('hello-world');
+    },
+    hide: function hide() {
+      this.$modal.hide('hello-world');
+    },
+    play: function play(friend) {
+      $('#users_list').modal('toggle');
+      axios.post('/getGamePlay', {
+        game_id: $("#game_id_for_vue").val(),
+        friend_id: friend.id,
+        bet_id: $("#bet_id_for_vue").val()
+      }).then(function (res) {
+        return openMathGameWindow(res.data.data);
+      });
+    },
+    openGamePopU: function close(friend) {
+      friend.session.open = false;
+    },
+    getUsers: function getUsers() {
+      var _this = this;
 
+      axios.post('/getUsers/').then(function (res) {
+        return _this.friends = res.data.data;
+      });
+    },
+    getCurrentUsers: function getCurrentUsers() {
+      var _this2 = this;
+
+      axios.post('/getCurrentUsers/').then(function (res) {
+        return _this2.current_user = res.data.data;
+      });
+    },
+    openChat: function openChat(friend) {
+      if (friend.session) {
+        this.friends.forEach(function (friend) {
+          friend.session.open = false;
+        });
+        friend.session.open = true;
+      } else {
+        this.createSession(friend);
+      }
+    },
+    createSession: function createSession(friend) {
+      axios.post('/session/create', {
+        friend_id: friend.id
+      }).then(function (res) {
+        friend.session = res.data.data, friend.session.open = true;
+      });
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    this.getUsers();
+    this.getCurrentUsers();
+    Echo.channel("Chat").listen('SessionEvent', function (e) {
+      var friend = _this3.friends.find(function (friend) {
+        return friend.id == e.session_by;
+      });
+
+      friend.session = e.session;
+    });
+    Echo.join("Chat").here(function (users) {
+      _this3.friends.forEach(function (friend) {
+        users.forEach(function (user) {
+          if (user.id == friend.id) {
+            friend.online = true;
+          }
+        });
+      });
+    }).joining(function (user) {
+      _this3.friends.forEach(function (friend) {
+        return user.id == friend.id ? friend.online = true : "";
+      });
+    }).leaving(function (user) {
+      _this3.friends.forEach(function (friend) {
+        return user.id == friend.id ? friend.online = false : '';
+      });
+    });
+  }
+});
 $(function () {
-    openGameWindow();
+  openGameWindow();
 });
 
 /***/ }),
@@ -44711,7 +44693,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-c0ce17c4", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-ed7b4d44", module.exports)
   }
 }
 
