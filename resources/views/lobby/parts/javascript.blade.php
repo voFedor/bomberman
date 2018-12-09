@@ -273,6 +273,12 @@
     {{--}--}}
 
     @if(Auth::user() != null)
+
+    function closeGame() {
+        $.fancybox.close();
+    }
+
+
     function checkBalanceFromChallenge(id, bet, uuid) {
         if ("{{Auth::user()}}" == "")
         {
@@ -303,6 +309,7 @@
                     toastr.error("", 'Пополните счет!', {timeOut: 3000})
                     return false;
                 } else {
+
                     openMathGameWindow("{{env('GAME_HOST')}}"+"/?"+uuid+"/"+'{{Auth::user()->id}}')
                 }
             },
