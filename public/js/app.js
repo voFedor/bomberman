@@ -44381,7 +44381,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   mounted: function mounted() {
     console.log('Component mounted.');
-    this.$dialog.confirm('Please confirm to continue');
   },
   methods: {
     show: function show() {
@@ -44400,9 +44399,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         bet_id: $("#bet_id_for_vue").val()
       }).then(function (res) {
         _this.session_id = res.data.data;
-        console.log(_this.session_id);
+        console.log(res.data.error);
 
-        if (res.data.error != true) {
+        if (res.data.error === false) {
           axios.post('/getGamePlay', {
             game_id: $("#game_id_for_vue").val(),
             friend_id: friend.id,

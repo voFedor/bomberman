@@ -145,7 +145,7 @@ class LoginController extends Controller
         $partOfEmail = explode("@", $request->input(self::$fields['register']['email']));
         $username = $partOfEmail[0];
 
-        $invitation_user_id = null;
+        $invitation_user_id = 0;
         $uuid_invitation_user = Session::get('uuid');
         if ($uuid_invitation_user != null)
         {

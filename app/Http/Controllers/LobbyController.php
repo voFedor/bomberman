@@ -84,12 +84,17 @@ class LobbyController extends Controller
         })->first();
 
         if ($checkGames != null)
-            return response()->json(['error' => true]);
+        {
+            $error = true;
+        } else {
+            $error = false;
+        }
+
         if ($games == null)
         {
-            return response()->json(['data' => 0]);
+            return response()->json(['data' => 0, 'error' =>  $error]);
         } else {
-            return response()->json(['data' => $games->id]);
+            return response()->json(['data' => $games->id, 'error' =>  $error]);
         }
 
 

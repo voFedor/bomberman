@@ -87,7 +87,6 @@
         },
         mounted() {
             console.log('Component mounted.');
-            this.$dialog.confirm('Please confirm to continue')
         },
         methods: {
             show () {
@@ -105,8 +104,8 @@
                     bet_id: $("#bet_id_for_vue").val()
                 }).then(res => {
                     this.session_id = res.data.data;
-                    console.log(this.session_id);
-                    if (res.data.error != true) {
+                    console.log(res.data.error);
+                    if (res.data.error === false) {
                         axios.post('/getGamePlay', {
                             game_id: $("#game_id_for_vue").val(),
                             friend_id: friend.id,
