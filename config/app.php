@@ -200,6 +200,7 @@ return [
         \App\Providers\LogProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
+        Laravel\Socialite\SocialiteServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
@@ -257,6 +258,7 @@ return [
         'Form'         => Collective\Html\FormFacade::class,
         'Html'         => Collective\Html\HtmlFacade::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
     

@@ -25,6 +25,8 @@ Route::post('/profile/save', 'LobbyController@profileSave');
 Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
 Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback');
 
+Route::get('/redirect', 'Auth\SocialAuthController@redirect');
+Route::get('/callback', 'Auth\SocialAuthController@callback');
 
 Route::get('/users-list/{game_id}/{bet_id}', 'SessionController@getUsersListForGame');
 
