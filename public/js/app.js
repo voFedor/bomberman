@@ -43834,7 +43834,7 @@ exports = module.exports = __webpack_require__(44)(false);
 
 
 // module
-exports.push([module.i, "\ni {\n    color: green;\n}\n.status{\n    color: black;\n}\n", ""]);
+exports.push([module.i, "\ni {\n    color: green;\n}\n.status{\n    color: black;\n}\n.name{\n     color: black;\n}\n", ""]);
 
 // exports
 
@@ -44347,9 +44347,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -44363,7 +44360,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             friends: [],
             selectedCategory: "All",
-            current_user: ""
+            current_user: "",
+            games: [],
+            session_id: 0
         };
     },
 
@@ -44378,10 +44377,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return vm.friends.filter(function (friend) {
 
                     if (vm.selectedCategory == "Online") {
-                        return friend.session !== null;
+                        return friend.online == true;
                     }
                     if (vm.selectedCategory == "Offline") {
-                        return friend.session === null;
+                        return friend.online === false;
                     }
                 });
             }
@@ -44401,30 +44400,42 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
 
         play: function play(friend) {
+            var _this = this;
+
             $('#users_list').modal('toggle');
-            axios.post('/getGamePlay', {
+
+            axios.post('/checkGameSession', {
                 game_id: $("#game_id_for_vue").val(),
                 friend_id: friend.id,
                 bet_id: $("#bet_id_for_vue").val()
             }).then(function (res) {
-                return openMathGameWindow(res.data.data);
+                _this.session_id = res.data.data;
+                console.log(_this.session_id);
+                axios.post('/getGamePlay', {
+                    game_id: $("#game_id_for_vue").val(),
+                    friend_id: friend.id,
+                    bet_id: $("#bet_id_for_vue").val(),
+                    session_id: _this.session_id
+                }).then(function (result) {
+                    return openMathGameWindow(result.data.data);
+                });
             });
         },
         openGamePopU: function close(friend) {
             friend.session.open = false;
         },
         getUsers: function getUsers() {
-            var _this = this;
+            var _this2 = this;
 
             axios.post('/getUsers/').then(function (res) {
-                return _this.friends = res.data.data;
+                return _this2.friends = res.data.data;
             });
         },
         getCurrentUsers: function getCurrentUsers() {
-            var _this2 = this;
+            var _this3 = this;
 
             axios.post('/getCurrentUsers/').then(function (res) {
-                return _this2.current_user = res.data.data;
+                return _this3.current_user = res.data.data;
             });
         },
         openChat: function openChat(friend) {
@@ -44444,18 +44455,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }
     },
     created: function created() {
-        var _this3 = this;
+        var _this4 = this;
 
         this.getUsers();
         this.getCurrentUsers();
         Echo.channel('Chat').listen('SessionEvent', function (e) {
-            var friend = _this3.friends.find(function (friend) {
+            var friend = _this4.friends.find(function (friend) {
                 return friend.id == e.session_by;
             });
             friend.session = e.session;
         });
         Echo.join('Chat').here(function (users) {
-            _this3.friends.forEach(function (friend) {
+            _this4.friends.forEach(function (friend) {
                 users.forEach(function (user) {
                     if (user.id == friend.id) {
                         friend.online = true;
@@ -44463,11 +44474,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 });
             });
         }).joining(function (user) {
-            _this3.friends.forEach(function (friend) {
+            _this4.friends.forEach(function (friend) {
                 return user.id == friend.id ? friend.online = true : "";
             });
         }).leaving(function (user) {
-            _this3.friends.forEach(function (friend) {
+            _this4.friends.forEach(function (friend) {
                 return user.id == friend.id ? friend.online = false : '';
             });
         });
@@ -44644,16 +44655,7 @@ var render = function() {
                                     }
                                   },
                                   [_vm._v("Играть")]
-                                ),
-                                _vm._v(
-                                  "\n                                        Пригласите друзей:\n                                        Отправьте им ссылку для регистрации:\n                                        "
-                                ),
-                                _c("span", [
-                                  _vm._v(
-                                    "http://ohh/invitation/" +
-                                      _vm._s(_vm.current_user)
-                                  )
-                                ])
+                                )
                               ])
                             ])
                           ]

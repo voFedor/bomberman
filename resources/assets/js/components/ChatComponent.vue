@@ -26,9 +26,6 @@
                                         <div class="status">
                                             <i class="fa fa-circle online" v-if="friend.online"></i>
                                             <button  @click.prevent="play(friend)">Играть</button>
-                                            Пригласите друзей:
-                                            Отправьте им ссылку для регистрации:
-                                            <span>http://ohh/invitation/{{current_user}}</span>
                                         </div>
                                     </div>
                                 </li>
@@ -62,7 +59,9 @@
             return {
                 friends:[],
                 selectedCategory: "All",
-                current_user: ""
+                current_user: "",
+                games: [],
+                session_id: 0
             }
         },
         computed: {
@@ -76,10 +75,10 @@
                     return vm.friends.filter(function(friend) {
 
                         if (vm.selectedCategory == "Online"){
-                            return friend.session !== null;
+                            return friend.online == true;
                         }
                         if (vm.selectedCategory == "Offline"){
-                            return friend.session === null;
+                            return friend.online === false;
                         }
                     });
                 }
@@ -98,11 +97,24 @@
             },
             play: function (friend) {
                 $('#users_list').modal('toggle');
-                axios.post('/getGamePlay', {
+
+                axios.post('/checkGameSession', {
                     game_id: $("#game_id_for_vue").val(),
                     friend_id: friend.id,
                     bet_id: $("#bet_id_for_vue").val()
-                }).then(res => openMathGameWindow(res.data.data))
+                }).then(res => {
+                    this.session_id = res.data.data;
+                    console.log(this.session_id);
+                    axios.post('/getGamePlay', {
+                        game_id: $("#game_id_for_vue").val(),
+                        friend_id: friend.id,
+                        bet_id: $("#bet_id_for_vue").val(),
+                        session_id: this.session_id
+                    }).then(result => openMathGameWindow(result.data.data))
+
+                });
+
+
             },
             openGamePopU: function
             close(friend){
@@ -172,4 +184,7 @@
     .status{
         color: black;
     }
+    .name{
+         color: black;
+     }
 </style>

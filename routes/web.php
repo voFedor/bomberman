@@ -7,6 +7,7 @@ Route::get('/invitation/{uuid}', 'LobbyController@getNewUser');
 Route::get('/lobby', 'LobbyController@getLobby');
 Route::get('/getUsers', 'LobbyController@getUsers');
 Route::get('/getCurrentUsers', 'LobbyController@getCurrentUsers');
+Route::post('/checkGameSession', 'LobbyController@checkGameSession');
 Route::post('/getGamePlay', 'LobbyController@getGamePlay');
 Route::get('/play', 'LobbyController@play');
 Route::get('/save-game-result', 'LobbyController@saveScore');

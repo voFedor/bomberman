@@ -21,6 +21,8 @@ class VerifyCsrfToken extends Middleware
         '/pvp/get-duel',
         '/ulogin',
         '/getUsers',
-        '/save-game-result'
+        '/save-game-result',
+        '/checkGameSession',
+        '/getGamePlay'
     ];
 }

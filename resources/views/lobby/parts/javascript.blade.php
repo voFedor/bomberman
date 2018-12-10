@@ -397,6 +397,7 @@
         return vars;
     }
     function openMathGameWindow(data) {
+
         console.log(data);
         $.fancybox.open({
             padding : 0,

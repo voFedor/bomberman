@@ -69,41 +69,63 @@ class LobbyController extends Controller
     }
 
 
+    public function checkGameSession(Request $request)
+    {
+        $user_game_session = GameSessionUser::where('user_id', Auth::user()->id)->pluck('session_id')->all();
+        $friend_id = $request->friend_id;
+
+        $games = GameSession::whereIn('id', $user_game_session)->where('winner_id', null)->whereHas('users_sessions', function ($query) use ($friend_id) {
+            $query->where('user_id', $friend_id);
+        })->first();
+
+        if ($games == null)
+        {
+            return response()->json(['data' => 0]);
+        } else {
+            return response()->json(['data' => $games->id]);
+        }
+
+
+    }
+
 
     public function getGamePlay(Request $request)
     {
-        $uuid = str_random(8);
-        if (GameSession::where('uuid', $uuid)->first() != null) {
-            while (GameSession::where('uuid', $uuid)->first() != null) {
-                $uuid = str_random(8);
-            }
-        }
-
-        $check_session = GameSessionUser::where('user_id', $request->friend_id)->where('user_id', Auth::user()->id)->get();
-
-        if (count($check_session) < 2)
+        if ($request->session_id == 0)
         {
-            $gameSession = new GameSession();
-            $gameSession->bet_id = $request->bet_id;
-            $gameSession->game_id = $request->game_id;
-            $gameSession->started_at = Carbon::now();
-            $gameSession->uuid = $uuid;
-            $gameSession->save();
+            $uuid = str_random(8);
+            if (GameSession::where('uuid', $uuid)->first() != null) {
+                while (GameSession::where('uuid', $uuid)->first() != null) {
+                    $uuid = str_random(8);
+                }
+            }
 
-            $gameSessionUser = new GameSessionUser();
-            $gameSessionUser->user_id = $request->friend_id;
-            $gameSessionUser->session_id = $gameSession->id;
-            $gameSessionUser->credits_before = User::find($request->friend_id)->credits;
-            $gameSessionUser->save();
+                $gameSession = new GameSession();
+                $gameSession->bet_id = $request->bet_id;
+                $gameSession->game_id = $request->game_id;
+                $gameSession->started_at = Carbon::now();
+                $gameSession->uuid = $uuid;
+                $gameSession->save();
 
-            $gameSessionUser = new GameSessionUser();
-            $gameSessionUser->user_id = Auth::user()->id;
-            $gameSessionUser->session_id = $gameSession->id;
-            $gameSessionUser->credits_before = Auth::user()->credits;
-            $gameSessionUser->save();
+                $gameSessionUser = new GameSessionUser();
+                $gameSessionUser->user_id = $request->friend_id;
+                $gameSessionUser->session_id = $gameSession->id;
+                $gameSessionUser->credits_before = User::find($request->friend_id)->credits;
+                $gameSessionUser->save();
+
+                $gameSessionUser = new GameSessionUser();
+                $gameSessionUser->user_id = Auth::user()->id;
+                $gameSessionUser->session_id = $gameSession->id;
+                $gameSessionUser->credits_before = Auth::user()->credits;
+                $gameSessionUser->save();
+
+
+            return response()->json(['data' => env('GAME_HOST')."/?$uuid/".Auth::user()->id]);
+        } else {
+            $uuid = GameSession::find($request->session_id)->uuid;
+            return response()->json(['data' => env('GAME_HOST')."/?$uuid/".Auth::user()->id]);
         }
 
-         return response()->json(['data' => env('GAME_HOST')."/?$uuid/".Auth::user()->id]);
     }
 
 
