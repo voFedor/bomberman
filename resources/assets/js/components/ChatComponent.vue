@@ -110,7 +110,11 @@
                         friend_id: friend.id,
                         bet_id: $("#bet_id_for_vue").val(),
                         session_id: this.session_id
-                    }).then(result => openMathGameWindow(result.data.data))
+                    }).then(result => {
+                        console.log(result.data.data);
+                        openMathGameWindow(result.data.data)
+
+                    });
 
                 });
 

@@ -75,14 +75,19 @@ class LobbyController extends Controller
         $friend_id = $request->friend_id;
 
         $games = GameSession::whereIn('id', $user_game_session)->where('winner_id', null)->whereHas('users_sessions', function ($query) use ($friend_id) {
+            $query->where('user_id', Auth::user()->id);
+        })->first();
+        $friendSession = GameSession::whereIn('id', $user_game_session)->where('winner_id', null)->whereHas('users_sessions', function ($query) use ($friend_id) {
             $query->where('user_id', $friend_id);
         })->first();
+
+
 
         if ($games == null)
         {
             return response()->json(['data' => 0]);
         } else {
-            return response()->json(['data' => $games->id]);
+            return response()->json(['data' => $friendSession->id]);
         }
 
 
@@ -192,6 +197,7 @@ class LobbyController extends Controller
 
     public function getUsers(Request $request)
     {
+
         return  UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
     }
 

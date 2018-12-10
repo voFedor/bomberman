@@ -21,7 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'online' => false,
             'session' => $this->session_details($this->id),
-            'uuid' => $this->uuid
+            'uuid' => $this->uuid,
+            //'openGameSession' => $this->checkOpenSession()
         ];
     }
 
@@ -31,4 +32,14 @@ class UserResource extends JsonResource
             ->first();
         return new SessionResource($session);
     }
+
+//    private function checkOpenSession($friend_id)
+//    {
+//        $user_id = Auth::user()->id;
+//        $userCount = [$user_id, $friend_id];
+//        $games = GameSession::where(['winner_id' => null])->whereHas('users_sessions', function ($query) use ($user_id) {
+//            $query->where('user_id', $user_id);
+//        })->get();
+//        return count($games);
+//    }
 }
