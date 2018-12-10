@@ -86,7 +86,8 @@
 
         },
         mounted() {
-            console.log('Component mounted.')
+            console.log('Component mounted.');
+            this.$dialog.confirm('Please confirm to continue')
         },
         methods: {
             show () {
@@ -105,12 +106,21 @@
                 }).then(res => {
                     this.session_id = res.data.data;
                     console.log(this.session_id);
-                    axios.post('/getGamePlay', {
-                        game_id: $("#game_id_for_vue").val(),
-                        friend_id: friend.id,
-                        bet_id: $("#bet_id_for_vue").val(),
-                        session_id: this.session_id
-                    }).then(result => openMathGameWindow(result.data.data))
+                    if (res.data.error != true) {
+                        axios.post('/getGamePlay', {
+                            game_id: $("#game_id_for_vue").val(),
+                            friend_id: friend.id,
+                            bet_id: $("#bet_id_for_vue").val(),
+                            session_id: this.session_id
+                        }).then(result => {
+                            console.log(result.data.data);
+                            openMathGameWindow(result.data.data)
+                        });
+                    } else {
+                        confirm('вы уже играли, дождитесь пока ваш соперник покажет результат\n' +
+                            'Можете сразиться с кем нибудь еще')
+                    }
+
 
                 });
 

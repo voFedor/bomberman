@@ -9,9 +9,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 Vue.use(require('vue-chat-scroll'));
-import VModal from 'vue-js-modal'
+import VModal from 'vue-js-modal';
 
-Vue.use(VModal)
+
+import VuejsDialog from "vuejs-dialog";
+
+// include the default style
+
+// Tell Vue to install the plugin.
+Vue.use(VuejsDialog);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -22,12 +28,10 @@ Vue.use(VModal)
 Vue.component('chat-component', require('./components/ChatComponent.vue'));
 // register modal component
 
-
-
-// register modal component
 Vue.component('modal', {
-    template: '#modal'
+    template: '#modal-template'
 })
+
 
 const app = new Vue({
     el: '#app',

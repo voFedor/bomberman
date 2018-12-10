@@ -78,6 +78,13 @@ class LobbyController extends Controller
             $query->where('user_id', $friend_id);
         })->first();
 
+
+        $checkGames = GameSession::whereIn('id', $user_game_session)->where('winner_id', null)->whereHas('users_sessions', function ($query) use ($friend_id) {
+            $query->where('user_id', Auth::user()->id)->where('score', '!=', null);
+        })->first();
+
+        if ($checkGames != null)
+            return response()->json(['error' => true]);
         if ($games == null)
         {
             return response()->json(['data' => 0]);
@@ -192,6 +199,7 @@ class LobbyController extends Controller
 
     public function getUsers(Request $request)
     {
+
         return  UserResource::collection(User::where('id', '!=', Auth::user()->id)->get());
     }
 
