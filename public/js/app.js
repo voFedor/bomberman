@@ -44344,7 +44344,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     return {
       friends: [],
       selectedCategory: "All",
-      current_user: ""
+      current_user: "",
+      games: [],
+      session_id: 0
     };
   },
   computed: {
@@ -44357,11 +44359,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       } else {
         return vm.friends.filter(function (friend) {
           if (vm.selectedCategory == "Online") {
-            return friend.session !== null;
+            return friend.online == true;
           }
 
           if (vm.selectedCategory == "Offline") {
-            return friend.session === null;
+            return friend.online === false;
           }
         });
       }
@@ -44374,167 +44376,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     show: function show() {
       this.$modal.show('hello-world');
     },
-<<<<<<< HEAD
-    props: ['game_id', 'bet_id'],
-    data: function data() {
-        return {
-            friends: [],
-            selectedCategory: "All",
-            current_user: "",
-            games: [],
-            session_id: 0
-        };
-    },
-
-    computed: {
-        filteredPeople: function filteredPeople() {
-            var vm = this;
-            var category = vm.selectedCategory;
-
-            if (category === "All") {
-                return vm.friends;
-            } else {
-                return vm.friends.filter(function (friend) {
-
-                    if (vm.selectedCategory == "Online") {
-                        return friend.online == true;
-                    }
-                    if (vm.selectedCategory == "Offline") {
-                        return friend.online === false;
-                    }
-                });
-            }
-        }
-
-=======
     hide: function hide() {
       this.$modal.hide('hello-world');
     },
     play: function play(friend) {
+      var _this = this;
+
       $('#users_list').modal('toggle');
-      axios.post('/getGamePlay', {
+      axios.post('/checkGameSession', {
         game_id: $("#game_id_for_vue").val(),
         friend_id: friend.id,
         bet_id: $("#bet_id_for_vue").val()
       }).then(function (res) {
-        return openMathGameWindow(res.data.data);
+        _this.session_id = res.data.data;
+        console.log(_this.session_id);
+        axios.post('/getGamePlay', {
+          game_id: $("#game_id_for_vue").val(),
+          friend_id: friend.id,
+          bet_id: $("#bet_id_for_vue").val(),
+          session_id: _this.session_id
+        }).then(function (result) {
+          return openMathGameWindow(result.data.data);
+        });
       });
->>>>>>> 110b5ebf18f2d1be8663d8ed2772c198863db048
     },
     openGamePopU: function close(friend) {
       friend.session.open = false;
     },
     getUsers: function getUsers() {
-      var _this = this;
+      var _this2 = this;
 
-<<<<<<< HEAD
-    methods: {
-        show: function show() {
-            this.$modal.show('hello-world');
-        },
-        hide: function hide() {
-            this.$modal.hide('hello-world');
-        },
-
-        play: function play(friend) {
-            var _this = this;
-
-            $('#users_list').modal('toggle');
-
-            axios.post('/checkGameSession', {
-                game_id: $("#game_id_for_vue").val(),
-                friend_id: friend.id,
-                bet_id: $("#bet_id_for_vue").val()
-            }).then(function (res) {
-                _this.session_id = res.data.data;
-                console.log(_this.session_id);
-                axios.post('/getGamePlay', {
-                    game_id: $("#game_id_for_vue").val(),
-                    friend_id: friend.id,
-                    bet_id: $("#bet_id_for_vue").val(),
-                    session_id: _this.session_id
-                }).then(function (result) {
-                    return openMathGameWindow(result.data.data);
-                });
-            });
-        },
-        openGamePopU: function close(friend) {
-            friend.session.open = false;
-        },
-        getUsers: function getUsers() {
-            var _this2 = this;
-
-            axios.post('/getUsers/').then(function (res) {
-                return _this2.friends = res.data.data;
-            });
-        },
-        getCurrentUsers: function getCurrentUsers() {
-            var _this3 = this;
-
-            axios.post('/getCurrentUsers/').then(function (res) {
-                return _this3.current_user = res.data.data;
-            });
-        },
-        openChat: function openChat(friend) {
-            if (friend.session) {
-                this.friends.forEach(function (friend) {
-                    friend.session.open = false;
-                });
-                friend.session.open = true;
-            } else {
-                this.createSession(friend);
-            }
-        },
-        createSession: function createSession(friend) {
-            axios.post('/session/create', { friend_id: friend.id }).then(function (res) {
-                friend.session = res.data.data, friend.session.open = true;
-            });
-        }
-    },
-    created: function created() {
-        var _this4 = this;
-
-        this.getUsers();
-        this.getCurrentUsers();
-        Echo.channel('Chat').listen('SessionEvent', function (e) {
-            var friend = _this4.friends.find(function (friend) {
-                return friend.id == e.session_by;
-            });
-            friend.session = e.session;
-        });
-        Echo.join('Chat').here(function (users) {
-            _this4.friends.forEach(function (friend) {
-                users.forEach(function (user) {
-                    if (user.id == friend.id) {
-                        friend.online = true;
-                    }
-                });
-            });
-        }).joining(function (user) {
-            _this4.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = true : "";
-            });
-        }).leaving(function (user) {
-            _this4.friends.forEach(function (friend) {
-                return user.id == friend.id ? friend.online = false : '';
-            });
-=======
       axios.post('/getUsers/').then(function (res) {
-        return _this.friends = res.data.data;
+        return _this2.friends = res.data.data;
       });
     },
     getCurrentUsers: function getCurrentUsers() {
-      var _this2 = this;
+      var _this3 = this;
 
       axios.post('/getCurrentUsers/').then(function (res) {
-        return _this2.current_user = res.data.data;
+        return _this3.current_user = res.data.data;
       });
     },
     openChat: function openChat(friend) {
       if (friend.session) {
         this.friends.forEach(function (friend) {
           friend.session.open = false;
->>>>>>> 110b5ebf18f2d1be8663d8ed2772c198863db048
         });
         friend.session.open = true;
       } else {
@@ -44550,19 +44436,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     this.getUsers();
     this.getCurrentUsers();
     Echo.channel("Chat").listen('SessionEvent', function (e) {
-      var friend = _this3.friends.find(function (friend) {
+      var friend = _this4.friends.find(function (friend) {
         return friend.id == e.session_by;
       });
 
       friend.session = e.session;
     });
     Echo.join("Chat").here(function (users) {
-      _this3.friends.forEach(function (friend) {
+      _this4.friends.forEach(function (friend) {
         users.forEach(function (user) {
           if (user.id == friend.id) {
             friend.online = true;
@@ -44570,11 +44456,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         });
       });
     }).joining(function (user) {
-      _this3.friends.forEach(function (friend) {
+      _this4.friends.forEach(function (friend) {
         return user.id == friend.id ? friend.online = true : "";
       });
     }).leaving(function (user) {
-      _this3.friends.forEach(function (friend) {
+      _this4.friends.forEach(function (friend) {
         return user.id == friend.id ? friend.online = false : '';
       });
     });

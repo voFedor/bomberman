@@ -17,11 +17,14 @@
                         <div class="project-description">
                             <div class="project-title clearfix">
                                 <h3>{{$game->name}}</h3>
+                                <p>Регистрийруйся, приглашай друга на дуэль, побеждай и зарабатывай на своей победе прямо сейчас.<br/>Минимальная ставка 100 рублей.<br/>Побеждай и выводи выигрыш себе на карту в любой момент.</p>
 
                             </div>
                             <div class="project-info">
+
                                 <div>Игроков онлайн: 0</div>
-                                <div>Пригласить:</div>
+
+                                {{--<div>Пригласить:</div>--}}
 
                                 @if(Auth::user())
 
@@ -32,17 +35,17 @@
                                         <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url=" http://ohh/game/{{$game->slug}}?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=vk_fb" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
                                     </div>
                                 @else
-                                    <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
+                                    <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить друга</button>
                                 @endif
                             </div>
-                            <p>
+                            <h4 style="font-weight: normal; font-size: 20px">
                                 {{$game->description}}
-                            </p>
+                            </h4>
                             <div class="share-post">
                                 <ul>
                                     {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
-                                    <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 0р</button>
-                                    <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
+                                    <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-large btn-info">Играть просто так</button>
+                                    <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-large btn-info">Играть на 100р</button>
 
                                 </ul>
                             </div>

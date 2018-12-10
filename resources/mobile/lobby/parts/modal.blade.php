@@ -19,22 +19,30 @@
 
 
 
-<div class="modal fade" style="width: 91%;" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="loginForm"
+<div class="modal fade" style="width: 100%; max-height: 100%; padding-top: 50px;" id="loginForm" tabindex="-1" role="dialog" aria-labelledby="loginForm"
      aria-hidden="true">
 
 
     <div class="modal-dialog modal-dialog-custom" role="document">
         <div class="modal-content modal-content-custom" id="loginFormContent">
             <div class="modal-header text-center">
-
-
-                <a class="btn btn-block btn-social btn-vk" style="padding: 0 1.1rem;" href="/login/vk">
-                    <span class="fa fa-vk"></span>
-                </a>
-
                  <h4 class="modal-title w-100 font-weight-bold">Вход</h4>
-                <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></h6>
+
             </div>
+            <p> войти с помощью </p>
+
+            <p class="btn  btn-social-icon btn-vk"  href="/login/vk">
+                <span class="fa fa-vk"></span>
+            </p>
+            <p class="btn btn-social-icon btn-facebook"  href="/login/vk">
+                <span class="fa fa-facebook"></span>
+            </p>
+            <p class="btn  btn-social-icon btn-google"   href="/login/vk">
+                <span class="fa fa-google"></span>
+            </p>
+
+            <a style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></a>
+            <h4>Или введи</h4>
             <form action="javascript:void(0)" method="post" id="auth-form">
             <div class="modal-body mx-3">
                 <div class="md-form mb-5" style="padding: 10px;">

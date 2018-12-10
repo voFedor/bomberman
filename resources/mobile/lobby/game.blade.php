@@ -9,15 +9,16 @@
             <div class="blog-single">
                 <img src="/template/mobile/{{env('MOBILE_THEME')}}/img/{{$game->getLogo()}}" alt="">
                 <div class="blog-single-content">
-                    <h5>{{$game->ru_name}}</h5>
+                    <h4 style="font-weight: bold">{{$game->ru_name}}</h4>
+                    <h5>Регистрийруйся, приглашай друга на дуэль, побеждай и зарабатывай на своей победе прямо сейчас.<br/>Минимальная ставка 100 рублей.<br/>Побеждай и выводи выигрыш себе на карту в любой момент.</h5>
 
                     <p>{{$game->description}}</p>
                     <div class="">
-                        <h5> Игроков онлайн: 0 </h5>
+                        <h5> Игроков онлайн: 10 </h5>
                         @if(Auth::user())
                             <div class="post" style="text-align: center">
                                 <ul id="generate_ui">
-                                    <button id="generate_btn" onclick='return generate_code("{{$game->slug}}")' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
+                                    {{--<button id="generate_btn" onclick='return generate_code("{{$game->slug}}")' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>--}}
                                 </ul>
                                 <div id="social_btn" style="">
                                     <script src="https://yastatic.net/share2/share.js" async="async"></script>
@@ -31,6 +32,7 @@
                     </div>
                     <div class="share-post">
                         <ul>
+                            <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть просто так</button>
                             {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
 
                             <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
