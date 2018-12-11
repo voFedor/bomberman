@@ -25,30 +25,10 @@ class SocialAuthController extends Controller
     public function callback($provider)
     {
         $user = Socialite::driver($provider)->user();
-        dd($user);
+
         if ($provider == "facebook")
         {
-            // OAuth Two Providers
-            $token = $user->token;
-            $refreshToken = $user->refreshToken; // not always provided
-            $expiresIn = $user->expiresIn;
-
-            // OAuth One Providers
-            $token = $user->token;
-
-
-            $user = Socialite::driver('facebook');
-            //$user = Socialite::driver('github')->userFromToken($token);
-            dd($user);
-
-            // All Providers
-            $user->getId();
-            $user->getNickname();
-            $user->getName();
-            $user->getEmail();
-            $user->getAvatar();
-            dd($user);
-            //$existUser = User::where('email', $user->getEmail())->first();
+            $existUser = User::where('name', $user->getName())->first();
         } else {
             $accessTokenResponseBody = $user->accessTokenResponseBody;
             $existUser = User::where('email', $accessTokenResponseBody['email'])->first();
@@ -59,24 +39,35 @@ class SocialAuthController extends Controller
         {
             Auth::loginUsingId($existUser->id, TRUE);
         } else {
-            $newUser = new User();
-            $newUser->uid = $user->user['id'];
-            $newUser->first_name = $user->user['first_name'];
-            $newUser->name = $user->user['first_name'];
-            $newUser->last_name = $user->user['last_name'];
-            $newUser->photo = $user->user['photo'];
-            $newUser->network = "vk";
             if ($provider == "facebook")
             {
+                $newUser = new User();
+                $newUser->first_name = $user->getName();
+                $newUser->name = $user->getName();
+                $newUser->photo = $user->getAvatar();
+                $newUser->network = "facebook";
                 $newUser->email = $user->getEmail();
-            } else {
-                $newUser->email = $accessTokenResponseBody['email'];
-            }
 
-            $newUser->password = Hash::make(str_random(8));
-            $newUser->role = 2;
-            $newUser->uuid = str_random(5);
-            $newUser->save();
+                $newUser->password = Hash::make(str_random(8));
+                $newUser->role = 2;
+                $newUser->uuid = str_random(5);
+                $newUser->save();
+            } else {
+                $newUser = new User();
+                $newUser->uid = $user->user['id'];
+                $newUser->first_name = $user->user['first_name'];
+                $newUser->name = $user->user['first_name'];
+                $newUser->last_name = $user->user['last_name'];
+                $newUser->photo = $user->user['photo'];
+                $newUser->network = "vk";
+                $newUser->email = $accessTokenResponseBody['email'];
+
+
+                $newUser->password = Hash::make(str_random(8));
+                $newUser->role = 2;
+                $newUser->uuid = str_random(5);
+                $newUser->save();
+            }
         }
 
         return redirect('/');
