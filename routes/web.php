@@ -68,9 +68,9 @@ Route::post('/fail-payment', 'PaymentsController@failPayment');
 // Authentication Routes...
 Route::any('/register', 'Auth\LoginController@anyForm')->name('login');
 
-$this->get('login', 'Auth\LoginController@showLoginForm')->name('login');
+$this->get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 $this->get('login/{network}', 'Auth\LoginController@networkAuth')->name('login');
-$this->post('login', 'Auth\LoginController@login')->name('auth.login');
+$this->post('/login', 'Auth\LoginController@login')->name('auth.login');
 $this->get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
 
