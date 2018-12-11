@@ -14,6 +14,7 @@ function login(form_id) {
                 window.location.href = data['url'];
             }
             if (data['result'] == 'success') {
+                alert(data['alert']);
                 location.reload();
             }
             if (data['result'] == 'error'){

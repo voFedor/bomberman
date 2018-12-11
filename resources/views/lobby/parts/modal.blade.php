@@ -288,7 +288,7 @@
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></h6>
             </div>
 
-            <form action="javascript:void(0)" method="post" id="auth-form" style="text-align: -webkit-center;">
+            <form action="javascript:void(0)" method="post" id="auth-form-tmp" style="text-align: -webkit-center;">
                 <a class="btn btn-social btn-vk" style="padding: 0 1.1rem;" href="/login/vk">
                     <span class="fa fa-vk"></span>
                 </a>

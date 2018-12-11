@@ -210,7 +210,7 @@ class LobbyController extends Controller
 
     public function getCurrentUsers(Request $request)
     {
-        return  Auth::user()->uuid;
+        return  Auth::user() == null ? "" : Auth::user()->uuid;
     }
 
 

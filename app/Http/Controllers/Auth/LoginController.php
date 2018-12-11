@@ -193,7 +193,8 @@ class LoginController extends Controller
             return [
                 'result' => 'success',
                 'message' => 'Пароль выслан вам на почту',
-                'action' => $request->input('login-with-ajax')
+                'action' => $request->input('login-with-ajax'),
+                'alert' => "тыц"
             ];
         }else{
             return [
