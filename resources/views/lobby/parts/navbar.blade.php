@@ -17,7 +17,7 @@
                     {{--<li><a href="#service">Who we are</a></li>--}}
                     <li><a href="/#games">Игры</a></li>
                     {{--<li><a href="#contact">Contacts</a></li>--}}
-                    <li><a href="/tournaments">Турниры</a></li>
+                    <li><a href="/tournaments">Акции</a></li>
                     @include('lobby.parts.auth')
                 </ul>
             </div>

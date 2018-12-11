@@ -35,9 +35,9 @@
                 <!-- End second slide -->
                 <!-- Start third slide -->
                 <div class="da-slide">
-                    <h2>Турнир близко</h2>
-                    <h4>Скоро состоится турнир по Bomberman<Br/>
-                    Призовой фонд больше 5000 рэ</h4>
+                    <h2>Как получить IPhone на Новый год? Легко!</h2>
+                    <h4>Играй и приглашай друзей<Br/>
+                    самые активные получат подарки к Новому году </h4>
                     <a href="/tournaments/" class="da-link button">Подробнее</a>
                     <div class="da-img">
                         <img src="{{ env('THEME') }}/images/Slider03.png" width="320" alt="image03">
