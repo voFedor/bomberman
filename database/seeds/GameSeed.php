@@ -29,7 +29,7 @@ class GameSeed extends Seeder
             [
                 'name' => 'Bomberman',
                 'ru_name' => 'Bomberman',
-                'logo' => 'bomber.png',
+                'logo' => 'bomber.jpg',
                 'need_users' => 2,
                 'description' => 'Тот самый бомбермен, только в 100 раз интереснее! Ставь бомбочки, загони противника в угол!',
                 'slug' => 'bomber',
@@ -39,7 +39,7 @@ class GameSeed extends Seeder
             [
                 'name' => 'Battle Ship',
                 'ru_name' => 'Морской Бой',
-                'logo' => 'sea-battle.png',
+                'logo' => 'mb.jpg',
                 'need_users' => 2,
                 'description' => 'Тот самый морской бой, только в 100 раз интереснее! Расставь свои корабли и вычисли, где находяться корабли соперника! Огонь! ',
                 'slug' => 'mb',

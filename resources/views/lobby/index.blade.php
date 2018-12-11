@@ -131,14 +131,11 @@
                 <button onclick="return callToAction()" type="button" class="button">клик</button>
             </form>
             <p class="large-text">или войди с помощью </p>
-            <a class="btn  btn-social-icon btn-lg btn-vk"  href="/login/vk">
+            <a class="btn  btn-social-icon btn-lg btn-vk"  href="/redirectToSocial/vkontakte">
                 <span class="fa fa-vk"></span>
             </a>
-            <a class="btn btn-social-icon btn-lg btn-facebook" href="/login/vk">
+            <a class="btn btn-social-icon btn-lg btn-facebook" href="/redirectToSocial/facebook">
                 <span class="fa fa-facebook"></span>
-            </a>
-            <a class="btn  btn-social-icon btn-lg btn-google" href="/login/vk">
-                <span class="fa fa-google"></span>
             </a>
         </div>
     </div>
@@ -176,7 +173,7 @@
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                            <img src="{{ env('THEME') }}/images/games/what.jpg" alt="client logo 1">
                         </a>
                     </li>
                 </ul>
