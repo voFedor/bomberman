@@ -178,9 +178,6 @@
                    <a class="btn btn-social-icon btn-facebook" style="width: 20px;color: black;padding: 4px 12px;margin-right: 10px;margin-left: 10px;" href="/redirectToSocial/facebook">
                        <span class="fa fa-facebook"></span>
                    </a>
-                   <a class="btn  btn-social-icon btn-google"  style="width: 20px;color: black;padding: 4px 12px;" href="/login/vk">
-                       <span class="fa fa-google"></span>
-                   </a>
                 </div>
                 <p> или введи </p>
             <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
