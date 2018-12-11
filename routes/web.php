@@ -25,11 +25,11 @@ Route::post('/profile/save', 'LobbyController@profileSave');
 Route::get('login/yandex', 'Auth\LoginController@redirectToProvider');
 Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback');
 
-//Route::get('/redirect', 'Auth\SocialAuthController@redirect');
+Route::get('/redirect/{facebook}', 'Auth\SocialAuthController@redirect');
 //Route::get('/callback', 'Auth\SocialAuthController@callback');
 
 Route::get('/auth/social/vkontakte', 'Auth\SocialAuthController@redirectToVkontakte');
-Route::get('/auth/vkontakte/callback', 'Auth\loginController@vkontakteCallback');
+//Route::get('/auth/vkontakte/callback', 'Auth\loginController@vkontakteCallback');
 
 Route::get('/users-list/{game_id}/{bet_id}', 'SessionController@getUsersListForGame');
 
@@ -46,8 +46,9 @@ Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
 
 Route::post('/ulogin', 'Auth\LoginController@ulogin');
-Route::get('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
-Route::post('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
+Route::get('/redirectToSocial/{provider}', 'Auth\SocialAuthController@redirectToSocial');
+Route::get('/auth/{network}/callback', 'Auth\SocialAuthController@callback');
+//Route::post('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
 
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');

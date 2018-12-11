@@ -200,7 +200,6 @@ return [
         \App\Providers\LogProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
 
-        Laravel\Socialite\SocialiteServiceProvider::class,
         \SocialiteProviders\Manager\ServiceProvider::class,
     ],
 
