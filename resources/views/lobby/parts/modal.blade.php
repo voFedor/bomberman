@@ -172,7 +172,7 @@
             </div>
                <p> войти с помощью </p>
                 <div style="display: inline-flex;">
-                   <a class="btn  btn-social-icon btn-vk" style="width: 20px;color: black;padding: 4px 12px;" href="/login/vk">
+                   <a class="btn  btn-social-icon btn-vk" style="width: 20px;color: black;padding: 4px 12px;" href="/redirect/vk">
                        <span class="fa fa-vk"></span>
                    </a>
                    <a class="btn btn-social-icon btn-facebook" style="width: 20px;color: black;padding: 4px 12px;margin-right: 10px;margin-left: 10px;" href="/redirect">

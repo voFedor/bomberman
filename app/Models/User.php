@@ -183,4 +183,10 @@ class User extends Authenticatable
         //Auth::login($user);
         return $user;
     }
+
+
+    public function profile()
+    {
+        return $this->hasOne('App\SocialProfile');
+    }
 }
