@@ -75,7 +75,9 @@
 <script>
 
 
-
+function gameBeReadySoon() {
+    alert('Эта игру скоро появится')
+}
 
 
 

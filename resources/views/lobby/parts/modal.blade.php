@@ -172,10 +172,10 @@
             </div>
                <p> войти с помощью </p>
                 <div style="display: inline-flex;">
-                   <a class="btn  btn-social-icon btn-vk" style="width: 20px;color: black;padding: 4px 12px;" href="/auth/social/vkontakte">
+                   <a class="btn  btn-social-icon btn-vk" style="width: 20px;color: black;padding: 4px 12px;" href="/redirectToSocial/vkontakte">
                        <span class="fa fa-vk"></span>
                    </a>
-                   <a class="btn btn-social-icon btn-facebook" style="width: 20px;color: black;padding: 4px 12px;margin-right: 10px;margin-left: 10px;" href="/redirect">
+                   <a class="btn btn-social-icon btn-facebook" style="width: 20px;color: black;padding: 4px 12px;margin-right: 10px;margin-left: 10px;" href="/redirectToSocial/facebook">
                        <span class="fa fa-facebook"></span>
                    </a>
                    <a class="btn  btn-social-icon btn-google"  style="width: 20px;color: black;padding: 4px 12px;" href="/login/vk">
@@ -288,7 +288,7 @@
                 <h6 style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></h6>
             </div>
 
-            <form action="javascript:void(0)" method="post" id="auth-form" style="text-align: -webkit-center;">
+            <form action="javascript:void(0)" method="post" id="auth-form-tmp" style="text-align: -webkit-center;">
                 <a class="btn btn-social btn-vk" style="padding: 0 1.1rem;" href="/login/vk">
                     <span class="fa fa-vk"></span>
                 </a>
