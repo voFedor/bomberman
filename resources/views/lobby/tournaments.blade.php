@@ -8,26 +8,55 @@
     <div class="section tour-section">
         <div class="triangle"></div>
         <div class="container" style="text-align: -webkit-center;">
-            <h2 class="align-content-center">До турнира по БОМБЕРМЕН осталось не так много времени </h2>
+            <h2 class="align-content-center">Пригласи друга - получи iPhone</h2>
             {{--<script src="http://gamechainger.io/timer/dcd07ca6a707711f788a1336417fb0dd.js"></script>--}}
-            <script src="http://megatimer.ru/s/a55c16cee4ae62c546440b23aeee55ae.js"></script>
-            <h2 class="align-content-center">призовой фонд больше 5000рэ</h2>
-            <h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>
+        <!-- HelloTimer http://hello-site.ru/timer/ -->
+
+            {{--<p class="hellotimercopy"><a href="http://hello-site.ru">Hello-Site.ru. Бесплатный конструктор сайтов.</a></p>--}}
+            <!-- HelloTimer http://hello-site.ru/timer/ -->
+            <h2 class="align-content-center">Трое самых активных получат ценные подарки на новый год</h2>
+            <script type="text/javascript" src="http://yandex.st/jquery/2.0.3/jquery.min.js"></script>
+            <script type="text/javascript">function get_timer_958(string_958) {var date_new_958 = string_958; var date_t_958 = new Date(date_new_958);var date_958 = new Date();var timer_958 = date_t_958 - date_958;if(date_t_958 > date_958) {var day_958 = parseInt(timer_958/(60*60*1000*24));if(day_958 < 10) {day_958 = "0" + day_958;}day_958 = day_958.toString();var hour_958 = parseInt(timer_958/(60*60*1000))%24;if(hour_958 < 10) {hour_958 = "0" + hour_958;}hour_958 = hour_958.toString();var min_958 = parseInt(timer_958/(1000*60))%60;if(min_958 < 10) {min_958 = "0" + min_958;}min_958 = min_958.toString();var sec_958 = parseInt(timer_958/1000)%60;if(sec_958 < 10) {sec_958 = "0" + sec_958;}sec_958 = sec_958.toString(); timethis_958 = day_958 + " : " + hour_958 + " : " + min_958 + " : " + sec_958;$(".timerhello_958 p.result .result-day").text(day_958);$(".timerhello_958 p.result .result-hour").text(hour_958);$(".timerhello_958 p.result .result-minute").text(min_958);$(".timerhello_958 p.result .result-second").text(sec_958);}else {$(".timerhello_958 p.result .result-day").text("00");$(".timerhello_958 p.result .result-hour").text("00");$(".timerhello_958 p.result .result-minute").text("00");$(".timerhello_958 p.result .result-second").text("00");} }function getfrominputs_958(){string_958 = "12/31/2018 22:22"; get_timer_958(string_958);setInterval(function(){get_timer_958(string_958);},1000);}$(document).ready(function(){ getfrominputs_958();});</script>
+            <style type="text/css">/*второй*/.second-my{width: 260px;padding: 0px;text-align: center;}.second-my .result span.items{padding: 10px 7px;display: inline-block;margin: 0 4px 0 -5px;font-size: 20px;-webkit-border-radius:4px;-moz-border-radius: 4px; border-radius: 4px;-webkit-box-shadow: 0px 1px 1px 0px rgb(178, 176, 176);-moz-box-shadow: 0px 1px 1px 0px rgb(178, 176, 176);box-shadow: 0px 1px 1px 0px rgb(178, 176, 176);background: rgb(125,126,125); /* Old browsers */background: -moz-linear-gradient(top, rgba(125,126,125,1) 0%, rgba(14,14,14,1) 100%); /* FF3.6+ */background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(125,126,125,1)), color-stop(100%,rgba(14,14,14,1))); /* Chrome,Safari4+ */background: -webkit-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* Opera 11.10+ */background: -ms-linear-gradient(top, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* IE10+ */ background: linear-gradient(to bottom, rgba(125,126,125,1) 0%,rgba(14,14,14,1) 100%); /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr="#7d7e7d", endColorstr="#0e0e0e",GradientType=0 ); /* IE6-9 */color: white; font-family: "Russo One", sans-serif;min-width: 30px;letter-spacing: 2px;}.second-my .result span.dot{ margin: 0 -1px;position: relative;left: -4px;font-family: "Russo One", sans-serif;font-size: 17px;}.second-my .result {float: right;}.second-my .titles{position: relative;height: 0;right: -23px;width: 300px;}.second-my .titles span{font-size: 10px;position: relative;top: 12px;}.second-my .titles span.mm{right: 18px;}.second-my .titles span.hh{right: 40px; }.second-my .titles span.dd{right: 62px;}.second-my p.titloftimer{ font-size: 18px;margin: 0 auto;left: 10px;  position: relative; font-family: "Russo One", sans-serif;}/*ресет*/.timerhello span{margin: 0;padding: 0;border: 0;font-size: 100%;font: inherit;vertical-align: baseline; }.timerhello p{font-size: 100%;font: inherit;color: #191919;font-family: Verdana, sans-serif; font-size: 13px;margin: 0 0 10px 0;line-height: 17px;}.clearf{visibility: hidden;display: block;font-size: 0;content: " ";clear: both;height: 0; }p.hellotimercopy{display:none!important;} </style>
+            <div class="second-my timerhello timerhello_958">
+                <div class="second-my-content">
+                    <link href="//fonts.googleapis.com/css?family=Russo+One&amp;subset=latin,cyrillic" rel="stylesheet" type="text/css">
+                    <p class="titloftimer" style="color: white">До подведения итогов:</p>
+                    <br>
+                    <p class="result">
+                        <span class="result-day items">20</span>
+                        <span class="dot" style="color: white">дн.&nbsp;</span>
+                        <span class="result-hour items">12</span>
+                        <span class="dot">:</span>
+                        <span class="result-minute items">46</span>
+                        <span class="dot">:</span>
+                        <span class="result-second items">49</span>
+                    </p>
+                    <div class="clearf"></div>
+                </div>
+            </div>
+            {{--<h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>--}}
+            {{--<img src="{{ env('THEME') }}/images/gifts.png" style="width: 300px">--}}
             <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;text-align: -webkit-left;margin-top: 30px;">
-                <H3>Регистрация на турнир заканчивается 23 октября в 22:00<br/>Турнирная таблица будет опубликована 24 октября<br/>Турнир начнется 25 октября в 20:00.<br/>Стоимость участия 200рэ</H3>
-                    {{ csrf_field() }}
+                <H3>Что нужно сделать:<br/>Зарегистрируйся<br/>Приглашай друга сразиться на "соточку" <br/>Чем больше играешь, тем больше шанс на победу</H3>
+
+                {{ csrf_field() }}
+                <img src="{{ env('THEME') }}/images/gifts.png" style="width: 500px">
                     @if(Auth::user() == null)
                     <button onclick="return alert('Вам необходимо авторизироваться на сайте.')" type="button" class="tournament-button button">Принять участие</button>
+
                     @else
-                    <button onclick="return tourReg()" type="button" class="tournament-button button">Принять участие</button>
+
                     @endif
             </form>
 
             <table class="table table-tournament">
+
                 <thead>
                 <tr>
-                    <th scope="col">#</th>
+                    <th scope="col">Место</th>
                     <th scope="col">Имя</th>
+                    <th scope="col">Друзей</th>
                 </tr>
                 </thead>
                 <tbody>
