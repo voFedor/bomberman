@@ -29,9 +29,15 @@ class SocialAuthController extends Controller
 
 
     //dynamic
-    public function redirectToSocial($social)
+    public function redirectToVkontakte($social)
     {
-        return Socialite::with($social)->redirect();
+        $params = array(
+         'client_id'     => env('VKONTAKTE_KEY'),
+         'redirect_uri'  => "https://gamechainger.ru/auth/vkontakte/callback",
+         'response_type' => 'code'
+        );
+       $url = 'http://oauth.vk.com/authorize?'.urldecode(http_build_query($params));
+       return redirect($url);
     }
 
 

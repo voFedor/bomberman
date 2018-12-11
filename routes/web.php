@@ -28,8 +28,8 @@ Route::get('login/yandex/callback', 'Auth\LoginController@handleProviderCallback
 //Route::get('/redirect', 'Auth\SocialAuthController@redirect');
 //Route::get('/callback', 'Auth\SocialAuthController@callback');
 
-Route::get('/auth/social/{social}', 'Auth\SocialAuthController@redirectToSocial');
-Route::get('/auth/{social}/callback', 'Auth\SocialAuthController@handleSocialCallback');
+Route::get('/auth/social/vkontakte', 'Auth\SocialAuthController@redirectToVkontakte');
+Route::get('/auth/vkontakte/callback', 'Auth\loginController@vkontakteCallback');
 
 Route::get('/users-list/{game_id}/{bet_id}', 'SessionController@getUsersListForGame');
 

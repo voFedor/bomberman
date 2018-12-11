@@ -22,7 +22,7 @@ class LoginController extends Controller
 
 
 
-    public function ulogin(Request $request)
+    public function vkontakteCallback(Request $request)
     {
         $userVk = Socialite::driver('vkontakte')->user();
         //Storage::put('file.txt', '<?php $arr = ' . var_export($user, true) . ';');
