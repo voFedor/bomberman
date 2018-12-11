@@ -8,7 +8,13 @@
             <a href="#animatedModal2" id="nav-menu"><i class="fa fa-gamepad"></i></a>
         </div>
         <div class="col s4">
-            <a href="contact.html"><i class="fa fa-share"></i></a>
+            <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
+
+            <!-- VK Widget -->
+            <div id="vk_community_messages"></div>
+            <script type="text/javascript">
+                VK.Widgets.CommunityMessages("vk_community_messages", 172832726, {expandTimeout: "30000",disableButtonTooltip: "1"});
+            </script>
         </div>
     </div>
 </div>

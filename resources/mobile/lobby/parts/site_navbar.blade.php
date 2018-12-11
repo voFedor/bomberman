@@ -3,19 +3,20 @@
         @if(Auth::user())
         <li class="profil">
             <img src="{{Auth::user()->photo}}" alt="">
-            <h2>{{Auth::user()->first_name}} {{Auth::user()->last_name}}</h2>
+            <h2> {{Auth::user()->first_name}} {{Auth::user()->last_name}}</h2>
+            <p>Баланс: {{ Auth::user()->credits }}р.</p>
         </li>
-            <li style="text-align: -webkit-center;margin-top: 15px;" id="gamer_balance">
-                Баланс: {{ Auth::user()->credits }}р.
-            </li>
-            <li style="margin-top: 110px;"><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-in"></i>Выход</a></li>
+            {{--<li style="text-align: -webkit-center;margin-top: 15px;" id="gamer_balance">--}}
+                {{--Баланс: {{ Auth::user()->credits }}р.--}}
+            {{--</li>--}}
+            <li style="margin-top: 110px;"><a href="/payments"><i class="fa fa-money"></i>Баланс</a></li>
+            <li><a href="/profile"><i class="fa fa-user-plus"></i>Профиль</a></li>
+            <li><a href="/history"><i class="fa fa-list"></i>История побед</a></li>
+            <li><a href="/challenge"><i class="fa fa-users"></i>Вызовы</a></li>
+            <li ><a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i class="fa fa-sign-in"></i>Выход</a></li>
             <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
             </form>
-            <li><a href="/history"><i class="fa fa-user-plus"></i>История побед</a></li>
-            <li><a href="/payments"><i class="fa fa-user-plus"></i>Баланс</a></li>
-            <li><a href="/profile"><i class="fa fa-user-plus"></i>Профиль</a></li>
-            <li><a href="/challenge"><i class="fa fa-user-plus"></i>Вызовы</a></li>
         @else
             <li style="text-align: -webkit-center;margin-top: 15px;">
             {{--<h5>Вы не авторизированы</h5>--}}
