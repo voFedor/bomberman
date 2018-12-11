@@ -1,11 +1,10 @@
 <div class="navbar-bottom">
     <div class="row">
         <div class="col s4">
-            <a href="/"><i class="fa fa-home"></i></a>
-            <z><br/>home</z>
+            <a href="/"><img src="/template/mobile/{{env('MOBILE_THEME')}}/img/home.png" style="width: 40px"></a>
         </div>
         <div class="col s4">
-            <a href="#animatedModal2" id="nav-menu"><i class="fa fa-gamepad"></i></a>
+            <a href="#animatedModal2" id="nav-menu"><img src="/template/mobile/{{env('MOBILE_THEME')}}/img/games.png" style="width: 40px"></a>
         </div>
         <div class="col s4">
             <script type="text/javascript" src="https://vk.com/js/api/openapi.js?160"></script>
