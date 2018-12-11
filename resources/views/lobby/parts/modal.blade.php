@@ -171,16 +171,17 @@
             <div style="text-align: center;">
             </div>
                <p> войти с помощью </p>
-
-                   <p class="btn  btn-social-icon btn-vk" style="width: 20px" href="/login/vk">
+                <div style="display: inline-flex;">
+                   <a class="btn  btn-social-icon btn-vk" style="width: 20px;color: black;padding: 4px 12px;" href="/auth/social/vkontakte">
                        <span class="fa fa-vk"></span>
-                   </p>
-                   <p class="btn btn-social-icon btn-facebook" style="width: 20px" href="/login/vk">
+                   </a>
+                   <a class="btn btn-social-icon btn-facebook" style="width: 20px;color: black;padding: 4px 12px;margin-right: 10px;margin-left: 10px;" href="/redirect">
                        <span class="fa fa-facebook"></span>
-                   </p>
-                   <p class="btn  btn-social-icon btn-google"  style="width: 20px" href="/login/vk">
+                   </a>
+                   <a class="btn  btn-social-icon btn-google"  style="width: 20px;color: black;padding: 4px 12px;" href="/login/vk">
                        <span class="fa fa-google"></span>
-                   </p>
+                   </a>
+                </div>
                 <p> или введи </p>
             <form class="lwa-form block-content" action="/login/" method="post" id="auth-form">
                 <span id="error_login" style="color: red;font-size: 16px;"></span>
