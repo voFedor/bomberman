@@ -188,7 +188,7 @@ class LoginController extends Controller
             ], function ($message) use ($email) {
                 $message->to($email, 'Успешная регистрация')->subject('Успешная регистрация')->from(env('MAIL_SENDER'));
             });
-    
+
 
             return [
                 'result' => 'success',

@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Auth;
+use Mail;
 use Session;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use RuntimeException;
@@ -34,7 +35,7 @@ class LobbyController extends Controller
     public function getIndex()
     {
         $games = Game::all();
-        //return UserResource::collection(User::all());
+
         return view('lobby.index', compact('games'));
     }
 
