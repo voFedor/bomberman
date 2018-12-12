@@ -68,6 +68,19 @@
     /></noscript>
 <!-- End Facebook Pixel Code -->
 
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129303122-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129303122-3');
+</script>
+
+
+
 {{--<link rel="stylesheet" href="/hangout/css/style.css">--}}
 <style>
         .duel {
