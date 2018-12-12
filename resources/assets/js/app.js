@@ -8,6 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -17,11 +18,13 @@ window.Vue = require('vue');
 //Vue.component('chat-component', require('./components/LobbyComponent.vue'));
 Vue.component('chat-component', require('./components/ChatComponent.vue'));
 // register modal component
+import ChatComponent from './components/ChatComponent.vue'
+
 
 
 const app = new Vue({
     el: '#app',
-    data: {
-        showModal: false
+    components: {
+        ChatComponent
     }
 });
