@@ -29,10 +29,16 @@ class LoginController extends Controller
         $email = $userVk->accessTokenResponseBody['email'];
 
         $existUser = User::where('email', $email)->first();
+        $existUser2 = User::where('name', $email)->first();
+
         if ($existUser != null)
         {
             Auth::loginUsingId($existUser->id, TRUE);
-        } else {
+        } elseif ($existUser2 != null) {
+            Auth::loginUsingId($existUser2->id, TRUE);
+
+        } else
+         {
             $newUser = new User();
             $newUser->uid = $userVk->user['id'];
             $newUser->first_name = $userVk->user['first_name'];
@@ -40,11 +46,19 @@ class LoginController extends Controller
             $newUser->last_name = $userVk->user['last_name'];
             $newUser->photo = $userVk->user['photo'];
             $newUser->network = "vk";
-            $newUser->email = $email;
+            $newUser->email = $email != null ? $email : $newUser->name;
             $newUser->password = Hash::make(str_random(8));
             $newUser->role = 2;
             $newUser->uuid = str_random(5);
             $newUser->save();
+
+            $credentials = ['email' => $newUser->email, 'password' => $newUser->password];
+
+            if (Auth::attempt($credentials)) {
+                // Authentication passed...
+                Auth::loginUsingId($newUser->id, TRUE);
+                return redirect('/');
+            }
         }
 
         return redirect('/');

@@ -32,7 +32,7 @@
                                         <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                                         <script src="https://yastatic.net/share2/share.js" async="async"></script>
                                         {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus  ,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
-                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url=" http://ohh/game/{{$game->slug}}?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=site_r" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
+                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="https://gamechainger.ru/game/{{$game->slug}}?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=site_r" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
                                     </div>
                                 @else
                                     <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить друга</button>
@@ -107,7 +107,7 @@
                                 js.src = 'https://connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v3.1&appId=134229433336489&autoLogAppEvents=1';
                                 fjs.parentNode.insertBefore(js, fjs);
                             }(document, 'script', 'facebook-jssdk'));</script>
-                        <div class="fb-comments" data-href="http://gamechainger.io/" data-width="100%" data-numposts="15">
+                        <div class="fb-comments" data-href="https://gamechainger.ru/" data-width="100%" data-numposts="15">
                         </div>
 
                     </div>
