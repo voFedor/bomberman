@@ -141,6 +141,7 @@ function gameBeReadySoon() {
                 }
             },
             error: function (xhr, str) {
+                console.log(xhr);
                 return 0;
             },
             beforeSend : function (){
@@ -316,7 +317,7 @@ function gameBeReadySoon() {
                 }
             },
             error: function (xhr, str) {
-                return 0;
+                console.log("{{env('GAME_HOST')}}"+"/?"+uuid+"/"+'{{Auth::user()->id}}');
             },
             beforeSend : function (){
                 toastr.clear();
