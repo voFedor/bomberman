@@ -154,26 +154,16 @@
                 </div>
                 <ul class="row client-slider" id="clint-slider">
                     @foreach($games as $game)
-                        @if($game->id == 1)
-                            <li>
-                                {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
-                                <a href="/game/{{$game->slug}}">
-                                    <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
-                                </a>
-                            </li>
-                        @else
-                            <li>
-                                {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
-                                <a href="javascript:void(0)" onclick="return gameBeReadySoon()">
-                                    <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
-                                </a>
-                            </li>
-                        @endif
-
+                        <li>
+                            {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
+                            <a href="/game/{{$game->slug}}">
+                                <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
+                            </a>
+                        </li>
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="{{ env('THEME') }}/images/games/what.jpg" alt="client logo 1">
+                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
                         </a>
                     </li>
                 </ul>
