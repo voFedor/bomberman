@@ -31,15 +31,12 @@
             </div>
             <p> войти с помощью </p>
 
-            <p class="btn  btn-social-icon btn-vk"  href="/login/vk">
+            <a class="btn  btn-social-icon btn-vk" style="margin: 10px" href="/redirectToSocial/vkontakte">
                 <span class="fa fa-vk"></span>
-            </p>
-            <p class="btn btn-social-icon btn-facebook"  href="/login/vk">
+            </a>
+            <a class="btn btn-social-icon btn-facebook" style="margin: 10px" href="/redirectToSocial/facebook">
                 <span class="fa fa-facebook"></span>
-            </p>
-            <p class="btn  btn-social-icon btn-google"   href="/login/vk">
-                <span class="fa fa-google"></span>
-            </p>
+            </a>
 
             <a style="font-size: 14px;" class="modal-title w-100 font-weight-bold"><a onclick="return checkoutRegForm()" href="javascript:void(0)">Регистрация</a></a>
             <h4>Или введи</h4>

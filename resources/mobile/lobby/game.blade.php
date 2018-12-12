@@ -13,6 +13,14 @@
                     <h5>Регистрийруйся, приглашай друга на дуэль, побеждай и зарабатывай на своей победе прямо сейчас.<br/>Минимальная ставка 100 рублей.<br/>Побеждай и выводи выигрыш себе на карту в любой момент.</h5>
 
                     <p>{{$game->description}}</p>
+                    <div class="share-post">
+                        <ul>
+                            <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть просто так</button>
+                            {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
+
+                            <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
+                        </ul>
+                    </div>
                     <div class="">
                         <h5> Игроков онлайн: 10 </h5>
                         @if(Auth::user())
@@ -23,6 +31,7 @@
                                 <div id="social_btn" style="">
                                     <script src="https://yastatic.net/share2/share.js" async="async"></script>
                                     {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
+                                    <p>Пригласить</p>
                                     <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,viber,whatsapp,skype,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="http://gamechainger.io?from=vk_fb" data-image="http://mob.gamechainger.io/template/mobile/cools/img/games/8Pool.jpg">  </div>
                                 </div>
                             </div>
@@ -30,14 +39,7 @@
                             <button id="generate_btn" onclick='return openModalAuth()' style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить</button>
                         @endif
                     </div>
-                    <div class="share-post">
-                        <ul>
-                            <button onclick="return checkBalance('{{$game->id}}', 1)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть просто так</button>
-                            {{--<button onclick="return invaiteFriend('{{$game->id}}')" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-primary">Пригласить друга</button>--}}
 
-                            <button onclick="return checkBalance('{{$game->id}}', 5)" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-info">Играть на 100р</button>
-                        </ul>
-                    </div>
 
 
                 </div>

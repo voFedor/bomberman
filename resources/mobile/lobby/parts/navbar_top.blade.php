@@ -2,8 +2,7 @@
     <!-- site brand	 -->
     <div class="site-brand">
         <a href="/" class="brand">
-        <img src="/template/mobile/{{env('MOBILE_THEME')}}/img/logo.png"   width="134" height="40" alt="Logo" />
-
+            <img src="/template/mobile/{{env('MOBILE_THEME')}}/img/logo.png"   width="134" height="40" alt="Logo" /></a>
     </div>
     <!-- end site brand	 -->
     <div class="side-nav-panel-right">
