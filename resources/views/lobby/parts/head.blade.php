@@ -26,7 +26,7 @@
 <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/{{ env('THEME') }}/images/apple-touch-icon-72.png">
 <link rel="apple-touch-icon-precomposed" href="/{{ env('THEME') }}/images/ico/apple-touch-icon-57.png">
 <link rel="shortcut icon" href="/{{ env('THEME') }}/images/ico/favicon.ico">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.2/jquery.fancybox.css">
 
 
 <!-- Yandex.Metrika counter -->
@@ -67,6 +67,19 @@
                src="https://www.facebook.com/tr?id=365315884219759&ev=PageView&noscript=1"
     /></noscript>
 <!-- End Facebook Pixel Code -->
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129303122-3"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-129303122-3');
+</script>
+
+
 
 {{--<link rel="stylesheet" href="/hangout/css/style.css">--}}
 <style>
