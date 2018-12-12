@@ -51,6 +51,7 @@
     import moment from '../../../../public/some.js';
 
     export default {
+        name: 'chat-component',
         components: {
             moment
         },
