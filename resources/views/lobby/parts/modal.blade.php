@@ -185,12 +185,12 @@
                 <p style="padding: 2px;">
                     Логин/Email: </p>
                 <div class="youplay-input">
-                    <input type="text" name="log" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93);">
+                    <input type="text" name="log" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93); color: white; ">
                 </div>
                 <p style="padding: 2px;">
                     Пароль: </p>
                 <div class="youplay-input">
-                    <input type="password" name="pwd" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93);">
+                    <input type="password" name="pwd" style="width: auto; border: 1px solid #fcbf35; background-color: rgb(102,101,93); color: white;">
                 </div>
                 {{--<div class="youplay-checkbox mb-15 ml-5" style="display: -webkit-box;">--}}
                 {{--<input type="checkbox" name="rememberme" value="forever" style="margin: 0px 0 0;">--}}
