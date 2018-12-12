@@ -12,7 +12,7 @@
             <!-- VK Widget -->
             <div id="vk_community_messages"></div>
             <script type="text/javascript">
-                VK.Widgets.CommunityMessages("vk_community_messages", 172832726, {expandTimeout: "30000",disableButtonTooltip: "1"});
+                VK.Widgets.CommunityMessages("vk_community_messages", 172832726, {disableButtonTooltip: "1"});
             </script>
         </div>
     </div>
