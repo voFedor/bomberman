@@ -20,8 +20,8 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 //    return Auth::user();
 //});
 
-Broadcast::channel('Chat', function ($user){
-    return $user;
+Broadcast::channel('user.{toUserId}', function ($user, $toUserId){
+    return $user->id == $toUserId;
 });
 //Broadcast::channel('Lobby', function ($user) {
 //    return $user;

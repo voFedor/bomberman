@@ -1,4 +1,5 @@
 <?php
+
 Route::get('/', 'LobbyController@getIndex');
 Route::get('/challenge', 'LobbyController@getChallenge');
 Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
@@ -57,6 +58,7 @@ Route::post('/get-bets', 'PaymentsController@getBets');
 Route::post('/cash-out-request', 'ServiceController@cashOutRequest');
 Route::post('/check-balance', 'PaymentsController@checkBalance');
 
+Route::get('/cash', 'ServiceController@cash');
 
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');

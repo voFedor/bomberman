@@ -50,8 +50,9 @@ function register(form_id) {
                     return;
                 }
                 if (data_resp['result'] == 'error') {
+                    console.log(data_resp);
                     toastr.clear();
-                    toastr.error(data_resp['message'], 'Ошибка!', {timeOut: 3000});
+                    toastr.error(data_resp['message'], '!Ошибка!', {timeOut: 3000});
                     //showErrorReg(data_resp['message']);
                 }
             },

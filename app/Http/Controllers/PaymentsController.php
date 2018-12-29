@@ -164,13 +164,12 @@ class PaymentsController extends Controller
 
 
         // var_export -- nice, one-liner
-        // $debug_export = var_export($sha1, true);
-
-        // \Storage::put('local.txt', $debug_export);
+        //$debug_export = var_export($request->all(), true);
+        //\Storage::put('local.txt', $debug_export);
 
         // // var_export -- nice, one-liner
-        // $debug_export2 = var_export($_POST['sha1_hash'], true);
-        // \Storage::put('sha1_hash.txt', $debug_export2);
+        //$debug_export2 = var_export($_POST['sha1_hash'], true);
+         //\Storage::put('sha1_hash.txt', $debug_export2);
 
         if ($sha1 != $_POST['sha1_hash'] ) {
             exit();
@@ -187,10 +186,11 @@ class PaymentsController extends Controller
         $payment->withdraw_amount = $_POST['withdraw_amount'];
         $payment->save();
 
-
         $user = User::find($payment->user_id);
         $user->credits = $user->credits + $payment->withdraw_amount;
         $user->update();
+
+
 
         $data = array();
         $data['email'] = $user->email;

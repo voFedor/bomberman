@@ -16,7 +16,9 @@
 <!-- /Navbar -->
 
 
+
 @yield('content')
+
 <div id="app">
     <chat-component></chat-component>
 </div>
@@ -54,5 +56,14 @@
 
 @include('lobby.parts.modal')
 
+
+@if(Auth::user() != null)
+<script type="text/javascript">
+    Echo.private('user.{{ Auth::user()->id }}')
+        .listen('PrivateNotifyEvent', (e) => {
+            alert(e.message);
+        });
+@endif
+</script>
 </body>
 </html>

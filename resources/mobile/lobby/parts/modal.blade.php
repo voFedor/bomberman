@@ -77,7 +77,7 @@
                     <input type="hidden" name="login-with-ajax" value="register">
                 </div>
                 <div class="modal-footer d-flex justify-content-center">
-                    <button style="float: left;" class="btn btn-default"  onclick="return register()">Потвердить</button>
+                    <button style="float: left;" class="btn btn-default"  onclick="return register('reg-form')">Потвердить</button>
                     <button class="btn btn-default" data-dismiss="modal" aria-label="Close">cancel</button>
                 </div>
             </form>
@@ -85,7 +85,6 @@
         </div>
     </div>
 </div>
-
 <div id="mySidenav" class="sidenav" style="width: 250px; display: block;">
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
     <a href="#">About</a>

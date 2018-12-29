@@ -192,7 +192,6 @@ class LoginController extends Controller
 //            'uuid' => str_random(30),
 //            'invited_user_id' => $invitation_user_id
 //        ]);
-
         if($user){
             $email = $request->input(self::$fields['register']['email']);
 
@@ -212,7 +211,7 @@ class LoginController extends Controller
             ];
         }else{
             return [
-                'message' => '<strong>ERROR</strong>' . ' user not saved',
+                'message' => '<strong>ERROR!</strong>' . ' user not saved',
                 'result' => 'error',
                 'action' => $request->input('login-with-ajax')
             ];

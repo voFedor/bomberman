@@ -22,6 +22,7 @@ class UserResource extends JsonResource
             'online' => false,
             'session' => $this->session_details($this->id),
             'uuid' => $this->uuid,
+            'photo' => $this->photo
             //'openGameSession' => $this->checkOpenSession()
         ];
     }

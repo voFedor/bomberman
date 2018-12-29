@@ -18,23 +18,47 @@
                                     <label><input type="radio" v-model="selectedCategory" value="Offline" /> Офлайн</label>
                                 </div>
                             </div>
-                            <ul class="list" style="overflow-y: hidden;overflow: auto;">
-                                <li class="clearfix" v-for="friend in filteredPeople" :key=friend.id>
-                                    <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />
-                                    <div class="about">
-                                        <div class="name">{{friend.name}}</div>
-                                        <div class="status">
-                                            <i class="fa fa-circle online" v-if="friend.online"></i>
-                                            <button  @click.prevent="play(friend)">Играть</button>
-                                        </div>
-                                    </div>
-                                </li>
-                            </ul>
+
+
+
+
+
+                            <div class="media" v-for="friend in filteredPeople" :key=friend.id>
+                                <a href="#" class="pull-left">
+                                    <img alt="64x64" data-src="holder.js/64x64" class="media-object img-thumbnail" style="width: 64px; height: 64px;" src="http://placehold.it/64x64">
+                                </a>
+                                <div class="media-body">
+                                    <h3 class="media-heading"><strong><a href="#">{{friend.name}}</a></strong></h3>
+                                    <p class="small">
+                                        <button  @click.prevent="play(friend)">Играть</button>
+                                        <i class="fa fa-circle online" v-if="friend.online"></i>
+                                    </p>
+
+                                </div>
+                            </div>
+
+
+
+
+                            <!--<ul class="list" style="overflow-y: hidden;overflow: auto;">-->
+                                <!--<li class="clearfix" v-for="friend in filteredPeople" :key=friend.id>-->
+                                    <!--<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/195612/chat_avatar_01.jpg" alt="avatar" />-->
+                                    <!--<img src="{{friend.photo}}" alt="avatar" />-->
+                                    <!--<div class="about">-->
+                                        <!--<div class="name">{{friend.name}}</div>-->
+                                        <!--<div class="status">-->
+                                            <!--<i class="fa fa-circle online" v-if="friend.online"></i>-->
+                                            <!--<button  @click.prevent="play(friend)">Играть</button>-->
+                                        <!--</div>-->
+                                    <!--</div>-->
+                                <!--</li>-->
+                            <!--</ul>-->
 
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default" style="display: none" id="someElement"></button>
                     </div>
                 </div>
             </div>
@@ -97,6 +121,11 @@
                 this.$modal.hide('hello-world');
             },
             play: function (friend) {
+                if ($("#game_id_for_vue").val() != 1)
+                {
+                    alert('Доделываем. \n' +
+                        'Скоро будут.')
+                }
                 $('#users_list').modal('toggle');
 
                 axios.post('/checkGameSession', {
@@ -106,7 +135,6 @@
                 }).then(res => {
                     this.session_id = res.data.data;
                     console.log(res.data.error);
-                    if (res.data.error === false) {
                         axios.post('/getGamePlay', {
                             game_id: $("#game_id_for_vue").val(),
                             friend_id: friend.id,
@@ -116,10 +144,7 @@
                             console.log(result.data.data);
                             openMathGameWindow(result.data.data)
                         });
-                    } else {
-                        confirm('вы уже играли, дождитесь пока ваш соперник покажет результат\n' +
-                            'Можете сразиться с кем нибудь еще')
-                    }
+
 
 
                 });
@@ -197,4 +222,10 @@
     .name{
          color: black;
      }
+    .small {
+        padding: 0px;
+    }
+    .media{
+        display: flow-root;
+    }
 </style>

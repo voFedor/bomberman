@@ -8,6 +8,7 @@
         <div class="container">
             <div class="blog-single">
                 <img src="/template/mobile/{{env('MOBILE_THEME')}}/img/{{$game->getLogo()}}" alt="">
+                <img src="" alt="">
                 <div class="blog-single-content">
                     <h4 style="font-weight: bold">{{$game->ru_name}}</h4>
                     <h5>Регистрийруйся, приглашай друга на дуэль, побеждай и зарабатывай на своей победе прямо сейчас.<br/>Минимальная ставка 100 рублей.<br/>Побеждай и выводи выигрыш себе на карту в любой момент.</h5>
@@ -32,7 +33,7 @@
                                     <script src="https://yastatic.net/share2/share.js" async="async"></script>
                                     {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
                                     <p>Пригласить</p>
-                                    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,viber,whatsapp,skype,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="http://gamechainger.io?from=vk_fb" data-image="http://mob.gamechainger.io/template/mobile/cools/img/games/8Pool.jpg">  </div>
+                                    <div class="ya-share2" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,viber,whatsapp,skype,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="https://gamechainger.ru/game/22?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=site_r&from=vk_fb" data-image="https://gamechainger.ru/template/mobile/cools/img/games/math.jpg">  </div>
                                 </div>
                             </div>
                             @else

@@ -10,7 +10,10 @@ class ServiceController extends Controller
 {
     //
 
-
+    public function cash()
+    {
+        return true;
+    }
 
 
 

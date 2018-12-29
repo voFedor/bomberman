@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-3">
                 <div class="card card-default">
                     <div class="card-header">Список игроков</div>
 
@@ -12,6 +12,7 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-9"></div>
         </div>
     </div>
 </template>

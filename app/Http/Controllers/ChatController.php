@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PrivateNotifyEvent;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use App\Models\Message;
@@ -32,7 +33,7 @@ class ChatController extends Controller
     public function send(Session $session, Request $request)
     {
         $message = $session->messages()->create(['content' => $request->content]);
-        return $message;
+        return response($message, 200);
     }
 
     /**

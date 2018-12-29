@@ -20,11 +20,25 @@ Vue.component('chat-component', require('./components/ChatComponent.vue'));
 // register modal component
 import ChatComponent from './components/ChatComponent.vue'
 
+Vue.component('NotifyComponent', require('./components/NotifyComponent.vue'));
+import NotifyComponent from './components/NotifyComponent.vue'
+
+Vue.component('LobbyComponent', require('./components/LobbyComponent.vue'));
+import LobbyComponent from './components/LobbyComponent.vue'
 
 
 const app = new Vue({
     el: '#app',
     components: {
-        ChatComponent
+        ChatComponent,
+        LobbyComponent
     }
 });
+
+
+const app2 = new Vue({
+     el: '#app2',
+     components: {
+         LobbyComponent
+     }
+ });

@@ -149,21 +149,9 @@
     }
 
     function openMathGameWindow(data) {
-        window.open(data, '_blank');
-        // $.fancybox.open({
-        //     padding : 0,
-        //     src: data,
-        //     type: 'iframe',
-        //     scrolling : 'auto',
-        //     preload   : true,
-        //     wmode: 'transparent',
-        //     allowfullscreen   : false,
-        //     allowscriptaccess : 'always',
-        //     buttons : ['close'],
-        //     clickSlide: 'toggleControls',
-        //     afterClose: function( instance, slide ) {
-        //     }
-        // });
+        window.location.href = data;
+
+
     }
 
 

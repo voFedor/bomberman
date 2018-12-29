@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Gate;
 use Auth;
+use App\Events\PrivateNotifyEvent;
 use Mail;
 use Session;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
@@ -24,6 +25,7 @@ use App\Models\Tournament;
 use Jenssegers\Agent\Agent;
 use Carbon\Carbon;
 use App\Models\UserAction;
+use         Pusher\Pusher;
 
 class LobbyController extends Controller
 {
@@ -104,6 +106,8 @@ class LobbyController extends Controller
 
     public function getGamePlay(Request $request)
     {
+        $message = "Игрок ".Auth::user()->name.' вызвал вас на дуэль';
+        event(new PrivateNotifyEvent(Auth::user(), $message, $request->friend_id));
         if ($request->session_id == 0)
         {
             $uuid = str_random(8);
@@ -132,7 +136,7 @@ class LobbyController extends Controller
                 $gameSessionUser->credits_before = Auth::user()->credits;
                 $gameSessionUser->save();
 
-
+            //broadcast(new PrivateNotifyEvent(Auth::user(), "Пользователь ".Auth::user()->name.'. вызвал вас на бой', $request->friend_id));
             return response()->json(['data' => env('GAME_HOST')."/?$uuid/".Auth::user()->id]);
         } else {
             $uuid = GameSession::find($request->session_id)->uuid;
@@ -234,6 +238,7 @@ class LobbyController extends Controller
     }
 
 
+
     public function getGame($slug, Request $request)
     {
         $game = Game::where('slug', $slug)->first();
@@ -253,6 +258,8 @@ class LobbyController extends Controller
             }
         }
         $games = Game::all();
+
+
 
         $uuid = $request->ref;
         if ($uuid != null)
