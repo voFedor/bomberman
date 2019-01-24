@@ -201,6 +201,7 @@ return [
         Jenssegers\Agent\AgentServiceProvider::class,
 
         \SocialiteProviders\Manager\ServiceProvider::class,
+        Telegram\Bot\Laravel\TelegramServiceProvider::class,
     ],
 
     /*
@@ -258,6 +259,8 @@ return [
         'Html'         => Collective\Html\HtmlFacade::class,
         'Agent' => Jenssegers\Agent\Facades\Agent::class,
         'Socialite' => Laravel\Socialite\Facades\Socialite::class,
+
+        'Telegram'  => Telegram\Bot\Laravel\Facades\Telegram::class
     ],
 
     

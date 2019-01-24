@@ -68,6 +68,11 @@ Route::get('/success-payment', 'PaymentsController@successPayment');
 Route::post('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...
+Route::match(['post', 'get'], 'telegram-register', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('telegram-register');
+
 Route::any('/register', 'Auth\LoginController@anyForm')->name('login');
 
 $this->get('/login', 'Auth\LoginController@showLoginForm')->name('login');
@@ -113,3 +118,14 @@ Route::post('mlogin', 'Mobile\LoginController@login');
 Route::get('mregister', 'Mobile\RegisterController@showRegistrationForm');
 Route::post('mregister', 'Mobile\RegisterController@register');
 Route::post('/makeDeposit', 'Mobile\PaymentsController@getPayments');
+
+Route::middleware(['auth'])->prefix('admin')->namespace('Backend')->name('admin.')->group(function (){
+    Route::get('/', 'DashboardController@index')->name('index');
+
+    Route::get('/setting', 'SettingController@index')->name('setting.index');
+
+    Route::post('/setting/store', 'SettingController@store')->name('setting.store');
+    Route::post('/setting/setwebhook', 'SettingController@setwebhook')->name('setting.setwebhook');
+    Route::post('/setting/getwebhookinfo', 'SettingController@getwebhookinfo')->name('setting.getwebhookinfo');
+
+});
