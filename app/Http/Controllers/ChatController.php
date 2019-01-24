@@ -6,6 +6,7 @@ use App\Events\PrivateNotifyEvent;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use App\Models\Message;
+use App\Models\Game;
 use Auth;
 use App\Models\User;
 use App\Events\MessageSent;
@@ -26,7 +27,9 @@ class ChatController extends Controller
      */
     public function index()
     {
-        return view('lobby.chat');
+        $games = Game::all();
+
+        return view('lobby.chat', compact('games'));
     }
 
 

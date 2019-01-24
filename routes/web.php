@@ -6,13 +6,13 @@ Route::get('/sdfksdhjfksdjfgjhds', 'LobbyController@statistic');
 Route::get('/invitation/{uuid}', 'LobbyController@getNewUser');
 
 Route::get('/lobby', 'LobbyController@getLobby');
-Route::get('/getUsers', 'LobbyController@getUsers');
-Route::get('/getCurrentUsers', 'LobbyController@getCurrentUsers');
+Route::post('/getUsers', 'LobbyController@getUsers');
+Route::post('/getCurrentUsers', 'LobbyController@getCurrentUsers');
 Route::post('/checkGameSession', 'LobbyController@checkGameSession');
 Route::post('/getGamePlay', 'LobbyController@getGamePlay');
 Route::get('/play', 'LobbyController@play');
 Route::get('/save-game-result', 'LobbyController@saveScore');
-Route::post('/session/create', 'SessionsController@create');
+Route::post('/session/create', 'SessionController@create');
 Route::post('/send/{session}', 'ChatController@send');
 
 Route::get('/games', ['as' => 'games', 'uses' => 'LobbyController@getGames']);

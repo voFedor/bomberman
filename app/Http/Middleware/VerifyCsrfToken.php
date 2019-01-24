@@ -25,6 +25,7 @@ class VerifyCsrfToken extends Middleware
         '/checkGameSession',
         '/getGamePlay',
         '/login',
-        '/register'
+        '/register',
+        '/getUsers'
     ];
 }

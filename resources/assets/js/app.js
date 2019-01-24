@@ -8,7 +8,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-
+Vue.use(require('vue-chat-scroll'));
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -23,15 +23,14 @@ import ChatComponent from './components/ChatComponent.vue'
 Vue.component('NotifyComponent', require('./components/NotifyComponent.vue'));
 import NotifyComponent from './components/NotifyComponent.vue'
 
-Vue.component('LobbyComponent', require('./components/LobbyComponent.vue'));
-import LobbyComponent from './components/LobbyComponent.vue'
+Vue.component('lobbycomponent', require('./components/LobbyComponent.vue'));
+import lobbycomponent from './components/LobbyComponent.vue'
 
 
 const app = new Vue({
     el: '#app',
     components: {
-        ChatComponent,
-        LobbyComponent
+        ChatComponent
     }
 });
 
@@ -39,6 +38,6 @@ const app = new Vue({
 const app2 = new Vue({
      el: '#app2',
      components: {
-         LobbyComponent
+         lobbycomponent
      }
  });

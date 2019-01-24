@@ -19,9 +19,7 @@
 
 @yield('content')
 
-<div id="app">
-    <chat-component></chat-component>
-</div>
+
 
 
 <div>
