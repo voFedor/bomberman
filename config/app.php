@@ -195,7 +195,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        //Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Lord\Laroute\LarouteServiceProvider::class,
         \App\Providers\LogProvider::class,
         Jenssegers\Agent\AgentServiceProvider::class,
