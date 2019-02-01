@@ -28,4 +28,11 @@ class VerifyCsrfToken extends Middleware
         '/register',
         '/getUsers'
     ];
+
+    public function __construct(\Illuminate\Foundation\Application $app, \Illuminate\Contracts\Encryption\Encrypter $encrypter)
+    {
+        $this->app = $app;
+        $this->encrypter = $encrypter;
+        $this->except[] = \Telegram::getAccessToken();
+    }
 }
