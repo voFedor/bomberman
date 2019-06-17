@@ -76,7 +76,7 @@ class TelegramBotController extends Controller
 		if(isset($session['message'])){
 			$data['text'] = $session['message'];
 		}else{
-			$data['url'] = env('GAME_HOST').'/index.html?user_id='.$user_id.'&inline_message_id='.$inline_message_id.'&chat_id='.$chat_id.'&message_id='.$message_id.'&message_id='.$message_id;
+			$data['url'] = env('GAME_HOST').'/index.html?user_id='.$user_id.'&inline_message_id='.$inline_message_id.'&chat_id='.$chat_id.'&message_id='.$message_id;
 		}
 
 		return Telegram::answerCallbackQuery($data);
