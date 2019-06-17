@@ -6,6 +6,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Hash;
 use Auth;
+use DB;
 
 /**
  * Class User
@@ -53,6 +54,11 @@ class User extends Authenticatable
     public function payments()
     {
         return $this->hasMany(PaymentHistory::class);
+    }
+	
+	public function holds()
+    {
+        return $this->hasMany(HoldCredits::class, 'user_id', 'id');
     }
 
     /**
@@ -159,8 +165,6 @@ class User extends Authenticatable
         }
     }
 
-
-
     /**
      * @return string
      */
@@ -189,4 +193,13 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\SocialProfile');
     }
+	
+	/**
+     * @return string
+     */
+    public static function getCredits($user_id)
+    {
+		return self::select(DB::raw('credits - COALESCE((Select SUM(hold) From hold_credits Where user_id = '.$user_id.'), 0) as balance'))->where('id', $user_id)->value('balance');
+	}
+	
 }

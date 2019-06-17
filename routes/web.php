@@ -113,3 +113,12 @@ Route::post('mlogin', 'Mobile\LoginController@login');
 Route::get('mregister', 'Mobile\RegisterController@showRegistrationForm');
 Route::post('mregister', 'Mobile\RegisterController@register');
 Route::post('/makeDeposit', 'Mobile\PaymentsController@getPayments');
+
+
+Route::prefix('/telegram')->group(function () {
+	Route::get('/set-hook', function () {
+		Telegram::setWebhook(['url' => 'https://'.env('TELEGRAM_NGROK').'.ngrok.io/telegram/' . env('TELEGRAM_BOT_TOKEN') . '/webhook']);
+	});
+	Route::post('/'.env('TELEGRAM_BOT_TOKEN') . '/webhook', 'TelegramBotController@handleRequest');
+	Route::get('/test', 'TelegramBotController@test');
+});

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 use DB;
+use App\Models\HoldCredits;
 /**
  * Class Game
  * @package App
@@ -26,6 +27,7 @@ class GameSession extends Model
         'bet_id',
         'game_id',
         'win',
+        'uuid',
         'started_at',
         'ended_at'
     ];
@@ -331,4 +333,142 @@ class GameSession extends Model
             return 0;
         }
     }
+	
+	/**
+	 * @param $telegram_id, $uuid, $game_short_name
+     * @return $session['id'] or $session['message']
+     */	
+	public static function tsOpen($telegram_id, $uuid, $game_short_name)
+    {
+		$game = self::getGameByGameShortName($game_short_name);
+		if(empty($game)) {
+			$session['message'] = "Игры не существует";
+			return $session;
+		}
+
+		$user = DB::table('users')->where('telegram_id', $telegram_id)->first();
+		$balance = User::getCredits($user->id);
+		if((float)$balance < (float)$game->bet) {
+			$session['message'] = "На вашем счету не хватает средств! Текущий баланс: {$balance} cr";
+			return $session;
+		}		
+
+		$session = self::where('uuid', $uuid)->first();
+		if(!isset($session->id)){
+			$session = GameSession::create([
+				'bet_id' => $game->bet_id,
+				'game_id' => $game->game_id,
+				'uuid' => $uuid,
+				'started_at' => Carbon::now(),
+			]);
+
+			GameSessionUser::create([
+				'user_id' => $user->id,
+				'session_id' => $session->id,
+				'credits_before' => $user->credits
+			]);
+			
+		}else{
+			$session_user = DB::table('game_sessions_users')->where([['user_id', $user->id], ['session_id', $session->id]])->first();
+			if(isset($session_user->id)){
+				$session['message'] = "Вы не может играть повторно! Ваш счет: ".($session_user->score ?? 0);
+				return $session;
+			}
+			else{
+				GameSessionUser::create([
+					'user_id' => $user->id,
+					'session_id' => $session->id,
+					'credits_before' => $user->credits
+				]);
+			}
+		}
+		$session['id'] = $session->id;
+		HoldCredits::create(['user_id' => $user->id, 'hold' => (float)$game->bet, 'session_id' => $session['id']]);
+		
+		return $session;
+	}
+	
+	/**
+	 * @param $telegram_id, $uuid, $score
+     * @return mixed
+     */	
+	public static function saveScoreDB($telegram_id, $uuid, $score)
+    {
+		$raw = DB::table('game_sessions_users')
+			->leftJoin('game_sessions', 'game_sessions.id', '=', 'game_sessions_users.session_id')
+			->leftJoin('users', 'users.id', '=', 'game_sessions_users.user_id')
+			->select('game_sessions_users.id')
+			->where([
+				['users.telegram_id', $telegram_id],
+				['game_sessions.uuid', "$uuid"],
+			])->first();
+			DB::table('game_sessions_users')->where('id', $raw->id)->update(['score' => $score]);
+
+		$game_sessions = DB::table('game_sessions_users')
+				->leftJoin('game_sessions', 'game_sessions.id', '=', 'game_sessions_users.session_id')
+				->where('game_sessions.uuid', "$uuid")
+				->whereNotNull('score')
+				->count();
+		if($game_sessions >= 2){
+			return self::tsEnd($uuid);
+		}
+	}
+	
+	/**
+	 * Get bet_id and game_id by game_short_name from Games
+	 * @param $game_short_name
+     * @return bet_id, game_id
+     */
+	public static function getGameByGameShortName($game_short_name)
+	{
+		$game_short = explode("_", $game_short_name);
+		$game_name = $game_short[0];
+		$bet = (int)$game_short[1];
+		$game = DB::table('game_bets')
+				->leftJoin('games', 'games.id', '=', 'game_bets.game_id')
+				->select('game_id', 'game_bets.id as bet_id', 'bet')
+				->where([['telegam_bot_game', "$game_name"], ['bet', $bet]])
+				->first();
+		return $game;
+	}
+		
+	/**
+	 * Close session telegram game. Update score, winner, and credits
+	 * @param $uuid
+     * @return message
+     */
+	public static function tsEnd($uuid)
+	{
+		$session = DB::table('game_sessions_users')
+				->leftJoin('game_sessions', 'game_sessions.id', '=', 'game_sessions_users.session_id')
+				->select('game_sessions_users.user_id  as user_id', 'score', 'bet_id', 'game_sessions.id as session_id')
+				->where('game_sessions.uuid', "$uuid")
+				->orderBy('score', 'desc')
+				->get()->toArray();
+		$winner = $session[0]; $looser = $session[1];
+		$bet = DB::table('game_bets')->where('id', $winner->bet_id)->value('bet'); $bet = (int)$bet;
+		DB::table('game_sessions')->where('uuid', "$uuid")->update(['ended_at' => Carbon::now(), 'winner_id' => $winner->user_id]);
+		self::updateCredits($winner, $bet, true);
+		self::updateCredits($looser, $bet, false);
+		$winner_name = DB::table('users')->where('id', $winner->user_id)->value('name');
+		$mes = "Победитель: {$winner_name}, набрав {$winner->score} баллов. Счёт проигравшего: {$looser->score} баллов.";
+		return $mes;
+	}
+			
+	/**
+	 * Close session telegram game. Update score, winner, and credits
+	 * @param $uuid
+     * @return message
+     */
+	public static function updateCredits($user, $bet, $winner = false)
+	{
+		$symbol = ($winner) ? '+' : '-';
+		DB::table('game_sessions_users')->leftJoin('users', 'users.id', '=', 'game_sessions_users.user_id')
+			->where([['session_id', $user->session_id], ['user_id', $user->user_id]])
+			->update([
+				'game_sessions_users.credits_after' => DB::raw("game_sessions_users.credits_before $symbol $bet"),
+				'users.credits' => DB::raw("users.credits $symbol $bet")
+			]);
+		HoldCredits::where([['session_id', $user->session_id], ['user_id', $user->user_id]])->delete();
+	}
 }
