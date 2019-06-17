@@ -36,7 +36,7 @@ return [
             'username'            => 'GameChainger',
             'token'               => env('TELEGRAM_BOT_TOKEN', '865104529:AAHE1TZJCxqM5vr3RVRHf_E2dQhKL7BeDDU'),
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', ''),
-            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', ''),
+            'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', env('APP_URL').'/telegram/' . env('TELEGRAM_BOT_TOKEN') . '/webhook'),
             'commands'            => [
                 App\Http\Controllers\Telegram\StartCommand::class,
                 App\Http\Controllers\Telegram\MenuCommand::class,
