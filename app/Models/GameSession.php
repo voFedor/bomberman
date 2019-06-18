@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Auth;
 use DB;
 use App\Models\HoldCredits;
+use App\Models\Profit;
 /**
  * Class Game
  * @package App
@@ -463,6 +464,7 @@ class GameSession extends Model
 	public static function updateCredits($user, $bet, $winner = false)
 	{
 		$symbol = ($winner) ? '+' : '-';
+		if($winner) $bet = $bet - Profit::setProfit($bet, $user);
 		DB::table('game_sessions_users')->leftJoin('users', 'users.id', '=', 'game_sessions_users.user_id')
 			->where([['session_id', $user->session_id], ['user_id', $user->user_id]])
 			->update([
