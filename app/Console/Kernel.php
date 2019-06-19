@@ -28,7 +28,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-		$schedule->command('session:clear')->cron('0 */6 * * *');
+		$schedule->command('session:clear')->hourly();
     }
 
     /**
