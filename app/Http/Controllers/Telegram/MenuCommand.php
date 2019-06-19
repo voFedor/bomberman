@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Telegram;
 use Telegram\Bot\Actions;
 use Telegram\Bot\Commands\Command;
 
+use App\Models\TelegramBot;
+
 class MenuCommand extends Command
 {
     /**
@@ -23,14 +25,9 @@ class MenuCommand extends Command
     public function handle()
     {
         $this->replyWithChatAction(['action' => Actions::TYPING]);
-
-        $commands = $this->getTelegram()->getCommands();
-
-        $response = '';
-        foreach ($commands as $name => $command) {
-            $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
-        }
-
-        $this->replyWithMessage(['text' => $response]);
+        $response = TelegramBot::menuText();		
+		$reply_markup = TelegramBot::menuButton();
+		
+        $this->replyWithMessage(['reply_markup' => $reply_markup, 'text' => $response]);
     }
 }

@@ -29,17 +29,10 @@ class StartCommand extends Command
 			$mes = "Привет: ".$user['user']->name."! Ваш пароль: ".$user['pass'];
 		else
 			$mes = "С возвращением: ".$user->name."!";
-        $this->replyWithMessage(['text' => $mes]);
         $this->replyWithChatAction(['action' => Actions::TYPING]);
 
-        $commands = $this->getTelegram()->getCommands();
-
-        $response = '';
-        foreach ($commands as $name => $command) {
-            $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
-        }
-
-        $this->replyWithMessage(['text' => $response]);
+        $reply_markup = TelegramBot::menuButton();
+        $this->replyWithMessage(['parse_mode' => 'html', 'reply_markup' => $reply_markup, 'text' => $mes]);
         //$this->triggerCommand('subscribe');
     }
 }

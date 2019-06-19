@@ -9,6 +9,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Eloquent\Model;
 
+use Telegram;
+use Telegram\Bot\Keyboard\Keyboard;
+
 class TelegramBot extends Model
 {
 	static $telegram_id;
@@ -24,6 +27,42 @@ class TelegramBot extends Model
         'telegram_id',
         'step',
     ];
+	
+	public static function menuButton()
+    {
+		$commands = Telegram::getCommands();
+		$count = count($commands);
+		$keyboard = array();
+		$a = 0; $b = 0;
+		
+        foreach ($commands as $name => $command) { 
+			$keyboard[$a][$b] = sprintf('/%s' . PHP_EOL, $name);
+			$b++;
+			if($name == 'start') {$a=0; $b=0;}
+			if($b == 3) {$a++; $b=0;}
+        }
+
+		$params = [
+			'keyboard' => $keyboard, 
+			'resize_keyboard' => true, 
+			'one_time_keyboard' => false
+		];
+		$reply_markup = Keyboard::make($params);			
+		
+		return $reply_markup;
+	}
+	
+	public static function menuText()
+    {
+		$commands = Telegram::getCommands();
+
+        $response = '';
+        foreach ($commands as $name => $command) {
+            if($name != 'start') $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
+        }
+		
+		return $response;
+	}
 	
     public static function checkDatabase($request)
     {

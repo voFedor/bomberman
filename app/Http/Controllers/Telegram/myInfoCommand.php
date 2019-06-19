@@ -30,7 +30,7 @@ class myInfoCommand extends Command
 		$user = TelegramBot::checkDatabase($this->getUpdate()->message);
 		$balance = User::getCredits($user->id);		
 		$message = "Ник: {$user->name}. Баланс: {$balance} cr. Имя: {$user->first_name} Фамилия: {$user->last_name}";
-
+		
         $this->replyWithMessage(['text' => $message]);
     }
 }

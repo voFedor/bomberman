@@ -119,8 +119,8 @@ class TelegramBotController extends Controller
 	
 	public function test()
 	{
-		$balance = User::select(DB::raw('credits - (Select SUM(hold) From hold_credits Where user_id = 134) as balance'))->where('id', 134)->value('balance');
+		$res = TelegramBot::menuButton();
 		
-		var_dump($balance);
+		var_dump($res);
 	}
 }

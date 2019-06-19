@@ -32,7 +32,7 @@ class MathCommand extends Command
             'game_short_name' => 'quickmath',
 			'reply_markup' => $reply_markup
         ];
-
+		
         $this->replyWithGame($data);
     }
 
