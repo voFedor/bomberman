@@ -115,7 +115,7 @@ Route::post('/makeDeposit', 'Mobile\PaymentsController@getPayments');
 
 Route::prefix('/telegram')->group(function () {
 	Route::get('/set-hook', function () {
-		Telegram::setWebhook(['url' => 'https://'.env('TELEGRAM_NGROK').'.ngrok.io/telegram/' . env('TELEGRAM_BOT_TOKEN') . '/webhook']);
+		Telegram::setWebhook(['url' => env('TELEGRAM_URL'). '/' . env('TELEGRAM_BOT_TOKEN') . '/webhook']);
 	});
 	Route::post('/'.env('TELEGRAM_BOT_TOKEN') . '/webhook', 'TelegramBotController@handleRequest');
 	Route::get('/auth/{id}', 'Auth\LoginController@telegramAuth');

@@ -38,7 +38,7 @@ class InformationCommand extends Command
 			//'reply_markup' => $reply_markup
 		]);*/
 		
-		$text = '<a href="'.env('TELEGRAM_URL').'/'.$this->getUpdate()->message->from->id.'">Пополнить баланс</a>';
+		$text = '<a href="'.env('TELEGRAM_URL').'/auth/'.$this->getUpdate()->message->from->id.'">Пополнить баланс</a>';
 
         $this->replyWithMessage(['parse_mode' => 'html', 'text' => $text]);
     }
