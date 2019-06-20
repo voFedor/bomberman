@@ -46,11 +46,6 @@ Route::get('/chat', 'ServiceController@chat')->name('chat');
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
 
-Route::post('/ulogin', 'Auth\LoginController@ulogin');
-Route::get('/redirectToSocial/{provider}', 'Auth\SocialAuthController@redirectToSocial');
-Route::get('/auth/{network}/callback', 'Auth\SocialAuthController@callback');
-//Route::post('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
-
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');
 Route::get('/tournaments', 'LobbyController@tournaments');
@@ -64,7 +59,7 @@ Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsControl
 Route::post('/check-payment', 'PaymentsController@checkPayment');
 Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');
 
-Route::get('/success-payment', 'PaymentsController@successPayment');
+Route::post('/success-payment', 'PaymentsController@successPayment');
 Route::post('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...
@@ -75,6 +70,9 @@ $this->get('login/{network}', 'Auth\LoginController@networkAuth')->name('login')
 $this->post('/login', 'Auth\LoginController@login')->name('auth.login');
 $this->get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
+Route::post('/ulogin', 'Auth\LoginController@ulogin');
+Route::get('/redirectToSocial/{provider}', 'Auth\SocialAuthController@redirectToSocial');
+Route::get('/auth/{network}/callback', 'Auth\SocialAuthController@callback');
 
 // Change Password Routes...
 $this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
@@ -120,5 +118,6 @@ Route::prefix('/telegram')->group(function () {
 		Telegram::setWebhook(['url' => 'https://'.env('TELEGRAM_NGROK').'.ngrok.io/telegram/' . env('TELEGRAM_BOT_TOKEN') . '/webhook']);
 	});
 	Route::post('/'.env('TELEGRAM_BOT_TOKEN') . '/webhook', 'TelegramBotController@handleRequest');
+	Route::get('/auth/{id}', 'Auth\LoginController@telegramAuth');
 	Route::get('/test', 'TelegramBotController@test');
 });

@@ -37,7 +37,9 @@ class InformationCommand extends Command
 			'parse_mode' => 'html',
 			//'reply_markup' => $reply_markup
 		]);*/
+		
+		$text = '<a href="'.env('TELEGRAM_URL').'/'.$this->getUpdate()->message->from->id.'">Пополнить баланс</a>';
 
-        $this->replyWithMessage(['parse_mode' => 'html', 'text' => 'https://gamechainger.ru/']);
+        $this->replyWithMessage(['parse_mode' => 'html', 'text' => $text]);
     }
 }

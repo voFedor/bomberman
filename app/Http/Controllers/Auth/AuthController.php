@@ -31,9 +31,7 @@ class AuthController extends Controller
     {
         return \Socialite::with($network)->redirect();
     }
-
-
-
+	
     public function handleProviderCallback()
     {
         $user = \Socialite::driver('vkontakte')->user();
