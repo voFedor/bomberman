@@ -55,6 +55,7 @@ Route::post('/check-balance', 'PaymentsController@checkBalance');
 
 Route::get('/cash', 'ServiceController@cash');
 
+Route::get('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');
 Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');

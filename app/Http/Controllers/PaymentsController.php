@@ -25,7 +25,7 @@ class PaymentsController extends Controller
     {
 		if(Auth::check()){
 			$games = Game::all();
-			$payment_history = PaymentHistory::where(['user_id' => Auth::user()->id ])->get();
+			$payment_history = PaymentHistory::where(['user_id' => Auth::user()->id, 'status' => PaymentHistory::PAID])->get();
 			return view('lobby.payment', compact('games', 'payment_history'));
 		}
 		return redirect('/');
@@ -52,7 +52,7 @@ class PaymentsController extends Controller
      */
     public function sendPayment(Request $request)
     {
-
+		$user_id = Auth::check() ? Auth::user()->id : $request->user_id;
         if ($request->price == "" || $request->price == null) {
             return back()->with(['error' => 'Укажите сумму']);
         }
@@ -76,7 +76,7 @@ class PaymentsController extends Controller
         $payment = new PaymentHistory();
         $payment->operation_id = $code;
         $payment->amount = $request->price;
-        $payment->user_id = Auth::user()->id;
+        $payment->user_id = $user_id;
         $payment->status = 0;
         $payment->save();
 

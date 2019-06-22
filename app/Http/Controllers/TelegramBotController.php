@@ -112,6 +112,8 @@ class TelegramBotController extends Controller
         $data = [
             'inline_query_id' => $update->inline_query->id,
 			'results' => json_encode($results),
+			'switch_pm_text'=>'Перейти в GameChaingerBot',
+			'switch_pm_parameter'=>'123'
         ];
 		
 		return Telegram::answerInlineQuery($data);

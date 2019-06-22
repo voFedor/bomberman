@@ -383,9 +383,11 @@ class LoginController extends Controller
     {
 		if(!Auth::check()){
 			$user = User::where('telegram_id', $request->id)->get()->first();		
-			if ($user) Auth::loginUsingId($user->id);
+			//if ($user) Auth::loginUsingId($user->id);
+			if ($user) {
+				return view('lobby.payment_form')->with(['user_id' => $user->id]);
+			}
 		}
-		
         return redirect()->to('/payments');
     }
 }

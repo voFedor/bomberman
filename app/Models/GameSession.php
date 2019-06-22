@@ -350,7 +350,7 @@ class GameSession extends Model
 		$user = DB::table('users')->where('telegram_id', $telegram_id)->first();
 		$balance = User::getCredits($user->id);
 		if((float)$balance < (float)$game->bet) {
-			$session['message'] = "На вашем счету не хватает средств! Текущий баланс: {$balance} cr";
+			$session['message'] = "На вашем счету не хватает средств! Текущий баланс: {$balance} cr. Для пополнения баланса перейдите в бота @gamechainger_bot";
 			return $session;
 		}		
 

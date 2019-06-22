@@ -70,7 +70,7 @@
                         @foreach($payment_history as $payment_h)
                             <tr>
                                 <th scope="row">{{$i}}</th>
-                                <td>{{$payment_h->withdraw_amount}}</td>
+                                <td>{{$payment_h->amount}}</td>
                                 <td>{{$payment_h->created_at}}</td>
                             </tr>
                             <?php $i++;?>
