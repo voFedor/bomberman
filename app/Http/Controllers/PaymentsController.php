@@ -74,8 +74,8 @@ class PaymentsController extends Controller
 
 
         $payment = new PaymentHistory();
-        $payment->token = $code;
-        $payment->price = $request->price;
+        $payment->operation_id = $code;
+        $payment->amount = $request->price;
         $payment->user_id = Auth::user()->id;
         $payment->status = 0;
         $payment->save();
@@ -138,8 +138,8 @@ class PaymentsController extends Controller
 
 
         if ($payment->validateResult($request->all())) {
-            $payments_history = PaymentHistory::where('token', $request->input('InvId'))->first();
-            if ($payments_history->price == $payment->getSum())
+            $payments_history = PaymentHistory::where('operation_id', $request->input('InvId'))->first();
+            if ($payments_history->amount == $payment->getSum())
             {
                 $payments_history->status = 1;
                 $user = User::find($payments_history->user_id);
