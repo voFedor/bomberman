@@ -59,8 +59,8 @@ Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsControl
 Route::post('/check-payment', 'PaymentsController@checkPayment');
 Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');
 
-Route::post('/success-payment', 'PaymentsController@successPayment');
-Route::post('/fail-payment', 'PaymentsController@failPayment');
+Route::get('/success-payment', 'PaymentsController@successPayment');
+Route::get('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...
 Route::any('/register', 'Auth\LoginController@anyForm')->name('login');

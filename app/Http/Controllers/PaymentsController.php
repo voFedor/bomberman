@@ -23,9 +23,12 @@ class PaymentsController extends Controller
      */
     public function getPayments()
     {
-        $games = Game::all();
-        $payment_history = PaymentHistory::where(['user_id' => Auth::user()->id ])->get();
-        return view('lobby.payment', compact('games', 'payment_history'));
+		if(Auth::check()){
+			$games = Game::all();
+			$payment_history = PaymentHistory::where(['user_id' => Auth::user()->id ])->get();
+			return view('lobby.payment', compact('games', 'payment_history'));
+		}
+		return redirect('/');
     }
 
 
@@ -61,7 +64,7 @@ class PaymentsController extends Controller
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
             env('ROBOKASSA_PASS_2'),
-            true
+            true // true - IsTest
         );
 
 
@@ -143,9 +146,11 @@ class PaymentsController extends Controller
                 $user->credits = $user->credits + $payments_history->amount;
                 $user->update();
                 $payments_history->update();
+				
+				return true;
             }
-
         }
+		return false;
     }
 
 
