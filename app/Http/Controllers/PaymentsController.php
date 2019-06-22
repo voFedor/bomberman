@@ -70,7 +70,7 @@ class PaymentsController extends Controller
 
         do {
             $code = rand(10000, 9999990);
-        } while (PaymentHistory::where('token', $code)->where('status', 0)->first() != null);
+        } while (PaymentHistory::where('operation_id', $code)->where('status', 0)->first() != null);
 
 
         $payment = new PaymentHistory();
@@ -84,7 +84,7 @@ class PaymentsController extends Controller
 
         $payment_robkass
             ->setInvoiceId($code)
-            ->setSum($payment->price)
+            ->setSum($payment->amount)
             ->setDescription('Новая оплата');
 
         // redirect to payment url
