@@ -137,7 +137,7 @@ class PaymentsController extends Controller
 
 
         if ($payment->validateResult($request->all())) {
-            $payments_history = PaymentHistory::where('operation_id', $request->input('InvId'))->first();
+            $payments_history = PaymentHistory::where('operation_id', $request->input('InvId'))->orderBy('id', 'desc')->first();
             if ($payments_history->amount == $payment->getSum())
             {
                 $payments_history->status = 1;
