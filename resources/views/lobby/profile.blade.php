@@ -81,13 +81,13 @@
                         <li>
                             {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
                             <a href="/game/{{$game->slug}}">
-                                <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
+                                <img src="{{ config('app.theme') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                            <img src="{{ config('app.theme') }}/images/games/cs-go.png" alt="client logo 1">
                         </a>
                     </li>
                 </ul>

@@ -11,7 +11,7 @@
             <div id="single-project">
                 <div id="slidingDiv" class=" row-fluid single-project">
                     <div class="span6">
-                        <img src="/{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="project 1" />
+                        <img src="/{{ config('app.theme') }}/images/{{ $game->getLogo() }}" alt="project 1" />
                     </div>
                     <div class="span6">
                         <div class="project-description">
@@ -32,7 +32,7 @@
                                         <script src="//yastatic.net/es5-shims/0.0.2/es5-shims.min.js"></script>
                                         <script src="https://yastatic.net/share2/share.js" async="async"></script>
                                         {{--<div class="ya-share2" data-services="vkontakte,twitter,facebook,gplus  ,linkedin,odnoklassniki,telegram" data-title="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль" data-description="{{Auth::user()->first_name}} {{Auth::user()->last_name}} вызвал вас на дуэль"></div>--}}
-                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="https://gamechainger.ru/game/{{$game->slug}}?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=site_r" data-image="/{{ env('THEME') }}/images/{{ $game->getLogo() }}">  </div>
+                                        <div class="ya-share2"  data-size="m" data-services="vkontakte,facebook,odnoklassniki,moimir,gplus,linkedin,whatsapp,telegram" data-title="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше"  data-description="{{Auth::user()->first_name}} хочет поспорить, кто из вас лучше" data-url="https://gamechainger.ru/game/{{$game->slug}}?ref={{Auth::user()->uuid}}&game={{$game->id}}&from=site_r" data-image="/{{ config('app.theme') }}/images/{{ $game->getLogo() }}">  </div>
                                     </div>
                                 @else
                                     <button id="auth-link" onclick="return openModalAuth()" style="padding-left: 5px;padding-right: 5px;" class="btn btn-sm btn-warning">Пригласить друга</button>
@@ -74,13 +74,13 @@
                         <li>
                             {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
                             <a href="/game/{{$game->slug}}">
-                                <img src="/{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
+                                <img src="/{{ config('app.theme') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="/{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
+                            <img src="/{{ config('app.theme') }}/images/games/cs-go.png" alt="client logo 1">
                         </a>
                     </li>
                 </ul>

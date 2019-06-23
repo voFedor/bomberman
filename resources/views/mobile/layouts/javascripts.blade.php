@@ -17,7 +17,7 @@
 </script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script src="//ulogin.ru/js/ulogin.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/auth.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/auth.js"></script>
 
 
 <script type="text/javascript" >

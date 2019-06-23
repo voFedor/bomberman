@@ -2,8 +2,8 @@
     <div class="navbar-inner">
         <div class="container">
             <a href="/" class="brand">
-                {{--<img src="{{ env('THEME') }}/images/logo.png" width="120" height="40" alt="Logo" />--}}
-                <img src="/{{ env('THEME') }}/images/logo.png" width="120" height="40" alt="Logo" />
+                {{--<img src="{{ config('app.theme') }}/images/logo.png" width="120" height="40" alt="Logo" />--}}
+                <img src="/{{ config('app.theme') }}/images/logo.png" width="120" height="40" alt="Logo" />
                 <!-- This is website logo -->
             </a>
             <!-- Navigation button, visible on small resolution -->

@@ -36,12 +36,12 @@
                 </div>
             </div>
             {{--<h2 class="align-content-center">Успей зарегистрироваться! Ну если не боишься проиграть!</h2>--}}
-            {{--<img src="{{ env('THEME') }}/images/gifts.png" style="width: 300px">--}}
+            {{--<img src="{{ config('app.theme') }}/images/gifts.png" style="width: 300px">--}}
             <form action="/tourReg" method="post" class="" id="tourRegForm" style="float: left;text-align: -webkit-left;margin-top: 30px;">
                 <H3>Что нужно сделать:<br/>Зарегистрируйся<br/>Приглашай друга сразиться на "соточку" <br/>Чем больше играешь, тем больше шанс на победу</H3>
 
                 {{ csrf_field() }}
-                <img src="{{ env('THEME') }}/images/gifts.png" style="width: 500px">
+                <img src="{{ config('app.theme') }}/images/gifts.png" style="width: 500px">
                     @if(Auth::user() == null)
                     <button onclick="return alert('Вам необходимо авторизироваться на сайте.')" type="button" class="tournament-button button">Принять участие</button>
 
@@ -98,7 +98,7 @@
                     {{--@foreach($games as $game)--}}
                         {{--<li>--}}
                             {{--<a href="javascript:void(0)" onclick="return checkBet({{Auth::check() ? Auth::user()->credits : 0}}, {{ $game->id }})">--}}
-                                {{--<img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">--}}
+                                {{--<img src="{{ config('app.theme') }}/images/{{ $game->getLogo() }}" alt="client logo 1">--}}
                             {{--</a>--}}
                         {{--</li>--}}
                     {{--@endforeach--}}

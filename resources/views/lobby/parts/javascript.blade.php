@@ -38,29 +38,29 @@
 
 
 <!-- Include javascript -->
-<script src="/{{ env('THEME') }}/js/jquery.js"></script>
+<script src="/{{ config('app.theme') }}/js/jquery.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 
-<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.mixitup.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/bootstrap.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/jquery.mixitup.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/bootstrap.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/javascript.util/0.12.12/javascript.util.min.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/modernizr.custom.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.bxslider.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.cslider.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.placeholder.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/jquery.inview.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/jquery.cslider.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/jquery.placeholder.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/jquery.inview.js"></script>
 
 
 <!-- css3-mediaqueries.js for IE8 or older -->
 <!--[if lt IE 9]>
-<script src="{{ env('THEME') }}/js/respond.min.js"></script>
+<script src="{{ config('app.theme') }}/js/respond.min.js"></script>
 <![endif]-->
 
-<script type="text/javascript" src="/{{ env('THEME') }}/js/app.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/popup-form.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/auth.js"></script>
-<script type="text/javascript" src="/{{ env('THEME') }}/js/custom.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/app.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/popup-form.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/auth.js"></script>
+<script type="text/javascript" src="/{{ config('app.theme') }}/js/custom.js"></script>
 
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>\
 
