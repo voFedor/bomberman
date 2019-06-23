@@ -21,7 +21,7 @@
 
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="newGame">
+<!--div class="modal fade" tabindex="-1" role="dialog" id="newGame">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,7 +39,7 @@
 
         </div>
     </div>
-</div>
+</div-->
 
 
 
@@ -48,7 +48,7 @@
 
 
 
-<div class="modal fade" tabindex="-1" role="dialog" id="newUserForm">
+<!--div class="modal fade" tabindex="-1" role="dialog" id="newUserForm">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -77,7 +77,7 @@
 
         </div>
     </div>
-</div>
+</div-->
 
 
 
@@ -273,7 +273,7 @@
 
 
 
-<div id="loginForm" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="color: black;">
+<!--div id="loginForm" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" style="color: black;">
     <div class="modal-dialog modal-dialog-custom" role="document">
         <div class="modal-content modal-content-custom" id="loginFormContent">
             <div class="modal-header text-center">
@@ -330,4 +330,4 @@
 
         </div>
     </div>
-</div>
+</div-->

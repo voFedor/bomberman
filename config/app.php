@@ -2,6 +2,11 @@
 
 return [
 
+	'theme' => env('THEME', 'pluton'),
+	'ROBOKASSA_SHOP_ID' => env('ROBOKASSA_SHOP_ID', ''),
+	'ROBOKASSA_PASS_1' => env('ROBOKASSA_PASS_1', ''),
+	'ROBOKASSA_PASS_2' => env('ROBOKASSA_PASS_2', ''),
+	
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -26,8 +31,6 @@ return [
     */
 
     'env' => env('APP_ENV', 'production'),
-	
-    'theme' => env('THEME', 'pluton'),
 
     /*
     |--------------------------------------------------------------------------
