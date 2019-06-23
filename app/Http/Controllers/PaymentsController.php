@@ -129,9 +129,9 @@ class PaymentsController extends Controller
     {
 
         $payment = new Payment(
-            env('ROBOKASSA_SHOP_ID'),
-            env('ROBOKASSA_PASS_1'),
-            env('ROBOKASSA_PASS_2'),
+            config('app.ROBOKASSA_SHOP_ID'),
+            config('app.ROBOKASSA_PASS_1'),
+            config('app.ROBOKASSA_PASS_2'),
             true
         );
 
