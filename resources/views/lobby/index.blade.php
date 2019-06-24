@@ -20,7 +20,7 @@
                         На платформе Game Chainger <br/>
                         можно играть и зарабатывать на каждой победе.</h4>
                     <div class="da-img">
-                        <img src="{{ config('app.theme') }}/images/Slider01.png" alt="image01" width="320">
+                        <img src="{{ env('THEME') }}/images/Slider01.png" alt="image01" width="320">
                     </div>
                 </div>
                 <!-- End first slide -->
@@ -29,7 +29,7 @@
                     <h2>Деньги, женщины, победа!</h2>
                     <h4><br/><br/>На нашей платформе есть почти все.</h4>
                     <div class="da-img">
-                        <img src="{{ config('app.theme') }}/images/Slider02.png" width="320" alt="image02">
+                        <img src="{{ env('THEME') }}/images/Slider02.png" width="320" alt="image02">
                     </div>
                 </div>
                 <!-- End second slide -->
@@ -40,7 +40,7 @@
                     самые активные получат подарки к Новому году </h4>
                     <a href="/tournaments/" class="da-link button">Подробнее</a>
                     <div class="da-img">
-                        <img src="{{ config('app.theme') }}/images/Slider03.png" width="320" alt="image03">
+                        <img src="{{ env('THEME') }}/images/Slider03.png" width="320" alt="image03">
                     </div>
                 </div>
                 <!-- Start third slide -->
@@ -69,7 +69,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service1.png" alt="service 1">
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service1.png" alt="service 1">
                         </div>
                         <h3>Регистрируешься</h3>
                     </div>
@@ -77,7 +77,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service2.png" alt="service 2" />
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service2.png" alt="service 2" />
                         </div>
                         <h3>Пополняешь баланс</h3>
                     </div>
@@ -85,7 +85,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service3.png" alt="service 3">
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service3.png" alt="service 3">
                         </div>
                         <h3>Выбираешь игру</h3>
                     </div>
@@ -93,7 +93,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service4.png" alt="service 4">
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service4.png" alt="service 4">
                         </div>
                         <h3>Выбираешь ставку</h3>
                     </div>
@@ -101,7 +101,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service5.png" alt="service 5">
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service5.png" alt="service 5">
                         </div>
                         <h3>Побеждаешь</h3>
                     </div>
@@ -109,7 +109,7 @@
                 <div class="span2">
                     <div class="centered service">
                         <div class="circle-border zoom-in">
-                            <img class="img-circle" src="{{ config('app.theme') }}/images/Service6.png" alt="service 6">
+                            <img class="img-circle" src="{{ env('THEME') }}/images/Service6.png" alt="service 6">
                         </div>
                         <h3>Забираешь выигрыш</h3>
                     </div>
@@ -157,13 +157,13 @@
                         <li>
                             {{--<a href="javascript:void(0)" onclick="return checkBet({{ $game->id }})">--}}
                             <a href="/game/{{$game->slug}}">
-                                <img src="{{ config('app.theme') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
+                                <img src="{{ env('THEME') }}/images/{{ $game->getLogo() }}" alt="client logo 1">
                             </a>
                         </li>
                     @endforeach
                     <li>
                         <a href="#" data-toggle="modal" data-target="#newGame">
-                            <img src="{{ config('app.theme') }}/images/games/cs-go.png" alt="client logo 1">
+                            <img src="{{ env('THEME') }}/images/games/cs-go.png" alt="client logo 1">
                         </a>
                     </li>
                 </ul>
