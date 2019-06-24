@@ -61,12 +61,11 @@ class PaymentsController extends Controller
         }
 
         $payment_robkass = new Payment(
-            env('ROBOKASSA_SHOP_ID'),
-            env('ROBOKASSA_PASS_1'),
-            env('ROBOKASSA_PASS_2'),
+            config('app.ROBOKASSA_SHOP_ID'),
+            config('app.ROBOKASSA_PASS_1'),
+            config('app.ROBOKASSA_PASS_2'),
             true // true - IsTest
         );
-
 
         do {
             $code = rand(10000, 9999990);
@@ -130,15 +129,15 @@ class PaymentsController extends Controller
     {
 
         $payment = new Payment(
-            env('ROBOKASSA_SHOP_ID'),
-            env('ROBOKASSA_PASS_1'),
-            env('ROBOKASSA_PASS_2'),
+            config('app.ROBOKASSA_SHOP_ID'),
+            config('app.ROBOKASSA_PASS_1'),
+            config('app.ROBOKASSA_PASS_2'),
             true
         );
 
 
         if ($payment->validateResult($request->all())) {
-            $payments_history = PaymentHistory::where('operation_id', $request->input('InvId'))->first();
+            $payments_history = PaymentHistory::where('operation_id', $request->input('InvId'))->orderBy('id', 'desc')->first();
             if ($payments_history->amount == $payment->getSum())
             {
                 $payments_history->status = 1;
