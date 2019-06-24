@@ -2,6 +2,14 @@
 
 return [
 
+	'theme' => env('THEME', 'pluton'),
+	'ROBOKASSA_SHOP_ID' => env('ROBOKASSA_SHOP_ID', ''),
+	'ROBOKASSA_PASS_1' => env('ROBOKASSA_PASS_1', ''),
+	'ROBOKASSA_PASS_2' => env('ROBOKASSA_PASS_2', ''),
+	'TELEGRAM_BOT_TOKEN' => env('TELEGRAM_BOT_TOKEN', ''),
+	'TELEGRAM_CHANNEL_ID' => env('TELEGRAM_CHANNEL_ID', ''),
+	'TELEGRAM_URL' => env('TELEGRAM_URL', ''),
+	
     /*
     |--------------------------------------------------------------------------
     | Application Name
@@ -64,7 +72,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Europe/Moscow',
 
     /*
      |--------------------------------------------------------------------------
@@ -93,7 +101,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'ru',
 
     /*
     |--------------------------------------------------------------------------

@@ -37,4 +37,12 @@ class GameBet extends Model
     {
         return route('api.get.open.session')  . '?bet_id=' . $this->id;
     }
+	
+	/**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public static function getBets($game_id)
+    {
+        return self::where('game_id', $game_id)->get();
+    }
 }

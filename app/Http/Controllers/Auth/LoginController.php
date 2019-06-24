@@ -20,8 +20,6 @@ use Illuminate\Support\Facades\Redirect;
 class LoginController extends Controller
 {
 
-
-
     public function vkontakteCallback(Request $request)
     {
         $userVk = Socialite::driver('vkontakte')->user();
@@ -376,9 +374,21 @@ class LoginController extends Controller
         return redirect()->to('/');
     }
 
-
     public function networkAuth($network)
     {
         return Socialite::with('vkontakte')->redirect();
+    }
+
+    public static function telegramAuth(Request $request)
+    {
+		if(!Auth::check()){
+			$user = User::where('telegram_id', $request->id)->get()->first();		
+			//if ($user) Auth::loginUsingId($user->id);
+			if ($user) {
+				$games = \App\Models\Game::all();
+				return view('lobby.payment_form', compact('games', 'payment_history'))->with(['user_id' => $user->id]);
+			}
+		}
+        return redirect()->to('/payments');
     }
 }

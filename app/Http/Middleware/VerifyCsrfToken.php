@@ -26,6 +26,8 @@ class VerifyCsrfToken extends Middleware
         '/getGamePlay',
         '/login',
         '/register',
-        '/getUsers'
+        '/getUsers',
+        '865104529:AAHE1TZJCxqM5vr3RVRHf_E2dQhKL7BeDDU/webhook',
+		'*:*/webhook',
     ];
 }

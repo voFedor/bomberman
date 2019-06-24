@@ -46,11 +46,6 @@ Route::get('/chat', 'ServiceController@chat')->name('chat');
 Route::post('/tourReg', 'TournamentsController@tournamentRegistration');
 Route::post('/refresh-status', 'ServiceController@refreshStatus');
 
-Route::post('/ulogin', 'Auth\LoginController@ulogin');
-Route::get('/redirectToSocial/{provider}', 'Auth\SocialAuthController@redirectToSocial');
-Route::get('/auth/{network}/callback', 'Auth\SocialAuthController@callback');
-//Route::post('/socialAuth/{network}', 'Auth\AuthController@socialAuth');
-
 // Payments Routes...
 Route::get('/payments', 'PaymentsController@getPayments');
 Route::get('/tournaments', 'LobbyController@tournaments');
@@ -60,12 +55,13 @@ Route::post('/check-balance', 'PaymentsController@checkBalance');
 
 Route::get('/cash', 'ServiceController@cash');
 
+Route::get('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/send-payment', ['as' => 'send-payment', 'uses' => 'PaymentsController@sendPayment']);
 Route::post('/check-payment', 'PaymentsController@checkPayment');
 Route::post('/check-payment-yandex', 'PaymentsController@checkPaymentYandex');
 
 Route::get('/success-payment', 'PaymentsController@successPayment');
-Route::post('/fail-payment', 'PaymentsController@failPayment');
+Route::get('/fail-payment', 'PaymentsController@failPayment');
 
 // Authentication Routes...
 Route::any('/register', 'Auth\LoginController@anyForm')->name('login');
@@ -75,6 +71,9 @@ $this->get('login/{network}', 'Auth\LoginController@networkAuth')->name('login')
 $this->post('/login', 'Auth\LoginController@login')->name('auth.login');
 $this->get('logout', 'Auth\LoginController@logout')->name('auth.logout');
 
+Route::post('/ulogin', 'Auth\LoginController@ulogin');
+Route::get('/redirectToSocial/{provider}', 'Auth\SocialAuthController@redirectToSocial');
+Route::get('/auth/{network}/callback', 'Auth\SocialAuthController@callback');
 
 // Change Password Routes...
 $this->get('change_password', 'Auth\ChangePasswordController@showChangePasswordForm')->name('auth.change_password');
@@ -113,3 +112,13 @@ Route::post('mlogin', 'Mobile\LoginController@login');
 Route::get('mregister', 'Mobile\RegisterController@showRegistrationForm');
 Route::post('mregister', 'Mobile\RegisterController@register');
 Route::post('/makeDeposit', 'Mobile\PaymentsController@getPayments');
+
+
+Route::prefix('/telegram')->group(function () {
+	Route::get('/set-hook', function () {
+		Telegram::setWebhook(['url' => config('app.TELEGRAM_URL'). '/' . config('app.TELEGRAM_BOT_TOKEN') . '/webhook']);
+	});
+	Route::post('/'.config('app.TELEGRAM_BOT_TOKEN') . '/webhook', 'TelegramBotController@handleRequest');
+	Route::get('/auth/{id}', 'Auth\LoginController@telegramAuth');
+	Route::get('/test', 'TelegramBotController@test');
+});
