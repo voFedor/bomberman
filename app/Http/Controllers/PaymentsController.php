@@ -64,7 +64,7 @@ class PaymentsController extends Controller
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
             env('ROBOKASSA_PASS_2'),
-            true // true - IsTest
+            true // true - IsTest 
         );
 
 
