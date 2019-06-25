@@ -412,6 +412,8 @@ class GameSession extends Model
 				->count();
 		if($game_sessions >= 2){
 			return self::tsEnd($uuid);
+		}else{
+			return "Вы набрали $score баллов";
 		}
 	}
 	
