@@ -8,6 +8,7 @@ use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
 use App\Models\Game;
+use App\Models\PaymentSto;
 use Carbon\Carbon;
 use Auth;
 use Storage;
@@ -59,16 +60,17 @@ class PaymentsController extends Controller
         if (!ctype_digit($request->price)) {
             return back()->with(['error' => 'Поле сумма не может содержать символы']);
         }
-
-        $payment_robkass = new Payment(
+		$payment = new PaymentSto(env('PAYSTO_SHOP_ID'));
+		
+        /*$payment_robkass = new Payment(
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
             env('ROBOKASSA_PASS_2'),
             env('ROBOKASSA_TEST')
-        );
+        );*/
 
 
-        do {
+        /*do {
             $code = rand(10000, 9999990);
         } while (PaymentHistory::where('operation_id', $code)->where('status', 0)->first() != null);
 
@@ -79,9 +81,9 @@ class PaymentsController extends Controller
         $payment->user_id = $user_id;
         $payment->status = 0;
         $payment->save();
+		*/
 
-
-
+		/*
         $payment_robkass
             ->setInvoiceId($code)
             ->setSum($payment->amount)
@@ -89,6 +91,8 @@ class PaymentsController extends Controller
 
         // redirect to payment url
         return redirect($payment_robkass->getPaymentUrl());
+		*/
+		return redirect($payment->getPaymentUrl());
     }
 
 
