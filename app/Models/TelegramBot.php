@@ -20,6 +20,9 @@ class TelegramBot extends Model
 	static $last_name;
 	static $arrEditUser = ['first_name', 'last_name'];
 	static $arrEditUserText = ['Введите ваше имя', 'Введите вашу фамилию', "Изменения сохранены"];
+	static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support'];
+	static $arrOtherCommands = ['back', 'math100'];
+
 	
 	protected $table = 'telegram_steps';
 	
@@ -28,9 +31,13 @@ class TelegramBot extends Model
         'step',
     ];
 	
-	public static function menuButton()
+	public static function menuButton($arr_name = false)
     {
+		if($arr_name == 'games') Telegram::removeCommands(self::$arrMainCommands);
+		if(!$arr_name) Telegram::removeCommands(self::$arrOtherCommands);
+		Telegram::removeCommand('start');
 		$commands = Telegram::getCommands();
+
 		$count = count($commands);
 		$keyboard = array();
 		$a = 0; $b = 0;
@@ -38,7 +45,7 @@ class TelegramBot extends Model
         foreach ($commands as $name => $command) { 
 			$keyboard[$a][$b] = sprintf('/%s' . PHP_EOL, $name);
 			$b++;
-			if($name == 'start') {$a=0; $b=0;}
+			//if($name == 'start') {$a=0; $b=0;}
 			if($b == 3) {$a++; $b=0;}
         }
 
@@ -54,11 +61,13 @@ class TelegramBot extends Model
 	
 	public static function menuText()
     {
+		Telegram::removeCommand('back');
+		Telegram::removeCommand('start');
 		$commands = Telegram::getCommands();
 
         $response = '';
         foreach ($commands as $name => $command) {
-            if($name != 'start') $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
+            $response .= sprintf('/%s - %s' . PHP_EOL, $name, $command->getDescription());
         }
 		
 		return $response;

@@ -26,13 +26,14 @@ class StartCommand extends Command
     {
 		$user = TelegramBot::checkDatabase($this->getUpdate()->message);
 		if($user['pass'])
-			$mes = "Привет: ".$user['user']->name."! Ваш пароль: ".$user['pass'];
+			$mes = "Привет, ".$user['user']->name."! Рады тебя видеть. Здесь ты можешь соревноваться с друзьями в игры и получать деньги за победу
+					твой пароль: ".$user['pass']."
+					Пиши /menu и выбери нужный пункт";
 		else
 			$mes = "С возвращением: ".$user->name."!";
         $this->replyWithChatAction(['action' => Actions::TYPING]);
 
         $reply_markup = TelegramBot::menuButton();
         $this->replyWithMessage(['parse_mode' => 'html', 'reply_markup' => $reply_markup, 'text' => $mes]);
-        //$this->triggerCommand('subscribe');
     }
 }

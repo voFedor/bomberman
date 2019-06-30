@@ -103,11 +103,19 @@ class TelegramBotController extends Controller
 	
     protected function answerInlineQuery($update)
     {
-		$results[] = [
-			'type' => 'game',
-			'id' => '1',
-			'game_short_name' => 'quickmath_100',
-			//'reply_markup' => $reply_markup,
+		$results = [
+			[
+				'type' => 'game',
+				'id' => '1',
+				'game_short_name' => 'quickmath_100',
+				//'reply_markup' => $reply_markup,
+			],
+			[
+				'type' => 'article',
+				'id' => '2',
+				'title' => 'Пополнить баланс',
+				"input_message_content" => ['message_text' => '<a href="'.env('TELEGRAM_URL').'/auth/'.$update->inline_query->from->id.'">Пополнить баланс</a>', 'parse_mode' => 'HTML', 'disable_web_page_preview' => true],
+			]
 		];
         $data = [
             'inline_query_id' => $update->inline_query->id,
@@ -121,8 +129,16 @@ class TelegramBotController extends Controller
 	
 	public function test()
 	{
-		$res = TelegramBot::menuButton();
+		$telegram_id = 675198135;
+		$histories = DB::table('game_sessions_users')
+					->leftJoin('game_sessions', 'game_sessions.id', '=', 'game_sessions_users.session_id')
+					->leftJoin('users', 'users.id', '=', 'game_sessions_users.user_id')
+					->leftJoin('game_bets', 'game_bets.id', '=', 'game_sessions.bet_id')
+					->select('game_sessions.started_at', 'bet',	DB::raw('(SELECT name FROM users WHERE id = winner_id) as winner'))
+					->where('telegram_id', $telegram_id)
+					->limit(5)
+					->get();
 		
-		var_dump($res);
+		var_dump($histories);
 	}
 }
