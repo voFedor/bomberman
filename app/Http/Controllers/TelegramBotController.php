@@ -129,16 +129,9 @@ class TelegramBotController extends Controller
 	
 	public function test()
 	{
-		$telegram_id = 675198135;
-		$histories = DB::table('game_sessions_users')
-					->leftJoin('game_sessions', 'game_sessions.id', '=', 'game_sessions_users.session_id')
-					->leftJoin('users', 'users.id', '=', 'game_sessions_users.user_id')
-					->leftJoin('game_bets', 'game_bets.id', '=', 'game_sessions.bet_id')
-					->select('game_sessions.started_at', 'bet',	DB::raw('(SELECT name FROM users WHERE id = winner_id) as winner'))
-					->where('telegram_id', $telegram_id)
-					->limit(5)
-					->get();
+		$operation_id = 2147483647;
+		$payments_history = \App\Models\PaymentHistory::where('operation_id', $operation_id)->first();
 		
-		var_dump($histories);
+		if(!empty($payments_history)) var_dump($payments_history->id);
 	}
 }

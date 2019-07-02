@@ -119,6 +119,7 @@ Route::prefix('/telegram')->group(function () {
 		Telegram::setWebhook(['url' => env('TELEGRAM_URL'). '/' . env('TELEGRAM_BOT_TOKEN') . '/webhook']);
 	});
 	Route::post('/'.env('TELEGRAM_BOT_TOKEN') . '/webhook', 'TelegramBotController@handleRequest');
-	Route::get('/auth/{id}', 'Auth\LoginController@telegramAuth');
+	Route::get('/auth/{id}', 'Auth\LoginController@telegramPay');
+	Route::get('/auth', 'Auth\LoginController@telegramAuth');
 	Route::get('/test', 'TelegramBotController@test');
 });

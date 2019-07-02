@@ -161,23 +161,25 @@ class PaymentsController extends Controller
         $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $secret_key. '&' . $_POST['label'] );
 
         // var_export -- nice, one-liner
-        //$debug_export = var_export($request->all(), true);
-        //\Storage::put('local.txt', $debug_export);
+        $debug_export = var_export($request->all(), true);
+        \Storage::put('local.txt', $debug_export);
 
         // // var_export -- nice, one-liner
-        //$debug_export2 = var_export($_POST['sha1_hash'], true);
-        //\Storage::put('sha1_hash.txt', $debug_export2);
+        $debug_export2 = var_export($sha1, true);
+        \Storage::put('sha1_hash.txt', $debug_export2);
 
         if ($sha1 != $_POST['sha1_hash'] ) {
             exit();
         }
-
+		$payments_history = PaymentHistory::where('operation_id', $request->operation_id)->first();
+		if(!empty($payments_history)) return;
+		
         $payment = new PaymentHistory();
-        $payment->operation_id = $_POST['operation_id'];
-        $payment->user_id = $_POST['label'];
+        $payment->operation_id = $request->operation_id;
+        $payment->user_id = $request->label;
         $payment->status = 1;
-        $payment->amount = $_POST['amount'];
-        $payment->withdraw_amount = $_POST['withdraw_amount'];
+        $payment->amount = $request->amount;
+        $payment->withdraw_amount = $request->withdraw_amount;
         $payment->save();
 
         $user = User::find($payment->user_id);
@@ -193,7 +195,7 @@ class PaymentsController extends Controller
             $message->subject('Баланс пополнен');
         });
 
-        exit();
+        return;
     }
 
 

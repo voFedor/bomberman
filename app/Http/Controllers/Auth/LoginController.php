@@ -380,7 +380,7 @@ class LoginController extends Controller
         return Socialite::with('vkontakte')->redirect();
     }
 
-    public static function telegramAuth(Request $request)
+    public static function telegramPay(Request $request)
     {
 		if(!Auth::check()){
 			$user = User::where('telegram_id', $request->id)->get()->first();		
@@ -391,5 +391,14 @@ class LoginController extends Controller
 			}
 		}
         return redirect()->to('/payments');
+    }
+
+    public static function telegramAuth()
+    {
+		if(!Auth::check()){
+			$games = \App\Models\Game::all();
+			return view('lobby.auth_telegram', compact('games', 'auth_telegram'));
+		}
+		return redirect()->to('/payments');
     }
 }
