@@ -25,7 +25,7 @@ class WithdrawalCommand extends Command
     {
         $this->replyWithChatAction(['action' => Actions::TYPING]);
 		
-		$text = "Перейди по ссылке и следуй инструкции \n" . '<a href="'.env('APP_URL').'">Вывод средств</a>';
+		$text = "Перейди по ссылке и следуй инструкции \n" . '<a href="'.env('TELEGRAM_URL').'/auth">Вывод средств</a>';
         $this->replyWithMessage(['parse_mode' => 'html', 'text' => $text, 'disable_web_page_preview' => true]);
     }
 }
