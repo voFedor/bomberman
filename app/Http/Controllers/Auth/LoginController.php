@@ -396,7 +396,8 @@ class LoginController extends Controller
     public static function telegramAuth()
     {
 		if(!Auth::check()){
-			return view('lobby.auth_telegram');
+			$games = \App\Models\Game::all();
+			return view('lobby.auth_telegram', compact('games', 'auth_telegram'));
 		}
 		return redirect()->to('/payments');
     }
