@@ -8,17 +8,17 @@ use Telegram\Bot\Commands\Command;
 use App\Models\TelegramBot;
 use App\Models\User;
 
-class myInfoCommand extends Command
+class MyProfileCommand extends Command
 {
     /**
      * @var string Command Name
      */
-    protected $name = "myInfo";
+    protected $name = "my_profile";
 
     /**
      * @var string Command Description
      */
-    protected $description = "Информация о пользователе";
+    protected $description = "Мой профиль";
 
     /**
      * @inheritdoc
@@ -29,7 +29,7 @@ class myInfoCommand extends Command
 		
 		$user = TelegramBot::checkDatabase($this->getUpdate()->message);
 		$balance = User::getCredits($user->id);		
-		$message = "Ник: {$user->name}. Баланс: {$balance} cr. Имя: {$user->first_name} Фамилия: {$user->last_name}";
+		$message = "Ник: {$user->name}. Баланс: {$balance} cr.";
 		
         $this->replyWithMessage(['text' => $message]);
     }

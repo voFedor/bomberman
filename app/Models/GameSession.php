@@ -48,6 +48,12 @@ class GameSession extends Model
     {
         return $this->hasMany(\App\Models\GameSessionUser::class, 'session_id', 'id');
     }
+	
+	
+    public function winner()
+    {
+        return $this->hasOne(\App\Models\User::class, 'winner_id', 'id');
+    }
 
     public function scopeNotPlayed()
     {

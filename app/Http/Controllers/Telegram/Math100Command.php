@@ -18,7 +18,7 @@ class Math100Command extends Command
     /**
      * @var string Command Description
      */
-    protected $description = "Игра QuickMath на 100";
+    protected $description = "Сыграть на 100";
 
     /**
      * @inheritdoc
@@ -37,7 +37,7 @@ class Math100Command extends Command
 		$reply_markup = Keyboard::make()
 		->inline()
 		->row(
-			Keyboard::inlineButton(['text' => "Играть в соло", 'callback_game' => ['game_short_name' => 'quickmath']]),
+			Keyboard::inlineButton(['text' => "Потренероваться", 'callback_game' => ['game_short_name' => 'quickmath']]),
 			//Keyboard::inlineButton(['text' => $this->description, 'url' => 'https://t.me/gamechainger_bot?game=quickmath_100'])
 			Keyboard::inlineButton(['text' => $this->description, 'switch_inline_query' => 'quickmath_100'])
 		);

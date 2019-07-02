@@ -17,7 +17,7 @@ class MenuCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = "Bot menu";
+    protected $description = "Меню";
 
     /**
      * @inheritdoc

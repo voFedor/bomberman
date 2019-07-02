@@ -38,13 +38,10 @@ return [
             'certificate_path'    => env('TELEGRAM_CERTIFICATE_PATH', ''),
             'webhook_url'         => env('TELEGRAM_WEBHOOK_URL', env('APP_URL').'/telegram/' . env('TELEGRAM_BOT_TOKEN') . '/webhook'),
             'commands'            => [
-                App\Http\Controllers\Telegram\StartCommand::class,
-                App\Http\Controllers\Telegram\MenuCommand::class,
-                App\Http\Controllers\Telegram\InformationCommand::class,
-                App\Http\Controllers\Telegram\myInfoCommand::class,
-                App\Http\Controllers\Telegram\MathCommand::class,
-                App\Http\Controllers\Telegram\Math100Command::class,
-                App\Http\Controllers\Telegram\EditUserCommand::class,
+				'main',
+				//'information',
+				'games',
+				App\Http\Controllers\Telegram\BackCommand::class,
             ],
         ],
 
@@ -145,11 +142,26 @@ return [
     */
     'command_groups'               => [
         // Group Type: 1
-        /*   'commmon' => [
-                App\Http\Controllers\Telegram\MathCommand::class,
+           'main' => [
+				App\Http\Controllers\Telegram\StartCommand::class,
+				App\Http\Controllers\Telegram\MenuCommand::class,
+                App\Http\Controllers\Telegram\InformationCommand::class,
+                App\Http\Controllers\Telegram\GamesCommand::class,
+                App\Http\Controllers\Telegram\DepositCommand::class,
+                App\Http\Controllers\Telegram\WithdrawalCommand::class,
+                App\Http\Controllers\Telegram\MyProfileCommand::class,
+                App\Http\Controllers\Telegram\HistoryCommand::class,
+                App\Http\Controllers\Telegram\SupportCommand::class,
+           ],
+		   
+		   'information' => [
+                App\Http\Controllers\Telegram\AboutCommand::class,
+           ],
+		   
+		   'games' => [
                 App\Http\Controllers\Telegram\Math100Command::class,
            ],
-        */
+        
 
         /* // Group Type: 2
            'subscription' => [

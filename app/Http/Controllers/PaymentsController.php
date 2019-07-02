@@ -8,6 +8,7 @@ use App\Models\PaymentHistory;
 use App\Models\GameBet;
 use App\Models\User;
 use App\Models\Game;
+use App\Models\PaymentSto;
 use Carbon\Carbon;
 use Auth;
 use Storage;
@@ -59,12 +60,12 @@ class PaymentsController extends Controller
         if (!ctype_digit($request->price)) {
             return back()->with(['error' => 'Поле сумма не может содержать символы']);
         }
-
+	
         $payment_robkass = new Payment(
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
             env('ROBOKASSA_PASS_2'),
-            true // true - IsTest 
+            env('ROBOKASSA_TEST')
         );
 
 
@@ -79,8 +80,6 @@ class PaymentsController extends Controller
         $payment->user_id = $user_id;
         $payment->status = 0;
         $payment->save();
-
-
 
         $payment_robkass
             ->setInvoiceId($code)
@@ -133,7 +132,7 @@ class PaymentsController extends Controller
             env('ROBOKASSA_SHOP_ID'),
             env('ROBOKASSA_PASS_1'),
             env('ROBOKASSA_PASS_2'),
-            true
+            env('ROBOKASSA_TEST')
         );
 
 
@@ -159,14 +158,7 @@ class PaymentsController extends Controller
     {
         $secret_key = env('SECRET_KEY'); // секретное слово, которое мы получили в предыдущем шаге.
 
-//        $payment = PaymentHistory::where(['token' => $_POST['label']])->first();
-//        if ($payment == null) {
-//            exit();
-//        }
-
         $sha1 = sha1( $_POST['notification_type'] . '&'. $_POST['operation_id']. '&' . $_POST['amount'] . '&643&' . $_POST['datetime'] . '&'. $_POST['sender'] . '&' . $_POST['codepro'] . '&' . $secret_key. '&' . $_POST['label'] );
-
-
 
         // var_export -- nice, one-liner
         //$debug_export = var_export($request->all(), true);
@@ -174,7 +166,7 @@ class PaymentsController extends Controller
 
         // // var_export -- nice, one-liner
         //$debug_export2 = var_export($_POST['sha1_hash'], true);
-         //\Storage::put('sha1_hash.txt', $debug_export2);
+        //\Storage::put('sha1_hash.txt', $debug_export2);
 
         if ($sha1 != $_POST['sha1_hash'] ) {
             exit();
@@ -182,11 +174,8 @@ class PaymentsController extends Controller
 
         $payment = new PaymentHistory();
         $payment->operation_id = $_POST['operation_id'];
-//        $payment->token = $_POST['label'];
-        //$payment->sender = $_POST['sender'];
         $payment->user_id = $_POST['label'];
-        //$payment->date = now()->timestamp;;
-        //$payment->status = 1;
+        $payment->status = 1;
         $payment->amount = $_POST['amount'];
         $payment->withdraw_amount = $_POST['withdraw_amount'];
         $payment->save();
@@ -194,8 +183,6 @@ class PaymentsController extends Controller
         $user = User::find($payment->user_id);
         $user->credits = $user->credits + $payment->withdraw_amount;
         $user->update();
-
-
 
         $data = array();
         $data['email'] = $user->email;
@@ -215,7 +202,6 @@ class PaymentsController extends Controller
     {
         return redirect('/payments')->with(['success' => 'Отлично! Оплата прошла успешно.']);
     }
-
 
     public function failPayment(Request $request)
     {

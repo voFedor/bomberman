@@ -7,7 +7,7 @@ use Telegram\Bot\Commands\Command;
 
 use App\Models\TelegramBot;
 
-class EditUserCommand extends Command
+class EditCommand extends Command
 {
     /**
      * @var string Command Name
@@ -17,7 +17,7 @@ class EditUserCommand extends Command
     /**
      * @var string Command Description
      */
-    protected $description = "Изменение данных пользователя";
+    protected $description = "Поддержка";
 
     /**
      * @inheritdoc

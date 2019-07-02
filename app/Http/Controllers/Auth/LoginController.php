@@ -78,6 +78,7 @@ class LoginController extends Controller
     public static $fields = [
         'login' => [
             'email' => 'log',
+            'name' => 'log',
             'password' => 'pwd'
         ],
         'remember' => [
@@ -282,7 +283,7 @@ class LoginController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            self::$fields['login']['email'] => 'required|email|max:255',
+            self::$fields['login']['email'] => 'required|max:255',
             self::$fields['login']['password'] => 'required',
         ]);
 
@@ -312,7 +313,7 @@ class LoginController extends Controller
         /**
          * @var User $user
          */
-        $user = User::where('email', $request->input(self::$fields['login']['email']))->get()->first();
+        $user = User::where('email', $request->input(self::$fields['login']['email']))->orWhere('name', $request->input(self::$fields['login']['email']))->get()->first();
 
         if ($user && Hash::check($request->input(self::$fields['login']['password']), $user->password)) {
             Auth::loginUsingId($user->id);

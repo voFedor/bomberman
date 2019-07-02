@@ -331,3 +331,4 @@
         </div>
     </div>
 </div-->
+<SPAN CLASS='MRTPLCEINFO'>ТОВАРЫ И УСЛУГИ РЕАЛИЗУЮТСЯ СОВМЕСТНО С PLENTR<!-- FROMSHOP=24167 VERIFICATION--></SPAN>
