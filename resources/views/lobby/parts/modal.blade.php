@@ -156,17 +156,15 @@
 <div id="mySidenav" class="sidenav" style="width: 0;z-index: 9999;">
     <a style="padding: 0px 8px 10px 34px;" href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     @if(Auth::user())
-            <p>{{Auth::user()->name}}</p>
-        <p href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span
-                    style="text-transform: none;"> рэ</span></p>
-    <a href="/history">История побед</a>
-    <a href="/challenge">Вызовы</a>
-    <a href="/payments">Баланс</a>
-    <a href="/invitations">Ивайты</a>
-    <a href="/profile">Профиль</a>
-    <a id="wp-logout"
-       href="{{ route('auth.logout') }}">Выйти
-        @else
+        <p>{{Auth::user()->name}}</p>
+        <p href="javascript:void(0)">Credits: <span class="balance" id="credits">{{ Auth::user()->credits }}</span><span style="text-transform: none;"> рэ</span></p>
+		<a href="/history">История побед</a>
+		<a href="/challenge">Вызовы</a>
+		<a href="/payments">Баланс</a>
+		<a href="/invitations">Ивайты</a>
+		<a href="/profile">Профиль</a>
+		<a id="wp-logout" href="{{ route('auth.logout') }}">Выйти
+    @else
             <div style="margin-left: 25px;">
             <div style="text-align: center;">
             </div>
@@ -331,4 +329,3 @@
         </div>
     </div>
 </div-->
-<SPAN CLASS='MRTPLCEINFO'>ТОВАРЫ И УСЛУГИ РЕАЛИЗУЮТСЯ СОВМЕСТНО С PLENTR<!-- FROMSHOP=24167 VERIFICATION--></SPAN>
