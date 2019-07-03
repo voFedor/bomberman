@@ -98,7 +98,6 @@ Route::prefix('/pvp')->group(function () {
 });
 
 
-
 Route::post('/check-balance-mob', 'Mobile\HomeController@checkBalance');
 Route::post('/generateGameUrl', 'Mobile\HomeController@generateGameUrl');
 Route::post('/inviteFriend', 'Mobile\HomeController@inviteFriend');

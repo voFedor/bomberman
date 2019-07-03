@@ -32,6 +32,7 @@ class GamesCommand extends Command
 		$text .= "\n\nMath";
 		$text .= "\nИгра с простыми арифметическими примерами, выбери правильный из нескольких вариантов. Звучит легко? Поверь, это не так.";
 		$text .= "\n\nПотренируйся бесплатно, а потом вызови друга на дуэль на 100р.";
+		$text .= "\n\nЗапустить игру /math100 или используй меню ниже.";
 
         $this->replyWithMessage(['parse_mode' => 'html', 'text' => $text, 'reply_markup' => $reply_markup,]);
     }
