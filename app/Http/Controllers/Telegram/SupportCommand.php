@@ -32,6 +32,7 @@ class SupportCommand extends Command
 		}
 		$text = TelegramBot::$arrEditUserText[0];*/
 		$text = $this->description;
+		$text .= "\n@GameChaingerGroup Вопросы, ответы и обсуждения в группе";
 		
         $this->replyWithMessage(['text' => $text]);        
     }
