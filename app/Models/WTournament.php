@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 use App\Models\User;
 use App\Models\Profit;
@@ -38,6 +39,12 @@ class WTournament extends Model
      */	
 	public static function open($user, $game_short_name, $message_id)
     {
+		$date_end = new Carbon(env('TOURNAMENT_DATE').' +1 day');
+		if(Carbon::today() < $date_end){
+			$session['message'] = "Турнир закончен!";
+			return $session;
+		}
+		
 		$session = null;
 		$game = GameSession::getGameByGameShortName($game_short_name);
 		if(empty($game)) {

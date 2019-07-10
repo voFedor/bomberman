@@ -6,12 +6,12 @@ use App\Models\TelegramBot;
 use App\Models\GameSession;
 use App\Models\User;
 use App\Models\WTournament;
-
 use App\Models\HoldCredits;
 
 use DB;
 use Telegram;
 use Telegram\Bot\Keyboard\Keyboard;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
  
@@ -135,9 +135,7 @@ class TelegramBotController extends Controller
 	
 	public function test()
 	{
-		$operation_id = 2147483647;
-		$payments_history = \App\Models\PaymentHistory::where('operation_id', $operation_id)->first();
-		
-		if(!empty($payments_history)) var_dump($payments_history->id);
+		$date_end = new Carbon(env('TOURNAMENT_DATE').' +1 day');
+		if(Carbon::today() < $date_end) var_dump($date_end);
 	}
 }
