@@ -20,7 +20,7 @@ class TelegramBot extends Model
 	static $last_name;
 	static $arrEditUser = ['first_name', 'last_name'];
 	static $arrEditUserText = ['Введите ваше имя', 'Введите вашу фамилию', "Изменения сохранены"];
-	static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support'];
+	static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support', 'tournament'];
 	static $arrOtherCommands = ['back', 'math100'];
 
 	

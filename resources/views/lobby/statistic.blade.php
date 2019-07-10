@@ -23,7 +23,7 @@
                         @if (count($users) > 0)
                             @foreach ($users as $user)
                                 <tr data-entry-id="">
-                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->first_name.' '.$user->last_name.' ('.$user->name.')' }}</td>
                                     <td>{{ $user->email}}</td>
                                     <td>{{ $user->created_at}}</td>
                                 </tr>

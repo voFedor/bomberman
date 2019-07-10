@@ -159,6 +159,7 @@ return [
            ],
 		   
 		   'games' => [
+                App\Http\Controllers\Telegram\Math10Command::class,
                 App\Http\Controllers\Telegram\Math100Command::class,
            ],
         

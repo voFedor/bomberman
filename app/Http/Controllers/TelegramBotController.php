@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\TelegramBot;
 use App\Models\GameSession;
 use App\Models\User;
+use App\Models\WTournament;
 
 use App\Models\HoldCredits;
 
@@ -56,7 +57,6 @@ class TelegramBotController extends Controller
 		$callback_query = $update->callback_query;
 		$user = $callback_query->from;
 		$message = $callback_query->message;
-		$game_name = $callback_query->game_short_name;
 		
 		$user_id = $user->id ?? null;
 		$chat_id = $message->chat->id ?? null;
@@ -67,6 +67,7 @@ class TelegramBotController extends Controller
 		// проверка пользователя в базе, если нет - сохраняем
 		$user = TelegramBot::checkDatabase($callback_query);
 		if($inline_message_id) $session = GameSession::tsOpen($user_id, $inline_message_id, $game_short_name);
+		if($game_short_name == 'quickmath_10') $session = WTournament::open($user, $game_short_name, $message_id);
 		
 		$data = [
 			'callback_query_id' => $callback_query->id,
@@ -87,13 +88,18 @@ class TelegramBotController extends Controller
         $data = [
             'user_id' => $req['user_id'],
 			'score' => ($req['score']) ? $req['score'] : 0,
-			'force' => true,
+			'force' => (!empty($data['inline_message_id'])) ? true : false,
         ];
 		if($req['inline_message_id']) $data['inline_message_id'] = $req['inline_message_id'];
 		if($req['message_id']) $data['message_id'] = $req['message_id'];
 		if($req['chat_id']) $data['chat_id'] = $req['chat_id'];
 		
+		if(isset($data['message_id'])) {
+			$mes = WTournament::close($data);
+			Telegram::sendMessage(['text' => $mes, 'chat_id' => $data['chat_id'], 'reply_to_message_id' => $data['message_id'], 'parse_mode' => 'html']);
+		}
 		Telegram::setGameScore($data);
+
 		if(!empty($data['inline_message_id'])){
 			$message = GameSession::saveScoreDB($data['user_id'], $data['inline_message_id'], $data['score']);
 			return  Telegram::editMessageText(['text' => $message, 'inline_message_id' => $data['inline_message_id'], 'parse_mode' => 'html']);
