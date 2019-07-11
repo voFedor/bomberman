@@ -21,7 +21,8 @@ class TelegramBot extends Model
 	static $arrEditUser = ['first_name', 'last_name'];
 	static $arrEditUserText = ['Введите ваше имя', 'Введите вашу фамилию', "Изменения сохранены"];
 	static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support', 'tournament'];
-	static $arrOtherCommands = ['back', 'math100'];
+	static $arrGameCommands = ['back', 'math100', 'play_math'];
+	static $arrTourCommands = ['deposit', 'leaders', 'my_profile', 'play_math', 'back'];
 
 	
 	protected $table = 'telegram_steps';
@@ -33,9 +34,11 @@ class TelegramBot extends Model
 	
 	public static function menuButton($arr_name = false)
     {
-		if($arr_name == 'games') Telegram::removeCommands(self::$arrMainCommands);
-		if(!$arr_name) Telegram::removeCommands(self::$arrOtherCommands);
 		Telegram::removeCommand('start');
+		
+		if($arr_name == 'games') Telegram::removeCommands(self::$arrMainCommands);
+		if(!$arr_name) Telegram::removeCommands(self::$arrGameCommands);
+		
 		$commands = Telegram::getCommands();
 
 		$count = count($commands);

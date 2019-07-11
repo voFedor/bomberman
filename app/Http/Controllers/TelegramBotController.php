@@ -54,6 +54,7 @@ class TelegramBotController extends Controller
 	
 	protected function answerCallbackQuery($update)
     {
+		$session = array();
 		$callback_query = $update->callback_query;
 		$user = $callback_query->from;
 		$message = $callback_query->message;
@@ -62,7 +63,7 @@ class TelegramBotController extends Controller
 		$chat_id = $message->chat->id ?? null;
 		$message_id = $message->message_id ?? null;
 		$inline_message_id = $callback_query->inline_message_id ?? null;
-		$game_short_name = $callback_query->game_short_name ?? null;
+		$game_short_name = $callback_query->game_short_name ?? $callback_query->data ?? null;
 		
 		// проверка пользователя в базе, если нет - сохраняем
 		$user = TelegramBot::checkDatabase($callback_query);
@@ -79,7 +80,7 @@ class TelegramBotController extends Controller
 		}else{
 			$data['url'] = env('GAME_HOST').'/index.html?user_id='.$user_id.'&inline_message_id='.$inline_message_id.'&chat_id='.$chat_id.'&message_id='.$message_id;
 		}
-
+var_dump($data); die();
 		return Telegram::answerCallbackQuery($data);
 	}
 	

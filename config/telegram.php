@@ -152,6 +152,7 @@ return [
                 App\Http\Controllers\Telegram\MyProfileCommand::class,
                 App\Http\Controllers\Telegram\HistoryCommand::class,
                 App\Http\Controllers\Telegram\SupportCommand::class,
+                App\Http\Controllers\Telegram\TournamentCommand::class,
            ],
 		   
 		   'information' => [
@@ -159,8 +160,15 @@ return [
            ],
 		   
 		   'games' => [
-                App\Http\Controllers\Telegram\Math10Command::class,
                 App\Http\Controllers\Telegram\Math100Command::class,
+				App\Http\Controllers\Telegram\BackCommand::class,
+           ],
+		   
+		   'tournament' => [
+                App\Http\Controllers\Telegram\Math10Command::class,
+                App\Http\Controllers\Telegram\DepositCommand::class,
+                App\Http\Controllers\Telegram\MyProfileCommand::class,
+				App\Http\Controllers\Telegram\BackCommand::class,
            ],
         
 

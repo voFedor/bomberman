@@ -39,8 +39,9 @@ class WTournament extends Model
      */	
 	public static function open($user, $game_short_name, $message_id)
     {
-		$date_end = new Carbon(env('TOURNAMENT_DATE').' +1 day');
-		if(Carbon::today() < $date_end){
+		$session = array();
+		$date_end = new Carbon(env('TOURNAMENT_DATE'));
+		if(Carbon::today() > $date_end){
 			$session['message'] = "Турнир закончен!";
 			return $session;
 		}
