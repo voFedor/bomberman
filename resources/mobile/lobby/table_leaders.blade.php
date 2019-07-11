@@ -22,7 +22,7 @@
 						@foreach ($leaders as $leader)
 							<tr data-entry-id="">
 								<td>{{ $leader->position }}</td>
-								<td>{{ $leader->user_id }}</td>
+								<td>{{ $leader->name }}</td>
 								<td>{{ $leader->score}}</td>
 							</tr>
 						@endforeach
