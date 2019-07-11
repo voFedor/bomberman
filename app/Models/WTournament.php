@@ -83,4 +83,12 @@ class WTournament extends Model
 		$raw->save();
 		return "Вы набрали {$data['score']} баллов";
 	}
+	
+	public static function getLeaders()
+    {
+		$raws = DB::table(DB::raw('(SELECT user_id, MAX(score) as score FROM tournament GROUP BY user_id) as q, (select @i:=0) AS z'))
+				->select([DB::raw('(@i := @i + 1) as position'), 'user_id', 'score'])
+				->orderBy('score', 'DESC')->get();
+		return $raws;
+	}
 }

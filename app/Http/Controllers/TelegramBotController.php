@@ -134,6 +134,12 @@ class TelegramBotController extends Controller
 		return Telegram::answerInlineQuery($data);
     }
 	
+	public function tournamentLeaders()
+	{
+		$games = \App\Models\Game::all();
+		return view('lobby.table_leaders', compact('games', 'payment_history'))->with(['leaders' => WTournament::getLeaders()]);
+	}
+	
 	public function test()
 	{
 		$text = '';
