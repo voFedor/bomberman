@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\TelegramBot;
 use App\Models\GameSession;
 use App\Models\User;
-
+use App\Models\WTournament;
 use App\Models\HoldCredits;
 
 use DB;
 use Telegram;
 use Telegram\Bot\Keyboard\Keyboard;
+use Carbon\Carbon;
 
 use Illuminate\Http\Request;
  
@@ -53,10 +54,10 @@ class TelegramBotController extends Controller
 	
 	protected function answerCallbackQuery($update)
     {
+		$session = array();
 		$callback_query = $update->callback_query;
 		$user = $callback_query->from;
 		$message = $callback_query->message;
-		$game_name = $callback_query->game_short_name;
 		
 		$user_id = $user->id ?? null;
 		$chat_id = $message->chat->id ?? null;
@@ -67,18 +68,19 @@ class TelegramBotController extends Controller
 		// проверка пользователя в базе, если нет - сохраняем
 		$user = TelegramBot::checkDatabase($callback_query);
 		if($inline_message_id) $session = GameSession::tsOpen($user_id, $inline_message_id, $game_short_name);
+		if($game_short_name == 'quickmath_10') $session = WTournament::open($user, $game_short_name, $message_id);
 		
 		$data = [
 			'callback_query_id' => $callback_query->id,
 			'show_alert' 		=> true,
 		];
-		
+
 		if(isset($session['message'])){
 			$data['text'] = $session['message'];
 		}else{
 			$data['url'] = env('GAME_HOST').'/index.html?user_id='.$user_id.'&inline_message_id='.$inline_message_id.'&chat_id='.$chat_id.'&message_id='.$message_id;
 		}
-
+		
 		return Telegram::answerCallbackQuery($data);
 	}
 	
@@ -87,13 +89,18 @@ class TelegramBotController extends Controller
         $data = [
             'user_id' => $req['user_id'],
 			'score' => ($req['score']) ? $req['score'] : 0,
-			'force' => true,
+			'force' => (!empty($data['inline_message_id'])) ? true : false,
         ];
 		if($req['inline_message_id']) $data['inline_message_id'] = $req['inline_message_id'];
 		if($req['message_id']) $data['message_id'] = $req['message_id'];
 		if($req['chat_id']) $data['chat_id'] = $req['chat_id'];
 		
+		if(isset($data['message_id'])) {
+			$mes = WTournament::close($data);
+			Telegram::sendMessage(['text' => $mes, 'chat_id' => $data['chat_id'], 'reply_to_message_id' => $data['message_id'], 'parse_mode' => 'html']);
+		}
 		Telegram::setGameScore($data);
+
 		if(!empty($data['inline_message_id'])){
 			$message = GameSession::saveScoreDB($data['user_id'], $data['inline_message_id'], $data['score']);
 			return  Telegram::editMessageText(['text' => $message, 'inline_message_id' => $data['inline_message_id'], 'parse_mode' => 'html']);
@@ -127,11 +134,25 @@ class TelegramBotController extends Controller
 		return Telegram::answerInlineQuery($data);
     }
 	
+	public function tournamentLeaders()
+	{
+		$games = \App\Models\Game::all();
+		return view('lobby.table_leaders', compact('games', 'payment_history'))->with(['leaders' => WTournament::getLeaders()]);
+	}
+	
 	public function test()
 	{
-		$operation_id = 2147483647;
-		$payments_history = \App\Models\PaymentHistory::where('operation_id', $operation_id)->first();
-		
-		if(!empty($payments_history)) var_dump($payments_history->id);
+		$text = '';
+		$params = [
+			'user_id'           => 675198135,
+			'chat_id'           => 675198135,
+			'message_id'        => 795,
+		];
+		$res = Telegram::getGameHighScores($params);
+		foreach($res as $row)
+		{
+			$text .= $row['position'].'.'.$row['user']['username'].' - '.$row['score'];
+		}
+		echo $text;
 	}
 }

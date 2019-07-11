@@ -41,7 +41,7 @@ return [
 				'main',
 				//'information',
 				'games',
-				App\Http\Controllers\Telegram\BackCommand::class,
+				'tournament',
             ],
         ],
 
@@ -143,7 +143,6 @@ return [
     'command_groups'               => [
         // Group Type: 1
            'main' => [
-				App\Http\Controllers\Telegram\StartCommand::class,
 				App\Http\Controllers\Telegram\MenuCommand::class,
                 App\Http\Controllers\Telegram\InformationCommand::class,
                 App\Http\Controllers\Telegram\GamesCommand::class,
@@ -152,6 +151,7 @@ return [
                 App\Http\Controllers\Telegram\MyProfileCommand::class,
                 App\Http\Controllers\Telegram\HistoryCommand::class,
                 App\Http\Controllers\Telegram\SupportCommand::class,
+                App\Http\Controllers\Telegram\TournamentCommand::class,
            ],
 		   
 		   'information' => [
@@ -160,6 +160,15 @@ return [
 		   
 		   'games' => [
                 App\Http\Controllers\Telegram\Math100Command::class,
+				App\Http\Controllers\Telegram\BackCommand::class,
+           ],
+		   
+		   'tournament' => [
+                App\Http\Controllers\Telegram\Math10Command::class,
+                App\Http\Controllers\Telegram\LeaderCommand::class,
+                App\Http\Controllers\Telegram\DepositCommand::class,
+                App\Http\Controllers\Telegram\MyProfileCommand::class,
+				App\Http\Controllers\Telegram\BackCommand::class,
            ],
         
 
