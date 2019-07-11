@@ -12,7 +12,7 @@ class Math10Command extends Command
     /**
      * @var string Command Name
      */
-    protected $name = "play_math";
+    protected $name = "play_t";
 
     /**
      * @var string Command Description
