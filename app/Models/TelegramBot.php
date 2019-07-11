@@ -20,9 +20,9 @@ class TelegramBot extends Model
 	static $last_name;
 	static $arrEditUser = ['first_name', 'last_name'];
 	static $arrEditUserText = ['Введите ваше имя', 'Введите вашу фамилию', "Изменения сохранены"];
-	static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support', 'tournament'];
-	static $arrGameCommands = ['back', 'math100', 'play_math'];
-	static $arrTourCommands = ['deposit', 'leaders', 'my_profile', 'play_math', 'back'];
+	//static $arrMainCommands = ['menu', 'information', 'games', 'deposit', 'withdrawal', 'my_profile', 'history', 'support', 'tournament'];
+	//static $arrGameCommands = ['back', 'math100', 'play_math'];
+	//static $arrTourCommands = ['deposit', 'leaders', 'my_profile', 'play_math', 'back'];
 
 	
 	protected $table = 'telegram_steps';
@@ -34,21 +34,20 @@ class TelegramBot extends Model
 	
 	public static function menuButton($arr_name = false)
     {
-		Telegram::removeCommand('start');
+		$arr_name = $arr_name ? : 'main';
+		$group_commands = config('telegram.command_groups') ?? null;
 		
-		if($arr_name == 'games') Telegram::removeCommands(self::$arrMainCommands);
-		if(!$arr_name) Telegram::removeCommands(self::$arrGameCommands);
+		Telegram::removeCommand('start');
+		Telegram::removeCommands(self::getAllCommands());
+		Telegram::addCommands($group_commands[$arr_name]);
 		
 		$commands = Telegram::getCommands();
-
-		$count = count($commands);
 		$keyboard = array();
 		$a = 0; $b = 0;
 		
         foreach ($commands as $name => $command) { 
 			$keyboard[$a][$b] = sprintf('/%s' . PHP_EOL, $name);
 			$b++;
-			//if($name == 'start') {$a=0; $b=0;}
 			if($b == 3) {$a++; $b=0;}
         }
 
@@ -112,5 +111,15 @@ class TelegramBot extends Model
 	public static function getStep($telegram_id)
     {
 		return self::where('telegram_id', $telegram_id)->value('step');
+	}
+	
+	public static function getAllCommands()
+    {
+		$commands = Telegram::getCommands();
+		$arr = array();
+        foreach ($commands as $name => $command) { 
+			$arr[] = $name;
+        }
+		return $arr;
 	}
 }

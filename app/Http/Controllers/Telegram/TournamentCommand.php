@@ -27,16 +27,16 @@ class TournamentCommand extends Command
     {
         $this->replyWithChatAction(['action' => Actions::TYPING]);
 		
-		//$reply_markup = TelegramBot::menuButton('tournament');
-		$reply_markup = Keyboard::make()
+		$reply_markup = TelegramBot::menuButton('tournament');
+		/*$reply_markup = Keyboard::make()
 		->inline()
 		->row(
-			Keyboard::inlineButton(['text' => "Пополнить баланс", 'url' => env('TELEGRAM_URL').'/auth/'.$this->getUpdate()->message->from->id]),
-			Keyboard::inlineButton(['text' => "Таблица лидеров", 'callback_data' => 'quickmath_10'])
+			Keyboard::inlineButton(['text' => "Играть", 'switch_inline_query' => 'quickmath_10']),
+			Keyboard::inlineButton(['text' => "Таблица лидеров", 'callback_data' => ''])
 		)->row(
-			Keyboard::inlineButton(['text' => "Мой баланс", 'callback_data' => 'quickmath_10']),
-			Keyboard::inlineButton(['text' => "Играть", 'callback_data' => 'quickmath_10'])
-		);
+			Keyboard::inlineButton(['text' => "Пополнить баланс", 'url' => env('TELEGRAM_URL').'/auth/'.$this->getUpdate()->message->from->id]),
+			Keyboard::inlineButton(['text' => "Мой баланс", 'callback_data' => ''])
+		);*/
 
 		$text = "Турнир по математике!)";
 		$text .= "\n\nКто наберет больше очков получит денежный приз.";

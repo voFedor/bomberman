@@ -63,7 +63,7 @@ class TelegramBotController extends Controller
 		$chat_id = $message->chat->id ?? null;
 		$message_id = $message->message_id ?? null;
 		$inline_message_id = $callback_query->inline_message_id ?? null;
-		$game_short_name = $callback_query->game_short_name ?? $callback_query->data ?? null;
+		$game_short_name = $callback_query->game_short_name ?? null;
 		
 		// проверка пользователя в базе, если нет - сохраняем
 		$user = TelegramBot::checkDatabase($callback_query);
@@ -74,13 +74,13 @@ class TelegramBotController extends Controller
 			'callback_query_id' => $callback_query->id,
 			'show_alert' 		=> true,
 		];
-		
+
 		if(isset($session['message'])){
 			$data['text'] = $session['message'];
 		}else{
 			$data['url'] = env('GAME_HOST').'/index.html?user_id='.$user_id.'&inline_message_id='.$inline_message_id.'&chat_id='.$chat_id.'&message_id='.$message_id;
 		}
-var_dump($data); die();
+		
 		return Telegram::answerCallbackQuery($data);
 	}
 	
@@ -136,7 +136,17 @@ var_dump($data); die();
 	
 	public function test()
 	{
-		$date_end = new Carbon(env('TOURNAMENT_DATE').' +1 day');
-		if(Carbon::today() < $date_end) var_dump($date_end);
+		$text = '';
+		$params = [
+			'user_id'           => 675198135,
+			'chat_id'           => 675198135,
+			'message_id'        => 795,
+		];
+		$res = Telegram::getGameHighScores($params);
+		foreach($res as $row)
+		{
+			$text .= $row['position'].'.'.$row['user']['username'].' - '.$row['score'];
+		}
+		echo $text;
 	}
 }
