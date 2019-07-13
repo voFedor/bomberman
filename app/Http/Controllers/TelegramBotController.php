@@ -137,22 +137,34 @@ class TelegramBotController extends Controller
 	public function tournamentLeaders()
 	{
 		$games = \App\Models\Game::all();
-		return view('lobby.table_leaders', compact('games', 'payment_history'))->with(['leaders' => WTournament::getLeaders()]);
+		return view('telegram.table_leaders', compact('games', 'payment_history'))->with(['leaders' => WTournament::getLeaders()]);
+	}
+	
+	public function message()
+	{
+		$games = \App\Models\Game::all();
+		$users = User::whereNotNull('telegram_id')->get();
+		return view('telegram.message', compact('games', 'payment_history'))->with(['users' => $users]);
+	}
+	
+	public function sendMessage(Request $request)
+	{
+		if(isset($request->message_all)){
+			$users = User::whereNotNull('telegram_id')->get();
+			foreach($users as $user){
+				Telegram::sendMessage(['text' => $request->message_all, 'chat_id' => $user->telegram_id]);
+			}
+		}else{
+			Telegram::sendMessage(['text' => $request->message, 'chat_id' => $request->telegram_id]);
+		}
+		
+		return redirect("/telegram/message");
 	}
 	
 	public function test()
 	{
-		$text = '';
-		$params = [
-			'user_id'           => 675198135,
-			'chat_id'           => 675198135,
-			'message_id'        => 795,
-		];
-		$res = Telegram::getGameHighScores($params);
-		foreach($res as $row)
-		{
-			$text .= $row['position'].'.'.$row['user']['username'].' - '.$row['score'];
-		}
-		echo $text;
+		$text = 'Test';
+		$chat_id = 262207330;
+		Telegram::sendMessage(['text' => $text, 'chat_id' => $chat_id, 'parse_mode' => 'html']);
 	}
 }

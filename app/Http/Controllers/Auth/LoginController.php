@@ -387,7 +387,7 @@ class LoginController extends Controller
 			//if ($user) Auth::loginUsingId($user->id);
 			if ($user) {
 				$games = \App\Models\Game::all();
-				return view('lobby.payment_form', compact('games', 'payment_history'))->with(['user_id' => $user->id]);
+				return view('telegram.payment_form', compact('games', 'payment_history'))->with(['user_id' => $user->id]);
 			}
 		}
         return redirect()->to('/payments');
@@ -397,7 +397,7 @@ class LoginController extends Controller
     {
 		if(!Auth::check()){
 			$games = \App\Models\Game::all();
-			return view('lobby.auth_telegram', compact('games', 'auth_telegram'));
+			return view('telegram.auth_telegram', compact('games', 'auth_telegram'));
 		}
 		return redirect()->to('/payments');
     }

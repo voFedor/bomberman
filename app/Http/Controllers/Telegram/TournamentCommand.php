@@ -45,6 +45,7 @@ class TournamentCommand extends Command
 		$text .= "\n3 место 200р.";
 		$text .= "\n\nИграй сколько хочешь.";
 		$text .= "\nКаждая попытка стоит 10 р.";
+		$text .= "\nПобедителей определим 21 июля 2019 в 22-00 мск.";
 
         $this->replyWithMessage(['parse_mode' => 'html', 'text' => $text, 'reply_markup' => $reply_markup]);
     }

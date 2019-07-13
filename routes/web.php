@@ -121,5 +121,7 @@ Route::prefix('/telegram')->group(function () {
 	Route::get('/auth/{id}', 'Auth\LoginController@telegramPay');
 	Route::get('/auth', 'Auth\LoginController@telegramAuth');
 	Route::get('/leaders', 'TelegramBotController@tournamentLeaders');
+	Route::get('/message', 'TelegramBotController@message');
+	Route::post('/message', 'TelegramBotController@sendMessage');
 	Route::get('/test', 'TelegramBotController@test');
 });
