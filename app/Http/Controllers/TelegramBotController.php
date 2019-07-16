@@ -11,6 +11,7 @@ use App\Models\HoldCredits;
 use DB;
 use Telegram;
 use Telegram\Bot\Keyboard\Keyboard;
+use Telegram\Bot\Exceptions\TelegramResponseException;
 use Carbon\Carbon;
 
 use Illuminate\Http\Request;
@@ -152,7 +153,20 @@ class TelegramBotController extends Controller
 		if(isset($request->message_all)){
 			$users = User::whereNotNull('telegram_id')->get();
 			foreach($users as $user){
-				Telegram::sendMessage(['text' => $request->message_all, 'chat_id' => $user->telegram_id]);
+				try {
+					Telegram::sendMessage(['text' => $request->message_all, 'chat_id' => $user->telegram_id]);
+				} catch (TelegramResponseException $e) {
+
+					/*$errorData = $e->getResponseData();
+
+					if ($errorData['ok'] === false) {
+						Telegram::sendMessage([
+							'chat_id' => '675198135',
+							'text'    => 'There was an error for a user. ' . $errorData['error_code'] . ' ' . $errorData['description'],
+						]);
+					}*/
+					continue;
+				}
 			}
 		}else{
 			Telegram::sendMessage(['text' => $request->message, 'chat_id' => $request->telegram_id]);
@@ -163,8 +177,6 @@ class TelegramBotController extends Controller
 	
 	public function test()
 	{
-		$text = 'Test';
-		$chat_id = 262207330;
-		Telegram::sendMessage(['text' => $text, 'chat_id' => $chat_id, 'parse_mode' => 'html']);
+		
 	}
 }
