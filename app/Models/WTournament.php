@@ -87,7 +87,7 @@ class WTournament extends Model
 	public static function getLeaders()
     {
 		$raws = DB::table(DB::raw('(SELECT user_id, MAX(score) as score FROM tournament GROUP BY user_id) as q, (select @i:=0) AS z'))
-				->select([DB::raw('(@i := @i + 1) as position'), DB::raw("(SELECT CONCAT(first_name,' ',last_name,' (',name,')') FROM users WHERE id=user_id) as name"), 'score'])
+				->select([DB::raw('(@i := @i + 1) as position'), DB::raw("(SELECT CONCAT(COALESCE(first_name, ''),' ',COALESCE(last_name, ''),' (',COALESCE(name, ''),')') FROM users WHERE id=user_id) as name"), 'score'])
 				->orderBy('score', 'DESC')->get();
 		return $raws;
 	}
