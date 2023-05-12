@@ -59,7 +59,7 @@
 <script type="text/javascript">
     Echo.private('user.{{ Auth::user()->id }}')
         .listen('PrivateNotifyEvent', (e) => {
-            alert(e.message);
+            console.log(e.message);
         });
 @endif
 </script>

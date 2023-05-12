@@ -30,6 +30,7 @@ class PvpController extends Controller
             }
         }
 
+        $agent = new Agent();
         if ($agent->isMobile() || $agent->isTablet()){
             return redirect('/');
         } else {
@@ -56,12 +57,16 @@ class PvpController extends Controller
         }
         $games = Game::all();
         $duel = Duel::where('token', $token)->first();
-        $duel->status = Duel::REGISTERED;
-        $duel->update();
-        $bet = GameBet::with(['game'])
-            ->where('id', $duel->bet_id)
-            ->first();
-        return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
+
+        if($duel)
+        {
+            $duel->status = Duel::REGISTERED;
+            $duel->update();
+            $bet = GameBet::with(['game'])
+                ->where('id', $duel->bet_id)
+                ->first();
+            return view('lobby.pvp-game')->with(['url' => $url, 'games' => $games, 'bet' => $bet]);
+        }
     }
 
 
